@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import PropTypes from 'prop-types';
-import styles from '../styles/Home.module.css';
 
 export const siteTitle = 'laymonage';
 
@@ -13,11 +12,6 @@ const Layout: React.FC = ({ children }) => {
         <meta name="og:title" content={siteTitle} />
       </Head>
       <main className="container flex items-center w-full min-h-screen mx-auto">{children}</main>
-      <footer className={styles.footer}>
-        <a href="https://vercel.com" target="_blank" rel="noopener noreferrer">
-          Powered by <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
     </>
   );
 };
