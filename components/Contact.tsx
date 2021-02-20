@@ -48,7 +48,7 @@ const Contact: React.FC<ContactInfo> = ({ name, alias, description, links }) => 
   ) : undefined;
 
   return (
-    <Card header={alias} subtitle={subtitle}>
+    <Card header={<strong>{alias}</strong>} subtitle={subtitle}>
       <div className="mb-8 text-xl text-left md:text-2xl">{description}</div>
       <div className="flex items-center">
         {links.map((link, index) => (
