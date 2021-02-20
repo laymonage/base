@@ -25,8 +25,14 @@ export const data = {
 };
 
 const Contact: React.FC = () => {
+  const subtitle = (
+    <>
+      <span className="mr-1 text-gray-500 sm:ml-4"> is </span>
+      <span>{data.name}</span>
+    </>
+  );
   return (
-    <Card header={data.alias} subtitle={`is ${data.name}`}>
+    <Card header={data.alias} subtitle={subtitle}>
       <div className="mb-8 text-xl text-left md:text-2xl">{data.description}</div>
       <div className="flex items-center">
         {data.links.map((link, index) => (
