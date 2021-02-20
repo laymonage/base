@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 
-interface CardProps {
-  children: React.ReactNode;
-  header: React.ReactNode;
-  subtitle: React.ReactNode;
-}
+const propTypes = {
+  children: PropTypes.node.isRequired,
+  header: PropTypes.node,
+  subtitle: PropTypes.node,
+};
+type CardProps = PropTypes.InferProps<typeof propTypes>;
 
 const Card: React.FC<CardProps> = ({ children, header, subtitle }) => {
   return (
@@ -17,11 +18,5 @@ const Card: React.FC<CardProps> = ({ children, header, subtitle }) => {
     </div>
   );
 };
-
-Card.propTypes = {
-  children: PropTypes.node.isRequired,
-  header: PropTypes.node,
-  subtitle: PropTypes.node,
-};
-
+Card.propTypes = propTypes;
 export default Card;
