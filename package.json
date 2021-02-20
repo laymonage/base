@@ -14,11 +14,13 @@
     "react-dom": "17.0.1"
   },
   "devDependencies": {
+    "@types/classnames": "^2.2.11",
     "@types/node": "^14.14.31",
     "@types/react": "^17.0.2",
     "@typescript-eslint/eslint-plugin": "^4.15.1",
     "@typescript-eslint/parser": "^4.15.1",
     "autoprefixer": "^10.2.4",
+    "classnames": "^2.2.6",
     "eslint": "^7.20.0",
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-prettier": "^3.3.1",
