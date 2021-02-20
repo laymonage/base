@@ -3,11 +3,7 @@ module.exports = {
   env: {
     node: true,
   },
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:react/recommended',
-  ],
+  extends: ['eslint:recommended', 'plugin:react/recommended'],
   plugins: ['@typescript-eslint', 'react'],
   rules: {
     'react/react-in-jsx-scope': 'off',
@@ -15,4 +11,10 @@ module.exports = {
   globals: {
     React: 'writable',
   },
+  overrides: [
+    {
+      files: ['*.ts', '*.tsx'],
+      extends: ['plugin:@typescript-eslint/recommended'],
+    },
+  ],
 };
