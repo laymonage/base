@@ -12,6 +12,17 @@ const Layout: React.FC = ({ children }) => {
         <meta name="og:title" content={siteTitle} />
       </Head>
       <main className="container flex items-center w-full min-h-screen mx-auto">{children}</main>
+      <div className="fixed top-0 left-0 w-screen h-screen duration-500 bg-center bg-cover bg ease" />
+      <style jsx>
+        {`
+          .bg {
+            background-image: url('/bg.svg');
+            z-index: -1;
+            content: '';
+            will-change: transform;
+          }
+        `}
+      </style>
     </>
   );
 };
