@@ -1,9 +1,24 @@
+import PropTypes from 'prop-types';
 import Card from './Card';
 import GitHub from './icons/GitHub.svg';
 import LinkedIn from './icons/LinkedIn.svg';
 import Twitter from './icons/Twitter.svg';
 
-export const data = {
+const propTypes = {
+  name: PropTypes.string,
+  alias: PropTypes.string.isRequired,
+  description: PropTypes.string,
+  metaDescription: PropTypes.string,
+  links: PropTypes.arrayOf(
+    PropTypes.exact({
+      url: PropTypes.string.isRequired,
+      icon: PropTypes.elementType.isRequired,
+    }),
+  ).isRequired,
+};
+type ContactInfo = PropTypes.InferProps<typeof propTypes>;
+
+export const data: ContactInfo = {
   alias: 'laymonage',
   name: 'Sage M. Abdullah',
   description: 'I build up and break down stuff in the open.',
@@ -24,18 +39,19 @@ export const data = {
   ],
 };
 
-const Contact: React.FC = () => {
-  const subtitle = (
+const Contact: React.FC<ContactInfo> = ({ name, alias, description, links }) => {
+  const subtitle = name ? (
     <>
       <span className="mr-1 text-gray-500 sm:ml-4"> is </span>
-      <span>{data.name}</span>
+      <span>{name}</span>
     </>
-  );
+  ) : undefined;
+
   return (
-    <Card header={data.alias} subtitle={subtitle}>
-      <div className="mb-8 text-xl text-left md:text-2xl">{data.description}</div>
+    <Card header={alias} subtitle={subtitle}>
+      <div className="mb-8 text-xl text-left md:text-2xl">{description}</div>
       <div className="flex items-center">
-        {data.links.map((link, index) => (
+        {links.map((link, index) => (
           <a
             key={index}
             target="_blank"
@@ -50,5 +66,5 @@ const Contact: React.FC = () => {
     </Card>
   );
 };
-
+Contact.propTypes = propTypes;
 export default Contact;

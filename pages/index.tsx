@@ -11,7 +11,7 @@ const Home: React.FC = () => {
         <meta name="description" content={data.metaDescription} />
       </Head>
       <div className="w-11/12 mx-auto sm:w-10/12 lg:w-7/12 xl:w-6/12">
-        <Contact />
+        <Contact {...data} />
       </div>
     </Layout>
   );
