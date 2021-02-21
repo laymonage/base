@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "babel-plugin-inline-react-svg": "^2.0.0",
+    "gray-matter": "^4.0.2",
     "next": "10.0.7",
     "next-themes": "0.0.10",
     "react": "17.0.1",
