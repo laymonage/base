@@ -2,6 +2,7 @@ import Head from 'next/head';
 import PropTypes from 'prop-types';
 import { capitalize } from '../lib/string';
 import Navigation from './Navigation';
+import ScrollTop from './ScrollTop';
 
 export const siteTitle = 'laymonage';
 export const propTypes = {
@@ -34,6 +35,7 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
           }
         `}
       </style>
+      <ScrollTop />
     </>
   );
 };
