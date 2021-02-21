@@ -4,6 +4,7 @@ import cn from 'classnames';
 import Logo from './icons/Logo.svg';
 import Bars from './icons/Bars.svg';
 import Times from './icons/Times.svg';
+import ThemeToggle from './ThemeToggle';
 
 const Navigation: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -43,6 +44,7 @@ const Navigation: React.FC = () => {
           </a>
         </Link>
         <div className="flex items-center justify-between text-blue-700 dark:text-blue-200">
+          <ThemeToggle />
           <button
             type="button"
             className="w-8 h-8 ml-4 fill-current sm:hidden focus:outline-none focus:text-blue-600 hover:text-blue-600 dark:focus:text-blue-100 dark:hover:text-blue-100"
