@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 
-const propTypes = {
+export const propTypes = {
   children: PropTypes.node.isRequired,
   header: PropTypes.node,
   subtitle: PropTypes.node,
 };
-type CardProps = PropTypes.InferProps<typeof propTypes>;
+export type CardProps = PropTypes.InferProps<typeof propTypes>;
 
 const Card: React.FC<CardProps> = ({ children, header, subtitle }) => {
   return (

@@ -4,7 +4,7 @@ import GitHub from './icons/GitHub.svg';
 import LinkedIn from './icons/LinkedIn.svg';
 import Twitter from './icons/Twitter.svg';
 
-const propTypes = {
+export const propTypes = {
   name: PropTypes.string,
   alias: PropTypes.string.isRequired,
   description: PropTypes.string,
@@ -16,7 +16,7 @@ const propTypes = {
     }),
   ).isRequired,
 };
-type ContactInfo = PropTypes.InferProps<typeof propTypes>;
+export type ContactInfo = PropTypes.InferProps<typeof propTypes>;
 
 export const data: ContactInfo = {
   alias: 'laymonage',
