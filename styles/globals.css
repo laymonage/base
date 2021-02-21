@@ -4,6 +4,10 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   @apply font-sans text-gray-700 dark:text-gray-300;
 }
