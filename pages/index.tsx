@@ -6,7 +6,6 @@ const Home: React.FC = () => {
   return (
     <Layout>
       <Head>
-        <title>Home</title>
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content={data.metaDescription} />
       </Head>

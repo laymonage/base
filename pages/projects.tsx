@@ -37,7 +37,7 @@ export async function getStaticProps(): Promise<{ props: ProjectsData }> {
 
 const Projects: React.FC<ProjectsData> = ({ projects }) => {
   return (
-    <Layout>
+    <Layout title="Projects">
       <div className="mx-auto mt-2 mb-16 sm:mt-32">
         {projects.map((group) => (
           <div
