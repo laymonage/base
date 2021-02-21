@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import PropTypes from 'prop-types';
 import Card from '../components/Card';
 import Catalog from '../components/Catalog';
@@ -43,7 +44,15 @@ const Projects: React.FC<ProjectsData> = ({ projects }) => {
             className="mx-auto mt-16 mb-2 md:w-11/12 lg:w-11/12 xl:w-9/12 first:mt-0"
             key={group.id}
           >
-            <Card header={`${group.type} Projects`}>
+            <Card
+              header={
+                <Link href={`#${group.anchor}`}>
+                  <a>
+                    <h2 id={group.anchor}>{group.type} Projects</h2>
+                  </a>
+                </Link>
+              }
+            >
               <Catalog
                 items={group.data.map((item) => (
                   <CatalogItem key={item.id} {...item} />
