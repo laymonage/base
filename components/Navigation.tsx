@@ -14,8 +14,8 @@ const Navigation: React.FC = () => {
   const hideOffset = 60;
 
   const handleScroll = () => {
+    setScrollY(window.scrollY || window.pageYOffset);
     if (Math.abs(scrollY - lastScroll) > hideOffset) {
-      setScrollY(window.scrollY || window.pageYOffset);
       setHidden(scrollY >= lastScroll);
       setLastScroll(scrollY);
     }
