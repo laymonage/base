@@ -19,14 +19,16 @@ const CatalogItem: React.FC<Item> = (item) => {
   return (
     <div className="flex flex-col items-start justify-between my-12 md:flex-row md:items-center">
       {item.image && (
-        <div className="relative h-64 mx-auto w-72">
-          <Image
-            className={cn('rounded', { 'dark:bg-white': item.image.lowContrast })}
-            src={item.image.src}
-            alt={item.title}
-            layout="fill"
-            objectFit="contain"
-          />
+        <div className="p-2 mx-auto">
+          <div className="relative w-56 h-48">
+            <Image
+              className={cn('rounded m-32', { 'dark:bg-white': item.image.lowContrast })}
+              src={item.image.src}
+              alt={item.title}
+              layout="fill"
+              objectFit="contain"
+            />
+          </div>
         </div>
       )}
       <div className="mt-4 md:w-7/12 lg:w-9/12 md:mt-0 md:ml-8">
