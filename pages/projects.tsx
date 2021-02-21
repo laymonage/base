@@ -1,3 +1,4 @@
+import { GetStaticProps } from 'next';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import Card from '../components/Card';
@@ -20,8 +21,9 @@ const propTypes = {
 
 type ProjectsData = PropTypes.InferProps<typeof propTypes>;
 
-export async function getStaticProps(): Promise<{ props: ProjectsData }> {
+export const getStaticProps: GetStaticProps = async () => {
   const { projects } = projectData as ProjectsData;
+
   for (const group of projects) {
     for (const project of group.data) {
       project.description = await md(project.description);
@@ -30,10 +32,11 @@ export async function getStaticProps(): Promise<{ props: ProjectsData }> {
       }
     }
   }
+
   return {
     props: { projects },
   };
-}
+};
 
 const Projects: React.FC<ProjectsData> = ({ projects }) => {
   return (

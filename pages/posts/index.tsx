@@ -7,20 +7,21 @@ import Date from '../../components/Date';
 import Layout from '../../components/Layout';
 import { getSortedPostsData } from '../../lib/content';
 import { postPropTypes } from '../../lib/models/content';
+import { GetStaticProps } from 'next';
 
 const propTypes = {
   allPostsData: PropTypes.arrayOf(PropTypes.shape(postPropTypes)),
 };
 type PostsData = PropTypes.InferProps<typeof propTypes>;
 
-export async function getStaticProps(): Promise<{ props: PostsData }> {
+export const getStaticProps: GetStaticProps = async () => {
   const allPostsData = getSortedPostsData();
   return {
     props: {
       allPostsData,
     },
   };
-}
+};
 
 const Posts: React.FC<PostsData> = ({ allPostsData }) => {
   const [search, setSearch] = useState('');
