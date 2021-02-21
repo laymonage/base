@@ -1,16 +1,25 @@
 import Head from 'next/head';
 import PropTypes from 'prop-types';
+import { capitalize } from '../lib/string';
 import Navigation from './Navigation';
 
 export const siteTitle = 'laymonage';
+export const propTypes = {
+  children: PropTypes.node.isRequired,
+  title: PropTypes.string,
+};
 
-const Layout: React.FC = ({ children }) => {
+export type LayoutProps = PropTypes.InferProps<typeof propTypes>;
+
+const Layout: React.FC<LayoutProps> = ({ children, title }) => {
+  const pageTitle = ((title && `${capitalize(title)} | `) || '') + siteTitle;
   return (
     <>
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content="laymonage's personal website" />
-        <meta name="og:title" content={siteTitle} />
+        <meta name="og:title" content={pageTitle} />
+        <title>{pageTitle}</title>
       </Head>
       <Navigation />
       <main className="container flex items-center w-full min-h-screen mx-auto">{children}</main>
@@ -28,7 +37,5 @@ const Layout: React.FC = ({ children }) => {
     </>
   );
 };
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-};
+Layout.propTypes = propTypes;
 export default Layout;
