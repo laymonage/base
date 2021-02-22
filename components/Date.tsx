@@ -3,15 +3,16 @@ import PropTypes from 'prop-types';
 
 export const propTypes = {
   dateString: PropTypes.string.isRequired,
+  dateFormat: PropTypes.string,
   className: PropTypes.string,
 };
 export type DateProps = PropTypes.InferProps<typeof propTypes>;
 
-const Date: React.FC<DateProps> = ({ dateString, className }) => {
+const Date: React.FC<DateProps> = ({ dateString, dateFormat, className }) => {
   const date = parseISO(dateString);
   return (
     <time dateTime={dateString} className={className}>
-      {format(date, 'LLLL d, yyyy')}
+      {format(date, dateFormat || 'LLLL d, yyyy')}
     </time>
   );
 };
