@@ -13,13 +13,12 @@ const Navigation: React.FC = () => {
   const [hidden, setHidden] = useState(false);
   const hideOffset = 60;
 
-  const handleScroll = () => {
-    setScrollY(window.scrollY || window.pageYOffset);
-    if (Math.abs(scrollY - lastScroll) > hideOffset) {
-      setHidden(scrollY >= lastScroll);
-      setLastScroll(scrollY);
-    }
-  };
+  if (Math.abs(scrollY - lastScroll) > hideOffset) {
+    setHidden(scrollY >= lastScroll);
+    setLastScroll(scrollY);
+  }
+
+  const handleScroll = () => setScrollY(window.scrollY || window.pageYOffset);
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
