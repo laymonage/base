@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import cn from 'classnames';
 import { ReactNode } from 'react';
 import { capitalize } from '../lib/string';
@@ -6,30 +7,60 @@ import Navigation from './Navigation';
 import ScrollTop from './ScrollTop';
 
 export const siteTitle = 'laymonage';
+export const siteRoot = 'https://laymonage.com';
+
+export interface CustomMeta {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: string;
+  date?: string;
+}
 export interface LayoutProps {
   children: ReactNode;
-  title?: string;
   navSafe?: boolean;
+  customMeta?: CustomMeta;
 }
 
-const Layout = ({ children, title, navSafe }: LayoutProps) => {
-  const pageTitle = ((title && `${capitalize(title)} | `) || '') + siteTitle;
+const Layout = ({ children, navSafe, customMeta }: LayoutProps) => {
+  const title = ((customMeta?.title && `${capitalize(customMeta.title)} | `) || '') + siteTitle;
+  const meta = {
+    description: 'I build up and break down stuff in the open.',
+    image:
+      'https://og-image.vercel.app/.png?theme=dark&images=/&images=https%3A%2F%2Flaymonage.com%2Fimg%2Fprojects%2Fapex.svg',
+    type: 'website',
+    ...customMeta,
+    title,
+  };
+
+  const router = useRouter();
+
   return (
     <>
       <Head>
+        <title>{meta.title}</title>
+        <link rel="canonical" href={`${siteRoot}${router.asPath}`} />
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <meta name="description" content="laymonage's personal website" />
-        <meta name="og:title" content={pageTitle} />
-        <title>{pageTitle}</title>
+        <meta name="description" content={meta.description} />
+        <meta property="og:url" content={`${siteRoot}${router.asPath}`} />
+        <meta property="og:type" content={meta.type} />
+        <meta property="og:site_name" content={siteTitle} />
+        <meta property="og:description" content={meta.description} />
+        <meta property="og:title" content={meta.title} />
+        <meta property="og:image" content={meta.image} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@laymonage" />
+        <meta name="twitter:title" content={meta.title} />
+        <meta name="twitter:description" content={meta.description} />
+        <meta name="twitter:image" content={meta.image} />
+        {meta.date && <meta property="article:published_time" content={meta.date} />}
       </Head>
       <Navigation />
       <main
         className={cn(
           'container flex flex-col items-center w-full min-h-screen mx-auto max-w-3xl',
-          {
-            'mt-2 mb-16 sm:mt-32': !navSafe,
-          },
+          { 'mt-2 mb-16 sm:mt-32': !navSafe },
         )}
       >
         {children}

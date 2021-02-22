@@ -28,7 +28,7 @@ interface PostProps {
 
 const SinglePost = ({ post }: PostProps) => {
   return (
-    <Layout title={post.data.title}>
+    <Layout customMeta={{ title: post.data.title, description: post.data.description }}>
       <Card>
         <div className="flex-row mt-8 text-center">
           <h2 className="mb-4 text-3xl font-bold">{post.data.title}</h2>

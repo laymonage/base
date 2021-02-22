@@ -35,7 +35,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
 const Projects = ({ projects }: ProjectsData) => {
   return (
-    <Layout title="Projects">
+    <Layout customMeta={{ title: 'Projects', description: `Selected projects by laymonage.` }}>
       {projects.map((group) => (
         <div className="w-full mx-auto mt-16 first:mt-0" key={group.id}>
           <Card

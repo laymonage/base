@@ -47,7 +47,7 @@ const Posts = ({ allPostsData }: PostsData) => {
   }, []);
 
   return (
-    <Layout title="Posts">
+    <Layout customMeta={{ title: 'Posts', description: 'All posts by laymonage.' }}>
       <div className="w-full mb-2">
         <Card
           header={
