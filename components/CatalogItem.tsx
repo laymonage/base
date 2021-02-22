@@ -19,7 +19,7 @@ const CatalogItem: React.FC<Item> = (item) => {
   return (
     <div className="flex flex-col items-center my-12 md:flex-row">
       {item.image && (
-        <div className="w-9/12 p-2 mb-6 mr-0 rounded md:w-3/12 md:mb-0 md:mr-8">
+        <div className="w-9/12 p-2 mb-6 mr-0 rounded md:w-5/12 md:mb-0 md:mr-8">
           <div className="relative h-48 md:h-36">
             <Image
               className={cn('rounded', { 'dark:bg-white': item.image.lowContrast })}
@@ -32,7 +32,7 @@ const CatalogItem: React.FC<Item> = (item) => {
           </div>
         </div>
       )}
-      <div className="flex flex-col justify-between w-full md:w-9/12">
+      <div className="flex flex-col justify-between w-full">
         <h3 className="text-3xl md:text-4xl">
           <a href={item.url} className="dark:text-blue-200" rel="noreferrer noopener nofollow">
             <strong>{item.title}</strong>
