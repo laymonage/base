@@ -53,8 +53,15 @@ const Posts: React.FC<PostsData> = ({ allPostsData }) => {
       <Layout title="Posts">
         <div className="w-full mx-auto md:w-11/12 lg:w-9/12 xl:w-7/12">
           <div className="mb-2">
-            <Card>
-              <h1 className="mb-8 text-4xl text-center">Posts</h1>
+            <Card
+              header={
+                <Link href="#posts">
+                  <a>
+                    <h1 id="posts">Posts</h1>
+                  </a>
+                </Link>
+              }
+            >
               <div className="flex">
                 <input
                   className="flex-grow w-full px-4 py-2 bg-gray-300 border-2 border-gray-400 rounded sm:border-r-0 sm:rounded-r-none border-opacity-20 focus:outline-none focus:bg-opacity-30 hover:bg-opacity-30 bg-opacity-10"
