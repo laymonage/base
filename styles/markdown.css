@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxygen&display=swap');
+
+.markdown {
+  @apply text-gray-700 dark:text-gray-300 text-opacity-90;
+  font-family: 'Oxygen', 'Lato', sans-serif;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply mt-8 mb-4 font-bold;
+  }
+
+  h2 {
+    @apply text-2xl;
+  }
+
+  h3 {
+    @apply text-xl;
+  }
+
+  hr {
+    @apply my-8;
+  }
+
+  p {
+    @apply mt-6 text-justify;
+    line-height: 1.7;
+  }
+
+  ul,
+  ol {
+    @apply ml-8;
+  }
+
+  > ul,
+  > ol {
+    @apply mb-8;
+  }
+
+  ul {
+    @apply list-disc;
+  }
+
+  ol {
+    @apply list-decimal;
+  }
+
+  li {
+    @apply my-2;
+  }
+
+  blockquote {
+    @apply pl-4 my-4 font-serif italic border-l-4 border-gray-400 border-opacity-20;
+  }
+
+  code {
+    @apply bg-gray-500 border border-gray-400 rounded border-opacity-20 bg-opacity-5;
+  }
+
+  p code,
+  li code {
+    @apply p-1 mx-1;
+  }
+
+  pre code {
+    @apply block p-4 my-4 overflow-auto;
+  }
+
+  img {
+    @apply block mx-auto rounded;
+  }
+
+  iframe,
+  img {
+    @apply my-8;
+  }
+}
