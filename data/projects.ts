@@ -38,13 +38,15 @@ const softwareProjects = [
     image: {
       src: '/img/projects/apex.svg',
     },
-    title: 'nook',
-    url: 'https://github.com/laymonage/nook',
-    description: 'This very website, built with Svelte, TypeScript, and Tailwind.',
+    title: 'base',
+    url: 'https://github.com/laymonage/base',
+    description: 'This very website, built with React, Next.js, TypeScript, and Tailwind.',
     details: [
       'Responsive design for devices with screen width of 320px and up.',
       'Clean architecture with reusable single-file components.',
       'Dark and light modes support.',
+      `Rewritten from two previous attempts with [Svelte](https://github.com/laymonage/nook)
+      and [Vue](https://github.com/laymonage/apex) as my learning environment.`,
     ],
   },
   {
