@@ -17,21 +17,22 @@ export type Item = PropTypes.InferProps<typeof propTypes>;
 
 const CatalogItem: React.FC<Item> = (item) => {
   return (
-    <div className="flex flex-col items-start justify-between my-12 md:flex-row md:items-center">
+    <div className="flex flex-col items-center my-12 md:flex-row">
       {item.image && (
-        <div className="p-2 mx-auto">
-          <div className="relative w-56 h-48">
+        <div className="w-9/12 p-2 mb-6 mr-0 rounded md:w-3/12 md:mb-0 md:mr-8">
+          <div className="relative h-48 md:h-36">
             <Image
-              className={cn('rounded m-32', { 'dark:bg-white': item.image.lowContrast })}
+              className={cn('rounded', { 'dark:bg-white': item.image.lowContrast })}
               src={item.image.src}
               alt={item.title}
+              title={item.title}
               layout="fill"
               objectFit="contain"
             />
           </div>
         </div>
       )}
-      <div className="mt-4 md:w-7/12 lg:w-9/12 md:mt-0 md:ml-8">
+      <div className="flex flex-col justify-between w-full md:w-9/12">
         <h3 className="text-3xl md:text-4xl">
           <a href={item.url} className="dark:text-blue-200" rel="noreferrer noopener nofollow">
             <strong>{item.title}</strong>
