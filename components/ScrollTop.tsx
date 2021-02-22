@@ -9,7 +9,7 @@ const ScrollTop: React.FC = () => {
     <button
       type="button"
       className={cn(
-        'fixed z-10 text-white transition duration-300 bg-blue-900 rounded-full shadow-lg bottom-3 right-3 button dark:bg-gray-700 focus:outline-none',
+        'fixed z-10 text-white transition-transform duration-300 bg-blue-900 rounded-full shadow-lg bottom-3 right-3 button dark:bg-gray-700 focus:outline-none',
         { 'button-hidden': offset > scrollY },
       )}
     >

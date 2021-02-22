@@ -24,7 +24,7 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
       </Head>
       <Navigation />
       <main className="container flex w-full min-h-screen mx-auto">{children}</main>
-      <div className="fixed top-0 left-0 w-screen h-screen duration-500 bg-white bg-center bg-cover dark:bg-gray-900 bg ease" />
+      <div className="fixed top-0 left-0 w-screen h-screen bg-white bg-center bg-cover dark:bg-gray-900 bg" />
       <style jsx>
         {`
           .bg {

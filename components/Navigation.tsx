@@ -24,7 +24,7 @@ const Navigation: React.FC = () => {
     <nav
       role="navigation"
       className={cn(
-        'fixed bottom-0 z-20 flex flex-col-reverse w-full py-3 transition duration-500 transform bg-white sm:flex-row sm:justify-between sm:items-center dark:bg-gray-800 dark:text-blue-200 ease sm:top-0 sm:bottom-auto',
+        'fixed bottom-0 z-20 flex flex-col-reverse w-full py-3 transition-transform duration-500 transform bg-white sm:flex-row sm:justify-between sm:items-center dark:bg-gray-800 dark:text-blue-200 ease sm:top-0 sm:bottom-auto',
         { 'shadow-md': !hidden, 'translate-y-full': hidden, 'sm:-translate-y-full': hidden },
       )}
     >
