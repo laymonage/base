@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import cn from 'classnames';
 import { ReactNode } from 'react';
 import { capitalize } from '../lib/string';
 import Navigation from './Navigation';
@@ -8,9 +9,10 @@ export const siteTitle = 'laymonage';
 export interface LayoutProps {
   children: ReactNode;
   title?: string;
+  navSafe?: boolean;
 }
 
-const Layout = ({ children, title }: LayoutProps) => {
+const Layout = ({ children, title, navSafe }: LayoutProps) => {
   const pageTitle = ((title && `${capitalize(title)} | `) || '') + siteTitle;
   return (
     <>
@@ -21,7 +23,13 @@ const Layout = ({ children, title }: LayoutProps) => {
         <title>{pageTitle}</title>
       </Head>
       <Navigation />
-      <main className="container flex w-full min-h-screen mx-auto">{children}</main>
+      <main
+        className={cn('container flex w-full min-h-screen mx-auto', {
+          'mt-2 mb-16 sm:mt-32': !navSafe,
+        })}
+      >
+        {children}
+      </main>
       <div className="fixed top-0 left-0 w-screen h-screen bg-white bg-center bg-cover dark:bg-gray-900 bg" />
       <style jsx>
         {`
