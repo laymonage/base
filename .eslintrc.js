@@ -5,9 +5,7 @@ module.exports = {
   },
   extends: ['eslint:recommended', 'plugin:react/recommended'],
   plugins: ['@typescript-eslint', 'react'],
-  rules: {
-    'react/react-in-jsx-scope': 'off',
-  },
+  rules: {},
   globals: {
     React: 'writable',
   },
@@ -15,6 +13,9 @@ module.exports = {
     {
       files: ['*.ts', '*.tsx'],
       extends: ['plugin:@typescript-eslint/recommended'],
+      rules: {
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
+      },
     },
   ],
   settings: {
