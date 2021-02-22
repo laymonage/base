@@ -45,7 +45,7 @@ const Posts: React.FC<PostsData> = ({ allPostsData }) => {
   useEffect(() => {
     window.addEventListener('keydown', handleKeydown);
     return () => window.removeEventListener('keydown', handleKeydown);
-  });
+  }, []);
 
   return (
     <div className="w-full mx-auto mt-2 mb-16 sm:mt-32">

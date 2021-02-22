@@ -23,7 +23,7 @@ const Navigation: React.FC = () => {
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  });
+  }, []);
 
   const menu = ['posts', 'projects'];
   return (
