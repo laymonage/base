@@ -9,7 +9,7 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content={data.metaDescription} />
       </Head>
-      <div className="flex items-center w-11/12 mx-auto sm:w-10/12 lg:w-7/12 xl:w-6/12">
+      <div className="flex items-center w-full h-screen max-w-lg px-2 md:max-w-2xl">
         <Contact {...data} />
       </div>
     </Layout>

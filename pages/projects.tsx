@@ -36,28 +36,26 @@ export const getStaticProps: GetStaticProps = async () => {
 const Projects = ({ projects }: ProjectsData) => {
   return (
     <Layout title="Projects">
-      <div className="w-full mx-auto md:w-11/12 lg:w-9/12 xl:w-7/12">
-        {projects.map((group) => (
-          <div className="mx-auto mt-16 first:mt-0" key={group.id}>
-            <Card
-              header={
-                <Link href={`#${group.anchor}`}>
-                  <a>
-                    <h2 id={group.anchor}>{group.type} Projects</h2>
-                  </a>
-                </Link>
-              }
-            >
-              <Catalog
-                border
-                items={group.data.map((item) => (
-                  <CatalogItem key={item.id} {...item} />
-                ))}
-              />
-            </Card>
-          </div>
-        ))}
-      </div>
+      {projects.map((group) => (
+        <div className="w-full mx-auto mt-16 first:mt-0" key={group.id}>
+          <Card
+            header={
+              <Link href={`#${group.anchor}`}>
+                <a>
+                  <h2 id={group.anchor}>{group.type} Projects</h2>
+                </a>
+              </Link>
+            }
+          >
+            <Catalog
+              border
+              items={group.data.map((item) => (
+                <CatalogItem key={item.id} {...item} />
+              ))}
+            />
+          </Card>
+        </div>
+      ))}
     </Layout>
   );
 };
