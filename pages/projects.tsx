@@ -57,6 +57,7 @@ const Projects: React.FC<ProjectsData> = ({ projects }) => {
               }
             >
               <Catalog
+                border
                 items={group.data.map((item) => (
                   <CatalogItem key={item.id} {...item} />
                 ))}
