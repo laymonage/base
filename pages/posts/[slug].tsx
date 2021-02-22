@@ -1,10 +1,9 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import PropTypes from 'prop-types';
 import Card from '../../components/Card';
 import Date from '../../components/Date';
 import Layout from '../../components/Layout';
 import { getAllPostSlugs, getPostData } from '../../lib/content';
-import { postPropTypes } from '../../lib/models/content';
+import { Post } from '../../lib/models/content';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = getAllPostSlugs();
@@ -23,10 +22,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   };
 };
 
-const propTypes = { post: PropTypes.exact(postPropTypes) };
-type PostProps = PropTypes.InferProps<typeof propTypes>;
+interface PostProps {
+  post: Post;
+}
 
-const SinglePost: React.FC<PostProps> = ({ post }) => {
+const SinglePost = ({ post }: PostProps) => {
   return (
     <div className="w-full mx-auto mt-2 mb-16 sm:mt-32">
       <Layout title={post.data.title}>
@@ -56,5 +56,4 @@ const SinglePost: React.FC<PostProps> = ({ post }) => {
     </div>
   );
 };
-SinglePost.propTypes = propTypes;
 export default SinglePost;

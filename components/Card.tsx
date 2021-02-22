@@ -1,13 +1,12 @@
-import PropTypes from 'prop-types';
+import { ReactNode } from 'react';
 
-export const propTypes = {
-  children: PropTypes.node.isRequired,
-  header: PropTypes.node,
-  subtitle: PropTypes.node,
-};
-export type CardProps = PropTypes.InferProps<typeof propTypes>;
+export interface CardProps {
+  children: ReactNode;
+  header?: ReactNode;
+  subtitle?: ReactNode;
+}
 
-const Card: React.FC<CardProps> = ({ children, header, subtitle }) => {
+const Card = ({ children, header, subtitle }: CardProps) => {
   return (
     <div className="flex-col w-full p-6 bg-white rounded shadow-md sm:p-8 dark:bg-gray-800">
       {header && (
@@ -20,5 +19,4 @@ const Card: React.FC<CardProps> = ({ children, header, subtitle }) => {
     </div>
   );
 };
-Card.propTypes = propTypes;
 export default Card;

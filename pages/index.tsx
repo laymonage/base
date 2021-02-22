@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Contact, { data } from '../components/Contact';
 import Layout from '../components/Layout';
 
-const Home: React.FC = () => {
+const Home = () => {
   return (
     <Layout>
       <Head>

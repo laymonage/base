@@ -1,12 +1,11 @@
-import PropTypes from 'prop-types';
+import { ReactNodeArray } from 'react';
 
-export const propTypes = {
-  items: PropTypes.arrayOf(PropTypes.node).isRequired,
-  border: PropTypes.bool,
-};
-export type Items = PropTypes.InferProps<typeof propTypes>;
+export interface Items {
+  items: ReactNodeArray;
+  border?: boolean;
+}
 
-const Catalog: React.FC<Items> = ({ items, border }) => {
+const Catalog = ({ items, border }: Items) => {
   return (
     <ol>
       {items.map((item, index) => (
@@ -18,5 +17,4 @@ const Catalog: React.FC<Items> = ({ items, border }) => {
     </ol>
   );
 };
-Catalog.propTypes = propTypes;
 export default Catalog;

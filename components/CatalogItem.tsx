@@ -1,21 +1,19 @@
 import cn from 'classnames';
 import Image from 'next/image';
-import PropTypes from 'prop-types';
 
-export const propTypes = {
-  id: PropTypes.number,
-  url: PropTypes.string.isRequired,
-  image: PropTypes.shape({
-    src: PropTypes.string.isRequired,
-    lowContrast: PropTypes.bool,
-  }),
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  details: PropTypes.arrayOf(PropTypes.string.isRequired),
-};
-export type Item = PropTypes.InferProps<typeof propTypes>;
+export interface Item {
+  id: number;
+  url: string;
+  image: {
+    src: string;
+    lowContrast: boolean;
+  };
+  title: string;
+  description: string;
+  details: string[];
+}
 
-const CatalogItem: React.FC<Item> = (item) => {
+const CatalogItem = (item: Item) => {
   return (
     <div className="flex flex-col items-center my-12 md:flex-row">
       {item.image && (
@@ -52,5 +50,4 @@ const CatalogItem: React.FC<Item> = (item) => {
     </div>
   );
 };
-CatalogItem.propTypes = propTypes;
 export default CatalogItem;

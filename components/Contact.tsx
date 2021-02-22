@@ -1,22 +1,19 @@
-import PropTypes from 'prop-types';
+import { ElementType } from 'react';
 import Card from './Card';
 import GitHub from './icons/GitHub.svg';
 import LinkedIn from './icons/LinkedIn.svg';
 import Twitter from './icons/Twitter.svg';
 
-export const propTypes = {
-  name: PropTypes.string,
-  alias: PropTypes.string.isRequired,
-  description: PropTypes.string,
-  metaDescription: PropTypes.string,
-  links: PropTypes.arrayOf(
-    PropTypes.exact({
-      url: PropTypes.string.isRequired,
-      icon: PropTypes.elementType.isRequired,
-    }),
-  ).isRequired,
-};
-export type ContactInfo = PropTypes.InferProps<typeof propTypes>;
+export interface ContactInfo {
+  name: string;
+  alias: string;
+  description: string;
+  metaDescription: string;
+  links: Array<{
+    url: string;
+    icon: ElementType;
+  }>;
+}
 
 export const data: ContactInfo = {
   alias: 'laymonage',
@@ -39,7 +36,7 @@ export const data: ContactInfo = {
   ],
 };
 
-const Contact: React.FC<ContactInfo> = ({ name, alias, description, links }) => {
+const Contact = ({ name, alias, description, links }: ContactInfo) => {
   const subtitle = name ? (
     <>
       <span className="mr-1 text-gray-500 sm:ml-4"> is </span>
@@ -66,5 +63,4 @@ const Contact: React.FC<ContactInfo> = ({ name, alias, description, links }) => 
     </Card>
   );
 };
-Contact.propTypes = propTypes;
 export default Contact;

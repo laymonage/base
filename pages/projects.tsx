@@ -1,25 +1,20 @@
 import { GetStaticProps } from 'next';
 import Link from 'next/link';
-import PropTypes from 'prop-types';
 import Card from '../components/Card';
 import Catalog from '../components/Catalog';
-import CatalogItem, { propTypes as itemPropTypes } from '../components/CatalogItem';
+import CatalogItem, { Item } from '../components/CatalogItem';
 import Layout from '../components/Layout';
 import projectData from '../data/projects';
 import { md } from '../lib/markdown';
 
-const propTypes = {
-  projects: PropTypes.arrayOf(
-    PropTypes.exact({
-      id: PropTypes.number.isRequired,
-      type: PropTypes.string.isRequired,
-      anchor: PropTypes.string,
-      data: PropTypes.arrayOf(PropTypes.shape(itemPropTypes)),
-    }),
-  ),
-};
-
-type ProjectsData = PropTypes.InferProps<typeof propTypes>;
+interface ProjectsData {
+  projects: Array<{
+    id: number;
+    type: string;
+    anchor: string;
+    data: Item[];
+  }>;
+}
 
 export const getStaticProps: GetStaticProps = async () => {
   const { projects } = projectData as ProjectsData;
@@ -38,7 +33,7 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-const Projects: React.FC<ProjectsData> = ({ projects }) => {
+const Projects = ({ projects }: ProjectsData) => {
   return (
     <Layout title="Projects">
       <div className="w-full mx-auto mb-16 sm:mt-32 sm:mb-0 md:w-11/12 lg:w-9/12 xl:w-7/12">
@@ -66,5 +61,4 @@ const Projects: React.FC<ProjectsData> = ({ projects }) => {
     </Layout>
   );
 };
-Projects.propTypes = propTypes;
 export default Projects;

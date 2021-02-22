@@ -1,14 +1,12 @@
 import { parseISO, format } from 'date-fns';
-import PropTypes from 'prop-types';
 
-export const propTypes = {
-  dateString: PropTypes.string.isRequired,
-  dateFormat: PropTypes.string,
-  className: PropTypes.string,
-};
-export type DateProps = PropTypes.InferProps<typeof propTypes>;
+export interface DateProps {
+  dateString: string;
+  dateFormat?: string;
+  className?: string;
+}
 
-const Date: React.FC<DateProps> = ({ dateString, dateFormat, className }) => {
+const Date = ({ dateString, dateFormat, className }: DateProps) => {
   const date = parseISO(dateString);
   return (
     <time dateTime={dateString} className={className}>
@@ -16,5 +14,4 @@ const Date: React.FC<DateProps> = ({ dateString, dateFormat, className }) => {
     </time>
   );
 };
-Date.propTypes = propTypes;
 export default Date;

@@ -3,7 +3,7 @@ import '../styles/markdown.css';
 import { AppProps } from 'next/app';
 import { ThemeProvider } from 'next-themes';
 
-const App: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => {
+const App = ({ Component, pageProps }: AppProps) => {
   return (
     <ThemeProvider attribute="class">
       <Component {...pageProps} />

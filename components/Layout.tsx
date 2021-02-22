@@ -1,18 +1,16 @@
 import Head from 'next/head';
-import PropTypes from 'prop-types';
+import { ReactNode } from 'react';
 import { capitalize } from '../lib/string';
 import Navigation from './Navigation';
 import ScrollTop from './ScrollTop';
 
 export const siteTitle = 'laymonage';
-export const propTypes = {
-  children: PropTypes.node.isRequired,
-  title: PropTypes.string,
-};
+export interface LayoutProps {
+  children: ReactNode;
+  title?: string;
+}
 
-export type LayoutProps = PropTypes.InferProps<typeof propTypes>;
-
-const Layout: React.FC<LayoutProps> = ({ children, title }) => {
+const Layout = ({ children, title }: LayoutProps) => {
   const pageTitle = ((title && `${capitalize(title)} | `) || '') + siteTitle;
   return (
     <>
@@ -39,5 +37,4 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
     </>
   );
 };
-Layout.propTypes = propTypes;
 export default Layout;

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import Moon from './icons/Moon.svg';
 import Sun from './icons/Sun.svg';
 
-const ThemeToggle: React.FC = () => {
+const ThemeToggle = () => {
   const [mounted, setMounted] = useState<boolean>(null);
   const { theme, setTheme } = useTheme();
 

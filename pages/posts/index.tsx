@@ -1,19 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import Image from 'next/image';
 import Link from 'next/link';
 import Card from '../../components/Card';
 import Date from '../../components/Date';
 import Layout from '../../components/Layout';
 import { getSortedPostsData } from '../../lib/content';
-import { postPropTypes } from '../../lib/models/content';
+import { Post } from '../../lib/models/content';
 import { GetStaticProps } from 'next';
 import Catalog from '../../components/Catalog';
 
-const propTypes = {
-  allPostsData: PropTypes.arrayOf(PropTypes.shape(postPropTypes)),
-};
-type PostsData = PropTypes.InferProps<typeof propTypes>;
+interface PostsData {
+  allPostsData: Post[];
+}
 
 export const getStaticProps: GetStaticProps = async () => {
   const allPostsData = getSortedPostsData();
@@ -24,7 +22,7 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-const Posts: React.FC<PostsData> = ({ allPostsData }) => {
+const Posts = ({ allPostsData }: PostsData) => {
   const [search, setSearch] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -139,5 +137,4 @@ const Posts: React.FC<PostsData> = ({ allPostsData }) => {
     </div>
   );
 };
-Posts.propTypes = propTypes;
 export default Posts;

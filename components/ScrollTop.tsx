@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import { useScrollY } from '../lib/hooks/scroll';
 
-const ScrollTop: React.FC = () => {
+const ScrollTop = () => {
   const offset = 256;
   const scrollY = useScrollY();
 

@@ -7,7 +7,7 @@ import Bars from './icons/Bars.svg';
 import Times from './icons/Times.svg';
 import ThemeToggle from './ThemeToggle';
 
-const Navigation: React.FC = () => {
+const Navigation = () => {
   const [open, setOpen] = useState(false);
   const [lastScroll, setLastScroll] = useState(0);
   const [hidden, setHidden] = useState(false);
