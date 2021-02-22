@@ -49,7 +49,7 @@ const Posts: React.FC<PostsData> = ({ allPostsData }) => {
 
   return (
     <div className="w-full mx-auto mt-2 mb-16 sm:mt-32">
-      <Layout>
+      <Layout title="Posts">
         <div className="w-full mx-auto md:w-11/12 lg:w-9/12 xl:w-7/12">
           <div className="mb-2">
             <Card>

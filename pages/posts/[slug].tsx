@@ -29,7 +29,7 @@ type PostProps = PropTypes.InferProps<typeof propTypes>;
 const SinglePost: React.FC<PostProps> = ({ post }) => {
   return (
     <div className="w-full mx-auto mt-2 mb-16 sm:mt-32">
-      <Layout>
+      <Layout title={post.data.title}>
         <div className="mx-auto mt-16 mb-2 first:mt-0 post">
           <Card>
             <div className="flex-row text-center">
