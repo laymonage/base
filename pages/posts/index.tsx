@@ -8,6 +8,7 @@ import Layout from '../../components/Layout';
 import { getSortedPostsData } from '../../lib/content';
 import { postPropTypes } from '../../lib/models/content';
 import { GetStaticProps } from 'next';
+import Catalog from '../../components/Catalog';
 
 const propTypes = {
   allPostsData: PropTypes.arrayOf(PropTypes.shape(postPropTypes)),
@@ -71,53 +72,57 @@ const Posts: React.FC<PostsData> = ({ allPostsData }) => {
               </div>
             </Card>
           </div>
-          {(posts.length &&
-            posts.map((post) => (
-              <div className="mb-2" key={post.slug}>
-                <Link href={`/posts/${post.slug}`}>
-                  <a className="text-gray-700 dark:text-gray-300">
-                    <Card>
-                      <div className="flex flex-col sm:flex-row">
-                        {post.data.image && (
-                          <div className="p-4 mb-6 mr-0 rounded dark:bg-gray-700 sm:w-48 sm:mb-0 sm:mr-8">
-                            <div className="relative h-48 my-auto sm:h-full">
-                              <Image
-                                src={post.data.image}
-                                alt={post.data.title}
-                                title={post.data.title}
-                                layout="fill"
-                                objectFit="contain"
-                              />
-                            </div>
-                          </div>
-                        )}
-                        <div className="flex flex-col justify-between w-full sm:w-9/12">
-                          <div>
-                            <div className="flex flex-col justify-between mb-4">
-                              <h2 className="text-xl font-bold">{post.data.title}</h2>
-                              <Date dateString={post.data.date} />
-                            </div>
-                            <div className="mb-6">{post.data.description}</div>
-                          </div>
-                          {post.data.tags.length && (
-                            <div className="flex">
-                              {post.data.tags.map((tag) => (
-                                <span
-                                  className="p-1 ml-2 bg-gray-400 border-2 border-gray-500 rounded first:ml-0 bg-opacity-20"
-                                  key={tag}
-                                >
-                                  {tag}
-                                </span>
-                              ))}
+          {(posts.length && (
+            <Catalog
+              border={false}
+              items={posts.map((post) => (
+                <div className="mb-2" key={post.slug}>
+                  <Link href={`/posts/${post.slug}`}>
+                    <a className="text-gray-700 dark:text-gray-300">
+                      <Card>
+                        <div className="flex flex-col sm:flex-row">
+                          {post.data.image && (
+                            <div className="p-4 mb-6 mr-0 rounded dark:bg-gray-700 sm:w-48 sm:mb-0 sm:mr-8">
+                              <div className="relative h-48 my-auto sm:h-full">
+                                <Image
+                                  src={post.data.image}
+                                  alt={post.data.title}
+                                  title={post.data.title}
+                                  layout="fill"
+                                  objectFit="contain"
+                                />
+                              </div>
                             </div>
                           )}
+                          <div className="flex flex-col justify-between w-full sm:w-9/12">
+                            <div>
+                              <div className="flex flex-col justify-between mb-4">
+                                <h2 className="text-xl font-bold">{post.data.title}</h2>
+                                <Date dateString={post.data.date} />
+                              </div>
+                              <div className="mb-6">{post.data.description}</div>
+                            </div>
+                            {post.data.tags.length && (
+                              <div className="flex">
+                                {post.data.tags.map((tag) => (
+                                  <span
+                                    className="p-1 ml-2 bg-gray-400 border-2 border-gray-500 rounded first:ml-0 bg-opacity-20"
+                                    key={tag}
+                                  >
+                                    {tag}
+                                  </span>
+                                ))}
+                              </div>
+                            )}
+                          </div>
                         </div>
-                      </div>
-                    </Card>
-                  </a>
-                </Link>
-              </div>
-            ))) || (
+                      </Card>
+                    </a>
+                  </Link>
+                </div>
+              ))}
+            />
+          )) || (
             <div className="text-center">
               <Card>No posts found matching your query.</Card>
             </div>
