@@ -1,15 +1,9 @@
 import cn from 'classnames';
-import { useEffect, useState } from 'react';
+import { useScrollY } from '../lib/hooks/scroll';
 
 const ScrollTop: React.FC = () => {
   const offset = 256;
-  const [scrollY, setScrollY] = useState(0);
-  const handleScroll = () => setScrollY(window.scrollY || window.pageYOffset);
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const scrollY = useScrollY();
 
   return (
     <button

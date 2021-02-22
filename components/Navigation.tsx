@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import cn from 'classnames';
+import { useScrollY } from '../lib/hooks/scroll';
 import Logo from './icons/Logo.svg';
 import Bars from './icons/Bars.svg';
 import Times from './icons/Times.svg';
@@ -8,21 +9,15 @@ import ThemeToggle from './ThemeToggle';
 
 const Navigation: React.FC = () => {
   const [open, setOpen] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
   const [lastScroll, setLastScroll] = useState(0);
   const [hidden, setHidden] = useState(false);
+  const scrollY = useScrollY();
   const hideOffset = 60;
 
   if (Math.abs(scrollY - lastScroll) > hideOffset) {
     setHidden(scrollY >= lastScroll);
     setLastScroll(scrollY);
   }
-
-  const handleScroll = () => setScrollY(window.scrollY || window.pageYOffset);
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const menu = ['posts', 'projects'];
   return (
