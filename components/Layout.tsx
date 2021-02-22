@@ -18,6 +18,7 @@ const Layout = ({ children, title, navSafe }: LayoutProps) => {
     <>
       <Head>
         <link rel="icon" href="/favicon.ico" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
         <meta name="description" content="laymonage's personal website" />
         <meta name="og:title" content={pageTitle} />
         <title>{pageTitle}</title>
