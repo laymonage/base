@@ -36,9 +36,9 @@ export const getStaticProps: GetStaticProps = async () => {
 const Projects = ({ projects }: ProjectsData) => {
   return (
     <Layout title="Projects">
-      <div className="w-full mx-auto mb-16 sm:mt-32 sm:mb-0 md:w-11/12 lg:w-9/12 xl:w-7/12">
+      <div className="w-full mx-auto md:w-11/12 lg:w-9/12 xl:w-7/12">
         {projects.map((group) => (
-          <div className="mx-auto mt-16 mb-16 first:mt-0" key={group.id}>
+          <div className="mx-auto mt-16 first:mt-0" key={group.id}>
             <Card
               header={
                 <Link href={`#${group.anchor}`}>

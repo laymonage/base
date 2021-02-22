@@ -4,7 +4,7 @@ import Layout from '../components/Layout';
 
 const Home = () => {
   return (
-    <Layout>
+    <Layout navSafe>
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content={data.metaDescription} />
