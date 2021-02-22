@@ -78,7 +78,7 @@ const Posts: React.FC<PostsData> = ({ allPostsData }) => {
                   <a className="text-gray-700 dark:text-gray-300">
                     <Card>
                       <div className="flex flex-col sm:flex-row">
-                        {
+                        {post.data.image && (
                           <div className="p-4 mb-6 mr-0 rounded dark:bg-gray-700 sm:w-48 sm:mb-0 sm:mr-8">
                             <div className="relative h-48 my-auto sm:h-full">
                               <Image
@@ -90,7 +90,7 @@ const Posts: React.FC<PostsData> = ({ allPostsData }) => {
                               />
                             </div>
                           </div>
-                        }
+                        )}
                         <div className="flex flex-col justify-between w-full sm:w-9/12">
                           <div>
                             <div className="flex flex-col justify-between mb-4">
@@ -99,16 +99,18 @@ const Posts: React.FC<PostsData> = ({ allPostsData }) => {
                             </div>
                             <div className="mb-6">{post.data.description}</div>
                           </div>
-                          <div className="flex">
-                            {post.data.tags.map((tag) => (
-                              <span
-                                className="p-1 ml-2 bg-gray-400 border-2 border-gray-500 rounded first:ml-0 bg-opacity-20"
-                                key={tag}
-                              >
-                                {tag}
-                              </span>
-                            ))}
-                          </div>
+                          {post.data.tags.length && (
+                            <div className="flex">
+                              {post.data.tags.map((tag) => (
+                                <span
+                                  className="p-1 ml-2 bg-gray-400 border-2 border-gray-500 rounded first:ml-0 bg-opacity-20"
+                                  key={tag}
+                                >
+                                  {tag}
+                                </span>
+                              ))}
+                            </div>
+                          )}
                         </div>
                       </div>
                     </Card>
