@@ -15,10 +15,10 @@ export interface Item {
 
 const CatalogItem = (item: Item) => {
   return (
-    <div className="flex flex-col items-center my-12 md:flex-row">
+    <div className="flex flex-col items-center my-6 sm:flex-row">
       {item.image && (
-        <div className="w-9/12 p-2 mb-6 mr-0 rounded md:w-5/12 md:mb-0 md:mr-8">
-          <div className="relative h-48 md:h-36">
+        <div className="w-9/12 p-2 mb-6 mr-0 rounded sm:w-5/12 sm:mb-0 sm:mr-8">
+          <div className="relative h-48 sm:h-36">
             <Image
               className={cn('rounded', { 'dark:bg-white': item.image.lowContrast })}
               src={item.image.src}
@@ -31,20 +31,13 @@ const CatalogItem = (item: Item) => {
         </div>
       )}
       <div className="flex flex-col justify-between w-full">
-        <h3 className="text-3xl md:text-4xl">
+        <h3 className="text-2xl">
           <a href={item.url} className="dark:text-blue-200" rel="noreferrer noopener nofollow">
             <strong>{item.title}</strong>
           </a>
         </h3>
-        <div className="mt-2 md:text-base lg:text-lg">
+        <div className="mt-2">
           <div dangerouslySetInnerHTML={{ __html: item.description }}></div>
-          {item.details && item.details.length && (
-            <ul className="mt-2 ml-8 text-base list-disc">
-              {item.details.map((detail, i) => (
-                <li key={i} dangerouslySetInnerHTML={{ __html: detail }}></li>
-              ))}
-            </ul>
-          )}
         </div>
       </div>
     </div>
