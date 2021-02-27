@@ -10,7 +10,9 @@ const Catalog = ({ items, border }: Items) => {
     <ol>
       {items.map((item, index) => (
         <li key={index}>
-          {border && index !== 0 && <div className="w-full mx-auto border" />}
+          {border && index !== 0 && (
+            <div className="w-full mx-auto border border-gray-400 border-opacity-20" />
+          )}
           {item}
         </li>
       ))}
