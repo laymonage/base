@@ -11,7 +11,7 @@ const Catalog = ({ items, border }: Items) => {
       {items.map((item, index) => (
         <li key={index}>
           {border && index !== 0 && (
-            <div className="w-full mx-auto border border-gray-400 border-opacity-20" />
+            <div className="w-full mx-auto my-6 border border-gray-400 border-opacity-20" />
           )}
           {item}
         </li>

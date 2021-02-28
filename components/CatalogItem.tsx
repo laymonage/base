@@ -15,7 +15,7 @@ export interface Item {
 
 const CatalogItem = (item: Item) => {
   return (
-    <div className="flex flex-col items-center my-4 sm:flex-row">
+    <div className="flex flex-col items-center sm:flex-row">
       {item.image && (
         <div className="w-9/12 p-2 mb-6 mr-0 rounded sm:w-5/12 sm:mb-0 sm:mr-8">
           <div className="relative h-48 sm:h-36">
