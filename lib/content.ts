@@ -3,14 +3,17 @@ import path from 'path';
 import { matter, md } from './markdown';
 import { Post, PostAttributes } from './models/content';
 
-const postsDirectory = path.join(process.cwd(), 'data', 'posts');
+const dataDirectory = path.join(process.cwd(), 'data');
 
-export function getSortedPostsData(): Post[] {
-  const fileNames = fs.readdirSync(postsDirectory);
+const getContentDirectory = (type: string) => path.join(dataDirectory, type);
+
+export function getSortedContentData(type: string): Post[] {
+  const contentDirectory = getContentDirectory(type);
+  const fileNames = fs.readdirSync(contentDirectory);
   const allPostsData: Post[] = fileNames.map((fileName) => {
     const slug = fileName.replace(/\.md$/, '');
 
-    const fullPath = path.join(postsDirectory, fileName);
+    const fullPath = path.join(contentDirectory, fileName);
     const fileContents = fs.readFileSync(fullPath, 'utf8');
 
     const matterResult = matter(fileContents);
@@ -25,8 +28,11 @@ export function getSortedPostsData(): Post[] {
   return allPostsData.sort((a, b) => (a.data.date < b.data.date ? 1 : -1));
 }
 
-export function getAllPostSlugs(): Array<{ params: { slug: string } }> {
-  const fileNames = fs.readdirSync(postsDirectory);
+export const getSortedPostsData = (): Post[] => getSortedContentData('posts');
+
+export function getAllContentSlugs(type: string): Array<{ params: { slug: string } }> {
+  const contentDirectory = getContentDirectory(type);
+  const fileNames = fs.readdirSync(contentDirectory);
   return fileNames.map((fileName) => {
     return {
       params: {
@@ -36,8 +42,10 @@ export function getAllPostSlugs(): Array<{ params: { slug: string } }> {
   });
 }
 
-export async function getPostData(slug: string): Promise<Post> {
-  const fullPath = path.join(postsDirectory, `${slug}.md`);
+export const getAllPostSlugs = (type: string) => getAllContentSlugs(type);
+
+export async function getContentData(slug: string, type?: string) {
+  const fullPath = path.join(dataDirectory, type || '', `${slug}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
 
   const matterResult = matter(fileContents);
@@ -52,3 +60,5 @@ export async function getPostData(slug: string): Promise<Post> {
     content,
   };
 }
+
+export const getPostData = async (slug: string) => await getContentData(slug, 'posts');
