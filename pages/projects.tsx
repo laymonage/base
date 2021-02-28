@@ -40,11 +40,11 @@ const Projects = ({ projects }: ProjectsData) => {
         <div className="w-full mx-auto mt-16 first:mt-0" key={group.id}>
           <Card
             header={
-              <Link href={`#${group.anchor}`}>
-                <a>
-                  <h2 id={group.anchor}>{group.type} Projects</h2>
-                </a>
-              </Link>
+              <h2 id={group.anchor}>
+                <Link href={`#${group.anchor}`}>
+                  <a>{group.type} Projects</a>
+                </Link>
+              </h2>
             }
           >
             <Catalog
