@@ -51,11 +51,11 @@ const Posts = ({ allPostsData }: PostsData) => {
       <div className="w-full mb-2">
         <Card
           header={
-            <Link href="#posts">
-              <a>
-                <h1 id="posts">Posts</h1>
-              </a>
-            </Link>
+            <h1 id="posts">
+              <Link href="#posts">
+                <a>Posts</a>
+              </Link>
+            </h1>
           }
         >
           <div className="flex">
