@@ -1,23 +1,25 @@
 import fs from 'fs';
 import path from 'path';
 import { matter, md } from './markdown';
-import { Post, PostAttributes } from './models/content';
+import { Content, ContentAttributes, Post, PostAttributes } from './models/content';
 
 const dataDirectory = path.join(process.cwd(), 'data');
 
 const getContentDirectory = (type: string) => path.join(dataDirectory, type);
 
-export function getSortedContentData(type: string): Post[] {
+export function getSortedContentData<A extends ContentAttributes = ContentAttributes>(
+  type: string,
+): Content[] {
   const contentDirectory = getContentDirectory(type);
   const fileNames = fs.readdirSync(contentDirectory);
-  const allPostsData: Post[] = fileNames.map((fileName) => {
+  const allPostsData: Content[] = fileNames.map((fileName) => {
     const slug = fileName.replace(/\.md$/, '');
 
     const fullPath = path.join(contentDirectory, fileName);
     const fileContents = fs.readFileSync(fullPath, 'utf8');
 
     const matterResult = matter(fileContents);
-    const data = matterResult.data as PostAttributes;
+    const data = matterResult.data as A;
 
     return {
       slug,
@@ -28,7 +30,7 @@ export function getSortedContentData(type: string): Post[] {
   return allPostsData.sort((a, b) => (a.data.date < b.data.date ? 1 : -1));
 }
 
-export const getSortedPostsData = (): Post[] => getSortedContentData('posts');
+export const getSortedPostsData = () => getSortedContentData<PostAttributes>('posts') as Post[];
 
 export function getAllContentSlugs(type: string): Array<{ params: { slug: string } }> {
   const contentDirectory = getContentDirectory(type);
@@ -42,14 +44,17 @@ export function getAllContentSlugs(type: string): Array<{ params: { slug: string
   });
 }
 
-export const getAllPostSlugs = (type: string) => getAllContentSlugs(type);
+export const getAllPostSlugs = () => getAllContentSlugs('posts');
 
-export async function getContentData(slug: string, type?: string) {
+export async function getContentData<A extends ContentAttributes = ContentAttributes>(
+  slug: string,
+  type?: string,
+) {
   const fullPath = path.join(dataDirectory, type || '', `${slug}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
 
   const matterResult = matter(fileContents);
-  const data = matterResult.data as PostAttributes;
+  const data = matterResult.data as A;
 
   const processedContent = await md(matterResult.content);
   const content = processedContent.toString();
@@ -58,7 +63,8 @@ export async function getContentData(slug: string, type?: string) {
     slug,
     data,
     content,
-  };
+  } as Content;
 }
 
-export const getPostData = async (slug: string) => await getContentData(slug, 'posts');
+export const getPostData = async (slug: string) =>
+  (await getContentData<PostAttributes>(slug, 'posts')) as Post;
