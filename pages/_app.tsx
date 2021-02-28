@@ -1,3 +1,4 @@
+import 'tailwindcss/tailwind.css';
 import '../styles/globals.css';
 import '../styles/markdown.css';
 import { AppProps } from 'next/app';
