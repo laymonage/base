@@ -58,10 +58,9 @@ const Layout = ({ children, navSafe, customMeta }: LayoutProps) => {
       </Head>
       <Navigation />
       <main
-        className={cn(
-          'container flex flex-col items-center w-full min-h-screen mx-auto max-w-3xl',
-          { 'mt-2 mb-16 sm:mt-32': !navSafe },
-        )}
+        className={cn('container flex flex-col items-center w-full mx-auto max-w-3xl', {
+          'mt-2 mb-16 sm:mt-32': !navSafe,
+        })}
       >
         {children}
       </main>
