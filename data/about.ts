@@ -22,7 +22,7 @@ export const timelineData: YearData[] = [
       {
         emoji: '🗣️',
         title: 'Spoke at DjangoCon Europe',
-        description: 'Presented my talk titled "Implementing a Cross-DB JSONField"',
+        description: 'Presented my talk titled "Implementing a Cross-DB JSONField".',
       },
       {
         emoji: '🐍',
