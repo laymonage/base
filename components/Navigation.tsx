@@ -19,7 +19,7 @@ const Navigation = () => {
     setLastScroll(scrollY);
   }
 
-  const menu = ['posts', 'projects'];
+  const menu = ['posts', 'projects', 'about'];
   return (
     <nav
       role="navigation"
