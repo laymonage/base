@@ -22,9 +22,6 @@ export const getStaticProps: GetStaticProps = async () => {
   for (const group of projects) {
     for (const project of group.data) {
       project.description = await md(project.description);
-      if (project.details) {
-        project.details = await Promise.all(project.details.map(md));
-      }
     }
   }
 
