@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import cn from 'classnames';
 import { ReactNode } from 'react';
-import { capitalize } from '../lib/string';
+import { capitalize } from 'lib/string';
 import Navigation from './Navigation';
 import ScrollTop from './ScrollTop';
 

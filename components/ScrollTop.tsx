@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import { useScrollY } from '../lib/hooks/scroll';
+import { useScrollY } from 'lib/hooks/scroll';
 
 const ScrollTop = () => {
   const offset = 256;

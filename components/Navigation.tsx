@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import cn from 'classnames';
-import { useScrollY } from '../lib/hooks/scroll';
+import { useScrollY } from 'lib/hooks/scroll';
 import Logo from './icons/Logo.svg';
 import Bars from './icons/Bars.svg';
 import Times from './icons/Times.svg';

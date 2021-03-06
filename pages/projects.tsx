@@ -1,11 +1,11 @@
 import { GetStaticProps } from 'next';
 import Link from 'next/link';
-import Card from '../components/Card';
-import Catalog from '../components/Catalog';
-import CatalogItem, { Item } from '../components/CatalogItem';
-import Layout from '../components/Layout';
-import projectData from '../data/projects';
-import { md } from '../lib/markdown';
+import Card from 'components/Card';
+import Catalog from 'components/Catalog';
+import CatalogItem, { Item } from 'components/CatalogItem';
+import Layout from 'components/Layout';
+import projectData from 'data/projects';
+import { md } from 'lib/markdown';
 
 interface ProjectsData {
   projects: Array<{

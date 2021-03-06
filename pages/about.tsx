@@ -1,13 +1,13 @@
 import { GetStaticProps } from 'next';
 import Link from 'next/link';
 import { useState } from 'react';
-import Card from '../components/Card';
-import Catalog from '../components/Catalog';
-import Layout from '../components/Layout';
-import { timelineData } from '../data/about';
-import { getContentData } from '../lib/content';
-import { YearData } from '../lib/models/about';
-import { Post } from '../lib/models/content';
+import Card from 'components/Card';
+import Catalog from 'components/Catalog';
+import Layout from 'components/Layout';
+import { timelineData } from 'data/about';
+import { getContentData } from 'lib/content';
+import { YearData } from 'lib/models/about';
+import { Post } from 'lib/models/content';
 
 export const getStaticProps: GetStaticProps = async () => {
   const about = await getContentData('about');
