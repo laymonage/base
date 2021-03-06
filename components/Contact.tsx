@@ -46,7 +46,7 @@ const Contact = ({ name, alias, description, links }: ContactInfo) => {
 
   return (
     <Card header={<strong>{alias}</strong>} subtitle={subtitle}>
-      <div className="mb-8 text-xl text-left md:text-2xl">{description}</div>
+      <div className="mb-8 text-xl text-left sm:text-2xl">{description}</div>
       <div className="flex items-center">
         {links.map((link, index) => (
           <a

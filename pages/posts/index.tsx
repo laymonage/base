@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -78,8 +79,8 @@ const Posts = ({ allPostsData }: PostsData) => {
       {(posts.length && (
         <Catalog
           border={false}
-          items={posts.map((post) => (
-            <div className="mb-2" key={post.slug}>
+          items={posts.map((post, idx) => (
+            <div className={cn({ 'mb-2': idx < posts.length - 1 })} key={post.slug}>
               <Link href={`/posts/${post.slug}`}>
                 <a className="text-gray-700 dark:text-gray-300">
                   <Card>

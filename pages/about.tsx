@@ -56,7 +56,7 @@ const About = ({ about }: AboutProps) => {
       >
         <div className="markdown" dangerouslySetInnerHTML={{ __html: about.content }}></div>
       </Card>
-      <div className="my-8"></div>
+      <div className="my-4"></div>
       <Card
         header={
           <h2 id="timeline">

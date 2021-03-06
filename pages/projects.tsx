@@ -37,7 +37,7 @@ const Projects = ({ projects }: ProjectsData) => {
   return (
     <Layout customMeta={{ title: 'Projects', description: `Selected projects by laymonage.` }}>
       {projects.map((group) => (
-        <div className="w-full mx-auto mt-16 first:mt-0" key={group.id}>
+        <div className="w-full mx-auto mt-8 first:mt-0" key={group.id}>
           <Card
             header={
               <h2 id={group.anchor}>
