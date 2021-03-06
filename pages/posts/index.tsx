@@ -130,6 +130,13 @@ const Posts = ({ allPostsData }: PostsData) => {
           <Card>No posts found matching your query.</Card>
         </div>
       )}
+      <style global jsx>
+        {`
+          body {
+            overflow-y: scroll;
+          }
+        `}
+      </style>
     </Layout>
   );
 };
