@@ -13,7 +13,7 @@ module.exports = {
   },
   variants: {
     extend: {
-      margin: ['first'],
+      margin: ['first', 'last'],
     },
   },
 };
