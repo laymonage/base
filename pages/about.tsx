@@ -26,8 +26,8 @@ const TimelineYear = ({ data }: { data: YearData }) => (
   <>
     <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100">{data.year}</h3>
     <ul>
-      {data.items.map((item, i) => (
-        <li key={i} className="mt-4">
+      {data.items.map((item) => (
+        <li key={item.title} className="mt-4">
           <p className="flex font-semibold text-gray-800 dark:text-gray-100">
             <span className="w-8">{item.emoji}</span>
             <span>{item.title}</span>

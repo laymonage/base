@@ -49,8 +49,8 @@ const Navigation = () => {
           </div>
         </div>
         <div className={cn('px-2 pb-2 sm:p-0 sm:mr-4 sm:flex sm:items-center', { hidden: !open })}>
-          {menu.map((m, i) => (
-            <Link href={`/${m}`} key={i}>
+          {menu.map((m) => (
+            <Link href={`/${m}`} key={m}>
               <a className="block p-2 mb-2 font-bold capitalize rounded sm:mb-0 first:mb-1 sm:first:mb-0 sm:ml-4 sm:first:ml-0 focus:outline-none focus:bg-blue-100 hover:bg-blue-100 dark:focus:bg-gray-700 dark:hover:bg-gray-700">
                 {m}
               </a>

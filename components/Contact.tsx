@@ -48,9 +48,9 @@ const Contact = ({ name, alias, description, links }: ContactInfo) => {
     <Card header={<strong>{alias}</strong>} subtitle={subtitle}>
       <div className="mb-8 text-xl text-left sm:text-2xl">{description}</div>
       <div className="flex items-center">
-        {links.map((link, index) => (
+        {links.map((link) => (
           <a
-            key={index}
+            key={link.url}
             target="_blank"
             rel="noreferrer noopener nofollow"
             href={link.url}
