@@ -3,11 +3,12 @@ import { ReactNodeArray } from 'react';
 export interface Items {
   items: ReactNodeArray;
   border?: boolean;
+  className?: string;
 }
 
-const Catalog = ({ items, border }: Items) => {
+const Catalog = ({ items, border, className }: Items) => {
   return (
-    <ol>
+    <ol className={className}>
       {items.map((item, index) => (
         <li key={index}>
           {border && index !== 0 && (
