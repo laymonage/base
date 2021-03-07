@@ -19,7 +19,7 @@ const Navigation = () => {
     setLastScroll(scrollY);
   }
 
-  const menu = ['posts', 'projects', 'about'];
+  const menu = ['posts', 'logs', 'projects', 'about'];
   return (
     <nav role="navigation" className="max-w-3xl mx-auto">
       <div
