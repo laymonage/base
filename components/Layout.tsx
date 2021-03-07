@@ -27,7 +27,7 @@ const Layout = ({ children, navSafe, customMeta }: LayoutProps) => {
   const meta = {
     description: 'I build up and break down stuff in the open.',
     image:
-      'https://og-image.vercel.app/.png?theme=dark&images=/&images=https%3A%2F%2Flaymonage.com%2Fimg%2Fprojects%2Fapex.svg',
+      `https://og-image.laymonage.com/**${encodeURI(customMeta?.title || siteTitle)}**.png?&md=1`,
     type: 'website',
     ...customMeta,
     title,
