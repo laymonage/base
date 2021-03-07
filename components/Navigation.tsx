@@ -30,10 +30,7 @@ const Navigation = () => {
       >
         <div className="flex items-center justify-between flex-grow mx-4">
           <Link href="/" aria-current aria-label="Home">
-            <a
-              tabIndex={-1}
-              className="w-10 h-10 mr-2 text-blue-700 fill-current focus:outline-none dark:text-blue-100"
-            >
+            <a className="w-10 h-10 mr-2 text-blue-700 fill-current focus:outline-none dark:text-blue-100">
               <Logo />
             </a>
           </Link>
