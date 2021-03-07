@@ -27,7 +27,7 @@
   }
 
   p {
-    @apply mt-6 text-justify;
+    @apply mt-6;
     line-height: 1.7;
   }
 
