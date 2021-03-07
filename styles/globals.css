@@ -2,6 +2,24 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-color: rgb(156, 163, 175) transparent;
+  scrollbar-width: thin;
+
+  &.dark {
+    scrollbar-color: rgb(55, 65, 81) transparent;
+  }
+}
+
+::-webkit-scrollbar {
+  @apply w-2 bg-transparent;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-white dark:bg-gray-900 rounded-full;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-400 hover:bg-gray-500 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-full;
 }
 
 body {
