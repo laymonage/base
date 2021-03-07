@@ -64,7 +64,7 @@ const Layout = ({ children, navSafe, customMeta }: LayoutProps) => {
       >
         {children}
       </main>
-      <div className="fixed top-0 left-0 w-screen h-screen bg-white bg-center bg-cover dark:bg-gray-900 bg" />
+      <div className="fixed top-0 left-0 w-screen h-screen bg-center bg-cover bg" />
       <style jsx>
         {`
           .bg {
