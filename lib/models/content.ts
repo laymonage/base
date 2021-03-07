@@ -15,6 +15,10 @@ export interface PostAttributes extends ContentAttributes {
   description: string;
 }
 
+export interface LogAttributes extends ContentAttributes {
+  description: string;
+}
+
 export interface Content {
   slug: string;
   data: ContentAttributes;
@@ -23,4 +27,8 @@ export interface Content {
 
 export interface Post extends Content {
   data: PostAttributes;
+}
+
+export interface Log extends Content {
+  data: LogAttributes;
 }
