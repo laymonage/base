@@ -1,7 +1,14 @@
 import fs from 'fs';
 import path from 'path';
 import { matter, md } from './markdown';
-import { Content, ContentAttributes, Post, PostAttributes } from './models/content';
+import {
+  Content,
+  ContentAttributes,
+  Log,
+  LogAttributes,
+  Post,
+  PostAttributes,
+} from './models/content';
 
 const dataDirectory = path.join(process.cwd(), 'data');
 
@@ -27,10 +34,17 @@ export function getSortedContentData<A extends ContentAttributes = ContentAttrib
     };
   });
 
-  return allPostsData.sort((a, b) => (a.data.date < b.data.date ? 1 : -1));
+  return allPostsData.sort((a, b) => {
+    if (a.data.date && b.data.date) {
+      return a.data.date < b.data.date ? 1 : -1;
+    }
+    return a.slug < b.slug ? 1 : -1;
+  });
 }
 
 export const getSortedPostsData = () => getSortedContentData<PostAttributes>('posts') as Post[];
+
+export const getSortedLogsData = () => getSortedContentData<LogAttributes>('logs') as Log[];
 
 export function getAllContentSlugs(type: string): Array<{ params: { slug: string } }> {
   const contentDirectory = getContentDirectory(type);
@@ -45,6 +59,8 @@ export function getAllContentSlugs(type: string): Array<{ params: { slug: string
 }
 
 export const getAllPostSlugs = () => getAllContentSlugs('posts');
+
+export const getAllLogSlugs = () => getAllContentSlugs('logs');
 
 export async function getContentData<A extends ContentAttributes = ContentAttributes>(
   slug: string,
@@ -68,3 +84,6 @@ export async function getContentData<A extends ContentAttributes = ContentAttrib
 
 export const getPostData = async (slug: string) =>
   (await getContentData<PostAttributes>(slug, 'posts')) as Post;
+
+export const getLogData = async (slug: string) =>
+  (await getContentData<LogAttributes>(slug, 'logs')) as Log;
