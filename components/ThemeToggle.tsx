@@ -12,7 +12,7 @@ const ThemeToggle = () => {
     mounted && (
       <button
         type="button"
-        className="w-6 h-6 fill-current focus:outline-none focus:text-blue-600 hover:text-blue-600 dark:focus:text-blue-100 dark:hover:text-blue-100"
+        className="w-6 h-6 fill-current focus:outline-none alike"
         aria-label="Theme"
         onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
       >
