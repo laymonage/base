@@ -17,6 +17,8 @@ export interface PostAttributes extends ContentAttributes {
 
 export interface LogAttributes extends ContentAttributes {
   description: string;
+  year: string;
+  week: string;
 }
 
 export interface Content {
