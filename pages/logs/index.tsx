@@ -1,18 +1,17 @@
 import Link from 'next/link';
 import Card from 'components/Card';
 import Layout from 'components/Layout';
-import { getSortedLogsData } from 'lib/content';
-import { Log } from 'lib/models/content';
+import { getGroupedLogsData } from 'lib/content';
 import { GetStaticProps } from 'next';
 import Catalog from 'components/Catalog';
-import { humanizeLogSlug } from 'lib/string';
+import { Fragment } from 'react';
 
 interface LogsData {
-  allLogsData: Log[];
+  allLogsData: ReturnType<typeof getGroupedLogsData>;
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const allLogsData = getSortedLogsData();
+  const allLogsData = getGroupedLogsData();
   return {
     props: {
       allLogsData,
@@ -34,18 +33,24 @@ const Logs = ({ allLogsData }: LogsData) => {
           }
         >
           {allLogsData.length > 0 ? (
-            <Catalog
-              border={false}
-              className="ml-5 list-disc"
-              items={allLogsData.map((log) => (
-                <Link href={`/logs/${log.slug}`} key={log.slug}>
-                  <a className="block mt-4 text-gray-700 dark:text-gray-300">
-                    <h3>{humanizeLogSlug(log.slug)}</h3>
-                    <h2 className="text-xl font-bold">{log.data.title}</h2>
-                  </a>
-                </Link>
-              ))}
-            />
+            allLogsData.map(([year, logs]) => (
+              <Fragment key={year}>
+                <h3 className="mt-6 text-2xl font-bold text-gray-800 dark:text-gray-100">{year}</h3>
+                <Catalog
+                  key={year}
+                  border={false}
+                  className="ml-5 list-disc"
+                  items={logs.map((log) => (
+                    <Link href={`/logs/${log.slug}`} key={log.slug}>
+                      <a className="block mt-4 text-gray-700 dark:text-gray-300">
+                        <h3>Week {log.data.week}</h3>
+                        <h2 className="text-xl font-bold">{log.data.title}</h2>
+                      </a>
+                    </Link>
+                  ))}
+                />
+              </Fragment>
+            ))
           ) : (
             <p>No logs so far.</p>
           )}
