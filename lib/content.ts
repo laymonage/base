@@ -9,6 +9,7 @@ import {
   Post,
   PostAttributes,
 } from './models/content';
+import { parseLogSlug } from './string';
 
 const dataDirectory = path.join(process.cwd(), 'data');
 
@@ -46,7 +47,14 @@ export function getSortedContentData<A extends ContentAttributes = ContentAttrib
 
 export const getSortedPostsData = () => getSortedContentData<PostAttributes>('posts') as Post[];
 
-export const getSortedLogsData = () => getSortedContentData<LogAttributes>('logs') as Log[];
+export const getSortedLogsData = () =>
+  getSortedContentData<LogAttributes>('logs', parseLogSlug) as Log[];
+
+export const getGroupedLogsData = () => {
+  const sortedLogs = getSortedLogsData();
+  const groupedLogs = groupBy(sortedLogs, 'year');
+  return sortGroup(groupedLogs);
+};
 
 export function getAllContentSlugs(type: string): Array<{ params: { slug: string } }> {
   const contentDirectory = getContentDirectory(type);
@@ -89,3 +97,15 @@ export const getPostData = async (slug: string) =>
 
 export const getLogData = async (slug: string) =>
   (await getContentData<LogAttributes>(slug, 'logs')) as Log;
+
+export const groupBy = <T extends Content>(arr: T[], key: string): { [key: string]: T[] } =>
+  arr.reduce((acc, current) => {
+    const groupingKey = current.data[key] as string;
+    acc[groupingKey] = acc[groupingKey] || [];
+    acc[groupingKey].push(current);
+    return acc;
+  }, Object.create(null));
+
+export const sortGroup = <T extends Content>(group: { [key: string]: T[] }) => {
+  return Object.entries(group).sort(([keyA], [keyB]) => (keyA < keyB ? 1 : -1));
+};
