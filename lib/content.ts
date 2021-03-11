@@ -16,11 +16,13 @@ const getContentDirectory = (type: string) => path.join(dataDirectory, type);
 
 export function getSortedContentData<A extends ContentAttributes = ContentAttributes>(
   type: string,
+  slugParser?: (slug: string) => Record<string, unknown>,
 ): Content[] {
   const contentDirectory = getContentDirectory(type);
   const fileNames = fs.readdirSync(contentDirectory);
   const allPostsData: Content[] = fileNames.map((fileName) => {
     const slug = fileName.replace(/\.md$/, '');
+    const extraAttributes = (slugParser && slugParser(slug)) || {};
 
     const fullPath = path.join(contentDirectory, fileName);
     const fileContents = fs.readFileSync(fullPath, 'utf8');
@@ -30,7 +32,7 @@ export function getSortedContentData<A extends ContentAttributes = ContentAttrib
 
     return {
       slug,
-      data,
+      data: { ...data, ...extraAttributes },
     };
   });
 
