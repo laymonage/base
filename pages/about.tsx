@@ -8,6 +8,7 @@ import { timelineData } from 'data/about';
 import { getContentData } from 'lib/content';
 import { YearData } from 'lib/models/about';
 import { Post } from 'lib/models/content';
+import NowPlaying from 'components/NowPlaying';
 
 export const getStaticProps: GetStaticProps = async () => {
   const about = await getContentData('about');
@@ -55,6 +56,9 @@ const About = ({ about }: AboutProps) => {
         }
       >
         <div className="markdown" dangerouslySetInnerHTML={{ __html: about.content }}></div>
+        <div className="flex items-center justify-end max-w-full mt-6 ml-auto">
+          <NowPlaying />
+        </div>
       </Card>
       <div className="my-4"></div>
       <Card
