@@ -33,7 +33,7 @@ const TimelineYear = ({ data }: { data: YearData }) => (
             <span className="w-8">{item.emoji}</span>
             <span>{item.title}</span>
           </p>
-          <p className="ml-8 text-justify">{item.description}</p>
+          <p className="ml-8">{item.description}</p>
         </li>
       ))}
     </ul>
