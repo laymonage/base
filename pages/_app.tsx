@@ -1,6 +1,6 @@
 import 'tailwindcss/tailwind.css';
 import 'styles/globals.css';
-import 'styles/markdown.css';
+import 'styles/markdown.scss';
 import { AppProps } from 'next/app';
 import { ThemeProvider } from 'next-themes';
 
