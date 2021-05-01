@@ -9,7 +9,7 @@ export interface CardProps {
 
 const Card = ({ children, header, subtitle }: CardProps) => {
   return (
-    <div className="flex-col w-full p-8 bg-white rounded shadow-md dark:bg-gray-800">
+    <div className="flex-col w-full p-2 bg-white rounded shadow-md sm:p-8 dark:bg-gray-800">
       {header && (
         <div
           className={cn('mb-8 text-4xl text-blue-800 dark:text-blue-200 sm:text-5xl sm:flex-row', {
