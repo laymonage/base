@@ -4,6 +4,7 @@ import Layout from 'components/Layout';
 import { getAllLogSlugs, getLogData } from 'lib/content';
 import { Log } from 'lib/models/content';
 import { humanizeLogSlug } from 'lib/string';
+import Giscussions from 'components/Giscussions';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = getAllLogSlugs();
@@ -44,6 +45,15 @@ const SingleLog = ({ log }: LogProps) => {
           dangerouslySetInnerHTML={{ __html: log.content }}
         ></div>
       </Card>
+      {log.data.comments === true ? (
+        <>
+          <div className="my-4" />
+
+          <Card>
+            <Giscussions />
+          </Card>
+        </>
+      ) : null}
     </Layout>
   );
 };
