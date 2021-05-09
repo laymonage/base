@@ -1,10 +1,12 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
+import Head from 'next/head';
 import Card from 'components/Card';
 import Layout from 'components/Layout';
 import { getAllLogSlugs, getLogData } from 'lib/content';
 import { Log } from 'lib/models/content';
 import { humanizeLogSlug } from 'lib/string';
-import Giscussions from 'components/Giscussions';
+import { useEffect, useState } from 'react';
+import { useTheme } from 'next-themes';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = getAllLogSlugs();
@@ -28,6 +30,10 @@ interface LogProps {
 }
 
 const SingleLog = ({ log }: LogProps) => {
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   return (
     <Layout
       customMeta={{
@@ -45,13 +51,24 @@ const SingleLog = ({ log }: LogProps) => {
           dangerouslySetInnerHTML={{ __html: log.content }}
         ></div>
       </Card>
-      {log.data.comments === true ? (
+      {mounted && log.data.comments === true ? (
         <>
           <div className="my-4" />
 
           <Card>
-            <Giscussions />
+            <div className="w-full giscussions" />
           </Card>
+
+          <Head>
+            <script
+              src="https://giscussions.vercel.app/client.js"
+              data-repo="laymonage/base"
+              data-theme={theme === 'light' ? 'light' : 'dark_dimmed'}
+              data-mapping="pathname"
+              crossOrigin="anonymous"
+              async
+            />
+          </Head>
         </>
       ) : null}
     </Layout>
