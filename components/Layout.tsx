@@ -3,6 +3,8 @@ import { useRouter } from 'next/router';
 import clsx from 'clsx';
 import { ReactNode } from 'react';
 import { capitalize } from 'lib/string';
+import Card from './Card';
+import Giscussions from './Giscussions';
 import Navigation from './Navigation';
 import ScrollTop from './ScrollTop';
 
@@ -20,9 +22,10 @@ export interface LayoutProps {
   children: ReactNode;
   navSafe?: boolean;
   customMeta?: CustomMeta;
+  hasComments?: boolean;
 }
 
-const Layout = ({ children, navSafe, customMeta }: LayoutProps) => {
+const Layout = ({ children, navSafe, customMeta, hasComments }: LayoutProps) => {
   const title = (customMeta?.title ? `${capitalize(customMeta.title)} | ` : '') + siteTitle;
   const meta = {
     description: 'I build up and break down stuff in the open.',
@@ -64,6 +67,14 @@ const Layout = ({ children, navSafe, customMeta }: LayoutProps) => {
         })}
       >
         {children}
+        {hasComments ? (
+          <>
+            <div className="my-4" />
+            <Card>
+              <Giscussions />
+            </Card>
+          </>
+        ) : null}
       </main>
       <div className="fixed top-0 left-0 w-screen h-screen bg-center bg-cover bg" />
       <style jsx>
