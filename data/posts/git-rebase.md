@@ -5,7 +5,6 @@ tags:
   - ppl
   - git
 toc: false
-comments: true
 draft: false
 description: |-
   As a regular user of Git, I find one particular command

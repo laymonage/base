@@ -6,7 +6,6 @@ tags:
   - django
   - open source
 toc: true
-comments: true
 draft: false
 description: >-
   Google Summer of Code 2019 was a life changing experience for me. Thanks to
