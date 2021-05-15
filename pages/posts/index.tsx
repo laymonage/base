@@ -75,7 +75,7 @@ const Posts = ({ allPostsData }: PostsData) => {
           </div>
         </Card>
       </div>
-      {(posts.length && (
+      {posts.length ? (
         <Catalog
           border={false}
           items={posts.map((post) => (
@@ -84,7 +84,7 @@ const Posts = ({ allPostsData }: PostsData) => {
                 <a className="text-gray-700 dark:text-gray-300">
                   <Card>
                     <div className="flex flex-col sm:flex-row">
-                      {post.data.image && (
+                      {post.data.image ? (
                         <div className="p-4 mb-6 mr-0 rounded dark:bg-gray-700 sm:w-48 sm:mb-0 sm:mr-8">
                           <div className="relative h-48 my-auto sm:h-full">
                             <Image
@@ -96,7 +96,7 @@ const Posts = ({ allPostsData }: PostsData) => {
                             />
                           </div>
                         </div>
-                      )}
+                      ) : null}
                       <div className="flex flex-col justify-between w-full sm:w-9/12">
                         <div>
                           <div className="flex flex-col justify-between mb-4">
@@ -105,7 +105,7 @@ const Posts = ({ allPostsData }: PostsData) => {
                           </div>
                           <div className="mb-6">{post.data.description}</div>
                         </div>
-                        {post.data.tags.length && (
+                        {post.data.tags.length ? (
                           <div className="flex">
                             {post.data.tags.map((tag) => (
                               <span
@@ -116,7 +116,7 @@ const Posts = ({ allPostsData }: PostsData) => {
                               </span>
                             ))}
                           </div>
-                        )}
+                        ) : null}
                       </div>
                     </div>
                   </Card>
@@ -125,7 +125,7 @@ const Posts = ({ allPostsData }: PostsData) => {
             </div>
           ))}
         />
-      )) || (
+      ) : (
         <div className="w-full text-center">
           <Card>No posts found matching your query.</Card>
         </div>

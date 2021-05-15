@@ -23,11 +23,12 @@ export interface LayoutProps {
 }
 
 const Layout = ({ children, navSafe, customMeta }: LayoutProps) => {
-  const title = ((customMeta?.title && `${capitalize(customMeta.title)} | `) || '') + siteTitle;
+  const title = (customMeta?.title ? `${capitalize(customMeta.title)} | ` : '') + siteTitle;
   const meta = {
     description: 'I build up and break down stuff in the open.',
-    image:
-      `https://og-image.laymonage.com/**${encodeURI(customMeta?.title || siteTitle)}**.png?&md=1`,
+    image: `https://og-image.laymonage.com/**${encodeURI(
+      customMeta?.title || siteTitle,
+    )}**.png?&md=1`,
     type: 'website',
     ...customMeta,
     title,
@@ -54,7 +55,7 @@ const Layout = ({ children, navSafe, customMeta }: LayoutProps) => {
         <meta name="twitter:title" content={meta.title} />
         <meta name="twitter:description" content={meta.description} />
         <meta name="twitter:image" content={meta.image} />
-        {meta.date && <meta property="article:published_time" content={meta.date} />}
+        {meta.date ? <meta property="article:published_time" content={meta.date} /> : null}
       </Head>
       <Navigation />
       <main

@@ -23,7 +23,7 @@ export function getSortedContentData<A extends ContentAttributes = ContentAttrib
   const fileNames = fs.readdirSync(contentDirectory);
   const allPostsData: Content[] = fileNames.map((fileName) => {
     const slug = fileName.replace(/\.md$/, '');
-    const extraAttributes = (slugParser && slugParser(slug)) || {};
+    const extraAttributes = slugParser ? slugParser(slug) : {};
 
     const fullPath = path.join(contentDirectory, fileName);
     const fileContents = fs.readFileSync(fullPath, 'utf8');

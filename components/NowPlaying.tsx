@@ -14,7 +14,7 @@ const NowPlaying = () => {
     <>
       <a
         className="flex items-center max-w-full ml-auto"
-        href={(isPlaying && data?.trackUrl) || SPOTIFY_PROFILE_URL}
+        href={isPlaying ? data?.trackUrl : SPOTIFY_PROFILE_URL}
         target="_blank"
         rel="noopener noreferrer nofollow"
       >
