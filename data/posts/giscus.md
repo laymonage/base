@@ -1,13 +1,13 @@
 ---
-title: 'Introducing giscussions'
+title: 'Introducing giscus'
 date: 2021-05-15T08:09:08.724Z
 tags: []
 toc: false
 comments: true
 draft: false
 description: |-
-  Introducing giscussions: a comments widget built on GitHub Discussions.
-image: /img/uploads/giscussions.svg
+  Introducing giscus: a comments widget built on GitHub Discussions.
+image: /img/uploads/giscus.svg
 ---
 
 ## The idea 💡
@@ -70,13 +70,13 @@ Initially, I wanted to fit Discussions support into utterances directly.
 However, with the obstacles I encountered and the limited time I have, I
 decided it would be much faster to build the thing from scratch.
 
-## Enter: giscussions 💎
+## Enter: giscus 💎
 
-giscussions is a comments widget built on GitHub Discussions. It's really
+giscus is a comments widget built on GitHub Discussions. It's really
 similar to utterances. Basically, just replace Issues in utterances with
-Discussions and you get giscussions.
+Discussions and you get giscus.
 
-Even the [landing page][giscussions] is similar.
+Even the [landing page][giscus] is similar.
 
 Behind the scenes, though, it's quite different.
 
@@ -91,10 +91,10 @@ details and I almost included them here, but it would make this post be too
 long to be an announcement. (It probably already is). I'll just turn it into a
 separate blog post for later.
 
-Anyway, in short, building giscussions wasn't so easy as I originally thought
+Anyway, in short, building giscus wasn't so easy as I originally thought
 it would be.
 
-Thus, I'd really appreciate it if you would use it.  Put it on your website. Tell your friends, too. [Contribute][giscussions-gh].
+Thus, I'd really appreciate it if you would use it.  Put it on your website. Tell your friends, too. [Contribute][giscus-gh].
 
 And, try it, right below this blog post! 👇
 
@@ -106,5 +106,5 @@ And, try it, right below this blog post! 👇
 [utterances-issue]: https://github.com/utterance/utterances/issues/324
 [discussions-api-announcement]: https://github.com/github/feedback/discussions/43#discussioncomment-399047
 [discussions-cors]: https://github.com/github/feedback/discussions/3622
-[giscussions]: https://giscussions.vercel.app
-[giscussions-gh]: https://github.com/laymonage/giscussions
+[giscus]: https://giscus.vercel.app
+[giscus-gh]: https://github.com/laymonage/giscus
