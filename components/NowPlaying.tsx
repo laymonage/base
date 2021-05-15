@@ -1,4 +1,4 @@
-import cn from 'classnames';
+import clsx from 'clsx';
 import useSWR from 'swr';
 import { fetcher } from 'lib/fetcher';
 import { NowPlaying as iNowPlaying } from 'lib/models/spotify';
@@ -29,7 +29,7 @@ const NowPlaying = () => {
           )}
         </div>
         <div
-          className={cn('flex-shrink-0', {
+          className={clsx('flex-shrink-0', {
             'w-8 h-8': isPlaying,
             'w-6 h-6': !isPlaying,
           })}
