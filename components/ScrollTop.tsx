@@ -1,4 +1,4 @@
-import cn from 'classnames';
+import clsx from 'clsx';
 import { useScrollY } from 'lib/hooks/scroll';
 
 const ScrollTop = () => {
@@ -8,7 +8,7 @@ const ScrollTop = () => {
   return (
     <button
       type="button"
-      className={cn(
+      className={clsx(
         'fixed z-10 text-white transition-transform duration-300 bg-blue-900 rounded-full shadow-lg bottom-3 right-3 button dark:bg-gray-700 focus:outline-none',
         { 'button-hidden': offset > scrollY },
       )}

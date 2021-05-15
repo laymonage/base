@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import cn from 'classnames';
+import clsx from 'clsx';
 import { ReactNode } from 'react';
 import { capitalize } from 'lib/string';
 import Navigation from './Navigation';
@@ -59,7 +59,7 @@ const Layout = ({ children, navSafe, customMeta }: LayoutProps) => {
       </Head>
       <Navigation />
       <main
-        className={cn('container flex flex-col items-center w-full mx-auto max-w-3xl', {
+        className={clsx('container flex flex-col items-center w-full mx-auto max-w-3xl', {
           'mt-2 mb-16 sm:mb-20 sm:mt-24': !navSafe,
         })}
       >

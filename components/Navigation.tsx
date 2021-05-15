@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Link from 'next/link';
-import cn from 'classnames';
+import clsx from 'clsx';
 import { useScrollY } from 'lib/hooks/scroll';
 import Logo from './icons/Logo.svg';
 import Bars from './icons/Bars.svg';
@@ -23,7 +23,7 @@ const Navigation = () => {
   return (
     <nav role="navigation" className="max-w-3xl mx-auto">
       <div
-        className={cn(
+        className={clsx(
           'fixed bottom-0 z-20 flex flex-col-reverse w-full max-w-3xl py-3 transition-transform duration-500 transform bg-white sm:flex-row sm:justify-between sm:items-center dark:bg-gray-800 ease sm:top-0 sm:bottom-auto',
           { 'shadow-md': !hidden, 'translate-y-full': hidden, 'sm:-translate-y-full': hidden },
         )}
@@ -45,7 +45,7 @@ const Navigation = () => {
             </button>
           </div>
         </div>
-        <div className={cn('px-3 pb-2 mr-4 sm:p-0 sm:flex sm:items-center', { hidden: !open })}>
+        <div className={clsx('px-3 pb-2 mr-4 sm:p-0 sm:flex sm:items-center', { hidden: !open })}>
           {menu.map((m) => (
             <Link href={`/${m}`} key={m}>
               <a className="block p-2 mb-2 font-bold capitalize rounded sm:mb-0 sm:ml-4 sm:first:ml-0 focus:outline-none focus:bg-blue-100 hover:bg-blue-100 dark:focus:bg-gray-700 dark:hover:bg-gray-700">
