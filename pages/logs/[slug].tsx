@@ -63,8 +63,10 @@ const SingleLog = ({ log }: LogProps) => {
             <script
               src="https://giscussions.vercel.app/client.js"
               data-repo="laymonage/base"
-              data-theme={theme === 'light' ? 'light' : 'dark_dimmed'}
+              data-repo-id="MDEwOlJlcG9zaXRvcnkzNDExNDE2OTY="
+              data-category-id="MDE4OkRpc2N1c3Npb25DYXRlZ29yeTMyNzIzMDI4"
               data-mapping="pathname"
+              data-theme={theme === 'light' ? 'light' : 'dark_dimmed'}
               crossOrigin="anonymous"
               async
             />
