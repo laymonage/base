@@ -1,6 +1,6 @@
 import Head from 'next/head';
+import { useMounted } from 'lib/hooks/mounted';
 import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
 
 const themeMapping = {
   light: 'light',
@@ -9,10 +9,8 @@ const themeMapping = {
 };
 
 export default function Giscussions() {
+  const mounted = useMounted();
   const { theme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => setMounted(true), []);
 
   return !mounted ? null : (
     <>
