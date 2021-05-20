@@ -1,5 +1,15 @@
 const softwareProjects = [
   {
+    id: 10,
+    image: {
+      src: '/img/projects/giscus.svg',
+    },
+    title: 'giscus',
+    url: 'https://giscus.vercel.app',
+    description: `A comments widget built on GitHub Discussions.`,
+    details: [],
+  },
+  {
     id: 9,
     image: {
       src: '/img/projects/djth.png',
