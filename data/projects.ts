@@ -10,24 +10,6 @@ const softwareProjects = [
     details: [],
   },
   {
-    id: 9,
-    image: {
-      src: '/img/projects/djth.png',
-    },
-    title: 'django-template-heroku',
-    url: 'https://github.com/laymonage/django-template-heroku',
-    description: `Simple Django project template ready for Heroku deployment
-    with GitLab CI or GitHub Actions.`,
-    details: [
-      'Single `requirements.txt` file for simplicity.',
-      'Project-wide and app-level static files and templates directories.',
-      'Pre-configured unit tests and functional tests.',
-      '100% code coverage on initial project spawn.',
-      'Automatic testing, coverage checking, and deployment to Heroku.',
-      'Includes GitLab CI and GitHub Actions configurations with caching support for `pip`.',
-    ],
-  },
-  {
     id: 8,
     image: {
       src: '/img/projects/django-jsonfield-backport.svg',
@@ -76,6 +58,24 @@ const softwareProjects = [
       '24,000+ downloads according to [PePy](https://pepy.tech/project/kbbi).',
       '`isort` and `flake8`-compliant with `black` code style and 100% code coverage.',
       'Automated PyPI releases with GitHub Actions.',
+    ],
+  },
+  {
+    id: 9,
+    image: {
+      src: '/img/projects/djth.png',
+    },
+    title: 'django-template-heroku',
+    url: 'https://github.com/laymonage/django-template-heroku',
+    description: `Simple Django project template ready for Heroku deployment
+    with GitLab CI or GitHub Actions.`,
+    details: [
+      'Single `requirements.txt` file for simplicity.',
+      'Project-wide and app-level static files and templates directories.',
+      'Pre-configured unit tests and functional tests.',
+      '100% code coverage on initial project spawn.',
+      'Automatic testing, coverage checking, and deployment to Heroku.',
+      'Includes GitLab CI and GitHub Actions configurations with caching support for `pip`.',
     ],
   },
   {
