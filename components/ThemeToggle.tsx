@@ -5,7 +5,7 @@ import Sun from './icons/Sun.svg';
 
 const ThemeToggle = () => {
   const mounted = useMounted();
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme: theme, setTheme } = useTheme();
 
   return mounted ? (
     <button
