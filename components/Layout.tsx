@@ -77,16 +77,6 @@ const Layout = ({ children, navSafe, customMeta, hasComments }: LayoutProps) => 
         ) : null}
       </main>
       <div className="fixed top-0 left-0 w-screen h-screen bg-center bg-cover bg" />
-      <style jsx>
-        {`
-          .bg {
-            background-image: url('/bg.svg');
-            z-index: -1;
-            content: '';
-            will-change: transform;
-          }
-        `}
-      </style>
       <ScrollTop />
     </>
   );
