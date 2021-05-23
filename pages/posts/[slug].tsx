@@ -14,7 +14,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const post = await getPostData(params.slug as string);
+  const post = await getPostData(params?.slug as string);
   return {
     props: {
       post,
@@ -52,7 +52,7 @@ const SinglePost = ({ post }: PostProps) => {
         </div>
         <div
           className="mx-auto mt-4 mb-8 markdown max-w-prose"
-          dangerouslySetInnerHTML={{ __html: post.content }}
+          dangerouslySetInnerHTML={{ __html: post.content || '' }}
         ></div>
       </Card>
     </Layout>

@@ -10,7 +10,7 @@ const themeMapping = {
 
 export default function Giscussions() {
   const mounted = useMounted();
-  const { theme } = useTheme();
+  const { theme = 'light' } = useTheme();
 
   return !mounted ? null : (
     <>
@@ -21,7 +21,7 @@ export default function Giscussions() {
           data-repo-id="MDEwOlJlcG9zaXRvcnkzNDExNDE2OTY="
           data-category-id="MDE4OkRpc2N1c3Npb25DYXRlZ29yeTMyNzIzMDI4"
           data-mapping="pathname"
-          data-theme={themeMapping[theme] || 'light'}
+          data-theme={themeMapping[theme as keyof typeof themeMapping]}
           crossOrigin="anonymous"
           async
         />
