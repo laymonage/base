@@ -37,7 +37,7 @@ const Posts = ({ allPostsData }: PostsData) => {
   const handleKeydown = (event: KeyboardEvent) => {
     if (event.key === '/' && document.activeElement !== inputRef.current) {
       event.preventDefault();
-      inputRef.current.focus();
+      inputRef.current?.focus();
     }
   };
 

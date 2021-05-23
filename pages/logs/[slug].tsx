@@ -14,7 +14,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const log = await getLogData(params.slug as string);
+  const log = await getLogData(params?.slug as string);
   return {
     props: {
       log,
@@ -42,7 +42,7 @@ const SingleLog = ({ log }: LogProps) => {
         </div>
         <div
           className="mx-auto my-4 markdown max-w-prose"
-          dangerouslySetInnerHTML={{ __html: log.content }}
+          dangerouslySetInnerHTML={{ __html: log.content || '' }}
         ></div>
       </Card>
     </Layout>

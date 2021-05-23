@@ -19,7 +19,7 @@ const NowPlaying = () => {
         rel="noopener noreferrer nofollow"
       >
         <div className="flex flex-col mr-4 text-right truncate">
-          {isPlaying ? (
+          {data && isPlaying ? (
             <>
               <p className="truncate">{data.artist}</p>
               <p className="truncate">{data.title}</p>

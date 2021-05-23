@@ -100,7 +100,7 @@ export const getLogData = async (slug: string) =>
 
 export const groupBy = <T extends Content>(arr: T[], key: string): { [key: string]: T[] } =>
   arr.reduce((acc, current) => {
-    const groupingKey = current.data[key] as string;
+    const groupingKey = current.data[key as keyof ContentAttributes] as string;
     acc[groupingKey] = acc[groupingKey] || [];
     acc[groupingKey].push(current);
     return acc;

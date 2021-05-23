@@ -29,7 +29,7 @@ const getAccessToken = async (): Promise<RefreshTokenResponse> => {
     body: new URLSearchParams({
       grant_type: 'refresh_token',
       refresh_token: auth.refreshToken,
-    }),
+    } as Record<string, string>),
   });
 
   return response.json();
@@ -59,9 +59,9 @@ export const getTopTracks = async () => fetchWith.accessToken(ENDPOINTS.TOP_TRAC
 
 export const adaptNowPlaying = (track: CurrentlyPlaying): NowPlaying => ({
   isPlaying: track.is_playing,
-  title: track.item.name,
-  artist: track.item.artists.map((artist) => artist.name).join(', '),
-  album: track.item.album.name,
-  albumImageUrl: track.item.album.images[0]?.url,
-  trackUrl: track.item.external_urls.spotify,
+  title: track.item?.name || '',
+  artist: track.item?.artists.map((artist) => artist.name).join(', ') || '',
+  album: track.item?.album.name || '',
+  albumImageUrl: track.item?.album.images[0]?.url || '',
+  trackUrl: track.item?.external_urls.spotify || '',
 });
