@@ -24,6 +24,7 @@
     "remark": "^13.0.0",
     "remark-gfm": "^1.0.0",
     "remark-html": "^13.0.1",
+    "styled-jsx": "^3.4.4",
     "swr": "^0.5.3"
   },
   "devDependencies": {
