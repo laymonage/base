@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV === 'development') {
+  import('preact/debug');
+}
+
 import 'tailwindcss/tailwind.css';
 import 'styles/globals.scss';
 import 'styles/markdown.scss';
