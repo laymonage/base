@@ -24,7 +24,7 @@ const Navigation = () => {
     <nav role="navigation" className="max-w-3xl mx-auto">
       <div
         className={clsx(
-          'fixed bottom-0 z-20 flex flex-col-reverse w-full max-w-3xl py-3 transition duration-500 transform bg-white bg-opacity-50 sm:flex-row sm:justify-between sm:items-center dark:bg-gray-800 dark:bg-opacity-50 ease sm:top-0 sm:bottom-auto backdrop-filter backdrop-blur',
+          'fixed bottom-0 z-20 flex flex-col-reverse w-full max-w-3xl py-3 transition duration-500 ease transform bg-white bg-opacity-50 sm:flex-row sm:justify-between sm:items-center dark:bg-gray-800 dark:bg-opacity-50 sm:top-0 sm:bottom-auto backdrop-filter backdrop-blur',
           hidden
             ? 'translate-y-full sm:-translate-y-full backdrop-opacity-0'
             : 'shadow backdrop-opacity-100',
@@ -50,7 +50,7 @@ const Navigation = () => {
         <div className={clsx('px-3 pb-2 mr-4 sm:p-0 sm:flex sm:items-center', { hidden: !open })}>
           {menu.map((m) => (
             <Link href={`/${m}`} key={m}>
-              <a className="block p-2 mb-2 font-bold capitalize rounded sm:mb-0 sm:ml-4 sm:first:ml-0 focus:outline-none focus:bg-blue-100 hover:bg-blue-100 dark:focus:bg-gray-700 dark:hover:bg-gray-700">
+              <a className="block p-2 mb-2 font-bold capitalize rounded sm:mb-0 sm:ml-4 sm:first:ml-0 focus:outline-none focus:bg-blue-100 hover:bg-blue-100 dark:focus:bg-gray-700 dark:hover:bg-gray-700 focus:bg-opacity-50 hover:bg-opacity-50 dark:focus:bg-opacity-50 dark:hover:bg-opacity-50">
                 {m}
               </a>
             </Link>
