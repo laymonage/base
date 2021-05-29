@@ -1,21 +1,23 @@
 import clsx from 'clsx';
 import { useScrollY } from 'lib/hooks/scroll';
+import { useCallback } from 'react';
 
 const ScrollTop = () => {
   const offset = 256;
   const scrollY = useScrollY();
+  const doScroll = useCallback(() => window.scrollTo({ top: 0, behavior: 'smooth' }), []);
 
   return (
     <button
       type="button"
       className={clsx(
         'fixed z-10 text-white transition-transform duration-300 bg-blue-900 rounded-full bottom-3 right-3 button dark:bg-gray-700 focus:outline-none transform translate-y-0',
-        { 'translate-y-20': offset > scrollY, 'shadow-lg': offset <= scrollY },
+        offset > scrollY ? 'translate-y-20' : 'shadow-lg',
       )}
     >
       <svg
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        className="w-12 h-12 fill-current sm:w-16 sm:h-16"
+        onClick={doScroll}
+        className="w-10 h-10 fill-current sm:w-16 sm:h-16"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
       >
