@@ -25,6 +25,7 @@ export const getStaticProps: GetStaticProps = async () => {
 const Posts = ({ allPostsData }: PostsData) => {
   const [search, setSearch] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
+  const showTags = false;
 
   const posts = allPostsData.filter((post) => {
     const {
@@ -103,9 +104,9 @@ const Posts = ({ allPostsData }: PostsData) => {
                             <h2 className="text-xl font-bold">{post.data.title}</h2>
                             <Date dateString={post.data.date} />
                           </div>
-                          <div className="mb-6">{post.data.description}</div>
+                          <p>{post.data.description}</p>
                         </div>
-                        {post.data.tags.length ? (
+                        {showTags && post.data.tags.length ? (
                           <div className="flex">
                             {post.data.tags.map((tag) => (
                               <span
