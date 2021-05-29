@@ -5,7 +5,7 @@ const softwareProjects = [
       src: '/img/projects/giscus.svg',
     },
     title: 'giscus',
-    url: 'https://giscus.vercel.app',
+    url: 'https://giscus.app',
     description: `A comments widget built on GitHub Discussions.`,
     details: [],
   },
