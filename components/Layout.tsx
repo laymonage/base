@@ -76,7 +76,7 @@ const Layout = ({ children, navSafe, customMeta, hasComments }: LayoutProps) => 
           </>
         ) : null}
       </main>
-      <div className="fixed top-0 left-0 w-screen h-screen bg-center bg-cover bg" />
+      <div className="fixed top-0 left-0 w-screen h-screen bg-center bg-cover opacity-40 xl:opacity-100 bg" />
       <ScrollTop />
     </>
   );
