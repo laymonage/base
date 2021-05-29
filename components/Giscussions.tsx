@@ -16,7 +16,7 @@ export default function Giscussions() {
     <>
       <Head>
         <script
-          src="https://giscus.vercel.app/client.js"
+          src="https://giscus.app/client.js"
           data-repo="laymonage/base"
           data-repo-id="MDEwOlJlcG9zaXRvcnkzNDExNDE2OTY="
           data-category-id="MDE4OkRpc2N1c3Npb25DYXRlZ29yeTMyNzIzMDI4"
