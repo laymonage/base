@@ -9,7 +9,7 @@ export interface CardProps {
 
 const Card = ({ children, header, subtitle }: CardProps) => {
   return (
-    <div className="flex-col w-full p-8">
+    <div className="flex-col w-full p-4">
       {header ? (
         <div
           className={clsx(
