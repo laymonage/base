@@ -35,7 +35,9 @@ const Logs = ({ allLogsData }: LogsData) => {
           {allLogsData.length > 0 ? (
             allLogsData.map(([year, logs]) => (
               <Fragment key={year}>
-                <h3 className="mt-6 text-2xl font-bold text-gray-800 dark:text-gray-100">{year}</h3>
+                <h3 className="mt-6 text-2xl font-semibold text-gray-800 dark:text-gray-100">
+                  {year}
+                </h3>
                 <Catalog
                   key={year}
                   border={false}
@@ -44,7 +46,7 @@ const Logs = ({ allLogsData }: LogsData) => {
                     <Link href={`/logs/${log.slug}`} key={log.slug}>
                       <a className="block mt-4 text-gray-700 dark:text-gray-300">
                         <h3>Week {log.data.week}</h3>
-                        <h2 className="text-xl font-bold">{log.data.title}</h2>
+                        <h2 className="text-xl font-semibold">{log.data.title}</h2>
                       </a>
                     </Link>
                   ))}

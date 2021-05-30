@@ -38,7 +38,7 @@ const SinglePost = ({ post }: PostProps) => {
     >
       <Card>
         <div className="flex-row mt-8 text-center">
-          <h2 className="mb-4 text-3xl font-bold">{post.data.title}</h2>
+          <h2 className="mb-4 text-3xl font-semibold">{post.data.title}</h2>
           <Date className="block mb-4" dateString={post.data.date} />
           <div className="mb-16">
             {showTags
@@ -54,7 +54,7 @@ const SinglePost = ({ post }: PostProps) => {
           </div>
         </div>
         <div
-          className="mx-auto mt-4 mb-8 markdown max-w-prose"
+          className="mx-auto mt-4 mb-8 markdown max-w-2xl"
           dangerouslySetInnerHTML={{ __html: post.content || '' }}
         ></div>
       </Card>
