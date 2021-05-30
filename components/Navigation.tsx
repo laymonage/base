@@ -24,10 +24,8 @@ const Navigation = () => {
     <nav role="navigation" className="max-w-3xl mx-auto">
       <div
         className={clsx(
-          'fixed bottom-0 z-20 flex flex-col-reverse w-full max-w-3xl py-3 transition duration-500 ease transform bg-white bg-opacity-50 sm:flex-row sm:justify-between sm:items-center dark:bg-gray-800 dark:bg-opacity-50 sm:top-0 sm:bottom-auto backdrop-filter backdrop-blur',
-          hidden
-            ? 'translate-y-full sm:-translate-y-full backdrop-opacity-0'
-            : 'shadow backdrop-opacity-100',
+          'fixed bottom-0 z-20 flex flex-col-reverse w-full max-w-3xl py-3 transition-transform duration-300 ease transform bg-white bg-opacity-50 sm:flex-row sm:justify-between sm:items-center dark:bg-gray-800 dark:bg-opacity-50 sm:top-0 sm:bottom-auto backdrop-filter backdrop-blur',
+          hidden ? 'translate-y-full sm:-translate-y-full' : 'shadow',
         )}
       >
         <div className="flex items-center justify-between flex-grow mx-4">
