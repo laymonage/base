@@ -78,7 +78,7 @@ const Layout = ({ children, navSafe, customMeta, hasComments }: LayoutProps) => 
       </Head>
       <Navigation />
       <main
-        className={clsx('container flex flex-col items-center w-full mx-auto max-w-2xl', {
+        className={clsx('flex flex-col items-center w-full mx-auto max-w-2xl', {
           'mt-2 mb-16 sm:mb-20 sm:mt-24': !navSafe,
         })}
       >
