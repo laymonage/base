@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { ReactNode } from 'react';
 import { capitalize } from 'lib/string';
 import Card from './Card';
-import Giscussions from './Giscussions';
+import Giscus from './Giscus';
 import Navigation from './Navigation';
 import ScrollTop from './ScrollTop';
 
@@ -71,7 +71,7 @@ const Layout = ({ children, navSafe, customMeta, hasComments }: LayoutProps) => 
           <>
             <div className="my-4" />
             <Card>
-              <Giscussions />
+              <Giscus />
             </Card>
           </>
         ) : null}

@@ -8,7 +8,7 @@ const themeMapping = {
   system: 'preferred_color_scheme',
 };
 
-export default function Giscussions() {
+export default function Giscus() {
   const mounted = useMounted();
   const { theme = 'light' } = useTheme();
 
