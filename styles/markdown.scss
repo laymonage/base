@@ -54,6 +54,10 @@
     @apply pl-4 my-4 italic border-l-4 border-gray-400 border-opacity-20 text-base;
   }
 
+  a {
+    @apply hover:underline focus:underline;
+  }
+
   code {
     @apply bg-gray-500 border border-gray-400 rounded border-opacity-20 bg-opacity-5 text-sm;
   }
