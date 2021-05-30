@@ -38,10 +38,10 @@ const SingleLog = ({ log }: LogProps) => {
       <Card>
         <div className="mt-4 mb-12 text-center">
           <p className="text-xl">{humanizeLogSlug(log.slug)}</p>
-          <h2 className="mt-2 text-3xl font-bold">{log.data.title}</h2>
+          <h2 className="mt-2 text-3xl font-semibold">{log.data.title}</h2>
         </div>
         <div
-          className="mx-auto my-4 markdown max-w-prose"
+          className="mx-auto my-4 markdown max-w-2xl"
           dangerouslySetInnerHTML={{ __html: log.content || '' }}
         ></div>
       </Card>

@@ -25,6 +25,13 @@ export interface LayoutProps {
   hasComments?: boolean;
 }
 
+const fonts = [
+  'source-sans-pro-latin-reg-400-v14',
+  'source-sans-pro-latin-reg-600-v14',
+  'source-sans-pro-latin-itl-400-v14',
+  'source-sans-pro-latin-itl-600-v14',
+];
+
 const Layout = ({ children, navSafe, customMeta, hasComments }: LayoutProps) => {
   const title = (customMeta?.title ? `${capitalize(customMeta.title)} | ` : '') + siteTitle;
   const meta = {
@@ -45,7 +52,16 @@ const Layout = ({ children, navSafe, customMeta, hasComments }: LayoutProps) => 
         <title>{meta.title}</title>
         <link rel="canonical" href={`${siteRoot}${router.asPath}`} />
         <link rel="icon" href="/favicon.ico" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        {fonts.map((font) => (
+          <link
+            key={font}
+            rel="preload"
+            href={`/fonts/${font}.woff2`}
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+        ))}
         <meta name="description" content={meta.description} />
         <meta property="og:url" content={`${siteRoot}${router.asPath}`} />
         <meta property="og:type" content={meta.type} />

@@ -50,7 +50,7 @@ const Navigation = () => {
         <div className={clsx('px-3 pb-2 mr-4 sm:p-0 sm:flex sm:items-center', { hidden: !open })}>
           {menu.map((m) => (
             <Link href={`/${m}`} key={m}>
-              <a className="block p-2 mb-2 font-bold capitalize rounded sm:mb-0 sm:ml-4 sm:first:ml-0 focus:outline-none focus:bg-blue-100 hover:bg-blue-100 dark:focus:bg-gray-700 dark:hover:bg-gray-700 focus:bg-opacity-50 hover:bg-opacity-50 dark:focus:bg-opacity-50 dark:hover:bg-opacity-50">
+              <a className="block p-2 mb-2 font-semibold capitalize rounded sm:mb-0 sm:ml-4 sm:first:ml-0 focus:outline-none focus:bg-blue-100 hover:bg-blue-100 dark:focus:bg-gray-700 dark:hover:bg-gray-700 focus:bg-opacity-50 hover:bg-opacity-50 dark:focus:bg-opacity-50 dark:hover:bg-opacity-50">
                 {m}
               </a>
             </Link>
