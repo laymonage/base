@@ -84,12 +84,9 @@ const Layout = ({ children, navSafe, customMeta, hasComments }: LayoutProps) => 
       >
         {children}
         {hasComments ? (
-          <>
-            <div className="my-4" />
-            <Card>
-              <Giscus />
-            </Card>
-          </>
+          <Card>
+            <Giscus />
+          </Card>
         ) : null}
       </main>
       <div className="fixed top-0 left-0 w-screen h-screen bg-center bg-cover opacity-40 xl:opacity-100 bg" />

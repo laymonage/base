@@ -56,11 +56,10 @@ const About = ({ about }: AboutProps) => {
         }
       >
         <div className="markdown" dangerouslySetInnerHTML={{ __html: about.content || '' }}></div>
-        <div className="flex justify-end mt-6">
+        <div className="flex justify-end my-6">
           <NowPlaying />
         </div>
       </Card>
-      <div className="my-4"></div>
       <Card
         header={
           <h2 id="timeline">
