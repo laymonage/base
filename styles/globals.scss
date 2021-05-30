@@ -48,6 +48,12 @@ html {
   }
 }
 
+@media screen and (max-width: 320px) {
+  html {
+    font-size: 5vw;
+  }
+}
+
 ::-webkit-scrollbar {
   @apply w-2 bg-transparent;
 }
