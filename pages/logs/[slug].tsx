@@ -36,12 +36,14 @@ const SingleLog = ({ log }: LogProps) => {
       hasComments={log.data.comments === true}
     >
       <Card>
-        <div className="mt-4 mb-12 text-center">
-          <p className="text-xl">{humanizeLogSlug(log.slug)}</p>
-          <h2 className="mt-2 text-3xl font-semibold">{log.data.title}</h2>
+        <div className="my-4">
+          <h2 className="text-4xl font-semibold tracking-tight text-black dark:text-white">
+            {log.data.title}
+          </h2>
+          <p className="mt-2 text-xl">{humanizeLogSlug(log.slug)}</p>
         </div>
         <div
-          className="mx-auto my-4 markdown max-w-2xl"
+          className="max-w-2xl mx-auto my-4 markdown"
           dangerouslySetInnerHTML={{ __html: log.content || '' }}
         ></div>
       </Card>

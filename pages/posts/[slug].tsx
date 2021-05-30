@@ -37,24 +37,26 @@ const SinglePost = ({ post }: PostProps) => {
       hasComments={post.data.comments === true}
     >
       <Card>
-        <div className="flex-row mt-8 text-center">
-          <h2 className="mb-4 text-3xl font-semibold">{post.data.title}</h2>
+        <div className="flex-row mt-4">
+          <h2 className="mb-4 text-5xl font-semibold tracking-tight text-black dark:text-white">
+            {post.data.title}
+          </h2>
           <Date className="block mb-4" dateString={post.data.date} />
-          <div className="mb-16">
-            {showTags
-              ? post.data.tags.map((tag) => (
-                  <span
-                    className="p-1 mx-1 bg-gray-400 border-2 border-gray-500 rounded bg-opacity-20"
-                    key={tag}
-                  >
-                    {tag}
-                  </span>
-                ))
-              : null}
-          </div>
+          {showTags ? (
+            <div className="mb-16">
+              {post.data.tags.map((tag) => (
+                <span
+                  className="p-1 mx-1 bg-gray-400 border-2 border-gray-500 rounded bg-opacity-20"
+                  key={tag}
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          ) : null}
         </div>
         <div
-          className="mx-auto mt-4 mb-8 markdown max-w-2xl"
+          className="max-w-2xl mx-auto mt-4 mb-8 markdown"
           dangerouslySetInnerHTML={{ __html: post.content || '' }}
         ></div>
       </Card>
