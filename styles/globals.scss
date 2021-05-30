@@ -54,6 +54,10 @@ html {
   }
 }
 
+::selection {
+  @apply bg-blue-500 text-gray-100;
+}
+
 ::-webkit-scrollbar {
   @apply w-2 bg-transparent;
 }
