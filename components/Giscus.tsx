@@ -4,7 +4,7 @@ import { useTheme } from 'next-themes';
 
 const themeMapping = {
   light: 'light',
-  dark: 'dark_dimmed',
+  dark: 'transparent_dark',
   system: 'preferred_color_scheme',
 };
 
