@@ -2,10 +2,7 @@ const withPreact = require('next-plugin-preact');
 
 const ContentSecurityPolicy = `
   frame-ancestors 'self';
-  default-src 'self';
-  script-src 'self' 'unsafe-eval' 'unsafe-inline' giscus.app cdnjs.cloudflare.com;
   child-src *.youtube.com giscus.app;
-  style-src 'self' 'unsafe-inline';
   img-src * blob: data:;
   media-src 'none';
   connect-src *;
