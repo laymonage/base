@@ -43,12 +43,26 @@ const securityHeaders = [
   }
 ];
 
+
+
+const cacheHeaders = [
+  {
+    "key": "Cache-Control",
+    "value": "public, max-age=31536000, immutable"
+  }
+];
+
 module.exports = withPreact({
   async headers() {
     return [
       {
         source: '/(.*)',
         headers: securityHeaders
-      }]
+      },
+      {
+        source: '/fonts/(.*)',
+        headers: cacheHeaders
+      },
+    ]
   }
 });
