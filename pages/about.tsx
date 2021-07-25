@@ -1,6 +1,5 @@
 import { GetStaticProps } from 'next';
 import Link from 'next/link';
-import { useState } from 'react';
 import Card from 'components/Card';
 import Catalog from 'components/Catalog';
 import Layout from 'components/Layout';
@@ -40,10 +39,12 @@ const TimelineYear = ({ data }: { data: YearData }) => (
   </>
 );
 
+const dataToTimeline = (data: YearData) => <TimelineYear data={data} key={data.year} />;
+
 const About = ({ about }: AboutProps) => {
-  const [isComplete, setComplete] = useState(false);
   const [one, two, three, ...rest] = timelineData;
-  const latestItems = [one, two, three].map((each) => <TimelineYear data={each} key={each.year} />);
+  const latestItems = [one, two, three].map(dataToTimeline);
+
   return (
     <Layout customMeta={{ title: 'About', description: `About laymonage.` }}>
       <Card
@@ -69,17 +70,11 @@ const About = ({ about }: AboutProps) => {
           </h2>
         }
       >
-        <Catalog
-          border
-          items={latestItems.concat(
-            isComplete ? rest.map((each) => <TimelineYear data={each} key={each.year} />) : [],
-          )}
-        />
-        {!isComplete ? (
-          <button className="mt-4 alike" onClick={() => setComplete(true)}>
-            See more...
-          </button>
-        ) : null}
+        <Catalog border items={latestItems} />
+        <details>
+          <summary className="my-4 cursor-pointer alike">More...</summary>
+          <Catalog border items={rest.map(dataToTimeline)} />
+        </details>
       </Card>
     </Layout>
   );
