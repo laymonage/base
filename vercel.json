@@ -3,15 +3,6 @@
   "trailingSlash": false,
   "headers": [
     {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "Permissions-Policy",
-          "value": "interest-cohort=()"
-        }
-      ]
-    },
-    {
       "source": "/fonts/source-sans-pro-latin-reg-400-v14.woff2",
       "headers": [
         {
