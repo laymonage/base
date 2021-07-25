@@ -17,7 +17,7 @@ const ThemeToggle = () => {
     <button
       type="button"
       className="w-6 h-6 fill-current focus:outline-none alike"
-      aria-label="Theme"
+      aria-label="Change theme"
       onClick={handleThemeChange}
     >
       {theme === 'dark' ? <Moon /> : <Sun />}

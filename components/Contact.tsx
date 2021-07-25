@@ -11,6 +11,7 @@ export interface ContactInfo {
   metaDescription: string;
   links: Array<{
     url: string;
+    name: string;
     icon: ElementType;
   }>;
 }
@@ -23,14 +24,17 @@ export const data: ContactInfo = {
   links: [
     {
       url: 'https://github.com/laymonage',
+      name: 'GitHub',
       icon: GitHub,
     },
     {
       url: 'https://linkedin.com/in/laymonage',
+      name: 'LinkedIn',
       icon: LinkedIn,
     },
     {
       url: 'https://twitter.com/laymonage',
+      name: 'Twitter',
       icon: Twitter,
     },
   ],
@@ -54,6 +58,7 @@ const Contact = ({ name, alias, description, links }: ContactInfo) => {
             target="_blank"
             rel="noreferrer noopener nofollow"
             href={link.url}
+            aria-label={link.name}
             className="w-8 h-8 p-1 ml-3 rounded fill-current first:ml-0 focus:outline-none focus:bg-blue-100 focus:text-blue-700 hover:bg-blue-100 hover:text-blue-700 dark:text-blue-200 dark:focus:bg-gray-700 dark:focus:text-blue-100 dark:hover:bg-gray-700 dark:hover:text-blue-100"
           >
             <link.icon />

@@ -35,9 +35,9 @@ const Logs = ({ allLogsData }: LogsData) => {
           {allLogsData.length > 0 ? (
             allLogsData.map(([year, logs]) => (
               <Fragment key={year}>
-                <h3 className="mt-6 text-2xl font-semibold text-gray-800 dark:text-gray-100">
+                <h2 className="mt-6 text-2xl font-semibold text-gray-800 dark:text-gray-100">
                   {year}
-                </h3>
+                </h2>
                 <Catalog
                   key={year}
                   border={false}

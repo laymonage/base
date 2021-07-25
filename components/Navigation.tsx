@@ -29,14 +29,18 @@ const Navigation = () => {
         )}
       >
         <div className="flex items-center justify-between flex-grow mx-4">
-          <Link href="/" aria-current aria-label="Home">
-            <a className="w-10 h-10 mr-2 text-blue-700 fill-current focus:outline-none dark:text-blue-100">
+          <Link href="/">
+            <a
+              aria-label="Home"
+              className="w-10 h-10 mr-2 text-blue-700 fill-current focus:outline-none dark:text-blue-100"
+            >
               <Logo />
             </a>
           </Link>
           <div className="flex items-center justify-between">
             <ThemeToggle />
             <button
+              aria-label="Toggle navigation menu"
               type="button"
               className="w-8 h-8 ml-4 fill-current sm:hidden focus:outline-none alike"
               onClick={() => setOpen(!open)}

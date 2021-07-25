@@ -9,6 +9,7 @@ const ScrollTop = () => {
 
   return (
     <button
+      aria-label="Scroll to top"
       type="button"
       className={clsx(
         'fixed z-10 text-white transition-transform duration-300 bg-blue-900 rounded-full bottom-3 right-3 button dark:bg-gray-700 focus:outline-none transform translate-y-0',
