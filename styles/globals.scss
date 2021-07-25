@@ -42,6 +42,7 @@ html {
   scroll-behavior: smooth;
   scrollbar-color: rgb(156, 163, 175) transparent;
   scrollbar-width: thin;
+  overflow-y: scroll;
 
   &.dark {
     scrollbar-color: rgb(55, 65, 81) transparent;
