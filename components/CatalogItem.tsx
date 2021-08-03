@@ -24,8 +24,7 @@ const CatalogItem = (item: Item) => {
               src={item.image.src}
               alt={item.title}
               title={item.title}
-              height={144}
-              width="auto"
+              layout="fill"
               objectFit="contain"
             />
           </div>
