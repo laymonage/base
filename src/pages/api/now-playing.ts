@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { adaptNowPlaying, getNowPlaying } from '@/lib/spotify';
 import { CurrentlyPlaying } from '@/lib/models/spotify';
 
-export default async (_: NextApiRequest, res: NextApiResponse) => {
+export default async function NowPlayingApi(_: NextApiRequest, res: NextApiResponse) {
   const response = await getNowPlaying();
 
   if (response.status !== 200) {
@@ -15,4 +15,4 @@ export default async (_: NextApiRequest, res: NextApiResponse) => {
   res.setHeader('Cache-Control', 'public, s-maxage=60, stale-while-revalidate=30');
 
   return res.status(200).json(nowPlaying);
-};
+}
