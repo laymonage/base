@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { adaptNowPlaying, getNowPlaying } from 'lib/spotify';
-import { CurrentlyPlaying } from 'lib/models/spotify';
+import { adaptNowPlaying, getNowPlaying } from '@/lib/spotify';
+import { CurrentlyPlaying } from '@/lib/models/spotify';
 
 export default async (_: NextApiRequest, res: NextApiResponse) => {
   const response = await getNowPlaying();

@@ -1,9 +1,9 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import Card from 'components/Card';
-import Date from 'components/Date';
-import Layout from 'components/Layout';
-import { getAllPostSlugs, getPostData } from 'lib/content';
-import { Post } from 'lib/models/content';
+import Card from '@/components/Card';
+import Date from '@/components/Date';
+import Layout from '@/components/Layout';
+import { getAllPostSlugs, getPostData } from '@/lib/content';
+import { Post } from '@/lib/models/content';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = getAllPostSlugs();

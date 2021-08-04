@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import useSWR from 'swr';
-import { fetcher } from 'lib/fetcher';
-import { NowPlaying as iNowPlaying } from 'lib/models/spotify';
+import { fetcher } from '@/lib/fetcher';
+import { NowPlaying as iNowPlaying } from '@/lib/models/spotify';
 import Spotify from './icons/Spotify.svg';
 
 const SPOTIFY_PROFILE_URL = 'https://open.spotify.com/user/laymonage';

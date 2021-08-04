@@ -1,4 +1,4 @@
-import { useMounted } from 'lib/hooks/mounted';
+import { useMounted } from '@/lib/hooks/mounted';
 import { useTheme } from 'next-themes';
 import { useCallback } from 'react';
 import Moon from './icons/Moon.svg';

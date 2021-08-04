@@ -1,4 +1,4 @@
-import { YearData } from 'lib/models/about';
+import { YearData } from '@/lib/models/about';
 
 export const timelineData: YearData[] = [
   {

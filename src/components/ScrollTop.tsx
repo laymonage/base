@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { useScrollY } from 'lib/hooks/scroll';
+import { useScrollY } from '@/lib/hooks/scroll';
 import { useCallback } from 'react';
 
 const ScrollTop = () => {

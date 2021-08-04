@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import Card from 'components/Card';
-import Layout from 'components/Layout';
-import { getGroupedLogsData } from 'lib/content';
+import Card from '@/components/Card';
+import Catalog from '@/components/Catalog';
+import Layout from '@/components/Layout';
+import { getGroupedLogsData } from '@/lib/content';
 import { GetStaticProps } from 'next';
-import Catalog from 'components/Catalog';
 import { Fragment } from 'react';
 
 interface LogsData {

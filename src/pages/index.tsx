@@ -1,5 +1,5 @@
-import Contact, { data } from 'components/Contact';
-import Layout from 'components/Layout';
+import Contact, { data } from '@/components/Contact';
+import Layout from '@/components/Layout';
 
 const Home = () => {
   return (

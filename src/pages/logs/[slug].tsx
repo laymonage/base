@@ -1,9 +1,9 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import Card from 'components/Card';
-import Layout from 'components/Layout';
-import { getAllLogSlugs, getLogData } from 'lib/content';
-import { Log } from 'lib/models/content';
-import { humanizeLogSlug } from 'lib/string';
+import Card from '@/components/Card';
+import Layout from '@/components/Layout';
+import { getAllLogSlugs, getLogData } from '@/lib/content';
+import { Log } from '@/lib/models/content';
+import { humanizeLogSlug } from '@/lib/string';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = getAllLogSlugs();

@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import clsx from 'clsx';
 import { ReactNode } from 'react';
-import { capitalize } from 'lib/string';
+import { capitalize } from '@/lib/string';
 import Card from './Card';
 import Giscus from './Giscus';
 import Navigation from './Navigation';
