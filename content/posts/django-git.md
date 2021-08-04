@@ -10,7 +10,7 @@ description: 'Django uses Git to manage its codebase, but how?'
 image: /img/uploads/django+git.png
 ---
 
-![The web framework for perfectionists with deadlines, and the version control system.](/img/uploads/django+git.png "The web framework for perfectionists with deadlines, and the version control system.")
+![The web framework for perfectionists with deadlines, and the version control system.](/img/uploads/django+git.png 'The web framework for perfectionists with deadlines, and the version control system.')
 
 Like pretty much every popular open source project nowadays,
 [**Django**][django] uses [**Git**][git] to manage its code base. It's hosted

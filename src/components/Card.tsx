@@ -20,7 +20,9 @@ export default function Card({ children, header, subtitle }: CardProps) {
           )}
         >
           {header}
-          {subtitle ? <div className="text-2xl sm:text-3xl">{subtitle}</div> : null}
+          {subtitle ? (
+            <div className="text-2xl sm:text-3xl">{subtitle}</div>
+          ) : null}
         </div>
       ) : null}
       {children}

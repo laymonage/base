@@ -32,7 +32,7 @@ more than one organization, but I'd advise picking **no more than two**.
 It's fine if you submit three proposals, though.
 
 For me, I had been looking at Django's **`JSONField`** idea since the previous
-February. I was *lucky* to stumble upon it.
+February. I was _lucky_ to stumble upon it.
 
 ### > Some backstory
 
@@ -111,7 +111,7 @@ the other third party `JSONField` packages, nor the database systems other
 than PostgreSQL and SQLite. I probably would think it's unlikely to happen.
 
 But hey! **That person was me.** As you can imagine, writing my proposal wasn't
-easy. I could imagine what the end product would look like. However, I *barely*
+easy. I could imagine what the end product would look like. However, I _barely_
 had an idea of how I was going to implement it.
 
 I kept reading the docs of those DBMS. I could understand what each system's
@@ -173,7 +173,7 @@ However, there are some things I would advise if you want your journey to go
 
 In GSoC, you work on a project, **remotely**. There will be obstacles as you go
 along the way. If you don't communicate with your mentors, they won't be able
-to help you. They don't even *know* what difficulties you are having.
+to help you. They don't even _know_ what difficulties you are having.
 
 So, please, **communicate** with your mentors. Use email, GitHub, Slack,
 whatever.
@@ -226,7 +226,7 @@ You'll learn a lot over the course of your project and that's fun! However,
 there may be times when it feels overwhelming.
 
 It's okay to take a break for a while. Maybe play some video games. Watch some
-movies. Read books. Anything, really.  It's summer, you can still **have fun**!
+movies. Read books. Anything, really. It's summer, you can still **have fun**!
 Just make sure to relax **responsibly**.
 
 Remember:

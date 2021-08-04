@@ -12,7 +12,7 @@ description: |-
 image: /img/uploads/git-rebase-2.png
 ---
 
-According to StackOverflow’s [annual developer survey][StackOverflow-survey],
+According to StackOverflow’s [annual developer survey][stackoverflow-survey],
 Git is the most popular version control system for developers, with almost 90%
 of them checking in their code via Git. As a regular user of Git myself, I find
 one particular Git command to be extremely powerful. That command is…
@@ -23,7 +23,7 @@ git rebase
 
 ### **What** is it, really?
 
-To quote the [Pro Git book][ProGit-branching-rebasing],
+To quote the [Pro Git book][progit-branching-rebasing],
 
 > In Git, there are two main ways to integrate changes from one branch into
 > another: the `merge` and the `rebase`.
@@ -39,7 +39,7 @@ Let’s start with `git merge` first. Let’s say you’ve created a new branch 
 `experiment`, and you’ve diverged your work by creating different commits on
 `experiment` and `master`.
 
-![Note that each commit in Git (except the initial commit) has a reference to its parent commit(s).](/img/uploads/git-rebase-0.png "Note that each commit in Git (except the initial commit) has a reference to its parent commit(s).")
+![Note that each commit in Git (except the initial commit) has a reference to its parent commit(s).](/img/uploads/git-rebase-0.png 'Note that each commit in Git (except the initial commit) has a reference to its parent commit(s).')
 
 Now, let’s say you want to integrate your changes on `experiment` into `master`.
 The easiest way to do this is to use `git merge`. It will merge the two latest
@@ -47,7 +47,7 @@ branch states (“snapshots”, in this case, `C3` and `C4`) and the most recent
 common ancestor of the two (`C2`), creating a new snapshot and a **merge**
 commit.
 
-![C5 is the merge commit.](/img/uploads/git-rebase-1.png "C5 is the merge commit.")
+![C5 is the merge commit.](/img/uploads/git-rebase-1.png 'C5 is the merge commit.')
 
 However, there’s another way. You can take the changes you’ve made on
 `experiment` and reapply them on top of `C3`. That’s what we call a `rebase`. In
@@ -70,7 +70,7 @@ the changes you’ve made in each commit on `experiment` into temporary files,
 resetting `experiment` to the same commit as `master`, then reapplying each
 commit in turn.
 
-![The result of rebasing the experiment branch onto master.](/img/uploads/git-rebase-2.png "The result of rebasing the experiment branch onto master.")
+![The result of rebasing the experiment branch onto master.](/img/uploads/git-rebase-2.png 'The result of rebasing the experiment branch onto master.')
 
 After that, you can go back to `master` and do a `git merge`, which will be a
 fast-forward merge since the base of `experiment` is now directly ahead of
@@ -81,7 +81,7 @@ $ git checkout master
 $ git merge experiment
 ```
 
-![Fast-forwarding the master branch.](/img/uploads/git-rebase-3.png "Fast-forwarding the master branch.")
+![Fast-forwarding the master branch.](/img/uploads/git-rebase-3.png 'Fast-forwarding the master branch.')
 
 The snapshot of the end result pointed by `C4'` is exactly the same as the one
 pointed by `C5` (in the first merge example). However, `C4'` and `C4` now have
@@ -128,10 +128,10 @@ squashing, or even dropping some commits when they are reapplied. This is very
 useful if you made a mistake or just want to build your commit history
 differently.
 
-![git rebase --interactive](/img/uploads/git-rebase-4.png "git rebase --interactive")
+![git rebase --interactive](/img/uploads/git-rebase-4.png 'git rebase --interactive')
 
 Another thing to note is that `git rebase` can’t only be used to work with
-branches. You can also pass a [Git reference][ProGit-git-internals-git-references]
+branches. You can also pass a [Git reference][progit-git-internals-git-references]
 or a commit hash as the argument instead of a branch. Therefore, you can use
 something like `git rebase HEAD~3 --interactive` to be able to modify up to the
 last three commits from your current `HEAD`. This is very useful when you need
@@ -144,16 +144,16 @@ with:
 > Please use it wisely :)
 
 **Reference:** \
-[ProGit: Branching - Rebasing][ProGit-branching-rebasing]
+[ProGit: Branching - Rebasing][progit-branching-rebasing]
 
 > **Note:** \
 > This article was written as part of a series for my Software Engineering
-> Project (Proyek Perangkat Lunak, [PPL][PPL]) course. This article was first
-> published on [Medium][Medium] under a different title. I decided to write
+> Project (Proyek Perangkat Lunak, [PPL][ppl]) course. This article was first
+> published on [Medium][medium] under a different title. I decided to write
 > the whole series on my own blog, so I moved it here.
 
-[StackOverflow-survey]: https://insights.stackoverflow.com/survey/2018/#work-_-version-control
-[ProGit-branching-rebasing]: https://git-scm.com/book/en/v2/Git-Branching-Rebasing
-[ProGit-git-internals-git-references]: https://git-scm.com/book/en/v2/Git-Internals-Git-References
-[Medium]: https://medium.com/@laymonage/40709ebb4ec2
-[PPL]: /tags/ppl
+[stackoverflow-survey]: https://insights.stackoverflow.com/survey/2018/#work-_-version-control
+[progit-branching-rebasing]: https://git-scm.com/book/en/v2/Git-Branching-Rebasing
+[progit-git-internals-git-references]: https://git-scm.com/book/en/v2/Git-Internals-Git-References
+[medium]: https://medium.com/@laymonage/40709ebb4ec2
+[ppl]: /tags/ppl

@@ -20,7 +20,8 @@ export const data: ContactInfo = {
   alias: 'laymonage',
   name: 'Sage Abdullah',
   description: 'I build up and break down stuff in the open.',
-  metaDescription: 'laymonage is Sage M. Abdullah. I build up and break down stuff in the open.',
+  metaDescription:
+    'laymonage is Sage M. Abdullah. I build up and break down stuff in the open.',
   links: [
     {
       url: 'https://github.com/laymonage',
@@ -40,7 +41,12 @@ export const data: ContactInfo = {
   ],
 };
 
-export default function Contact({ name, alias, description, links }: ContactInfo) {
+export default function Contact({
+  name,
+  alias,
+  description,
+  links,
+}: ContactInfo) {
   const subtitle = name ? (
     <>
       <span className="mr-1 text-gray-500 sm:ml-4"> is </span>

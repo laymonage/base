@@ -22,7 +22,8 @@ export const timelineData: YearData[] = [
       {
         emoji: '🗣️',
         title: 'Spoke at DjangoCon Europe',
-        description: 'Presented my talk titled "Implementing a Cross-DB JSONField".',
+        description:
+          'Presented my talk titled "Implementing a Cross-DB JSONField".',
       },
       {
         emoji: '🐍',
@@ -73,7 +74,8 @@ export const timelineData: YearData[] = [
       {
         emoji: '🧩',
         title: 'Internship at Wikimedia Indonesia',
-        description: 'Helped setting up a local server to host applications internally.',
+        description:
+          'Helped setting up a local server to host applications internally.',
       },
       {
         emoji: '👨‍🏫',
@@ -95,7 +97,8 @@ export const timelineData: YearData[] = [
       {
         emoji: '🎒',
         title: 'Graduated High School',
-        description: 'I found amazing friends in high school whom I still keep in touch with.',
+        description:
+          'I found amazing friends in high school whom I still keep in touch with.',
       },
     ],
   },

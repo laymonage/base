@@ -21,7 +21,9 @@ export const getStaticProps: GetStaticProps = async () => {
 
 export default function Logs({ allLogsData }: LogsData) {
   return (
-    <Layout customMeta={{ title: 'Logs', description: 'All logs by laymonage.' }}>
+    <Layout
+      customMeta={{ title: 'Logs', description: 'All logs by laymonage.' }}
+    >
       <div className="w-full mb-2">
         <Card
           header={
@@ -46,7 +48,9 @@ export default function Logs({ allLogsData }: LogsData) {
                     <Link href={`/logs/${log.slug}`} key={log.slug}>
                       <a className="block mt-4 text-gray-700 dark:text-gray-300">
                         <h3>Week {log.data.week}</h3>
-                        <h2 className="text-xl font-semibold">{log.data.title}</h2>
+                        <h2 className="text-xl font-semibold">
+                          {log.data.title}
+                        </h2>
                       </a>
                     </Link>
                   ))}

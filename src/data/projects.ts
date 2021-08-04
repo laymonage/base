@@ -16,7 +16,8 @@ const softwareProjects = [
     },
     title: 'django-jsonfield-backport',
     url: 'https://github.com/laymonage/django-jsonfield-backport',
-    description: 'Backport of the cross-DB JSONField model and form fields from Django 3.1.',
+    description:
+      'Backport of the cross-DB JSONField model and form fields from Django 3.1.',
     details: [
       'Brings a highly-anticipated feature of Django 3.1 into previous versions.',
       'Supports multiple versions of MariaDB, MySQL, Oracle Database, PostgreSQL, and SQLite.',
@@ -32,7 +33,8 @@ const softwareProjects = [
     },
     title: 'base',
     url: 'https://github.com/laymonage/base',
-    description: 'This very website, built with React, Next.js, TypeScript, and Tailwind.',
+    description:
+      'This very website, built with React, Next.js, TypeScript, and Tailwind.',
     details: [
       'Responsive design for devices with screen width of 320px and up.',
       'Clean architecture with reusable single-file components.',
@@ -205,7 +207,8 @@ const artProjects = [
     },
     title: 'Lunacy',
     url: 'https://line.me/S/shop/theme/detail?id=33ef311d-7d79-444b-8e22-1f08d09c3f4b',
-    description: 'A minimalist, simple, and clean LINE theme with beige and blue color scheme.',
+    description:
+      'A minimalist, simple, and clean LINE theme with beige and blue color scheme.',
   },
   {
     id: 2,
@@ -214,7 +217,8 @@ const artProjects = [
     },
     title: 'The Dark Side of Big Ben',
     url: 'https://www.youtube.com/watch?v=CEDrikeKgZs',
-    description: 'A digital painting mashup of Big Ben and the legendary album art.',
+    description:
+      'A digital painting mashup of Big Ben and the legendary album art.',
   },
   {
     id: 1,

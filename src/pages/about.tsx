@@ -25,7 +25,9 @@ interface AboutProps {
 function TimelineYear({ data }: { data: YearData }) {
   return (
     <>
-      <h3 className="text-2xl font-semibold text-gray-800 dark:text-gray-100">{data.year}</h3>
+      <h3 className="text-2xl font-semibold text-gray-800 dark:text-gray-100">
+        {data.year}
+      </h3>
       <ul>
         {data.items.map((item) => (
           <li key={item.title} className="mt-4">
@@ -41,7 +43,9 @@ function TimelineYear({ data }: { data: YearData }) {
   );
 }
 
-const dataToTimeline = (data: YearData) => <TimelineYear data={data} key={data.year} />;
+const dataToTimeline = (data: YearData) => (
+  <TimelineYear data={data} key={data.year} />
+);
 
 export default function About({ about }: AboutProps) {
   const [one, two, three, ...rest] = timelineData;
@@ -58,7 +62,10 @@ export default function About({ about }: AboutProps) {
           </h2>
         }
       >
-        <div className="markdown" dangerouslySetInnerHTML={{ __html: about.content || '' }}></div>
+        <div
+          className="markdown"
+          dangerouslySetInnerHTML={{ __html: about.content || '' }}
+        ></div>
         <div className="flex justify-end my-6">
           <NowPlaying />
         </div>

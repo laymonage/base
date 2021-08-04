@@ -94,7 +94,7 @@ separate blog post for later.
 Anyway, in short, building giscus wasn't so easy as I originally thought
 it would be.
 
-Thus, I'd really appreciate it if you would use it.  Put it on your website. Tell your friends, too. [Contribute][giscus-gh].
+Thus, I'd really appreciate it if you would use it. Put it on your website. Tell your friends, too. [Contribute][giscus-gh].
 
 And, try it, right below this blog post! 👇
 

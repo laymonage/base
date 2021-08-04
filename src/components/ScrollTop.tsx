@@ -5,7 +5,10 @@ import { useCallback } from 'react';
 export default function ScrollTop() {
   const offset = 256;
   const scrollY = useScrollY();
-  const doScroll = useCallback(() => window.scrollTo({ top: 0, behavior: 'smooth' }), []);
+  const doScroll = useCallback(
+    () => window.scrollTo({ top: 0, behavior: 'smooth' }),
+    [],
+  );
 
   return (
     <button

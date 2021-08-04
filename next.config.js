@@ -16,37 +16,35 @@ const securityHeaders = [
   },
   {
     key: 'Referrer-Policy',
-    value: 'strict-origin-when-cross-origin'
+    value: 'strict-origin-when-cross-origin',
   },
   {
     key: 'X-Frame-Options',
-    value: 'SAMEORIGIN'
+    value: 'SAMEORIGIN',
   },
   {
     key: 'X-Content-Type-Options',
-    value: 'nosniff'
+    value: 'nosniff',
   },
   {
     key: 'X-DNS-Prefetch-Control',
-    value: 'on'
+    value: 'on',
   },
   {
     key: 'Strict-Transport-Security',
-    value: 'max-age=31536000; includeSubDomains; preload'
+    value: 'max-age=31536000; includeSubDomains; preload',
   },
   {
     key: 'Permissions-Policy',
-    value: 'camera=(), microphone=(), geolocation=(), interest-cohort=()'
-  }
+    value: 'camera=(), microphone=(), geolocation=(), interest-cohort=()',
+  },
 ];
-
-
 
 const cacheHeaders = [
   {
-    "key": "Cache-Control",
-    "value": "public, max-age=31536000, immutable"
-  }
+    key: 'Cache-Control',
+    value: 'public, max-age=31536000, immutable',
+  },
 ];
 
 module.exports = withPreact({
@@ -54,12 +52,12 @@ module.exports = withPreact({
     return [
       {
         source: '/(.*)',
-        headers: securityHeaders
+        headers: securityHeaders,
       },
       {
         source: '/fonts/(.*)',
-        headers: cacheHeaders
+        headers: cacheHeaders,
       },
-    ]
-  }
+    ];
+  },
 });

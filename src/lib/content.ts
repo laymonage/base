@@ -13,9 +13,12 @@ import { parseLogSlug } from './string';
 
 const baseContentDirectory = path.join(process.cwd(), 'content');
 
-const getContentDirectory = (type: string) => path.join(baseContentDirectory, type);
+const getContentDirectory = (type: string) =>
+  path.join(baseContentDirectory, type);
 
-export function getSortedContentData<A extends ContentAttributes = ContentAttributes>(
+export function getSortedContentData<
+  A extends ContentAttributes = ContentAttributes,
+>(
   type: string,
   slugParser?: (slug: string) => Record<string, unknown>,
 ): Content[] {
@@ -45,7 +48,8 @@ export function getSortedContentData<A extends ContentAttributes = ContentAttrib
   });
 }
 
-export const getSortedPostsData = () => getSortedContentData<PostAttributes>('posts') as Post[];
+export const getSortedPostsData = () =>
+  getSortedContentData<PostAttributes>('posts') as Post[];
 
 export const getSortedLogsData = () =>
   getSortedContentData<LogAttributes>('logs', parseLogSlug) as Log[];
@@ -56,7 +60,9 @@ export const getGroupedLogsData = () => {
   return sortGroup(groupedLogs);
 };
 
-export function getAllContentSlugs(type: string): Array<{ params: { slug: string } }> {
+export function getAllContentSlugs(
+  type: string,
+): Array<{ params: { slug: string } }> {
   const contentDirectory = getContentDirectory(type);
   const fileNames = fs.readdirSync(contentDirectory);
   return fileNames.map((fileName) => {
@@ -72,10 +78,9 @@ export const getAllPostSlugs = () => getAllContentSlugs('posts');
 
 export const getAllLogSlugs = () => getAllContentSlugs('logs');
 
-export async function getContentData<A extends ContentAttributes = ContentAttributes>(
-  slug: string,
-  type?: string,
-) {
+export async function getContentData<
+  A extends ContentAttributes = ContentAttributes,
+>(slug: string, type?: string) {
   const fullPath = path.join(baseContentDirectory, type || '', `${slug}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
 
@@ -98,7 +103,10 @@ export const getPostData = async (slug: string) =>
 export const getLogData = async (slug: string) =>
   (await getContentData<LogAttributes>(slug, 'logs')) as Log;
 
-export const groupBy = <T extends Content>(arr: T[], key: string): { [key: string]: T[] } =>
+export const groupBy = <T extends Content>(
+  arr: T[],
+  key: string,
+): { [key: string]: T[] } =>
   arr.reduce((acc, current) => {
     const groupingKey = current.data[key as keyof ContentAttributes] as string;
     acc[groupingKey] = acc[groupingKey] || [];

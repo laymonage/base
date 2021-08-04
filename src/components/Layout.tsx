@@ -32,8 +32,14 @@ const fonts = [
   'source-sans-pro-latin-itl-600-v14',
 ];
 
-export default function Layout({ children, navSafe, customMeta, hasComments }: LayoutProps) {
-  const title = (customMeta?.title ? `${capitalize(customMeta.title)} | ` : '') + siteTitle;
+export default function Layout({
+  children,
+  navSafe,
+  customMeta,
+  hasComments,
+}: LayoutProps) {
+  const title =
+    (customMeta?.title ? `${capitalize(customMeta.title)} | ` : '') + siteTitle;
   const meta = {
     description: 'I build up and break down stuff in the open.',
     image: `https://og-image.laymonage.com/**${encodeURI(
@@ -74,7 +80,9 @@ export default function Layout({ children, navSafe, customMeta, hasComments }: L
         <meta name="twitter:title" content={meta.title} />
         <meta name="twitter:description" content={meta.description} />
         <meta name="twitter:image" content={meta.image} />
-        {meta.date ? <meta property="article:published_time" content={meta.date} /> : null}
+        {meta.date ? (
+          <meta property="article:published_time" content={meta.date} />
+        ) : null}
       </Head>
       <Navigation />
       <main

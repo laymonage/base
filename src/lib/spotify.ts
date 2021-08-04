@@ -1,4 +1,8 @@
-import { CurrentlyPlaying, NowPlaying, RefreshTokenResponse } from './models/spotify';
+import {
+  CurrentlyPlaying,
+  NowPlaying,
+  RefreshTokenResponse,
+} from './models/spotify';
 
 const SPOTIFY_API_BASE_URL = 'https://api.spotify.com/v1';
 const SPOTIFY_ACCOUNTS_BASE_URL = 'https://accounts.spotify.com';
@@ -51,9 +55,11 @@ const fetchWith = {
 
 // API functions
 
-export const getNowPlaying = async () => fetchWith.accessToken(ENDPOINTS.NOW_PLAYING);
+export const getNowPlaying = async () =>
+  fetchWith.accessToken(ENDPOINTS.NOW_PLAYING);
 
-export const getTopTracks = async () => fetchWith.accessToken(ENDPOINTS.TOP_TRACKS);
+export const getTopTracks = async () =>
+  fetchWith.accessToken(ENDPOINTS.TOP_TRACKS);
 
 // Adapter functions
 

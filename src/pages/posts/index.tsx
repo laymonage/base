@@ -48,7 +48,9 @@ export default function Posts({ allPostsData }: PostsData) {
   }, []);
 
   return (
-    <Layout customMeta={{ title: 'Posts', description: 'All posts by laymonage.' }}>
+    <Layout
+      customMeta={{ title: 'Posts', description: 'All posts by laymonage.' }}
+    >
       <div className="w-full mb-2">
         <Card
           header={
@@ -101,7 +103,9 @@ export default function Posts({ allPostsData }: PostsData) {
                       <div className="flex flex-col justify-between w-full sm:w-9/12">
                         <div>
                           <div className="flex flex-col justify-between mb-4">
-                            <h2 className="text-xl font-semibold">{post.data.title}</h2>
+                            <h2 className="text-xl font-semibold">
+                              {post.data.title}
+                            </h2>
                             <Date dateString={post.data.date} />
                           </div>
                           <p>{post.data.description}</p>
