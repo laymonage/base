@@ -1,14 +1,5 @@
 module.exports = {
-  parser: '@typescript-eslint/parser',
-  env: {
-    node: true,
-  },
-  extends: ['eslint:recommended', 'plugin:react/recommended'],
-  plugins: ['@typescript-eslint', 'react'],
-  rules: {},
-  globals: {
-    React: 'writable',
-  },
+  extends: ['next', 'next/core-web-vitals', 'prettier'],
   overrides: [
     {
       files: ['*.ts', '*.tsx'],
@@ -18,10 +9,4 @@ module.exports = {
       },
     },
   ],
-  ignorePatterns: ['out'],
-  settings: {
-    react: {
-      version: 'detect',
-    },
-  },
 };
