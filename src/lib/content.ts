@@ -11,9 +11,9 @@ import {
 } from './models/content';
 import { parseLogSlug } from './string';
 
-const dataDirectory = path.join(process.cwd(), 'data');
+const baseContentDirectory = path.join(process.cwd(), 'content');
 
-const getContentDirectory = (type: string) => path.join(dataDirectory, type);
+const getContentDirectory = (type: string) => path.join(baseContentDirectory, type);
 
 export function getSortedContentData<A extends ContentAttributes = ContentAttributes>(
   type: string,
@@ -76,7 +76,7 @@ export async function getContentData<A extends ContentAttributes = ContentAttrib
   slug: string,
   type?: string,
 ) {
-  const fullPath = path.join(dataDirectory, type || '', `${slug}.md`);
+  const fullPath = path.join(baseContentDirectory, type || '', `${slug}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
 
   const matterResult = matter(fileContents);
