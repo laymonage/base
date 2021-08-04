@@ -1,7 +1,7 @@
 import Contact, { data } from '@/components/Contact';
 import Layout from '@/components/Layout';
 
-const Home = () => {
+export default function Home() {
   return (
     <Layout navSafe customMeta={{ description: data.metaDescription }}>
       <div className="flex items-center w-full min-h-screen">
@@ -9,5 +9,4 @@ const Home = () => {
       </div>
     </Layout>
   );
-};
-export default Home;
+}

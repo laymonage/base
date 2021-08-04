@@ -32,7 +32,7 @@ const fonts = [
   'source-sans-pro-latin-itl-600-v14',
 ];
 
-const Layout = ({ children, navSafe, customMeta, hasComments }: LayoutProps) => {
+export default function Layout({ children, navSafe, customMeta, hasComments }: LayoutProps) {
   const title = (customMeta?.title ? `${capitalize(customMeta.title)} | ` : '') + siteTitle;
   const meta = {
     description: 'I build up and break down stuff in the open.',
@@ -93,5 +93,4 @@ const Layout = ({ children, navSafe, customMeta, hasComments }: LayoutProps) => 
       <ScrollTop />
     </>
   );
-};
-export default Layout;
+}

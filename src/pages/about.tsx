@@ -22,26 +22,28 @@ interface AboutProps {
   about: Post;
 }
 
-const TimelineYear = ({ data }: { data: YearData }) => (
-  <>
-    <h3 className="text-2xl font-semibold text-gray-800 dark:text-gray-100">{data.year}</h3>
-    <ul>
-      {data.items.map((item) => (
-        <li key={item.title} className="mt-4">
-          <p className="flex font-semibold text-gray-800 dark:text-gray-100">
-            <span className="w-8">{item.emoji}</span>
-            <span>{item.title}</span>
-          </p>
-          <p className="ml-8">{item.description}</p>
-        </li>
-      ))}
-    </ul>
-  </>
-);
+function TimelineYear({ data }: { data: YearData }) {
+  return (
+    <>
+      <h3 className="text-2xl font-semibold text-gray-800 dark:text-gray-100">{data.year}</h3>
+      <ul>
+        {data.items.map((item) => (
+          <li key={item.title} className="mt-4">
+            <p className="flex font-semibold text-gray-800 dark:text-gray-100">
+              <span className="w-8">{item.emoji}</span>
+              <span>{item.title}</span>
+            </p>
+            <p className="ml-8">{item.description}</p>
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+}
 
 const dataToTimeline = (data: YearData) => <TimelineYear data={data} key={data.year} />;
 
-const About = ({ about }: AboutProps) => {
+export default function About({ about }: AboutProps) {
   const [one, two, three, ...rest] = timelineData;
   const latestItems = [one, two, three].map(dataToTimeline);
 
@@ -78,5 +80,4 @@ const About = ({ about }: AboutProps) => {
       </Card>
     </Layout>
   );
-};
-export default About;
+}

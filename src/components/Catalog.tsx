@@ -6,7 +6,7 @@ export interface Items {
   className?: string;
 }
 
-const Catalog = ({ items, border, className }: Items) => {
+export default function Catalog({ items, border, className }: Items) {
   return (
     <ol className={className}>
       {items.map((item, index) => (
@@ -19,5 +19,4 @@ const Catalog = ({ items, border, className }: Items) => {
       ))}
     </ol>
   );
-};
-export default Catalog;
+}

@@ -13,7 +13,7 @@ export interface Item {
   details: string[];
 }
 
-const CatalogItem = (item: Item) => {
+export default function CatalogItem(item: Item) {
   return (
     <div className="flex flex-col items-center sm:flex-row">
       {item.image ? (
@@ -42,5 +42,4 @@ const CatalogItem = (item: Item) => {
       </div>
     </div>
   );
-};
-export default CatalogItem;
+}

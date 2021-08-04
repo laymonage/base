@@ -22,7 +22,7 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-const Posts = ({ allPostsData }: PostsData) => {
+export default function Posts({ allPostsData }: PostsData) {
   const [search, setSearch] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
   const showTags = false;
@@ -133,5 +133,4 @@ const Posts = ({ allPostsData }: PostsData) => {
       )}
     </Layout>
   );
-};
-export default Posts;
+}

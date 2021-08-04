@@ -4,7 +4,7 @@ import { useCallback } from 'react';
 import Moon from './icons/Moon.svg';
 import Sun from './icons/Sun.svg';
 
-const ThemeToggle = () => {
+export default function ThemeToggle() {
   const mounted = useMounted();
   const { resolvedTheme: theme, setTheme } = useTheme();
 
@@ -23,5 +23,4 @@ const ThemeToggle = () => {
       {theme === 'dark' ? <Moon /> : <Sun />}
     </button>
   ) : null;
-};
-export default ThemeToggle;
+}

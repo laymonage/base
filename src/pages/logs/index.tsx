@@ -19,7 +19,7 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-const Logs = ({ allLogsData }: LogsData) => {
+export default function Logs({ allLogsData }: LogsData) {
   return (
     <Layout customMeta={{ title: 'Logs', description: 'All logs by laymonage.' }}>
       <div className="w-full mb-2">
@@ -60,5 +60,4 @@ const Logs = ({ allLogsData }: LogsData) => {
       </div>
     </Layout>
   );
-};
-export default Logs;
+}

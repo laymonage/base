@@ -26,7 +26,7 @@ interface LogProps {
   log: Log;
 }
 
-const SingleLog = ({ log }: LogProps) => {
+export default function SingleLog({ log }: LogProps) {
   return (
     <Layout
       customMeta={{
@@ -49,5 +49,4 @@ const SingleLog = ({ log }: LogProps) => {
       </Card>
     </Layout>
   );
-};
-export default SingleLog;
+}

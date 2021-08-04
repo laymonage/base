@@ -7,7 +7,7 @@ import Bars from './icons/Bars.svg';
 import Times from './icons/Times.svg';
 import ThemeToggle from './ThemeToggle';
 
-const Navigation = () => {
+export default function Navigation() {
   const [open, setOpen] = useState(false);
   const [lastScroll, setLastScroll] = useState(0);
   const [hidden, setHidden] = useState(false);
@@ -61,5 +61,4 @@ const Navigation = () => {
       </div>
     </nav>
   );
-};
-export default Navigation;
+}

@@ -26,7 +26,7 @@ interface PostProps {
   post: Post;
 }
 
-const SinglePost = ({ post }: PostProps) => {
+export default function SinglePost({ post }: PostProps) {
   const showTags = false;
   return (
     <Layout
@@ -62,5 +62,4 @@ const SinglePost = ({ post }: PostProps) => {
       </Card>
     </Layout>
   );
-};
-export default SinglePost;
+}

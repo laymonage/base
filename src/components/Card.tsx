@@ -7,7 +7,7 @@ export interface CardProps {
   subtitle?: ReactNode;
 }
 
-const Card = ({ children, header, subtitle }: CardProps) => {
+export default function Card({ children, header, subtitle }: CardProps) {
   return (
     <div className="flex-col w-full p-4">
       {header ? (
@@ -26,5 +26,4 @@ const Card = ({ children, header, subtitle }: CardProps) => {
       {children}
     </div>
   );
-};
-export default Card;
+}

@@ -6,12 +6,11 @@ export interface DateProps {
   className?: string;
 }
 
-const Date = ({ dateString, dateFormat, className }: DateProps) => {
+export default function Date({ dateString, dateFormat, className }: DateProps) {
   const date = parseISO(dateString);
   return (
     <time dateTime={dateString} className={className}>
       {format(date, dateFormat || 'LLLL d, yyyy')}
     </time>
   );
-};
-export default Date;
+}

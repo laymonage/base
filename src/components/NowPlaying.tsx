@@ -6,7 +6,7 @@ import Spotify from './icons/Spotify.svg';
 
 const SPOTIFY_PROFILE_URL = 'https://open.spotify.com/user/laymonage';
 
-const NowPlaying = () => {
+export default function NowPlaying() {
   const { data } = useSWR<iNowPlaying>('/api/now-playing', fetcher);
   const isPlaying = data?.isPlaying;
 
@@ -39,5 +39,4 @@ const NowPlaying = () => {
       </a>
     </>
   );
-};
-export default NowPlaying;
+}

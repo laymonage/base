@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { useScrollY } from '@/lib/hooks/scroll';
 import { useCallback } from 'react';
 
-const ScrollTop = () => {
+export default function ScrollTop() {
   const offset = 256;
   const scrollY = useScrollY();
   const doScroll = useCallback(() => window.scrollTo({ top: 0, behavior: 'smooth' }), []);
@@ -26,5 +26,4 @@ const ScrollTop = () => {
       </svg>
     </button>
   );
-};
-export default ScrollTop;
+}

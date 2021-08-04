@@ -40,7 +40,7 @@ export const data: ContactInfo = {
   ],
 };
 
-const Contact = ({ name, alias, description, links }: ContactInfo) => {
+export default function Contact({ name, alias, description, links }: ContactInfo) {
   const subtitle = name ? (
     <>
       <span className="mr-1 text-gray-500 sm:ml-4"> is </span>
@@ -67,5 +67,4 @@ const Contact = ({ name, alias, description, links }: ContactInfo) => {
       </div>
     </Card>
   );
-};
-export default Contact;
+}

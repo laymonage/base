@@ -30,7 +30,7 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-const Projects = ({ projects }: ProjectsData) => {
+export default function Projects({ projects }: ProjectsData) {
   return (
     <Layout customMeta={{ title: 'Projects', description: `Selected projects by laymonage.` }}>
       {projects.map((group) => (
@@ -55,5 +55,4 @@ const Projects = ({ projects }: ProjectsData) => {
       ))}
     </Layout>
   );
-};
-export default Projects;
+}
