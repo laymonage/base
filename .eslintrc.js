@@ -18,6 +18,7 @@ module.exports = {
       },
     },
   ],
+  ignorePatterns: ['out'],
   settings: {
     react: {
       version: 'detect',
