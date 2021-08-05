@@ -7,6 +7,7 @@ import Card from './Card';
 import Giscus from './Giscus';
 import Navigation from './Navigation';
 import ScrollTop from './ScrollTop';
+import Footer from './Footer';
 
 export const siteTitle = 'laymonage';
 export const siteRoot = 'https://laymonage.com';
@@ -98,6 +99,7 @@ export default function Layout({
         ) : null}
       </main>
       <div className="fixed top-0 left-0 w-screen h-screen bg-center bg-cover opacity-40 xl:opacity-100 bg" />
+      <Footer />
       <ScrollTop />
     </>
   );
