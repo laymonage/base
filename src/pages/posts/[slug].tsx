@@ -2,11 +2,11 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import Card from '@/components/Card';
 import Date from '@/components/Date';
 import Layout from '@/components/Layout';
-import { getAllPostSlugs, getPostData } from '@/lib/content';
-import { Post } from '@/lib/models/content';
+import { getAllContentSlugs, getContentData } from '@/lib/content';
+import { Post, PostAttributes } from '@/lib/models/content';
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = getAllPostSlugs();
+  const paths = getAllContentSlugs('posts');
   return {
     paths,
     fallback: false,
@@ -14,7 +14,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const post = await getPostData(params?.slug as string);
+  const slug = params?.slug as string;
+  const post = await getContentData<PostAttributes, Post>(slug, 'posts');
+
   return {
     props: {
       post,

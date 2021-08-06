@@ -6,8 +6,6 @@ import {
   ContentAttributes,
   Log,
   LogAttributes,
-  Post,
-  PostAttributes,
 } from './models/content';
 import { parseLogSlug } from './string';
 
@@ -18,12 +16,11 @@ const getContentDirectory = (type: string) =>
 
 export function getSortedContentData<
   A extends ContentAttributes = ContentAttributes,
->(
-  type: string,
-  slugParser?: (slug: string) => Record<string, unknown>,
-): Content[] {
+  C extends Content = Content,
+>(type: string, slugParser?: (slug: string) => Record<string, unknown>) {
   const contentDirectory = getContentDirectory(type);
   const fileNames = fs.readdirSync(contentDirectory);
+
   const allPostsData: Content[] = fileNames.map((fileName) => {
     const slug = fileName.replace(/\.md$/, '');
     const extraAttributes = slugParser ? slugParser(slug) : {};
@@ -45,19 +42,12 @@ export function getSortedContentData<
       return a.data.date < b.data.date ? 1 : -1;
     }
     return a.slug < b.slug ? 1 : -1;
-  });
+  }) as unknown as C[];
 }
 
-export const getSortedPostsData = () =>
-  getSortedContentData<PostAttributes>('posts') as Post[];
-
-export const getSortedLogsData = () =>
-  getSortedContentData<LogAttributes>('logs', parseLogSlug) as Log[];
-
 export const getGroupedLogsData = () => {
-  const sortedLogs = getSortedLogsData();
-  const groupedLogs = groupBy(sortedLogs, 'year');
-  return sortGroup(groupedLogs);
+  const logs = getSortedContentData<LogAttributes, Log>('logs', parseLogSlug);
+  return groupSortContent(logs, 'year');
 };
 
 export function getAllContentSlugs(
@@ -74,12 +64,9 @@ export function getAllContentSlugs(
   });
 }
 
-export const getAllPostSlugs = () => getAllContentSlugs('posts');
-
-export const getAllLogSlugs = () => getAllContentSlugs('logs');
-
 export async function getContentData<
   A extends ContentAttributes = ContentAttributes,
+  C extends Content = Content,
 >(slug: string, type?: string) {
   const fullPath = path.join(baseContentDirectory, type || '', `${slug}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
@@ -94,14 +81,8 @@ export async function getContentData<
     slug,
     data,
     content,
-  } as Content;
+  } as unknown as C;
 }
-
-export const getPostData = async (slug: string) =>
-  (await getContentData<PostAttributes>(slug, 'posts')) as Post;
-
-export const getLogData = async (slug: string) =>
-  (await getContentData<LogAttributes>(slug, 'logs')) as Log;
 
 export const groupBy = <T extends Content>(
   arr: T[],
@@ -117,3 +98,8 @@ export const groupBy = <T extends Content>(
 export const sortGroup = <T extends Content>(group: { [key: string]: T[] }) => {
   return Object.entries(group).sort(([keyA], [keyB]) => (keyA < keyB ? 1 : -1));
 };
+
+export const groupSortContent = <C extends Content = Content>(
+  content: C[],
+  by: string,
+) => sortGroup(groupBy(content, by));
