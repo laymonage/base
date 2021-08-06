@@ -89,7 +89,7 @@ export default function Layout({
       <Navigation />
       <main
         className={clsx('flex flex-col items-center w-full mx-auto max-w-2xl', {
-          'mt-2 mb-16 sm:mb-20 sm:mt-24': !navSafe,
+          'mt-2 mb-4 sm:mt-24': !navSafe,
         })}
       >
         {children}

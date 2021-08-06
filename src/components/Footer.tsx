@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="flex flex-col items-start justify-center w-full max-w-2xl mx-auto mb-8">
+    <footer className="flex flex-col items-start justify-center w-full max-w-3xl p-4 mx-auto">
       <hr className="w-full mb-8 border-gray-400 border-1 border-opacity-20" />
       <div className="grid w-full max-w-2xl grid-cols-1 gap-4 pb-16 sm:grid-cols-3">
         <div className="flex flex-col space-y-4">
@@ -14,8 +14,8 @@ export default function Footer() {
           </Link>
         </div>
         <div className="flex flex-col space-y-4">
-          <Link href="/blog">
-            <a>Blog</a>
+          <Link href="/posts">
+            <a>Posts</a>
           </Link>
           <Link href="/projects">
             <a>Projects</a>
