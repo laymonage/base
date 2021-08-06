@@ -12,9 +12,8 @@ export default function Giscus() {
 
   useEffect(() => {
     const hasLoaded = theme.current && theme.current !== resolvedTheme;
-    if (!resolvedTheme || hasLoaded) return;
-
     theme.current = resolvedTheme;
+    if (!resolvedTheme || hasLoaded) return;
 
     const script = document.createElement('script');
     const attributes = {
