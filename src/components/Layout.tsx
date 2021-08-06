@@ -69,6 +69,7 @@ export default function Layout({
             crossOrigin="anonymous"
           />
         ))}
+        <link rel="preconnect" href="https://giscus.app" />
         <meta name="description" content={meta.description} />
         <meta property="og:url" content={`${siteRoot}${router.asPath}`} />
         <meta property="og:type" content={meta.type} />
