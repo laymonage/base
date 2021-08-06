@@ -8,6 +8,7 @@ import {
   LogAttributes,
 } from './models/content';
 import { parseLogSlug } from './string';
+import { sortDescending } from './utils';
 
 const baseContentDirectory = path.join(process.cwd(), 'content');
 
@@ -39,9 +40,9 @@ export function getSortedContentMetadata<
 
   return allPostsData.sort((a, b) => {
     if (a.data.date && b.data.date) {
-      return a.data.date < b.data.date ? 1 : -1;
+      return sortDescending(a.data.date, b.data.date);
     }
-    return a.slug < b.slug ? 1 : -1;
+    return sortDescending(a.slug, b.slug);
   }) as unknown as C[];
 }
 
@@ -87,7 +88,7 @@ export async function getSingleContentData<
   } as unknown as C;
 }
 
-export const groupBy = <T extends Content>(
+export const groupBy = <T extends Content = Content>(
   arr: T[],
   key: string,
 ): { [key: string]: T[] } =>
@@ -98,8 +99,12 @@ export const groupBy = <T extends Content>(
     return acc;
   }, Object.create(null));
 
-export const sortGroup = <T extends Content>(group: { [key: string]: T[] }) => {
-  return Object.entries(group).sort(([keyA], [keyB]) => (keyA < keyB ? 1 : -1));
+export const sortGroup = <T extends Content = Content>(group: {
+  [key: string]: T[];
+}) => {
+  return Object.entries(group).sort(([keyA], [keyB]) =>
+    sortDescending(keyA, keyB),
+  );
 };
 
 export const groupSortContent = <C extends Content = Content>(
