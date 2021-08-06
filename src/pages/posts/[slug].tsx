@@ -2,7 +2,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import Card from '@/components/Card';
 import Date from '@/components/Date';
 import Layout from '@/components/Layout';
-import { getAllContentSlugs, getContentData } from '@/lib/content';
+import { getAllContentSlugs, getSingleContentData } from '@/lib/content';
 import { Post, PostAttributes } from '@/lib/models/content';
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -15,7 +15,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params?.slug as string;
-  const post = await getContentData<PostAttributes, Post>(slug, 'posts');
+  const post = await getSingleContentData<PostAttributes, Post>(slug, 'posts');
 
   return {
     props: {

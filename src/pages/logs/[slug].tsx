@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Card from '@/components/Card';
 import Layout from '@/components/Layout';
-import { getAllContentSlugs, getContentData } from '@/lib/content';
+import { getAllContentSlugs, getSingleContentData } from '@/lib/content';
 import { Log, LogAttributes } from '@/lib/models/content';
 import { humanizeLogSlug } from '@/lib/string';
 
@@ -15,7 +15,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params?.slug as string;
-  const log = await getContentData<LogAttributes, Log>(slug, 'logs');
+  const log = await getSingleContentData<LogAttributes, Log>(slug, 'logs');
 
   return {
     props: {

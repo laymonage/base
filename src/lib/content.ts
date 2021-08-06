@@ -14,7 +14,7 @@ const baseContentDirectory = path.join(process.cwd(), 'content');
 const getContentDirectory = (type: string) =>
   path.join(baseContentDirectory, type);
 
-export function getSortedContentData<
+export function getSortedContentMetadata<
   A extends ContentAttributes = ContentAttributes,
   C extends Content = Content,
 >(type: string, slugParser?: (slug: string) => Record<string, unknown>) {
@@ -45,8 +45,11 @@ export function getSortedContentData<
   }) as unknown as C[];
 }
 
-export const getGroupedLogsData = () => {
-  const logs = getSortedContentData<LogAttributes, Log>('logs', parseLogSlug);
+export const getGroupedLogsMetadata = () => {
+  const logs = getSortedContentMetadata<LogAttributes, Log>(
+    'logs',
+    parseLogSlug,
+  );
   return groupSortContent(logs, 'year');
 };
 
@@ -64,7 +67,7 @@ export function getAllContentSlugs(
   });
 }
 
-export async function getContentData<
+export async function getSingleContentData<
   A extends ContentAttributes = ContentAttributes,
   C extends Content = Content,
 >(slug: string, type?: string) {

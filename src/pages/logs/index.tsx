@@ -2,16 +2,16 @@ import Link from 'next/link';
 import Card from '@/components/Card';
 import Catalog from '@/components/Catalog';
 import Layout from '@/components/Layout';
-import { getGroupedLogsData } from '@/lib/content';
+import { getGroupedLogsMetadata } from '@/lib/content';
 import { GetStaticProps } from 'next';
 import { Fragment } from 'react';
 
 interface LogsData {
-  allLogsData: ReturnType<typeof getGroupedLogsData>;
+  allLogsData: ReturnType<typeof getGroupedLogsMetadata>;
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const allLogsData = getGroupedLogsData();
+  const allLogsData = getGroupedLogsMetadata();
   return {
     props: {
       allLogsData,

@@ -4,13 +4,13 @@ import Card from '@/components/Card';
 import Catalog from '@/components/Catalog';
 import Layout from '@/components/Layout';
 import { timelineData } from '@/data/about';
-import { getContentData } from '@/lib/content';
+import { getSingleContentData } from '@/lib/content';
 import { YearData } from '@/lib/models/about';
 import { Post } from '@/lib/models/content';
 import NowPlaying from '@/components/NowPlaying';
 
 export const getStaticProps: GetStaticProps = async () => {
-  const about = await getContentData('about');
+  const about = await getSingleContentData('about');
   return {
     props: {
       about,

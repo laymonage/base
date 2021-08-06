@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Card from '@/components/Card';
 import Date from '@/components/Date';
 import Layout from '@/components/Layout';
-import { getSortedContentData } from '@/lib/content';
+import { getSortedContentMetadata } from '@/lib/content';
 import { Post, PostAttributes } from '@/lib/models/content';
 import { GetStaticProps } from 'next';
 import Catalog from '@/components/Catalog';
@@ -14,7 +14,7 @@ interface PostsData {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const allPostsData = getSortedContentData<PostAttributes, Post>('posts');
+  const allPostsData = getSortedContentMetadata<PostAttributes, Post>('posts');
   return {
     props: {
       allPostsData,
