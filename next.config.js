@@ -48,6 +48,7 @@ const cacheHeaders = [
 ];
 
 module.exports = withPreact({
+  reactStrictMode: true,
   async headers() {
     return [
       {
