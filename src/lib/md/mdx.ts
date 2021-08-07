@@ -6,6 +6,7 @@ import readingTime from 'reading-time';
 import codeTitle from './remark-code-title';
 import imgToJsx from './img-to-jsx';
 import { grayMatterEngines } from '../markdown';
+import processTaskListItem from './task-list-item';
 
 function fixESBuildPath() {
   // https://github.com/kentcdodds/mdx-bundler#nextjs-esbuild-enoent
@@ -55,6 +56,7 @@ export async function processMDX<T>(content: string) {
           },
         ],
         [require('rehype-prism-plus'), { ignoreMissing: true }],
+        processTaskListItem,
       ];
       return options;
     },
