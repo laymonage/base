@@ -2,7 +2,7 @@ const withPreact = require('next-plugin-preact');
 
 const ContentSecurityPolicy = `
   frame-ancestors 'self';
-  child-src *.youtube.com laymonage.github.io giscus.app;
+  child-src *.youtube.com *.laymonage.com laymonage.github.io giscus.app;
   img-src * blob: data:;
   media-src 'none';
   connect-src *;
