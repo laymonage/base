@@ -4,6 +4,7 @@ import Layout from '@/components/Layout';
 import { getAllContentSlugs, getSingleContentData } from '@/lib/content';
 import { Log, LogAttributes } from '@/lib/models/content';
 import { humanizeLogSlug } from '@/lib/string';
+import MDXLayoutRenderer from '@/components/MDX';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = getAllContentSlugs('logs');
@@ -39,15 +40,17 @@ export default function SingleLog({ log }: LogProps) {
     >
       <Card>
         <div className="my-4">
-          <h2 className="text-4xl font-semibold tracking-tight text-black dark:text-white">
+          <h2 className="mb-2 text-4xl font-semibold tracking-tight text-black dark:text-white">
             {log.data.title}
           </h2>
-          <p className="mt-2 text-xl">{humanizeLogSlug(log.slug)}</p>
+          <div className="flex justify-between mb-4">
+            <span>{humanizeLogSlug(log.slug)}</span>
+            <span>{log.data.readingTime.text}</span>
+          </div>
         </div>
-        <div
-          className="max-w-2xl mx-auto my-4 markdown"
-          dangerouslySetInnerHTML={{ __html: log.content || '' }}
-        ></div>
+        <div className="max-w-2xl mx-auto my-4 markdown">
+          <MDXLayoutRenderer mdxSource={log.content as string} />
+        </div>
       </Card>
     </Layout>
   );

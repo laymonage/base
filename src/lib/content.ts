@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import { matter, md } from './markdown';
+import { matter } from './markdown';
+import { processMDX } from './md/mdx';
 import {
   Content,
   ContentAttributes,
@@ -77,11 +78,9 @@ export async function getSingleContentData<
   const fullPath = path.join(baseContentDirectory, type || '', `${slug}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
 
-  const matterResult = matter(fileContents);
-  const data = matterResult.data as A;
-
-  const processedContent = await md(matterResult.content);
-  const content = processedContent.toString();
+  const { frontMatter: data, mdxSource: content } = await processMDX<A>(
+    fileContents,
+  );
 
   return {
     slug,

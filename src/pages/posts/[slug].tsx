@@ -4,6 +4,7 @@ import Date from '@/components/Date';
 import Layout from '@/components/Layout';
 import { getAllContentSlugs, getSingleContentData } from '@/lib/content';
 import { Post, PostAttributes } from '@/lib/models/content';
+import MDXLayoutRenderer from '@/components/MDX';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = getAllContentSlugs('posts');
@@ -43,7 +44,10 @@ export default function SinglePost({ post }: PostProps) {
           <h2 className="mb-4 text-5xl font-semibold tracking-tight text-black dark:text-white">
             {post.data.title}
           </h2>
-          <Date className="block mb-4" dateString={post.data.date} />
+          <div className="flex justify-between mb-4">
+            <Date dateString={post.data.date} />
+            <span>{post.data.readingTime.text}</span>
+          </div>
           {showTags ? (
             <div className="mb-16">
               {post.data.tags.map((tag) => (
@@ -57,10 +61,9 @@ export default function SinglePost({ post }: PostProps) {
             </div>
           ) : null}
         </div>
-        <div
-          className="max-w-2xl mx-auto mt-4 mb-8 markdown"
-          dangerouslySetInnerHTML={{ __html: post.content || '' }}
-        ></div>
+        <div className="max-w-2xl mx-auto mt-4 mb-8 markdown">
+          <MDXLayoutRenderer mdxSource={post.content as string} />
+        </div>
       </Card>
     </Layout>
   );

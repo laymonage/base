@@ -8,6 +8,7 @@ import { getSingleContentData } from '@/lib/content';
 import { YearData } from '@/lib/models/about';
 import { Post } from '@/lib/models/content';
 import NowPlaying from '@/components/NowPlaying';
+import MDXLayoutRenderer from '@/components/MDX';
 
 export const getStaticProps: GetStaticProps = async () => {
   const about = await getSingleContentData('about');
@@ -60,10 +61,9 @@ export default function About({ about }: AboutProps) {
           </h2>
         }
       >
-        <div
-          className="markdown"
-          dangerouslySetInnerHTML={{ __html: about.content || '' }}
-        ></div>
+        <div className="markdown">
+          <MDXLayoutRenderer mdxSource={about.content as string} />
+        </div>
         <div className="flex justify-end my-6">
           <NowPlaying />
         </div>
