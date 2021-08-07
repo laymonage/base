@@ -5,6 +5,7 @@ if (process.env.NODE_ENV === 'development') {
 import 'tailwindcss/tailwind.css';
 import '@/styles/globals.scss';
 import '@/styles/markdown.scss';
+import '@/styles/prism.scss';
 import { AppProps } from 'next/app';
 import { ThemeProvider } from 'next-themes';
 
