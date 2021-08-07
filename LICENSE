@@ -19,3 +19,12 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+Some parts of the code are adapted and/or inspired from the following projects:
+
+- Tailwind Nextjs Starter Blog by Timothy Lin
+  Licensed under the MIT License
+  https://github.com/timlrx/tailwind-nextjs-starter-blog/blob/master/LICENSE
+
+- Lee Robinson's personal portfolio
+  https://github.com/leerob/leerob.io/blob/main/LICENSE.txt

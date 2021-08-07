@@ -1,5 +1,13 @@
+export interface ReadingTime {
+  minutes: number;
+  time: number;
+  words: number;
+  text: string;
+}
+
 export interface ContentAttributes {
   title: string;
+  readingTime: ReadingTime;
   date?: string;
   tags?: string[];
   toc?: boolean;
