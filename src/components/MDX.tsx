@@ -1,15 +1,13 @@
 // https://github.com/timlrx/tailwind-nextjs-starter-blog/blob/typescript/components/MDXComponents.tsx
 
-import { useMemo } from 'react';
+import { ComponentType, useMemo } from 'react';
 import { ComponentMap, getMDXComponent } from 'mdx-bundler/client';
 import Image from 'next/image';
 import Link from './Link';
 import Pre from './Pre';
 
 export const MDXComponents: ComponentMap = {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  Image,
+  Image: Image as ComponentType,
   a: Link,
   pre: Pre,
 };
