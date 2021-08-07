@@ -22,21 +22,23 @@ export function getSortedContentMetadata<
   const contentDirectory = getContentDirectory(type);
   const fileNames = fs.readdirSync(contentDirectory);
 
-  const allPostsData: Content[] = fileNames.map((fileName) => {
-    const slug = fileName.replace(/\.md$/, '');
-    const extraAttributes = slugParser ? slugParser(slug) : {};
+  const allPostsData: Content[] = fileNames
+    .map((fileName) => {
+      const slug = fileName.replace(/\.md$/, '');
+      const extraAttributes = slugParser ? slugParser(slug) : {};
 
-    const fullPath = path.join(contentDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
+      const fullPath = path.join(contentDirectory, fileName);
+      const fileContents = fs.readFileSync(fullPath, 'utf8');
 
-    const matterResult = matter(fileContents);
-    const data = matterResult.data as A;
+      const matterResult = matter(fileContents);
+      const data = matterResult.data as A;
 
-    return {
-      slug,
-      data: { ...data, ...extraAttributes },
-    };
-  });
+      return {
+        slug,
+        data: { ...data, ...extraAttributes },
+      };
+    })
+    .filter(({ data: { draft } }) => !draft);
 
   return allPostsData.sort((a, b) => {
     if (a.data.date && b.data.date) {
