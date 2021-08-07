@@ -1,8 +1,8 @@
 import { GetStaticProps } from 'next';
-import Link from 'next/link';
 import Card from '@/components/Card';
 import Catalog from '@/components/Catalog';
 import Layout from '@/components/Layout';
+import Link from '@/components/Link';
 import { timelineData } from '@/data/about';
 import { getSingleContentData } from '@/lib/content';
 import { YearData } from '@/lib/models/about';
@@ -56,9 +56,7 @@ export default function About({ about }: AboutProps) {
       <Card
         header={
           <h2 id="me">
-            <Link href="#me">
-              <a className="">{about.data.title}</a>
-            </Link>
+            <Link href="#me">{about.data.title}</Link>
           </h2>
         }
       >
@@ -73,9 +71,7 @@ export default function About({ about }: AboutProps) {
       <Card
         header={
           <h2 id="timeline">
-            <Link href="#timeline">
-              <a>Timeline</a>
-            </Link>
+            <Link href="#timeline">Timeline</Link>
           </h2>
         }
       >

@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import Link from 'next/link';
 import clsx from 'clsx';
+import Link from '@/components/Link';
 import { useScrollY } from '@/lib/hooks/scroll';
 import Logo from './icons/Logo.svg';
 import Bars from './icons/Bars.svg';
@@ -29,13 +29,12 @@ export default function Navigation() {
         )}
       >
         <div className="flex items-center justify-between flex-grow mx-4">
-          <Link href="/">
-            <a
-              aria-label="Home"
-              className="w-10 h-10 mr-2 text-blue-700 fill-current focus:outline-none dark:text-blue-100"
-            >
-              <Logo />
-            </a>
+          <Link
+            href="/"
+            aria-label="Home"
+            className="w-10 h-10 mr-2 text-blue-700 fill-current focus:outline-none dark:text-blue-100"
+          >
+            <Logo />
           </Link>
           <div className="flex items-center justify-between">
             <ThemeToggle />
@@ -55,10 +54,12 @@ export default function Navigation() {
           })}
         >
           {menu.map((m) => (
-            <Link href={`/${m}`} key={m}>
-              <a className="block p-2 mb-2 font-semibold capitalize rounded sm:mb-0 sm:ml-4 sm:first:ml-0 focus:outline-none focus:bg-blue-100 hover:bg-blue-100 dark:focus:bg-gray-700 dark:hover:bg-gray-700 focus:bg-opacity-50 hover:bg-opacity-50 dark:focus:bg-opacity-50 dark:hover:bg-opacity-50">
-                {m}
-              </a>
+            <Link
+              href={`/${m}`}
+              key={m}
+              className="block p-2 mb-2 font-semibold capitalize rounded sm:mb-0 sm:ml-4 sm:first:ml-0 focus:outline-none focus:bg-blue-100 hover:bg-blue-100 dark:focus:bg-gray-700 dark:hover:bg-gray-700 focus:bg-opacity-50 hover:bg-opacity-50 dark:focus:bg-opacity-50 dark:hover:bg-opacity-50"
+            >
+              {m}
             </Link>
           ))}
         </div>

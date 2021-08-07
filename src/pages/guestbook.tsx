@@ -1,7 +1,6 @@
-import Link from 'next/link';
 import Card from '@/components/Card';
 import Layout from '@/components/Layout';
-import ExternalLink from '@/components/ExternalLink';
+import Link from '@/components/Link';
 
 export default function About() {
   return (
@@ -15,16 +14,13 @@ export default function About() {
       <Card
         header={
           <h2 id="guestbook">
-            <Link href="#guestbook">
-              <a>Guestbook</a>
-            </Link>
+            <Link href="#guestbook">Guestbook</Link>
           </h2>
         }
       >
         Welcome! You can sign my guestbook down below. It is powered by my very
-        own project:{' '}
-        <ExternalLink href="https://giscus.app">giscus</ExternalLink>. Feel free
-        to write anything – just please be considerate :)
+        own project: <Link href="https://giscus.app">giscus</Link>. Feel free to
+        write anything – just please be considerate :)
       </Card>
     </Layout>
   );

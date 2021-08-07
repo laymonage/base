@@ -1,6 +1,6 @@
 import { ElementType } from 'react';
 import Card from './Card';
-import ExternalLink from './ExternalLink';
+import Link from './Link';
 import GitHub from './icons/GitHub.svg';
 import LinkedIn from './icons/LinkedIn.svg';
 import Twitter from './icons/Twitter.svg';
@@ -60,14 +60,14 @@ export default function Contact({
       <div className="mb-8 text-xl text-left sm:text-2xl">{description}</div>
       <div className="flex items-center">
         {links.map((link) => (
-          <ExternalLink
+          <Link
             key={link.url}
             href={link.url}
             aria-label={link.name}
             className="w-8 h-8 p-1 ml-3 rounded fill-current first:ml-0 focus:outline-none focus:bg-blue-100 focus:text-blue-700 hover:bg-blue-100 hover:text-blue-700 dark:text-blue-200 dark:focus:bg-gray-700 dark:focus:text-blue-100 dark:hover:bg-gray-700 dark:hover:text-blue-100"
           >
             <link.icon />
-          </ExternalLink>
+          </Link>
         ))}
       </div>
     </Card>

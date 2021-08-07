@@ -1,7 +1,7 @@
-import Link from 'next/link';
 import Card from '@/components/Card';
 import Catalog from '@/components/Catalog';
 import Layout from '@/components/Layout';
+import Link from '@/components/Link';
 import { getGroupedLogsMetadata } from '@/lib/content';
 import { GetStaticProps } from 'next';
 import { Fragment } from 'react';
@@ -28,9 +28,7 @@ export default function Logs({ allLogsData }: LogsData) {
         <Card
           header={
             <h1 id="logs">
-              <Link href="#logs">
-                <a>Logs</a>
-              </Link>
+              <Link href="#logs">Logs</Link>
             </h1>
           }
         >
@@ -45,13 +43,15 @@ export default function Logs({ allLogsData }: LogsData) {
                   border={false}
                   className="ml-5 list-disc"
                   items={logs.map((log) => (
-                    <Link href={`/logs/${log.slug}`} key={log.slug}>
-                      <a className="block mt-4 text-gray-700 dark:text-gray-300">
-                        <h3>Week {log.data.week}</h3>
-                        <h2 className="text-xl font-semibold">
-                          {log.data.title}
-                        </h2>
-                      </a>
+                    <Link
+                      href={`/logs/${log.slug}`}
+                      key={log.slug}
+                      className="block mt-4 text-gray-700 dark:text-gray-300"
+                    >
+                      <h3>Week {log.data.week}</h3>
+                      <h2 className="text-xl font-semibold">
+                        {log.data.title}
+                      </h2>
                     </Link>
                   ))}
                 />

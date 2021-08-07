@@ -1,9 +1,9 @@
 import { GetStaticProps } from 'next';
-import Link from 'next/link';
 import Card from '@/components/Card';
 import Catalog from '@/components/Catalog';
 import CatalogItem, { Item } from '@/components/CatalogItem';
 import Layout from '@/components/Layout';
+import Link from '@/components/Link';
 import projectData from '@/data/projects';
 import { md } from '@/lib/markdown';
 
@@ -43,9 +43,7 @@ export default function Projects({ projects }: ProjectsData) {
           <Card
             header={
               <h2 id={group.anchor}>
-                <Link href={`#${group.anchor}`}>
-                  <a>{group.type} Projects</a>
-                </Link>
+                <Link href={`#${group.anchor}`}>{group.type} Projects</Link>
               </h2>
             }
           >

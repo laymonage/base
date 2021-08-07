@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from '@/components/Link';
 
 export default function Footer() {
   return (
@@ -6,28 +6,16 @@ export default function Footer() {
       <hr className="w-full mb-8 border-gray-400 border-1 border-opacity-20" />
       <div className="grid justify-between w-full max-w-3xl gap-4 grid-cols-2 pb-16 sm:grid-cols-[repeat(3,min-content)]">
         <div className="flex flex-col space-y-4">
-          <Link href="/">
-            <a>Home</a>
-          </Link>
-          <Link href="/about">
-            <a>About</a>
-          </Link>
+          <Link href="/">Home</Link>
+          <Link href="/about">About</Link>
         </div>
         <div className="flex flex-col space-y-4">
-          <Link href="/posts">
-            <a>Posts</a>
-          </Link>
-          <Link href="/logs">
-            <a>Logs</a>
-          </Link>
+          <Link href="/posts">Posts</Link>
+          <Link href="/logs">Logs</Link>
         </div>
         <div className="flex flex-col space-y-4">
-          <Link href="/projects">
-            <a>Projects</a>
-          </Link>
-          <Link href="/guestbook">
-            <a>Guestbook</a>
-          </Link>
+          <Link href="/projects">Projects</Link>
+          <Link href="/guestbook">Guestbook</Link>
         </div>
       </div>
       <div className="w-full text-sm text-center">
