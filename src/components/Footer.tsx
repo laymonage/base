@@ -12,6 +12,7 @@ export default function Footer() {
         <div className="flex flex-col space-y-4">
           <Link href="/posts">Posts</Link>
           <Link href="/logs">Logs</Link>
+          <Link href="/gsoc">GSoC</Link>
         </div>
         <div className="flex flex-col space-y-4">
           <Link href="/projects">Projects</Link>
