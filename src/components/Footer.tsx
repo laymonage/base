@@ -2,9 +2,9 @@ import Link from '@/components/Link';
 
 export default function Footer() {
   return (
-    <footer className="flex flex-col items-start justify-center w-full max-w-3xl p-4 mx-auto">
+    <footer className="flex flex-col items-start justify-center w-full max-w-2xl p-4 mx-auto">
       <hr className="w-full mb-8 border-gray-400 border-1 border-opacity-20" />
-      <div className="grid justify-between w-full max-w-3xl gap-4 grid-cols-2 pb-16 sm:grid-cols-[repeat(3,min-content)]">
+      <div className="grid justify-between w-full gap-4 grid-cols-2 pb-16 sm:grid-cols-[repeat(3,min-content)]">
         <div className="flex flex-col space-y-4">
           <Link href="/">Home</Link>
           <Link href="/about">About</Link>
