@@ -62,7 +62,11 @@
   }
 
   code {
-    @apply bg-gray-500 border border-gray-400 rounded border-opacity-20 bg-opacity-5 text-sm text-pink-600 dark:text-red-300;
+    @apply bg-gray-500 border border-gray-400 rounded border-opacity-20 bg-opacity-5 text-sm;
+  }
+
+  p > code {
+    @apply text-pink-600 dark:text-red-300;
   }
 
   p code,
