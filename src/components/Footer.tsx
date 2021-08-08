@@ -21,8 +21,8 @@ export default function Footer() {
       </div>
       <div className="w-full text-sm text-center">
         © 2021 – made with{' '}
-        <span className="duration-700 cursor-pointer hover:text-red-500 transition-color">
-          ♥
+        <span className="duration-700 cursor-pointer saturate-0 hover:saturate-100 hover:brightness-100 brightness-50 dark:brightness-[320%] dark:hover:brightness-100 hover:text-red-500 transition-color">
+          ♥&#xfe0e;
         </span>{' '}
         by laymonage
       </div>
