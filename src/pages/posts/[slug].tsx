@@ -1,4 +1,4 @@
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import Card from '@/components/Card';
 import Date from '@/components/Date';
 import Layout from '@/components/Layout';
@@ -6,15 +6,15 @@ import { getAllContentSlugs, getSingleContentData } from '@/lib/content';
 import { Post, PostAttributes } from '@/lib/models/content';
 import MDXLayoutRenderer from '@/components/MDX';
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export async function getStaticPaths() {
   const paths = getAllContentSlugs('posts');
   return {
     paths,
     fallback: false,
   };
-};
+}
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export async function getStaticProps({ params }: GetStaticPropsContext) {
   const slug = params?.slug as string;
   const post = await getSingleContentData<PostAttributes, Post>(slug, 'posts');
 
@@ -23,13 +23,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       post,
     },
   };
-};
-
-interface PostProps {
-  post: Post;
 }
 
-export default function SinglePost({ post }: PostProps) {
+export default function SinglePost({
+  post,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   const showTags = false;
   return (
     <Layout

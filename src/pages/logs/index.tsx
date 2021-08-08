@@ -3,23 +3,21 @@ import Catalog from '@/components/Catalog';
 import Layout from '@/components/Layout';
 import Link from '@/components/Link';
 import { getGroupedLogsMetadata } from '@/lib/content';
-import { GetStaticProps } from 'next';
+import { InferGetStaticPropsType } from 'next';
 import { Fragment } from 'react';
 
-interface LogsData {
-  allLogsData: ReturnType<typeof getGroupedLogsMetadata>;
-}
-
-export const getStaticProps: GetStaticProps = async () => {
+export async function getStaticProps() {
   const allLogsData = getGroupedLogsMetadata();
   return {
     props: {
       allLogsData,
     },
   };
-};
+}
 
-export default function Logs({ allLogsData }: LogsData) {
+export default function Logs({
+  allLogsData,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <Layout
       customMeta={{ title: 'Logs', description: 'All logs by laymonage.' }}

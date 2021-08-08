@@ -6,23 +6,21 @@ import Layout from '@/components/Layout';
 import Link from '@/components/Link';
 import { getSortedContentMetadata } from '@/lib/content';
 import { Post, PostAttributes } from '@/lib/models/content';
-import { GetStaticProps } from 'next';
 import Catalog from '@/components/Catalog';
+import { InferGetStaticPropsType } from 'next';
 
-interface PostsData {
-  allPostsData: Post[];
-}
-
-export const getStaticProps: GetStaticProps = async () => {
+export async function getStaticProps() {
   const allPostsData = getSortedContentMetadata<PostAttributes, Post>('posts');
   return {
     props: {
       allPostsData,
     },
   };
-};
+}
 
-export default function Posts({ allPostsData }: PostsData) {
+export default function Posts({
+  allPostsData,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   const [search, setSearch] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
   const showTags = false;

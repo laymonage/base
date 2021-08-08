@@ -1,4 +1,3 @@
-import { GetStaticProps } from 'next';
 import Card from '@/components/Card';
 import Catalog from '@/components/Catalog';
 import CatalogItem, { Item } from '@/components/CatalogItem';
@@ -6,6 +5,7 @@ import Layout from '@/components/Layout';
 import Link from '@/components/Link';
 import projectData from '@/data/projects';
 import { md } from '@/lib/markdown';
+import { InferGetStaticPropsType } from 'next';
 
 interface ProjectsData {
   projects: Array<{
@@ -16,7 +16,7 @@ interface ProjectsData {
   }>;
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export async function getStaticProps() {
   const { projects } = projectData as ProjectsData;
 
   for (const group of projects) {
@@ -28,9 +28,11 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: { projects },
   };
-};
+}
 
-export default function Projects({ projects }: ProjectsData) {
+export default function Projects({
+  projects,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <Layout
       customMeta={{

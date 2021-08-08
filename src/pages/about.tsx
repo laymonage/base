@@ -1,4 +1,3 @@
-import { GetStaticProps } from 'next';
 import Card from '@/components/Card';
 import Catalog from '@/components/Catalog';
 import Layout from '@/components/Layout';
@@ -6,21 +5,17 @@ import Link from '@/components/Link';
 import { timelineData } from '@/data/about';
 import { getSingleContentData } from '@/lib/content';
 import { YearData } from '@/lib/models/about';
-import { Post } from '@/lib/models/content';
 import NowPlaying from '@/components/NowPlaying';
 import MDXLayoutRenderer from '@/components/MDX';
+import { InferGetStaticPropsType } from 'next';
 
-export const getStaticProps: GetStaticProps = async () => {
+export async function getStaticProps() {
   const about = await getSingleContentData('about');
   return {
     props: {
       about,
     },
   };
-};
-
-interface AboutProps {
-  about: Post;
 }
 
 function TimelineYear({ data }: { data: YearData }) {
@@ -48,7 +43,9 @@ const dataToTimeline = (data: YearData) => (
   <TimelineYear data={data} key={data.year} />
 );
 
-export default function About({ about }: AboutProps) {
+export default function About({
+  about,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   const [one, two, three, ...rest] = timelineData;
   const latestItems = [one, two, three].map(dataToTimeline);
 

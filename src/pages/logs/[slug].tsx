@@ -1,4 +1,4 @@
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import Card from '@/components/Card';
 import Layout from '@/components/Layout';
 import { getAllContentSlugs, getSingleContentData } from '@/lib/content';
@@ -6,15 +6,15 @@ import { Log, LogAttributes } from '@/lib/models/content';
 import { humanizeLogSlug } from '@/lib/string';
 import MDXLayoutRenderer from '@/components/MDX';
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export async function getStaticPaths() {
   const paths = getAllContentSlugs('logs');
   return {
     paths,
     fallback: false,
   };
-};
+}
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export async function getStaticProps({ params }: GetStaticPropsContext) {
   const slug = params?.slug as string;
   const log = await getSingleContentData<LogAttributes, Log>(slug, 'logs');
 
@@ -23,13 +23,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       log,
     },
   };
-};
-
-interface LogProps {
-  log: Log;
 }
 
-export default function SingleLog({ log }: LogProps) {
+export default function SingleLog({
+  log,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <Layout
       customMeta={{
