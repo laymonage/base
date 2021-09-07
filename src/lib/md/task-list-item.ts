@@ -1,17 +1,30 @@
-import { Parent } from 'unist';
-import visit from 'unist-util-visit';
+import { Node, Parent } from 'unist';
+import { visit } from 'unist-util-visit';
+
+type ListItem = Parent & {
+  tagName?: string;
+  properties?: {
+    className?: string;
+  };
+  children: Array<{
+    properties?: {
+      title: string;
+    };
+    value: string;
+  }>;
+};
 
 export default function processTaskListItem() {
   return (tree: Parent) => {
     visit(
       tree,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (node: any): node is Parent =>
-        node?.tagName === 'li' &&
-        node?.properties?.className?.includes('task-list-item'),
-      (
-        node: Parent & { children: Array<{ properties?: { title: string } }> },
-      ) => {
+      (node: Node): node is ListItem =>
+        ((node as ListItem)?.tagName === 'li' &&
+          (node as ListItem)?.properties?.className?.includes(
+            'task-list-item',
+          )) ||
+        false,
+      (node: ListItem) => {
         const { children } = node;
         const [input, , text] = children;
         // Add title tag to prevent accessibility issue.

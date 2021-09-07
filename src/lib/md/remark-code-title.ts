@@ -1,7 +1,7 @@
 // https://github.com/timlrx/tailwind-nextjs-starter-blog/blob/typescript/lib/remark-code-title.ts
 
 import { Parent } from 'unist';
-import visit from 'unist-util-visit';
+import { visit } from 'unist-util-visit';
 
 export default function codeTitle() {
   return (tree: Parent & { lang?: string }) =>

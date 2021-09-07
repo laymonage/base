@@ -34,7 +34,6 @@ function fixESBuildPath() {
 
 export async function processMDX<T>(content: string) {
   fixESBuildPath();
-
   const { frontmatter, code } = await bundleMDX(content, {
     // mdx imports can be automatically source from the components directory
     cwd: path.join(process.cwd(), 'components'),

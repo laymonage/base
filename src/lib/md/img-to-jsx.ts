@@ -1,28 +1,29 @@
 // https://github.com/timlrx/tailwind-nextjs-starter-blog/blob/typescript/lib/img-to-jsx.ts
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Parent, Node, Literal } from 'unist';
-import visit from 'unist-util-visit';
+import { visit } from 'unist-util-visit';
 import sizeOf from 'image-size';
 import fs from 'fs';
 
+type ImageNode = Parent & {
+  url: string;
+  alt: string;
+  name: string;
+  title: string;
+  attributes: (Literal & { name: string })[];
+};
+
 export default function imgToJsx() {
   return (tree: Node) => {
-    visit<Node>(
+    visit(
       tree,
       // only visit p tags that contain an img element
-      (node: any): node is Parent =>
+      (node: Node): node is Parent =>
         node.type === 'paragraph' &&
-        node.children.some((n: Node) => n.type === 'image'),
-      (node: any) => {
-        type ImageNode = Parent & {
-          url: string;
-          alt: string;
-          name: string;
-          attributes: (Literal & { name: string })[];
-        };
+        (node as Parent).children.some((n) => n.type === 'image'),
+      (node: Parent) => {
         const imageNode = node.children.find(
-          (n: Node) => n.type === 'image',
+          (n) => n.type === 'image',
         ) as ImageNode;
 
         // only local files
