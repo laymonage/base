@@ -21,12 +21,14 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
   return {
     props: {
       log,
+      slug,
     },
   };
 }
 
 export default function SingleLog({
   log,
+  slug,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <Layout
@@ -46,7 +48,7 @@ export default function SingleLog({
             <span>{log.data.readingTime.text}</span>
           </div>
         </div>
-        <div className="max-w-2xl mx-auto my-4 markdown">
+        <div key={slug} className="max-w-2xl mx-auto my-4 markdown">
           <MDXLayoutRenderer mdxSource={log.content as string} />
         </div>
       </Card>

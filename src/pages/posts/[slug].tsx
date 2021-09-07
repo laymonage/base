@@ -21,12 +21,14 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
   return {
     props: {
       post,
+      slug,
     },
   };
 }
 
 export default function SinglePost({
   post,
+  slug,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const showTags = false;
   return (
@@ -59,7 +61,7 @@ export default function SinglePost({
             </div>
           ) : null}
         </div>
-        <div className="max-w-2xl mx-auto mt-4 mb-8 markdown">
+        <div key={slug} className="max-w-2xl mx-auto mt-4 mb-8 markdown">
           <MDXLayoutRenderer mdxSource={post.content as string} />
         </div>
       </Card>
