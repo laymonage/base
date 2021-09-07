@@ -9,6 +9,7 @@ import { NextScript } from 'next/document';
 
 export const MDXComponents: ComponentMap = {
   Image: Image as ComponentType,
+  Link,
   a: Link,
   pre: Pre,
   script: NextScript,
