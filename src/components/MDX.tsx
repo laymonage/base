@@ -5,11 +5,13 @@ import { ComponentMap, getMDXComponent } from 'mdx-bundler/client';
 import Image from 'next/image';
 import Link from './Link';
 import Pre from './Pre';
+import { NextScript } from 'next/document';
 
 export const MDXComponents: ComponentMap = {
   Image: Image as ComponentType,
   a: Link,
   pre: Pre,
+  script: NextScript,
 };
 
 interface Props {
