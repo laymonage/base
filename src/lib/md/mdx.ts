@@ -7,6 +7,10 @@ import codeTitle from './remark-code-title';
 import imgToJsx from './img-to-jsx';
 import { grayMatterEngines } from '../markdown';
 import processTaskListItem from './task-list-item';
+import remarkGfm from 'remark-gfm';
+import rehypeSlug from 'rehype-slug';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypePrismPlus from 'rehype-prism-plus';
 
 function fixESBuildPath() {
   // https://github.com/kentcdodds/mdx-bundler#nextjs-esbuild-enoent
@@ -41,21 +45,21 @@ export async function processMDX<T>(content: string) {
     xdmOptions(options) {
       options.remarkPlugins = [
         ...(options.remarkPlugins ?? []),
-        require('remark-gfm'),
+        remarkGfm,
         codeTitle,
         imgToJsx,
       ];
       options.rehypePlugins = [
         ...(options.rehypePlugins ?? []),
-        require('rehype-slug'),
+        rehypeSlug,
         [
-          require('rehype-autolink-headings'),
+          rehypeAutolinkHeadings,
           {
             properties: { className: 'anchor' },
             content: { type: 'comment', value: '' }, // Remove default span content
           },
         ],
-        [require('rehype-prism-plus'), { ignoreMissing: true }],
+        [rehypePrismPlus, { ignoreMissing: true }],
         processTaskListItem,
       ];
       return options;
