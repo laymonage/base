@@ -132,4 +132,8 @@
       content: attr(line);
     }
   }
+
+  .twitter-tweet {
+    @apply mx-auto;
+  }
 }
