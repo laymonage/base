@@ -1,11 +1,12 @@
 import gm from 'gray-matter';
 import yaml from 'js-yaml';
-import remark from 'remark';
+import { unified } from 'unified';
+import parse from 'remark-parse';
 import gfm from 'remark-gfm';
 import html from 'remark-html';
 
 export const md = async (markup: string): Promise<string> =>
-  (await remark().use(gfm).use(html).process(markup)).toString();
+  (await unified().use(parse).use(gfm).use(html).process(markup)).toString();
 
 export const grayMatterEngines = {
   yaml: (s: string) =>
