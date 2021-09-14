@@ -88,6 +88,14 @@
     @apply my-8;
   }
 
+  figure .mdx-image:not(:only-child) {
+    @apply mb-2;
+  }
+
+  figcaption {
+    @apply text-center text-sm;
+  }
+
   /* MDX stuff */
 
   .task-list-item {
