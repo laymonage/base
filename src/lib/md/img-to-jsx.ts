@@ -17,46 +17,51 @@ export default function imgToJsx() {
   return (tree: Node) => {
     visit(
       tree,
-      // only visit p tags that contain an img element
       (node: Node): node is Parent =>
-        node.type === 'paragraph' &&
-        (node as Parent).children.some((n) => n.type === 'image'),
-      (node: Parent) => {
+        (node.type === 'paragraph' || node.type === 'linkReference') &&
+        (node as ImageNode).children?.some((n) => n.type === 'image'),
+      (node: Parent, _, parent) => {
         const imageNode = node.children.find(
           (n) => n.type === 'image',
         ) as ImageNode;
 
         // only local files
-        if (fs.existsSync(`${process.cwd()}/public${imageNode.url}`)) {
-          const dimensions = sizeOf(`${process.cwd()}/public${imageNode.url}`);
+        const fileUrl = `${process.cwd()}/public${imageNode.url}`;
+        if (!fs.existsSync(fileUrl)) return;
 
-          // Convert original node to next/image
-          imageNode.type = 'mdxJsxFlowElement';
-          imageNode.name = 'Image';
-          imageNode.attributes = [
-            { type: 'mdxJsxAttribute', name: 'alt', value: imageNode.alt },
-            { type: 'mdxJsxAttribute', name: 'src', value: imageNode.url },
-            { type: 'mdxJsxAttribute', name: 'title', value: imageNode.title },
-            {
-              type: 'mdxJsxAttribute',
-              name: 'width',
-              value: dimensions.width,
-            },
-            {
-              type: 'mdxJsxAttribute',
-              name: 'height',
-              value: dimensions.height,
-            },
-          ];
+        const dimensions = sizeOf(fileUrl);
 
-          // Add className for easier styling
-          if (!node.data) node.data = {};
-          node.data.hProperties = {
-            className: 'mdx-image',
-          };
+        // Convert original node to next/image
+        imageNode.type = 'mdxJsxFlowElement';
+        imageNode.name = 'Image';
+        imageNode.attributes = [
+          { type: 'mdxJsxAttribute', name: 'alt', value: imageNode.alt },
+          { type: 'mdxJsxAttribute', name: 'src', value: imageNode.url },
+          { type: 'mdxJsxAttribute', name: 'title', value: imageNode.title },
+          {
+            type: 'mdxJsxAttribute',
+            name: 'width',
+            value: dimensions.width,
+          },
+          {
+            type: 'mdxJsxAttribute',
+            name: 'height',
+            value: dimensions.height,
+          },
+        ];
 
-          // Change node type from p to div to avoid nesting error
-          node.type = 'div';
+        const isParagraph = node.type === 'paragraph';
+        const targetNode = isParagraph ? node : (parent as Parent);
+
+        // Add className for easier styling
+        if (!targetNode.data) targetNode.data = {};
+        targetNode.data.hProperties = {
+          className: 'mdx-image',
+        };
+        targetNode.type = 'div';
+
+        // Change node type from p to div to avoid nesting error
+        if (isParagraph) {
           node.children = [imageNode];
         }
       },
