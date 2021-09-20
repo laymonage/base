@@ -9,7 +9,7 @@ export interface CardProps {
 
 export default function Card({ children, header, subtitle }: CardProps) {
   return (
-    <div className="flex-col w-full p-4">
+    <div className="flex-col w-full px-8 py-4">
       {header ? (
         <div
           className={clsx(
