@@ -92,6 +92,10 @@
     @apply mb-2;
   }
 
+  .mdx-image {
+    @apply flex justify-center mx-auto;
+  }
+
   figcaption {
     @apply text-center text-sm;
   }
