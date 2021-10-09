@@ -31,13 +31,15 @@ export default function imgToJsx() {
 
         const dimensions = sizeOf(fileUrl);
 
+        const title = imageNode.title || imageNode.alt;
+
         // Convert original node to next/image
         imageNode.type = 'mdxJsxFlowElement';
         imageNode.name = 'Image';
         imageNode.attributes = [
           { type: 'mdxJsxAttribute', name: 'alt', value: imageNode.alt },
           { type: 'mdxJsxAttribute', name: 'src', value: imageNode.url },
-          { type: 'mdxJsxAttribute', name: 'title', value: imageNode.title },
+          { type: 'mdxJsxAttribute', name: 'title', value: title },
           {
             type: 'mdxJsxAttribute',
             name: 'width',
