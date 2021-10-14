@@ -42,28 +42,27 @@ export default function Posts({
           'The documentation of my Google Summer of Code 2019 journey with Django Software Foundation.',
       }}
     >
-      <div className="w-full mb-2">
-        <Card
-          header={
-            <h1 id="posts">
-              <Link href="#gsoc-2019">GSoC 2019 Blog</Link>
-            </h1>
-          }
-        >
-          <p className="mb-8">
-            In 2019, I participated in the{' '}
-            <Link href="https://g.co/gsoc">Google Summer of Code (GSoC)</Link>{' '}
-            program, during which I implemented the cross-DB{' '}
-            <Link href="https://github.com/django/django/pull/12392">
-              JSONField
-            </Link>
-            . This is the documentation of my journey.
-          </p>
-          <Search onSearch={handleSearch} />
-        </Card>
-      </div>
+      <Card
+        header={
+          <h1 id="posts">
+            <Link href="#gsoc-2019">GSoC 2019 Blog</Link>
+          </h1>
+        }
+      >
+        <p className="mb-8">
+          In 2019, I participated in the{' '}
+          <Link href="https://g.co/gsoc">Google Summer of Code (GSoC)</Link>{' '}
+          program, during which I implemented the cross-DB{' '}
+          <Link href="https://github.com/django/django/pull/12392">
+            JSONField
+          </Link>
+          . This is the documentation of my journey.
+        </p>
+        <Search onSearch={handleSearch} />
+      </Card>
       {posts.length ? (
         <Catalog
+          className="my-4"
           border={false}
           items={posts.map((post) => (
             <div className="mb-2 last:mb-0" key={post.slug}>
@@ -71,7 +70,7 @@ export default function Posts({
                 href={`/gsoc/${post.slug}`}
                 className="text-gray-700 dark:text-gray-300"
               >
-                <Card>
+                <Card className="py-4">
                   <div className="flex flex-col justify-between w-full">
                     <div className="flex justify-between mb-2">
                       <h2 className="text-xl font-semibold">

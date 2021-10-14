@@ -21,9 +21,9 @@ export interface CustomMeta {
 }
 export interface LayoutProps {
   children: ReactNode;
-  navSafe?: boolean;
   customMeta?: CustomMeta;
   hasComments?: boolean;
+  className?: string;
 }
 
 const fonts = [
@@ -35,9 +35,9 @@ const fonts = [
 
 export default function Layout({
   children,
-  navSafe,
   customMeta,
   hasComments,
+  className,
 }: LayoutProps) {
   const title =
     (customMeta?.title ? `${capitalize(customMeta.title)} | ` : '') + siteTitle;
@@ -87,17 +87,15 @@ export default function Layout({
         ) : null}
       </Head>
       <Navigation />
-      <main
-        className={clsx('flex flex-col items-center w-full mx-auto max-w-2xl', {
-          'mt-2 mb-4 sm:mt-24': !navSafe,
-        })}
-      >
-        {children}
-        {hasComments ? (
-          <Card>
-            <Giscus />
-          </Card>
-        ) : null}
+      <main className="flex flex-col items-center w-full p-8 sm:mt-20">
+        <div className={clsx('w-full max-w-2xl', className)}>
+          {children}
+          {hasComments ? (
+            <Card className="my-8">
+              <Giscus />
+            </Card>
+          ) : null}
+        </div>
       </main>
       <div className="fixed top-0 left-0 w-screen h-screen bg-center bg-cover opacity-40 xl:opacity-100 bg" />
       <Footer />

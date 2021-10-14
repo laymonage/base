@@ -5,11 +5,17 @@ export interface CardProps {
   children: ReactNode;
   header?: ReactNode;
   subtitle?: ReactNode;
+  className?: string;
 }
 
-export default function Card({ children, header, subtitle }: CardProps) {
+export default function Card({
+  children,
+  header,
+  subtitle,
+  className,
+}: CardProps) {
   return (
-    <div className="flex-col w-full px-8 py-4">
+    <div className={clsx('w-full', className)}>
       {header ? (
         <div
           className={clsx(

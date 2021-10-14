@@ -40,20 +40,19 @@ export default function Posts({
     <Layout
       customMeta={{ title: 'Posts', description: 'All posts by laymonage.' }}
     >
-      <div className="w-full mb-2">
-        <Card
-          header={
-            <h1 id="posts">
-              <Link href="#posts">Posts</Link>
-            </h1>
-          }
-        >
-          <Search onSearch={handleSearch} />
-        </Card>
-      </div>
+      <Card
+        header={
+          <h1 id="posts">
+            <Link href="#posts">Posts</Link>
+          </h1>
+        }
+      >
+        <Search onSearch={handleSearch} />
+      </Card>
       {posts.length ? (
         <Catalog
-          border={false}
+          className="my-8"
+          border
           items={posts.map((post) => (
             <div className="mb-2 last:mb-0" key={post.slug}>
               <Link

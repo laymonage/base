@@ -56,7 +56,11 @@ export default function Contact({
   ) : undefined;
 
   return (
-    <Card header={<strong>{alias}</strong>} subtitle={subtitle}>
+    <Card
+      className="flex flex-col justify-center min-h-[calc(100vh-6rem)] sm:min-h-[calc(100vh-4rem)] sm:-mt-20 max-w-lg mx-auto"
+      header={<strong>{alias}</strong>}
+      subtitle={subtitle}
+    >
       <div className="mb-8 text-xl text-left sm:text-2xl">{description}</div>
       <div className="flex items-center">
         {links.map((link) => (

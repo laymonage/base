@@ -66,6 +66,7 @@ export default function About({
         </div>
       </Card>
       <Card
+        className="mb-8"
         header={
           <h2 id="timeline">
             <Link href="#timeline">Timeline</Link>

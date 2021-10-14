@@ -41,22 +41,22 @@ export default function Projects({
       }}
     >
       {projects.map((group) => (
-        <div className="w-full mx-auto mt-8 first:mt-0" key={group.id}>
-          <Card
-            header={
-              <h2 id={group.anchor}>
-                <Link href={`#${group.anchor}`}>{group.type} Projects</Link>
-              </h2>
-            }
-          >
-            <Catalog
-              border
-              items={group.data.map((item) => (
-                <CatalogItem key={item.id} {...item} />
-              ))}
-            />
-          </Card>
-        </div>
+        <Card
+          className="w-full mx-auto my-16 first:mt-0"
+          key={group.id}
+          header={
+            <h2 id={group.anchor}>
+              <Link href={`#${group.anchor}`}>{group.type} Projects</Link>
+            </h2>
+          }
+        >
+          <Catalog
+            border
+            items={group.data.map((item) => (
+              <CatalogItem key={item.id} {...item} />
+            ))}
+          />
+        </Card>
       ))}
     </Layout>
   );
