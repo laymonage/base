@@ -62,20 +62,16 @@
   }
 
   code {
-    @apply bg-gray-500 border border-gray-400 rounded border-opacity-20 bg-opacity-5 text-sm;
-  }
-
-  p > code {
-    @apply text-pink-600 dark:text-red-300;
+    @apply bg-gray-500 border border-gray-400 rounded border-opacity-20 bg-opacity-5 p-1;
   }
 
   p code,
   li code {
-    @apply p-1 mx-1;
+    @apply text-pink-600 dark:text-red-300 text-sm mx-1;
   }
 
   pre code {
-    @apply py-4 block overflow-auto;
+    @apply py-4 block overflow-auto text-sm;
   }
 
   img {
