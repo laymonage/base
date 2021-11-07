@@ -49,7 +49,6 @@ const cacheHeaders = [
 
 module.exports = withPreact({
   reactStrictMode: true,
-  experimental: { esmExternals: true },
   images: {
     domains: ['cdn.laymonage.com'],
   },
