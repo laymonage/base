@@ -4,7 +4,7 @@ const path = require('path');
 
 const ContentSecurityPolicy = `
   frame-ancestors 'self';
-  child-src *.youtube.com platform.twitter.com *.laymonage.com laymonage.github.io giscus.app star-history.t9t.io;
+  child-src *.youtube.com platform.twitter.com *.laymonage.com laymonage.github.io giscus.app star-history.com;
   img-src * blob: data:;
   media-src 'none';
   connect-src *;
