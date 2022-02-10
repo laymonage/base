@@ -49,9 +49,12 @@ export default function Navigation() {
           </div>
         </div>
         <div
-          className={clsx('px-3 pb-2 mr-4 sm:p-0 sm:flex sm:items-center', {
-            hidden: !open,
-          })}
+          className={clsx(
+            'px-3 pb-2 mr-0 sm:mr-4 sm:p-0 sm:flex sm:items-center',
+            {
+              hidden: !open,
+            },
+          )}
         >
           {menu.map((m) => (
             <Link
