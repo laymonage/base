@@ -2,6 +2,17 @@ import { YearData } from '@/lib/models/about';
 
 export const timelineData: YearData[] = [
   {
+    year: 2022,
+    items: [
+      {
+        emoji: '👨‍💻',
+        title: 'Freelance',
+        description:
+          'Started freelancing as an open source software developer while preparing for my next step in life.',
+      },
+    ],
+  },
+  {
     year: 2021,
     items: [
       {

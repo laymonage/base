@@ -2,9 +2,10 @@
 title: About Me
 ---
 
-Hi, I'm Sage. I build up and break down stuff in the open. Recently, I finished
-my Computer Science study at Universitas Indonesia. Now, I work full-time as a
-Software Engineer at [GudangAda][gudangada].
+Hi, I'm Sage. I build up and break down stuff in the open. After studying
+Computer Science at Universitas Indonesia, I worked as a software engineer at
+GudangAda. Now, I'm freelancing as an open source software developer while
+preparing for my next step in life.
 
 I enjoy using Django and I have made some contributions to it. During [Google
 Summer of Code][gsoc] 2019, I implemented a [`JSONField`][jsonfield] feature
@@ -22,7 +23,6 @@ I grew up in small districts of Jakarta. I spend my free time writing, reading,
 playing music, and enjoying time alone or with my friends and family. I also
 play [video games][steam] occasionally.
 
-[gudangada]: https://gudangada.com
 [gsoc]: https://g.co/gsoc
 [jsonfield]: https://docs.djangoproject.com/en/3.1/releases/3.1/#jsonfield-for-all-supported-database-backends
 [documented]: /gsoc
