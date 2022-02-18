@@ -32,9 +32,10 @@ function fixESBuildPath() {
   );
 }
 
-export async function processMDX<T>(content: string) {
+export async function processMDX<T>(source: string) {
   fixESBuildPath();
-  const { frontmatter, code } = await bundleMDX(content, {
+  const { frontmatter, code } = await bundleMDX({
+    source,
     // mdx imports can be automatically source from the components directory
     cwd: path.join(process.cwd(), 'components'),
     grayMatterOptions(options) {

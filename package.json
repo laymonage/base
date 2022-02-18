@@ -15,10 +15,10 @@
   },
   "dependencies": {
     "date-fns": "^2.25.0",
-    "esbuild": "^0.12.29",
+    "esbuild": "^0.14.22",
     "gray-matter": "^4.0.2",
     "image-size": "^1.0.1",
-    "mdx-bundler": "^6.0.3",
+    "mdx-bundler": "^8.0.1",
     "next": "^12.1.0",
     "next-react-svg": "^1.1.3",
     "next-themes": "^0.0.15",
