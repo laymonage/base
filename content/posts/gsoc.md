@@ -14,7 +14,7 @@ image: /img/uploads/gsoc-15years.png
 ---
 
 <a href="https://opensource.googleblog.com/2019/09/google-summer-of-code-2019-statistics.html">
-	<img src="/img/uploads/gsoc-15years.png" alt="Celebrating 15 Years - Google Summer of Code" title="Google Summer of Code 2019: 15th year" class="dark:bg-gray-700"/>
+	<img src="/img/uploads/gsoc-15years.png" alt="Celebrating 15 Years - Google Summer of Code" title="Google Summer of Code 2019: 15th year" className="dark:bg-gray-700"/>
 </a>
 
 [**Google Summer of Code**][gsoc] 2019 was a life changing experience for me.
@@ -150,8 +150,8 @@ announcement, I also wrote [a documentation ticket][first-ticket] and submitted
 > Now, for the real deal: **working on the project**.
 
 <a
-  href="https://tenor.com/view/spongebob-squarepants-patrick-star-snow-winter-cold-gif-4769079"
-  style="display: block; margin-left: auto; margin-right: auto; width: fit-content;">
+href="https://tenor.com/view/spongebob-squarepants-patrick-star-snow-winter-cold-gif-4769079"
+style={{display: "block", marginLeft: "auto", marginRight: "auto", width: "fit-content" }}>
 <Image
     src="/img/uploads/shiver.gif"
     alt="Patrick shivering"
