@@ -1,6 +1,6 @@
 import { useTheme } from 'next-themes';
 import Head from 'next/head';
-import { useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
 
 const themeMapping = {
   light: 'light',
@@ -9,52 +9,15 @@ const themeMapping = {
 
 export default function Giscus() {
   const { resolvedTheme } = useTheme();
-  const theme = useRef(resolvedTheme);
+  const [isMounted, setIsMounted] = useState(false);
+  const theme = themeMapping[resolvedTheme as keyof typeof themeMapping];
 
   useEffect(() => {
-    const hasLoaded = theme.current && theme.current !== resolvedTheme;
-    theme.current = resolvedTheme;
-    if (!resolvedTheme || hasLoaded) return;
+    import('giscus');
+    setIsMounted(true);
+  }, []);
 
-    const script = document.createElement('script');
-    const attributes = {
-      src: 'https://giscus.app/client.js',
-      id: 'giscus-script',
-      'data-repo': 'laymonage/base',
-      'data-repo-id': 'MDEwOlJlcG9zaXRvcnkzNDExNDE2OTY',
-      'data-category-id': 'MDE4OkRpc2N1c3Npb25DYXRlZ29yeTMyNzIzMDI4',
-      'data-mapping': 'pathname',
-      'data-theme': themeMapping[resolvedTheme as keyof typeof themeMapping],
-      crossOrigin: 'anonymous',
-      async: '',
-    };
-
-    Object.entries(attributes).forEach(([name, value]) =>
-      script.setAttribute(name, value),
-    );
-    document.body.appendChild(script);
-
-    return () => {
-      const existingScript = document.body.querySelector('#giscus-script');
-      if (existingScript) document.body.removeChild(existingScript);
-    };
-  }, [resolvedTheme]);
-
-  useEffect(() => {
-    const iframe = document.querySelector<HTMLIFrameElement>(
-      'iframe.giscus-frame',
-    );
-    iframe?.contentWindow?.postMessage(
-      {
-        giscus: {
-          setConfig: {
-            theme: themeMapping[resolvedTheme as keyof typeof themeMapping],
-          },
-        },
-      },
-      'https://giscus.app',
-    );
-  }, [resolvedTheme]);
+  if (!isMounted) return null;
 
   return (
     <>
@@ -70,7 +33,18 @@ export default function Giscus() {
           />
         ))}
       </Head>
-      <div className="giscus" />
+      <giscus-widget
+        repo="laymonage/base"
+        repoid="MDEwOlJlcG9zaXRvcnkzNDExNDE2OTY"
+        category="Comments"
+        categoryid="MDE4OkRpc2N1c3Npb25DYXRlZ29yeTMyNzIzMDI4"
+        theme={theme}
+        mapping="pathname"
+        reactionsenabled="1"
+        emitmetadata="0"
+        inputposition="bottom"
+        lang="en"
+      />
     </>
   );
 }
