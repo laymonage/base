@@ -11,7 +11,8 @@
     "format": "prettier",
     "format:check": "prettier --check",
     "format:fix": "prettier --write",
-    "tscheck": "tsc --noEmit"
+    "tscheck": "tsc --noEmit",
+    "prepare": "husky install"
   },
   "dependencies": {
     "date-fns": "^2.25.0",
