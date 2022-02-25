@@ -7,7 +7,6 @@ import Twitter from './icons/Twitter.svg';
 
 export interface ContactInfo {
   name: string;
-  alias: string;
   description: string;
   metaDescription: string;
   links: Array<{
@@ -18,8 +17,7 @@ export interface ContactInfo {
 }
 
 export const data: ContactInfo = {
-  alias: 'laymonage',
-  name: 'Sage Abdullah',
+  name: 'Kaushik Iska',
   description: 'I build up and break down stuff in the open.',
   metaDescription:
     'laymonage is Sage M. Abdullah. I build up and break down stuff in the open.',
@@ -42,12 +40,7 @@ export const data: ContactInfo = {
   ],
 };
 
-export default function Contact({
-  name,
-  alias,
-  description,
-  links,
-}: ContactInfo) {
+export default function Contact({ name, description, links }: ContactInfo) {
   const subtitle = name ? (
     <>
       <span className="mr-1 text-gray-500 sm:ml-4"> is </span>
@@ -58,7 +51,6 @@ export default function Contact({
   return (
     <Card
       className="flex flex-col justify-center min-h-[calc(100vh-6rem)] sm:min-h-[calc(100vh-4rem)] sm:-mt-20 max-w-lg mx-auto"
-      header={<strong>{alias}</strong>}
       subtitle={subtitle}
     >
       <div className="mb-8 text-xl text-left sm:text-2xl">{description}</div>

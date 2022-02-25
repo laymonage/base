@@ -5,7 +5,6 @@ import Link from '@/components/Link';
 import { timelineData } from '@/data/about';
 import { getSingleContentData } from '@/lib/content';
 import { YearData } from '@/lib/models/about';
-import NowPlaying from '@/components/NowPlaying';
 import MDXLayoutRenderer from '@/components/MDX';
 import { InferGetStaticPropsType } from 'next';
 
@@ -60,9 +59,6 @@ export default function About({
       >
         <div className="markdown">
           <MDXLayoutRenderer mdxSource={about.content as string} />
-        </div>
-        <div className="flex justify-end my-6">
-          <NowPlaying />
         </div>
       </Card>
       <Card
