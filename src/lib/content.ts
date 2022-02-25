@@ -2,13 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { matter } from './markdown';
 import { processMDX } from './md/mdx';
-import {
-  Content,
-  ContentAttributes,
-  Log,
-  LogAttributes,
-} from './models/content';
-import { parseLogSlug } from './string';
+import { Content, ContentAttributes } from './models/content';
 import { sortDescending } from './utils';
 
 const baseContentDirectory = path.join(process.cwd(), 'content');
@@ -49,14 +43,6 @@ export function getSortedContentMetadata<
   }) as unknown as C[];
 }
 
-export const getGroupedLogsMetadata = () => {
-  const logs = getSortedContentMetadata<LogAttributes, Log>(
-    'logs',
-    parseLogSlug,
-  );
-  return groupSortContent(logs, 'year');
-};
-
 export function getAllContentSlugs(
   type: string,
 ): Array<{ params: { slug: string } }> {
@@ -88,27 +74,3 @@ export async function getSingleContentData<
     content,
   } as unknown as C;
 }
-
-export const groupBy = <T extends Content = Content>(
-  arr: T[],
-  key: string,
-): { [key: string]: T[] } =>
-  arr.reduce((acc, current) => {
-    const groupingKey = current.data[key as keyof ContentAttributes] as string;
-    acc[groupingKey] = acc[groupingKey] || [];
-    acc[groupingKey].push(current);
-    return acc;
-  }, Object.create(null));
-
-export const sortGroup = <T extends Content = Content>(group: {
-  [key: string]: T[];
-}) => {
-  return Object.entries(group).sort(([keyA], [keyB]) =>
-    sortDescending(keyA, keyB),
-  );
-};
-
-export const groupSortContent = <C extends Content = Content>(
-  content: C[],
-  by: string,
-) => sortGroup(groupBy(content, by));
