@@ -19,7 +19,7 @@ export default function Navigation() {
     setLastScroll(scrollY);
   }
 
-  const menu = ['posts', 'logs', 'projects', 'about'];
+  const menu = ['posts', 'about'];
   return (
     <nav role="navigation" className="max-w-3xl mx-auto">
       <div
