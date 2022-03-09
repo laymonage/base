@@ -50,6 +50,9 @@ const cacheHeaders = [
 
 module.exports = withReactSvg({
   reactStrictMode: true,
+  experimental: {
+    scrollRestoration: true,
+  },
   images: {
     domains: ['cdn.laymonage.com'],
   },
