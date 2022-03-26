@@ -11,32 +11,30 @@ export default function NowPlaying() {
   const isPlaying = data?.isPlaying;
 
   return (
-    <>
-      <a
-        className="flex items-center max-w-full ml-auto"
-        href={isPlaying ? data?.trackUrl : SPOTIFY_PROFILE_URL}
-        target="_blank"
-        rel="noopener noreferrer nofollow"
+    <a
+      className="flex items-center max-w-full ml-auto min-h-[56px]"
+      href={isPlaying ? data?.trackUrl : SPOTIFY_PROFILE_URL}
+      target="_blank"
+      rel="noopener noreferrer nofollow"
+    >
+      <div className="flex flex-col mr-4 text-right truncate">
+        {data && isPlaying ? (
+          <>
+            <p className="truncate">{data.artist}</p>
+            <p className="truncate">{data.title}</p>
+          </>
+        ) : (
+          <p>Not playing</p>
+        )}
+      </div>
+      <div
+        className={clsx('flex-shrink-0', {
+          'w-8 h-8': isPlaying,
+          'w-6 h-6': !isPlaying,
+        })}
       >
-        <div className="flex flex-col mr-4 text-right truncate">
-          {data && isPlaying ? (
-            <>
-              <p className="truncate">{data.artist}</p>
-              <p className="truncate">{data.title}</p>
-            </>
-          ) : (
-            <p>Not playing</p>
-          )}
-        </div>
-        <div
-          className={clsx('flex-shrink-0', {
-            'w-8 h-8': isPlaying,
-            'w-6 h-6': !isPlaying,
-          })}
-        >
-          <Spotify />
-        </div>
-      </a>
-    </>
+        <Spotify />
+      </div>
+    </a>
   );
 }
