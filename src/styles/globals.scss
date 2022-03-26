@@ -89,3 +89,11 @@ a,
   content: '';
   will-change: transform;
 }
+
+details summary {
+  @apply cursor-pointer;
+}
+
+details summary > * {
+  @apply inline;
+}

@@ -75,7 +75,9 @@ export default function About({
       >
         <Catalog border items={latestItems} />
         <details>
-          <summary className="my-4 cursor-pointer alike">More...</summary>
+          <summary className="my-4 alike">
+            <span className="ml-2">More...</span>
+          </summary>
           <Catalog border items={rest.map(dataToTimeline)} />
         </details>
       </Card>
