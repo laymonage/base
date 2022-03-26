@@ -104,9 +104,9 @@ export default function Posts({
           ))}
         />
       ) : (
-        <div className="w-full text-center">
-          <Card>No posts found matching your query.</Card>
-        </div>
+        <Card className="my-8 text-center">
+          No posts found matching your query.
+        </Card>
       )}
     </Layout>
   );
