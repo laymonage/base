@@ -4,7 +4,6 @@ import Layout from '@/components/Layout';
 import Link from '@/components/Link';
 import { getGroupedLogsMetadata } from '@/lib/content';
 import { InferGetStaticPropsType } from 'next';
-import { Fragment } from 'react';
 
 export async function getStaticProps() {
   const allLogsData = getGroupedLogsMetadata();
@@ -38,11 +37,11 @@ export default function Logs({
           wonder why {`you're`} reading these. Make of them what you will.
         </p>
         {allLogsData.length > 0 ? (
-          allLogsData.map(([year, logs]) => (
-            <Fragment key={year}>
-              <h2 className="mt-6 text-2xl font-semibold text-gray-800 dark:text-gray-100">
-                {year}
-              </h2>
+          allLogsData.map(([year, logs], index) => (
+            <details key={year} open={index === 0}>
+              <summary className="mt-6 text-2xl font-semibold text-gray-800 dark:text-gray-100 marker:text-xl">
+                <h2 className="ml-2 align-text-top">{year}</h2>
+              </summary>
               <Catalog
                 key={year}
                 border={false}
@@ -58,7 +57,7 @@ export default function Logs({
                   </Link>
                 ))}
               />
-            </Fragment>
+            </details>
           ))
         ) : (
           <p>No logs so far.</p>
