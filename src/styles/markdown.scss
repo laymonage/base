@@ -68,7 +68,12 @@
 
   p code,
   li code {
-    @apply text-pink-600 dark:text-red-300 text-sm mx-1;
+    @apply text-sm mx-1;
+  }
+
+  p code:not(a code),
+  li code:not(a code) {
+    @apply text-pink-600 dark:text-red-300;
   }
 
   p kbd,
