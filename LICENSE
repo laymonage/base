@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2021 Sage M. Abdullah
+Copyright (c) 2021-2022 Sage Abdullah
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -28,3 +28,7 @@ Some parts of the code are adapted and/or inspired from the following projects:
 
 - Lee Robinson's personal portfolio
   https://github.com/leerob/leerob.io/blob/main/LICENSE.txt
+
+Contents of the `content` submodule are subject to the submodule's own LICENSE:
+
+https://github.com/laymonage/content/blob/main/LICENSE.md
