@@ -42,7 +42,7 @@ export async function processMDX<T>(source: string) {
       options.engines = grayMatterEngines;
       return options;
     },
-    xdmOptions(options) {
+    mdxOptions(options) {
       options.remarkPlugins = [
         ...(options.remarkPlugins ?? []),
         remarkGfm,
