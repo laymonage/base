@@ -1,3 +1,4 @@
+const withPreact = require('next-plugin-preact');
 const withReactSvg = require('next-react-svg');
 const path = require('path');
 
@@ -48,38 +49,28 @@ const cacheHeaders = [
   },
 ];
 
-module.exports = withReactSvg({
-  reactStrictMode: true,
-  experimental: {
-    scrollRestoration: true,
-  },
-  images: {
-    domains: ['cdn.laymonage.com'],
-  },
-  include: path.resolve(__dirname, 'src/components/icons'),
-  async headers() {
-    return [
-      {
-        source: '/(.*)',
-        headers: securityHeaders,
-      },
-      {
-        source: '/fonts/(.*)',
-        headers: cacheHeaders,
-      },
-    ];
-  },
-  webpack: (config, { dev, isServer }) => {
-    if (!dev && !isServer) {
-      config.resolve.alias = {
-        ...config.resolve.alias,
-        'react/jsx-runtime.js': 'preact/compat/jsx-runtime',
-        react: 'preact/compat',
-        'react-dom/test-utils': 'preact/test-utils',
-        'react-dom': 'preact/compat',
-      };
-    }
-
-    return config;
-  },
-});
+module.exports = withPreact(
+  withReactSvg({
+    reactStrictMode: true,
+    experimental: {
+      esmExternals: false,
+      scrollRestoration: true,
+    },
+    images: {
+      domains: ['cdn.laymonage.com'],
+    },
+    include: path.resolve(__dirname, 'src/components/icons'),
+    async headers() {
+      return [
+        {
+          source: '/(.*)',
+          headers: securityHeaders,
+        },
+        {
+          source: '/fonts/(.*)',
+          headers: cacheHeaders,
+        },
+      ];
+    },
+  }),
+);
