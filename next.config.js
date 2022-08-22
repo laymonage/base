@@ -1,5 +1,4 @@
 const withPreact = require('next-plugin-preact');
-const withReactSvg = require('next-react-svg');
 const path = require('path');
 
 const ContentSecurityPolicy = `
@@ -49,28 +48,35 @@ const cacheHeaders = [
   },
 ];
 
-module.exports = withPreact(
-  withReactSvg({
-    reactStrictMode: true,
-    experimental: {
-      esmExternals: false,
-      scrollRestoration: true,
-    },
-    images: {
-      domains: ['cdn.laymonage.com'],
-    },
-    include: path.resolve(__dirname, 'src/components/icons'),
-    async headers() {
-      return [
-        {
-          source: '/(.*)',
-          headers: securityHeaders,
-        },
-        {
-          source: '/fonts/(.*)',
-          headers: cacheHeaders,
-        },
-      ];
-    },
-  }),
-);
+module.exports = withPreact({
+  reactStrictMode: true,
+  experimental: {
+    esmExternals: false,
+    scrollRestoration: true,
+  },
+  images: {
+    domains: ['cdn.laymonage.com'],
+  },
+  include: path.resolve(__dirname, 'src/components/icons'),
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: securityHeaders,
+      },
+      {
+        source: '/fonts/(.*)',
+        headers: cacheHeaders,
+      },
+    ];
+  },
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/i,
+      issuer: /\.[jt]sx?$/,
+      use: ['@svgr/webpack'],
+    });
+
+    return config;
+  },
+});
