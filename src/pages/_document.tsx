@@ -4,7 +4,9 @@ export default class CustomDocument extends Document {
   render() {
     return (
       <Html lang="en">
-        <Head />
+        <Head>
+          <meta name="color-scheme" content="dark light" />
+        </Head>
         <body>
           <Main />
           <NextScript />
