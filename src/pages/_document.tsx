@@ -5,7 +5,7 @@ export default class CustomDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <meta name="color-scheme" content="dark light" />
+          <meta name="color-scheme" content="light dark" />
         </Head>
         <body>
           <Main />
