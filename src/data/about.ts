@@ -5,10 +5,25 @@ export const timelineData: YearData[] = [
     year: 2022,
     items: [
       {
-        emoji: '👨‍💻',
-        title: 'Freelance',
+        emoji: '🐦',
+        title: 'Joined the Wagtail Core Team',
         description:
-          'Started freelancing as an open source software developer while preparing for my next step in life.',
+          'After contributing major features to Wagtail, I was invited to join the core team.',
+      },
+      {
+        emoji: '🇵🇹',
+        title: 'Spoke at DjangoCon Europe',
+        description: `Third time's the charm! DjangoCon Europe 2022 was finally held on-site in Porto, Portugal. I gave a talk about my experiment with file-based routing in Django. I also met my awesome Google Summer of Code mentors for the first time.`,
+      },
+      {
+        emoji: '🇬🇧',
+        title: 'Moved to Bristol, UK',
+        description: `Big move! It's the first time I live on my own. Abroad, too!`,
+      },
+      {
+        emoji: '🐦',
+        title: 'Joined Torchbox',
+        description: 'Started working on Wagtail CMS and its ecosystem.',
       },
     ],
   },
