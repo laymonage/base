@@ -57,7 +57,6 @@ module.exports = withPreact({
   images: {
     domains: ['cdn.laymonage.com'],
   },
-  include: path.resolve(__dirname, 'src/components/icons'),
   async headers() {
     return [
       {
