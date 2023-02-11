@@ -1,13 +1,13 @@
 // https://github.com/timlrx/tailwind-nextjs-starter-blog/blob/typescript/components/MDXComponents.tsx
 
 import { useMemo } from 'react';
-import { ComponentMap, getMDXComponent } from 'mdx-bundler/client';
+import { getMDXComponent } from 'mdx-bundler/client';
 import Image from 'next/image';
 import Link from './Link';
 import Pre from './Pre';
 import Script, { ScriptProps } from 'next/script';
 
-export const MDXComponents: ComponentMap = {
+export const MDXComponents = {
   Image,
   Link,
   a: Link,

@@ -276,4 +276,5 @@ export const other = {
   data: otherProjects,
 };
 
-export default { projects: [software, art, other] };
+const data = { projects: [software, art, other] };
+export default data;
