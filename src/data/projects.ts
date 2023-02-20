@@ -1,6 +1,7 @@
 const softwareProjects = [
   {
     id: 10,
+    shown: true,
     image: {
       src: '/img/projects/giscus.svg',
     },
@@ -11,6 +12,7 @@ const softwareProjects = [
   },
   {
     id: 8,
+    shown: true,
     image: {
       src: '/img/projects/django-jsonfield-backport.svg',
     },
@@ -28,6 +30,7 @@ const softwareProjects = [
   },
   {
     id: 0,
+    shown: true,
     image: {
       src: '/img/projects/apex.svg',
     },
@@ -45,6 +48,7 @@ const softwareProjects = [
   },
   {
     id: 2,
+    shown: true,
     image: {
       src: '/img/projects/kbbi.png',
     },
@@ -64,6 +68,7 @@ const softwareProjects = [
   },
   {
     id: 9,
+    shown: false,
     image: {
       src: '/img/projects/djth.png',
     },
@@ -82,6 +87,7 @@ const softwareProjects = [
   },
   {
     id: 5,
+    shown: false,
     image: {
       src: '/img/projects/sigap.png',
     },
@@ -98,6 +104,7 @@ const softwareProjects = [
   },
   {
     id: 4,
+    shown: false,
     image: {
       src: '/img/projects/santun.png',
     },
@@ -114,6 +121,7 @@ const softwareProjects = [
   },
   {
     id: 6,
+    shown: false,
     image: {
       src: '/img/projects/flappymecin.png',
     },
@@ -132,6 +140,7 @@ const softwareProjects = [
   },
   {
     id: 1,
+    shown: true,
     image: {
       src: '/img/projects/aiden.svg',
       lowContrast: true,
@@ -147,6 +156,7 @@ const softwareProjects = [
   },
   {
     id: 3,
+    shown: false,
     image: {
       src: '/img/projects/sso-ui.png',
     },
@@ -162,6 +172,7 @@ const softwareProjects = [
   },
   {
     id: 7,
+    shown: false,
     image: {
       src: '/img/projects/eval.png',
     },
@@ -178,6 +189,7 @@ const softwareProjects = [
 const artProjects = [
   {
     id: 5,
+    shown: true,
     image: {
       src: '/img/projects/sagesans.svg',
     },
@@ -192,6 +204,7 @@ const artProjects = [
   },
   {
     id: 4,
+    shown: true,
     image: {
       src: '/img/projects/tiga.jpg',
     },
@@ -201,6 +214,7 @@ const artProjects = [
   },
   {
     id: 3,
+    shown: true,
     image: {
       src: '/img/projects/lunacy.png',
       lowContrast: true,
@@ -212,6 +226,7 @@ const artProjects = [
   },
   {
     id: 2,
+    shown: true,
     image: {
       src: '/img/projects/dsobb.png',
     },
@@ -222,6 +237,7 @@ const artProjects = [
   },
   {
     id: 1,
+    shown: true,
     image: {
       src: '/img/projects/aidensreactions.png',
     },
@@ -233,6 +249,7 @@ const artProjects = [
   },
   {
     id: 0,
+    shown: true,
     image: {
       src: '/img/projects/portal2linetheme.png',
     },
@@ -245,6 +262,7 @@ const artProjects = [
 const otherProjects = [
   {
     id: 0,
+    shown: false,
     image: {
       src: '/img/projects/tarunglabddp1.png',
     },
@@ -257,6 +275,7 @@ const otherProjects = [
 
 export const software = {
   id: 0,
+  shown: true,
   type: 'Software',
   anchor: 'software',
   data: softwareProjects,
@@ -264,6 +283,7 @@ export const software = {
 
 export const art = {
   id: 1,
+  shown: true,
   type: 'Art',
   anchor: 'art',
   data: artProjects,
@@ -271,6 +291,7 @@ export const art = {
 
 export const other = {
   id: 2,
+  shown: false,
   type: 'Other',
   anchor: 'other',
   data: otherProjects,

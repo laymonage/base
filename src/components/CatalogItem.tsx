@@ -3,6 +3,7 @@ import Image from 'next/image';
 
 export interface Item {
   id: number;
+  shown: boolean;
   url: string;
   image: {
     src: string;

@@ -10,6 +10,7 @@ import { InferGetStaticPropsType } from 'next';
 interface ProjectsData {
   projects: Array<{
     id: number;
+    shown: boolean;
     type: string;
     anchor: string;
     data: Item[];
@@ -17,13 +18,23 @@ interface ProjectsData {
 }
 
 export async function getStaticProps() {
-  const { projects } = projectData as ProjectsData;
+  const { projects: rawProjects } = projectData as ProjectsData;
 
-  for (const group of projects) {
-    for (const project of group.data) {
-      project.description = await md(project.description);
-    }
-  }
+  const projects = await Promise.all(
+    rawProjects
+      .filter(({ shown }) => shown)
+      .map(async ({ data, ...groupRest }) => ({
+        ...groupRest,
+        data: await Promise.all(
+          data
+            .filter(({ shown }) => shown)
+            .map(async (item) => ({
+              ...item,
+              description: await md(item.description),
+            })),
+        ),
+      })),
+  );
 
   return {
     props: { projects },
