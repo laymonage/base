@@ -21,7 +21,7 @@ export const timelineData: YearData[] = [
         description: `Big move! It's the first time I live on my own. Abroad, too!`,
       },
       {
-        emoji: '🐦',
+        emoji: '🔥',
         title: 'Joined Torchbox',
         description: 'Started working on Wagtail CMS and its ecosystem.',
       },
