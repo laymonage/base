@@ -46,7 +46,7 @@ export function getSortedContentMetadata<
       return sortDescending(a.data.date, b.data.date);
     }
     return sortDescending(a.slug, b.slug);
-  }) as unknown as C[];
+  }) as Content[] as C[];
 }
 
 export const getGroupedLogsMetadata = () => {
@@ -57,16 +57,17 @@ export const getGroupedLogsMetadata = () => {
   return groupSortContent(logs, 'year');
 };
 
-export function getAllContentSlugs(
+export function getAllContentSlugs<T extends string>(
   type: string,
-): Array<{ params: { slug: string } }> {
+  paramName = 'slug' as T,
+) {
   const contentDirectory = getContentDirectory(type);
   const fileNames = fs.readdirSync(contentDirectory);
   return fileNames.map((fileName) => {
     return {
       params: {
-        slug: fileName.replace(/\.md$/, ''),
-      },
+        [paramName]: fileName.replace(/\.md$/, ''),
+      } as Record<T, string>,
     };
   });
 }
@@ -86,7 +87,7 @@ export async function getSingleContentData<
     slug,
     data,
     content,
-  } as unknown as C;
+  } as Content as C;
 }
 
 export const groupBy = <T extends Content = Content>(
