@@ -30,11 +30,12 @@ export default function Logs({
         }
       >
         <p>
-          These are logs that contain my life updates. If things are not moving
-          too fast, a new log is up every Monday. Some of these may be shorter
-          than a paragraph, and some may be a few articles worth of words. Some
-          may make sense, some may not. Some may be useful, some may make you
-          wonder why {`you're`} reading these. Make of them what you will.
+          These were logs that contain my life updates between 2021 and 2022. If
+          things were not moving too fast, a new log would be up every Monday.
+          Some of these might be shorter than a paragraph, and some might be a
+          few articles worth of words. Some might make sense, some might not.
+          Some might be useful, some might make you wonder why {`you're `}
+          reading these. Make of them what you will.
         </p>
         {allLogsData.length > 0 ? (
           allLogsData.map(([year, logs], index) => (
