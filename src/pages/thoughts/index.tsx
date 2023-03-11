@@ -47,7 +47,10 @@ export default function Thoughts({
                 className="block mt-4 text-gray-700 dark:text-gray-300"
               >
                 <h2 className="text-xl flex flex-wrap items-center gap-x-4 gap-y-2">
-                  <time className="tabular-nums" dateTime={thought.data.date}>
+                  <time
+                    className="tabular-nums font-semibold"
+                    dateTime={thought.data.date}
+                  >
                     {thought.data.date}
                   </time>
                   {thought.data.title}
