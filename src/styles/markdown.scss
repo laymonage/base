@@ -84,13 +84,15 @@
     @apply py-4 block overflow-auto text-sm;
   }
 
-  img {
+  img,
+  video {
     @apply block mx-auto rounded;
   }
 
   iframe,
   img,
-  .mdx-image {
+  .mdx-image,
+  video {
     @apply mt-8;
   }
 
