@@ -7,7 +7,7 @@
   h4,
   h5,
   h6 {
-    @apply mt-8 mb-4 font-semibold text-black dark:text-white;
+    @apply mt-8 font-semibold text-black dark:text-white;
   }
 
   h2 {
@@ -19,7 +19,7 @@
   }
 
   hr {
-    @apply my-8;
+    @apply mt-8 my-4;
   }
 
   p,
@@ -30,11 +30,6 @@
   ul,
   ol {
     @apply ml-8;
-  }
-
-  > ul,
-  > ol {
-    @apply mb-8;
   }
 
   ul:not(.contains-task-list) {
@@ -51,13 +46,17 @@
 
   blockquote {
     @apply pl-4 my-4 italic border-l-4 border-gray-400 border-opacity-20 text-base;
+
+    > :first-child {
+      @apply mt-0;
+    }
   }
 
   a:not(.anchor) {
     @apply hover:underline focus:underline;
   }
 
-  pre {
+  div.pre {
     @apply my-4;
   }
 
@@ -92,7 +91,7 @@
   iframe,
   img,
   .mdx-image {
-    @apply my-8;
+    @apply mt-8;
   }
 
   figure .mdx-image:not(:only-child) {
