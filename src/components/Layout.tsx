@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import clsx from 'clsx';
 import { ReactNode } from 'react';
 import { capitalize } from '@/lib/string';
-import Card from './Card';
 import Giscus from './Giscus';
 import Navigation from './Navigation';
 import ScrollTop from './ScrollTop';
@@ -22,7 +21,7 @@ export interface CustomMeta {
 export interface LayoutProps {
   children: ReactNode;
   customMeta?: CustomMeta;
-  hasComments?: boolean;
+  comments?: true | false | 'eager';
   className?: string;
 }
 
@@ -36,7 +35,7 @@ const fonts = [
 export default function Layout({
   children,
   customMeta,
-  hasComments,
+  comments,
   className,
 }: LayoutProps) {
   const title =
@@ -90,10 +89,10 @@ export default function Layout({
       <main className="flex w-full flex-col items-center p-8 sm:mt-20">
         <div className={clsx('reading-wrapper', className)}>
           {children}
-          {hasComments ? (
-            <Card className="my-8">
-              <Giscus />
-            </Card>
+          {comments ? (
+            <div className="my-8 text-center">
+              <Giscus eager={comments === 'eager'} />
+            </div>
           ) : null}
         </div>
       </main>

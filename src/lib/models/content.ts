@@ -11,7 +11,7 @@ export interface ContentAttributes {
   date?: string;
   tags?: string[];
   toc?: boolean;
-  comments?: boolean;
+  comments?: true | false | 'eager';
   draft?: boolean;
   description?: string;
   image?: string;

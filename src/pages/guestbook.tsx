@@ -9,7 +9,7 @@ export default function About() {
         title: 'Guestbook',
         description: `laymonage's guestbook. Feel free to sign it!`,
       }}
-      hasComments
+      comments="eager"
     >
       <Card
         header={

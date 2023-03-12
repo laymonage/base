@@ -36,7 +36,7 @@ export default function SinglePost({
         title: post.data.title,
         description: post.data.description,
       }}
-      hasComments={post.data.comments === true}
+      comments={post.data.comments}
     >
       <div className="mt-4 flex-row">
         <h2 className="mb-4 text-5xl font-semibold tracking-tight text-black dark:text-white">

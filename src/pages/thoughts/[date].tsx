@@ -37,7 +37,7 @@ export default function SingleThought({
         title: thought.data.title,
         description: thought.data.description,
       }}
-      hasComments={thought.data.comments === true}
+      comments={thought.data.comments}
     >
       <div className="my-4">
         <h2 className="mb-2 text-4xl font-semibold tracking-tight text-black dark:text-white">

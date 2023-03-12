@@ -35,7 +35,7 @@ export default function SingleLog({
         title: log.data.title,
         description: log.data.description,
       }}
-      hasComments={log.data.comments === true}
+      comments={log.data.comments}
     >
       <div className="my-4">
         <h2 className="mb-2 text-4xl font-semibold tracking-tight text-black dark:text-white">
