@@ -62,12 +62,12 @@
 
   code,
   kbd {
-    @apply rounded border border-gray-400 border-opacity-20 bg-gray-500 bg-opacity-5 p-1;
+    @apply rounded bg-gray-500 bg-opacity-5 p-1;
   }
 
   p code,
   li code {
-    @apply mx-1 text-sm;
+    @apply -mx-[1px] text-sm;
   }
 
   p code:not(a code),
@@ -81,7 +81,7 @@
   }
 
   pre code {
-    @apply block overflow-auto py-4 text-sm;
+    @apply block overflow-auto py-8 text-sm;
   }
 
   img,
@@ -139,7 +139,7 @@
   }
 
   .code-line {
-    @apply w-max border-l-4 border-transparent px-4;
+    @apply w-max border-l-4 border-transparent px-6;
   }
 
   .highlight-line {

@@ -24,7 +24,11 @@ export default function Pre({ children }: Props) {
   };
 
   return (
-    <div ref={wrapper} onMouseLeave={onExit} className="pre group relative">
+    <div
+      ref={wrapper}
+      onMouseLeave={onExit}
+      className="pre group relative -mx-8"
+    >
       <button
         aria-label="Copy code"
         type="button"
