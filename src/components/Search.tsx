@@ -22,14 +22,14 @@ export default function Search({ onSearch }: SearchProps) {
   return (
     <div className="flex">
       <input
-        className="flex-grow w-full px-4 py-2 bg-gray-300 border-2 border-gray-400 rounded sm:border-r-0 sm:rounded-r-none border-opacity-20 focus:outline-none focus:bg-opacity-30 hover:bg-opacity-30 bg-opacity-10"
+        className="w-full flex-grow rounded border-2 border-gray-400 border-opacity-20 bg-gray-300 bg-opacity-10 px-4 py-2 hover:bg-opacity-30 focus:bg-opacity-30 focus:outline-none sm:rounded-r-none sm:border-r-0"
         placeholder="Type what you're looking for..."
         type="text"
         onChange={onSearch}
         ref={inputRef}
       />
       <kbd
-        className="hidden h-full p-2 my-auto text-gray-400 bg-gray-400 border-2 border-gray-400 rounded rounded-l-none border-opacity-20 bg-opacity-20 sm:block"
+        className="my-auto hidden h-full rounded rounded-l-none border-2 border-gray-400 border-opacity-20 bg-gray-400 bg-opacity-20 p-2 text-gray-400 sm:block"
         title="Press / to focus"
       >
         /

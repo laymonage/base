@@ -40,7 +40,7 @@ export default function Logs({
         {allLogsData.length > 0 ? (
           allLogsData.map(([year, logs], index) => (
             <details key={year} open={index === 0}>
-              <summary className="mt-6 text-2xl font-semibold text-gray-800 dark:text-gray-100 marker:text-xl">
+              <summary className="mt-6 text-2xl font-semibold text-gray-800 marker:text-xl dark:text-gray-100">
                 <h2 className="ml-2 align-text-top">{year}</h2>
               </summary>
               <Catalog
@@ -51,7 +51,7 @@ export default function Logs({
                   <Link
                     href={`/logs/${log.slug}`}
                     key={log.slug}
-                    className="block mt-4 text-gray-700 dark:text-gray-300"
+                    className="mt-4 block text-gray-700 dark:text-gray-300"
                   >
                     <h3>Week {log.data.week}</h3>
                     <h2 className="text-xl font-semibold">{log.data.title}</h2>

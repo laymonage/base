@@ -61,7 +61,7 @@ export default function About({
         <div className="markdown">
           <MDXLayoutRenderer mdxSource={about.content as string} />
         </div>
-        <div className="flex justify-end my-6">
+        <div className="my-6 flex justify-end">
           <NowPlaying />
         </div>
       </Card>
@@ -75,7 +75,7 @@ export default function About({
       >
         <Catalog border items={latestItems} />
         <details>
-          <summary className="my-4 alike">
+          <summary className="alike my-4">
             <span className="ml-2">More...</span>
           </summary>
           <Catalog border items={rest.map(dataToTimeline)} />

@@ -12,12 +12,12 @@ export default function NowPlaying() {
 
   return (
     <a
-      className="flex items-center max-w-full ml-auto min-h-[56px]"
+      className="ml-auto flex min-h-[56px] max-w-full items-center"
       href={isPlaying ? data?.trackUrl : SPOTIFY_PROFILE_URL}
       target="_blank"
       rel="noopener noreferrer nofollow"
     >
-      <div className="flex flex-col mr-4 text-right truncate">
+      <div className="mr-4 flex flex-col truncate text-right">
         {data && isPlaying ? (
           <>
             <p className="truncate">{data.artist}</p>
@@ -29,8 +29,8 @@ export default function NowPlaying() {
       </div>
       <div
         className={clsx('flex-shrink-0', {
-          'w-8 h-8': isPlaying,
-          'w-6 h-6': !isPlaying,
+          'h-8 w-8': isPlaying,
+          'h-6 w-6': !isPlaying,
         })}
       >
         <Spotify />

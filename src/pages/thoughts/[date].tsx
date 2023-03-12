@@ -43,12 +43,12 @@ export default function SingleThought({
         <h2 className="mb-2 text-4xl font-semibold tracking-tight text-black dark:text-white">
           {thought.data.title}
         </h2>
-        <div className="flex justify-between mb-4">
+        <div className="mb-4 flex justify-between">
           <span>{thought.slug}</span>
           <span>{thought.data.readingTime.text}</span>
         </div>
       </div>
-      <div key={date} className="mx-auto my-4 markdown">
+      <div key={date} className="markdown mx-auto my-4">
         <MDXLayoutRenderer mdxSource={thought.content as string} />
       </div>
     </Layout>

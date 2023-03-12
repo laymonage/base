@@ -87,7 +87,7 @@ export default function Layout({
         ) : null}
       </Head>
       <Navigation />
-      <main className="flex flex-col items-center w-full p-8 sm:mt-20">
+      <main className="flex w-full flex-col items-center p-8 sm:mt-20">
         <div className={clsx('reading-wrapper', className)}>
           {children}
           {hasComments ? (
@@ -97,7 +97,7 @@ export default function Layout({
           ) : null}
         </div>
       </main>
-      <div className="fixed top-0 left-0 w-screen h-screen bg-center bg-cover opacity-40 xl:opacity-100 bg" />
+      <div className="bg fixed top-0 left-0 h-screen w-screen bg-cover bg-center opacity-40 xl:opacity-100" />
       <Footer />
       <ScrollTop />
     </>

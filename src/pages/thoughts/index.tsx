@@ -44,11 +44,11 @@ export default function Thoughts({
               <Link
                 href={`/thoughts/${thought.slug}`}
                 key={thought.slug}
-                className="block mt-4 text-gray-700 dark:text-gray-300"
+                className="mt-4 block text-gray-700 dark:text-gray-300"
               >
-                <h2 className="text-xl flex flex-wrap items-center gap-x-4 gap-y-2">
+                <h2 className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xl">
                   <time
-                    className="tabular-nums font-semibold"
+                    className="font-semibold tabular-nums"
                     dateTime={thought.data.date}
                   >
                     {thought.data.date}

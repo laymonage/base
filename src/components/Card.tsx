@@ -19,7 +19,7 @@ export default function Card({
       {header ? (
         <div
           className={clsx(
-            'mb-8 text-4xl text-blue-800 dark:text-blue-200 sm:text-5xl sm:flex-row',
+            'mb-8 text-4xl text-blue-800 dark:text-blue-200 sm:flex-row sm:text-5xl',
             {
               'flex flex-col items-baseline': !!(header && subtitle),
             },

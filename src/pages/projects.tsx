@@ -53,7 +53,7 @@ export default function Projects({
     >
       {projects.map((group) => (
         <Card
-          className="w-full mx-auto my-16 first:mt-0"
+          className="mx-auto my-16 w-full first:mt-0"
           key={group.id}
           header={
             <h2 id={group.anchor}>

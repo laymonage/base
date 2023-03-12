@@ -62,8 +62,8 @@ export default function Posts({
                 <Card>
                   <div className="flex flex-col sm:flex-row">
                     {post.data.image ? (
-                      <div className="p-4 mb-6 mr-0 rounded dark:bg-gray-700 sm:w-48 sm:mb-0 sm:mr-8">
-                        <div className="relative h-48 my-auto sm:h-full">
+                      <div className="mb-6 mr-0 rounded p-4 dark:bg-gray-700 sm:mb-0 sm:mr-8 sm:w-48">
+                        <div className="relative my-auto h-48 sm:h-full">
                           <Image
                             src={post.data.image}
                             alt={post.data.title}
@@ -74,9 +74,9 @@ export default function Posts({
                         </div>
                       </div>
                     ) : null}
-                    <div className="flex flex-col justify-between w-full sm:w-9/12">
+                    <div className="flex w-full flex-col justify-between sm:w-9/12">
                       <div>
-                        <div className="flex flex-col justify-between mb-4">
+                        <div className="mb-4 flex flex-col justify-between">
                           <h2 className="text-xl font-semibold">
                             {post.data.title}
                           </h2>
@@ -88,7 +88,7 @@ export default function Posts({
                         <div className="flex">
                           {post.data.tags.map((tag) => (
                             <span
-                              className="p-1 ml-2 bg-gray-400 border-2 border-gray-500 rounded first:ml-0 bg-opacity-20"
+                              className="ml-2 rounded border-2 border-gray-500 bg-gray-400 bg-opacity-20 p-1 first:ml-0"
                               key={tag}
                             >
                               {tag}

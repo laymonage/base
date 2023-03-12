@@ -16,7 +16,7 @@ export default function ThemeToggle() {
   return mounted ? (
     <button
       type="button"
-      className="w-6 h-6 fill-current focus:outline-none alike"
+      className="alike h-6 w-6 fill-current focus:outline-none"
       aria-label="Change theme"
       onClick={handleThemeChange}
     >

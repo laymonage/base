@@ -71,8 +71,8 @@ export default function Posts({
                 className="text-gray-700 dark:text-gray-300"
               >
                 <Card className="py-4">
-                  <div className="flex flex-col justify-between w-full">
-                    <div className="flex justify-between mb-2">
+                  <div className="flex w-full flex-col justify-between">
+                    <div className="mb-2 flex justify-between">
                       <h2 className="text-xl font-semibold">
                         {post.data.title}
                       </h2>

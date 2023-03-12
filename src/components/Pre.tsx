@@ -24,13 +24,13 @@ export default function Pre({ children }: Props) {
   };
 
   return (
-    <div ref={wrapper} onMouseLeave={onExit} className="relative pre group">
+    <div ref={wrapper} onMouseLeave={onExit} className="pre group relative">
       <button
         aria-label="Copy code"
         type="button"
-        className={`absolute right-2 top-2 w-8 h-8 p-1 rounded border-2 bg-gray-200 dark:bg-gray-800 opacity-0 group-hover:opacity-100 focus:opacity-100 ${
+        className={`absolute right-2 top-2 h-8 w-8 rounded border-2 bg-gray-200 p-1 opacity-0 focus:opacity-100 group-hover:opacity-100 dark:bg-gray-800 ${
           copied
-            ? 'focus:outline-none focus:border-green-500 border-green-500'
+            ? 'border-green-500 focus:border-green-500 focus:outline-none'
             : 'border-gray-300 dark:border-gray-400'
         }`}
         onClick={onCopy}

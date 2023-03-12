@@ -41,12 +41,12 @@ export default function SingleLog({
         <h2 className="mb-2 text-4xl font-semibold tracking-tight text-black dark:text-white">
           {log.data.title}
         </h2>
-        <div className="flex justify-between mb-4">
+        <div className="mb-4 flex justify-between">
           <span>{humanizeLogSlug(log.slug)}</span>
           <span>{log.data.readingTime.text}</span>
         </div>
       </div>
-      <div key={slug} className="mx-auto my-4 markdown">
+      <div key={slug} className="markdown mx-auto my-4">
         <MDXLayoutRenderer mdxSource={log.content as string} />
       </div>
     </Layout>

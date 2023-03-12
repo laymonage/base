@@ -1,5 +1,5 @@
 .markdown {
-  @apply text-gray-700 dark:text-gray-300 text-opacity-90;
+  @apply text-gray-700 text-opacity-90 dark:text-gray-300;
 
   h1,
   h2,
@@ -19,7 +19,7 @@
   }
 
   hr {
-    @apply mt-8 my-4;
+    @apply my-4 mt-8;
   }
 
   p,
@@ -45,7 +45,7 @@
   }
 
   blockquote {
-    @apply pl-4 my-4 italic border-l-4 border-gray-400 border-opacity-20 text-base;
+    @apply my-4 border-l-4 border-gray-400 border-opacity-20 pl-4 text-base italic;
 
     > :first-child {
       @apply mt-0;
@@ -62,12 +62,12 @@
 
   code,
   kbd {
-    @apply bg-gray-500 border border-gray-400 rounded border-opacity-20 bg-opacity-5 p-1;
+    @apply rounded border border-gray-400 border-opacity-20 bg-gray-500 bg-opacity-5 p-1;
   }
 
   p code,
   li code {
-    @apply text-sm mx-1;
+    @apply mx-1 text-sm;
   }
 
   p code:not(a code),
@@ -77,16 +77,16 @@
 
   p kbd,
   li kbd {
-    @apply text-pink-600 dark:text-pink-300 text-xs align-middle inline-block py-[3px] px-[5px] mx-1 rounded-lg;
+    @apply mx-1 inline-block rounded-lg py-[3px] px-[5px] align-middle text-xs text-pink-600 dark:text-pink-300;
   }
 
   pre code {
-    @apply py-4 block overflow-auto text-sm;
+    @apply block overflow-auto py-4 text-sm;
   }
 
   img,
   video {
-    @apply block mx-auto rounded;
+    @apply mx-auto block rounded;
   }
 
   iframe,
@@ -101,7 +101,7 @@
   }
 
   .mdx-image {
-    @apply flex justify-center mx-auto;
+    @apply mx-auto flex justify-center;
   }
 
   figcaption {
@@ -131,7 +131,7 @@
   }
 
   .remark-code-title {
-    @apply px-5 mt-4 py-3 font-mono text-sm font-bold bg-gray-200 dark:bg-gray-700 rounded-t;
+    @apply mt-4 rounded-t bg-gray-200 px-5 py-3 font-mono text-sm font-bold dark:bg-gray-700;
   }
 
   .remark-code-title + div > pre {
@@ -139,11 +139,11 @@
   }
 
   .code-line {
-    @apply px-4 w-max border-l-4 border-transparent;
+    @apply w-max border-l-4 border-transparent px-4;
   }
 
   .highlight-line {
-    @apply bg-blue-200 dark:bg-gray-700 bg-opacity-50 border-l-4 border-gray-500;
+    @apply border-l-4 border-gray-500 bg-blue-200 bg-opacity-50 dark:bg-gray-700;
   }
 
   .line-number {

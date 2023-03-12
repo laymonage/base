@@ -38,11 +38,11 @@ export default function SinglePost({
       }}
       hasComments={post.data.comments === true}
     >
-      <div className="flex-row mt-4">
+      <div className="mt-4 flex-row">
         <h2 className="mb-4 text-5xl font-semibold tracking-tight text-black dark:text-white">
           {post.data.title}
         </h2>
-        <div className="flex justify-between mb-4">
+        <div className="mb-4 flex justify-between">
           <Date dateString={post.data.date} />
           <span>{post.data.readingTime.text}</span>
         </div>
@@ -50,7 +50,7 @@ export default function SinglePost({
           <div className="mb-16">
             {post.data.tags.map((tag) => (
               <span
-                className="p-1 mx-1 bg-gray-400 border-2 border-gray-500 rounded bg-opacity-20"
+                className="mx-1 rounded border-2 border-gray-500 bg-gray-400 bg-opacity-20 p-1"
                 key={tag}
               >
                 {tag}
@@ -59,7 +59,7 @@ export default function SinglePost({
           </div>
         ) : null}
       </div>
-      <div key={slug} className="mx-auto mt-4 mb-8 markdown">
+      <div key={slug} className="markdown mx-auto mt-4 mb-8">
         <MDXLayoutRenderer mdxSource={post.content as string} />
       </div>
     </Layout>

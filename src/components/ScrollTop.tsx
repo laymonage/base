@@ -15,13 +15,13 @@ export default function ScrollTop() {
       aria-label="Scroll to top"
       type="button"
       className={clsx(
-        'fixed z-10 text-white transition-transform duration-300 bg-blue-900 rounded-full bottom-3 right-3 button dark:bg-gray-700 focus:outline-none transform translate-y-0',
+        'button fixed bottom-3 right-3 z-10 translate-y-0 transform rounded-full bg-blue-900 text-white transition-transform duration-300 focus:outline-none dark:bg-gray-700',
         offset > scrollY ? 'translate-y-20' : 'shadow-lg',
       )}
     >
       <svg
         onClick={doScroll}
-        className="w-10 h-10 fill-current sm:w-16 sm:h-16"
+        className="h-10 w-10 fill-current sm:h-16 sm:w-16"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
       >
