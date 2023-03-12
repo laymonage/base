@@ -1,5 +1,4 @@
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
-import Card from '@/components/Card';
 import Layout from '@/components/Layout';
 import { getAllContentSlugs, getSingleContentData } from '@/lib/content';
 import { Post, PostAttributes } from '@/lib/models/content';
@@ -40,20 +39,18 @@ export default function SingleThought({
       }}
       hasComments={thought.data.comments === true}
     >
-      <Card>
-        <div className="my-4">
-          <h2 className="mb-2 text-4xl font-semibold tracking-tight text-black dark:text-white">
-            {thought.data.title}
-          </h2>
-          <div className="flex justify-between mb-4">
-            <span>{thought.slug}</span>
-            <span>{thought.data.readingTime.text}</span>
-          </div>
+      <div className="my-4">
+        <h2 className="mb-2 text-4xl font-semibold tracking-tight text-black dark:text-white">
+          {thought.data.title}
+        </h2>
+        <div className="flex justify-between mb-4">
+          <span>{thought.slug}</span>
+          <span>{thought.data.readingTime.text}</span>
         </div>
-        <div key={date} className="max-w-2xl mx-auto my-4 markdown">
-          <MDXLayoutRenderer mdxSource={thought.content as string} />
-        </div>
-      </Card>
+      </div>
+      <div key={date} className="mx-auto my-4 markdown">
+        <MDXLayoutRenderer mdxSource={thought.content as string} />
+      </div>
     </Layout>
   );
 }

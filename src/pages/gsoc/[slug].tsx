@@ -1,5 +1,4 @@
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
-import Card from '@/components/Card';
 import Date from '@/components/Date';
 import Layout from '@/components/Layout';
 import { getAllContentSlugs, getSingleContentData } from '@/lib/content';
@@ -38,20 +37,18 @@ export default function SinglePost({
       }}
       hasComments={post.data.comments === true}
     >
-      <Card>
-        <div className="flex-row mt-4">
-          <h2 className="mb-4 text-5xl font-semibold tracking-tight text-black dark:text-white">
-            {post.data.title}
-          </h2>
-          <div className="flex justify-between mb-4">
-            <Date dateString={post.data.date} />
-            <span>{post.data.readingTime.text}</span>
-          </div>
+      <div className="flex-row mt-4">
+        <h2 className="mb-4 text-5xl font-semibold tracking-tight text-black dark:text-white">
+          {post.data.title}
+        </h2>
+        <div className="flex justify-between mb-4">
+          <Date dateString={post.data.date} />
+          <span>{post.data.readingTime.text}</span>
         </div>
-        <div key={slug} className="max-w-2xl mx-auto mt-4 mb-8 markdown">
-          <MDXLayoutRenderer mdxSource={post.content as string} />
-        </div>
-      </Card>
+      </div>
+      <div key={slug} className="mx-auto mt-4 mb-8 markdown">
+        <MDXLayoutRenderer mdxSource={post.content as string} />
+      </div>
     </Layout>
   );
 }

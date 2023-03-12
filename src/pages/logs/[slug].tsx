@@ -1,5 +1,4 @@
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
-import Card from '@/components/Card';
 import Layout from '@/components/Layout';
 import { getAllContentSlugs, getSingleContentData } from '@/lib/content';
 import { Log, LogAttributes } from '@/lib/models/content';
@@ -38,20 +37,18 @@ export default function SingleLog({
       }}
       hasComments={log.data.comments === true}
     >
-      <Card>
-        <div className="my-4">
-          <h2 className="mb-2 text-4xl font-semibold tracking-tight text-black dark:text-white">
-            {log.data.title}
-          </h2>
-          <div className="flex justify-between mb-4">
-            <span>{humanizeLogSlug(log.slug)}</span>
-            <span>{log.data.readingTime.text}</span>
-          </div>
+      <div className="my-4">
+        <h2 className="mb-2 text-4xl font-semibold tracking-tight text-black dark:text-white">
+          {log.data.title}
+        </h2>
+        <div className="flex justify-between mb-4">
+          <span>{humanizeLogSlug(log.slug)}</span>
+          <span>{log.data.readingTime.text}</span>
         </div>
-        <div key={slug} className="max-w-2xl mx-auto my-4 markdown">
-          <MDXLayoutRenderer mdxSource={log.content as string} />
-        </div>
-      </Card>
+      </div>
+      <div key={slug} className="mx-auto my-4 markdown">
+        <MDXLayoutRenderer mdxSource={log.content as string} />
+      </div>
     </Layout>
   );
 }

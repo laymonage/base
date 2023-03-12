@@ -88,7 +88,7 @@ export default function Layout({
       </Head>
       <Navigation />
       <main className="flex flex-col items-center w-full p-8 sm:mt-20">
-        <div className={clsx('w-full max-w-2xl', className)}>
+        <div className={clsx('reading-wrapper', className)}>
           {children}
           {hasComments ? (
             <Card className="my-8">
