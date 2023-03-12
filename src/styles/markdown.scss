@@ -45,7 +45,7 @@
   }
 
   blockquote {
-    @apply my-4 border-l-4 border-gray-400 border-opacity-20 pl-4 text-base italic;
+    @apply -mx-5 my-4 border-l-4 border-gray-400 border-opacity-20 pl-4 text-base italic;
 
     > :first-child {
       @apply mt-0;
