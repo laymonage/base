@@ -53,6 +53,7 @@ export default function Thoughts({
                   >
                     {thought.data.date}
                   </time>
+                  <span className="sr-only">-</span>
                   {thought.data.title}
                 </h2>
               </Link>
