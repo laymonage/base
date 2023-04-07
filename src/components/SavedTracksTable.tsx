@@ -173,7 +173,7 @@ export default function SavedTracksTable({
           </thead>
           <tbody>
             {table.getRowModel().rows.map((row) => (
-              <tr key={row.id} className="group">
+              <tr key={row.id} className="group/row">
                 {row.getVisibleCells().map((cell) => (
                   <td
                     className={clsx(

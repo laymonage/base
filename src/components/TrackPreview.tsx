@@ -28,14 +28,23 @@ export default function TrackPreview({
 
   return (
     <button
+      className="group"
       type="button"
       onClick={togglePlay}
       aria-label={`Play ${title} by ${artists.join(', ')}`}
     >
-      <span className="group-focus-within:hidden group-hover:hidden">
-        {number}
+      <span className="group-hover/row:hidden group-focus-within:group-focus-visible:hidden">
+        {isPlaying ? (
+          <img
+            className="h-3.5 w-3.5"
+            alt="Is currently playing"
+            src="/img/equaliser-animated-green.gif"
+          />
+        ) : (
+          number
+        )}
       </span>
-      <span className="hidden group-focus-within:inline group-hover:inline">
+      <span className="hidden group-hover/row:inline group-focus-within:group-focus-visible:inline">
         {isPlaying ? '⏸️' : '▶️'}
       </span>
       <audio src={previewUrl} />
