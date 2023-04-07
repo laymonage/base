@@ -77,7 +77,7 @@ export function AudioProvider({ children }: { children: ReactNode }) {
     <AudioContext.Provider value={state}>
       <AudioDispatchContext.Provider value={dispatch}>
         {children}
-        <audio ref={audio} />
+        <audio ref={audio} onEnded={() => dispatch({ type: 'PAUSE' })} />
       </AudioDispatchContext.Provider>
     </AudioContext.Provider>
   );
