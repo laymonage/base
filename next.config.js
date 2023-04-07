@@ -5,7 +5,7 @@ const ContentSecurityPolicy = `
   frame-ancestors 'self';
   child-src *.youtube.com platform.twitter.com *.laymonage.com laymonage.github.io giscus.app star-history.com;
   img-src * blob: data:;
-  media-src *.laymonage.com;
+  media-src *.laymonage.com p.scdn.co;
   connect-src *;
   font-src 'self';
 `;
