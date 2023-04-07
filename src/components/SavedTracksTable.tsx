@@ -41,19 +41,24 @@ function getColumnMeta(columnDef: ReturnType<typeof columnHelper.display>) {
 const columns = [
   columnHelper.display({
     id: 'number',
-    cell: ({ row }) => row.index + 1,
+    cell: ({ row }) => (
+      <TrackPreview
+        number={row.index + 1}
+        title={row.original.title}
+        artists={row.original.artist.map((artist) => artist.name)}
+        previewUrl={row.original.preview_url}
+      />
+    ),
     header: '#',
     meta: { class: 'w-[6%] text-center tabular-nums' },
   }),
   columnHelper.accessor((row) => `${row.title} ${row.album}`, {
     cell: (info) => (
       <div className="flex items-center gap-4">
-        <TrackPreview
-          title={info.row.original.title}
-          album={info.row.original.album}
-          imageUrl={info.row.original.image_url}
-          artists={info.row.original.artist.map(({ name }) => name)}
-          previewUrl={info.row.original.preview_url}
+        <img
+          alt={info.row.original.album}
+          src={info.row.original.image_url}
+          className="h-8 w-8"
         />
         <div className="min-w-0">
           <div
@@ -168,7 +173,7 @@ export default function SavedTracksTable({
           </thead>
           <tbody>
             {table.getRowModel().rows.map((row) => (
-              <tr key={row.id}>
+              <tr key={row.id} className="group">
                 {row.getVisibleCells().map((cell) => (
                   <td
                     className={clsx(

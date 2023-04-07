@@ -1,19 +1,17 @@
 import { useAudio } from '@/lib/providers/audio';
 
 interface TrackPreviewProps {
+  number: number;
   title: string;
-  album: string;
-  imageUrl: string;
   artists: string[];
   previewUrl: string;
 }
 
 export default function TrackPreview({
+  number,
   title,
   artists,
   previewUrl,
-  album,
-  imageUrl,
 }: TrackPreviewProps) {
   const [state, dispatch] = useAudio();
   const isCurrent = state.audio?.src === previewUrl;
@@ -29,22 +27,18 @@ export default function TrackPreview({
   };
 
   return (
-    <div className="group relative flex-shrink-0">
-      <audio src={previewUrl} />
-      <img
-        alt={album}
-        src={imageUrl}
-        className="h-8 w-8 group-focus-within:opacity-50 group-hover:opacity-50"
-        loading="lazy"
-      />
-      <button
-        type="button"
-        onClick={togglePlay}
-        aria-label={`Play ${title} by ${artists.join(', ')}`}
-        className="absolute top-0 left-0 h-8 w-8 opacity-0 focus:opacity-100 group-hover:opacity-100"
-      >
+    <button
+      type="button"
+      onClick={togglePlay}
+      aria-label={`Play ${title} by ${artists.join(', ')}`}
+    >
+      <span className="group-focus-within:hidden group-hover:hidden">
+        {number}
+      </span>
+      <span className="hidden group-focus-within:inline group-hover:inline">
         {isPlaying ? '⏸️' : '▶️'}
-      </button>
-    </div>
+      </span>
+      <audio src={previewUrl} />
+    </button>
   );
 }
