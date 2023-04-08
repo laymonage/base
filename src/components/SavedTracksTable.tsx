@@ -147,8 +147,8 @@ export default function SavedTracksTable({
 
   return (
     <AudioProvider>
-      <div className={clsx('p-2', className)}>
-        <table className="w-full table-fixed border-collapse whitespace-nowrap">
+      <div className={clsx('overflow-auto', className)}>
+        <table className="w-full min-w-max table-fixed border-collapse whitespace-nowrap">
           <thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
