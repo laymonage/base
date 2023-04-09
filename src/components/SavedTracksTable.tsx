@@ -243,12 +243,15 @@ export default function SavedTracksTable({
             {virtualRows.map((virtualRow) => {
               const row = rows[virtualRow.index] as Row<SavedTrackSimplified>;
               return (
-                <tr key={row.index} className="group/row">
+                <tr
+                  key={row.original.id}
+                  className="group/row focus-within:bg-blue-300 focus-within:bg-opacity-10 hover:bg-blue-300 hover:bg-opacity-10"
+                >
                   {row.getVisibleCells().map((cell) => (
                     <td
                       className={clsx(
                         getColumnMeta(cell.column.columnDef)?.class,
-                        'p-2',
+                        'p-2 first-of-type:rounded-l last-of-type:rounded-r',
                       )}
                       key={cell.id}
                     >
