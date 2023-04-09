@@ -71,7 +71,10 @@ html {
 }
 
 body {
-  @apply bg-white text-lg dark:bg-gray-900;
+  &,
+  .bg-primary {
+    @apply bg-white text-lg dark:bg-gray-900;
+  }
 
   &,
   & .text-primary {
