@@ -142,7 +142,7 @@ const columns = [
       </time>
     ),
     header: '⌛️',
-    meta: { class: 'w-[5%] text-right tabular-nums' },
+    meta: { class: 'w-[6%] text-right tabular-nums pr-4' },
     enableSorting: false,
   }),
 ];
