@@ -71,7 +71,16 @@ html {
 }
 
 body {
-  @apply bg-white font-sans text-lg text-gray-700 dark:bg-gray-900 dark:text-gray-300;
+  @apply bg-white text-lg dark:bg-gray-900;
+
+  &,
+  & .text-primary {
+    @apply font-sans text-gray-700 dark:text-gray-300;
+  }
+}
+
+.text-secondary {
+  @apply text-gray-500 dark:text-gray-400;
 }
 
 a,
