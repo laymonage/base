@@ -121,6 +121,7 @@ const columns = [
       </time>
     ),
     header: 'Date added',
+    sortDescFirst: true,
     meta: { class: 'w-[15%] text-left' },
   }),
   columnHelper.accessor('duration_ms', {
@@ -139,6 +140,7 @@ const columns = [
 ];
 
 let fetched = false;
+const defaultSorting = [{ id: 'added_at', desc: true }];
 
 export default function SavedTracksTable({
   className,
@@ -146,9 +148,7 @@ export default function SavedTracksTable({
   className?: string;
 }) {
   const tableContainerRef = useRef<HTMLDivElement>(null);
-  const [sorting, setSorting] = useState<SortingState>([
-    { id: 'added_at', desc: true },
-  ]);
+  const [sorting, setSorting] = useState<SortingState>(defaultSorting);
   const [data, setData] = useState<SavedTrackSimplified[]>([]);
 
   useEffect(() => {
@@ -167,7 +167,7 @@ export default function SavedTracksTable({
     data,
     columns,
     state: {
-      sorting,
+      sorting: sorting.length ? sorting : defaultSorting,
     },
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
