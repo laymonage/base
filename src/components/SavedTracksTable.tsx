@@ -84,7 +84,13 @@ const columns = [
           <div className="text-sm">
             {row.artists
               .map<ReactNode>((artist) => (
-                <a className="text-secondary" href={artist.url} key={artist.id}>
+                <a
+                  key={artist.id}
+                  className="text-secondary"
+                  href={artist.url}
+                  target="_blank"
+                  rel="noreferrer noopener nofollow"
+                >
                   {artist.name}
                 </a>
               ))
@@ -100,8 +106,10 @@ const columns = [
   columnHelper.accessor((row) => row.album.name, {
     cell: ({ row: { original: row } }) => (
       <a
-        href={row.album.url}
         className="text-secondary text-sm"
+        href={row.album.url}
+        target="_blank"
+        rel="noreferrer noopener nofollow"
         title={row.album.name}
       >
         {row.album.name}
