@@ -61,7 +61,8 @@ html {
   @apply h-2 w-2 bg-transparent;
 }
 
-::-webkit-scrollbar-track {
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner {
   @apply rounded-full bg-white dark:bg-gray-900;
 }
 
