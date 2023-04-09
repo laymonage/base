@@ -4,7 +4,7 @@ interface TrackPreviewProps {
   number: number;
   title: string;
   artists: string[];
-  previewUrl: string;
+  previewUrl: string | null;
 }
 
 export default function TrackPreview({
@@ -14,6 +14,8 @@ export default function TrackPreview({
   previewUrl,
 }: TrackPreviewProps) {
   const [state, dispatch] = useAudio();
+  if (!previewUrl) return <>{number}</>;
+
   const isCurrent = state.audio?.src === previewUrl;
   const isPlaying = isCurrent && state.playing;
 
@@ -47,7 +49,7 @@ export default function TrackPreview({
       <span className="hidden group-hover/row:inline group-focus-within:group-focus-visible:inline">
         {isPlaying ? '⏸️' : '▶️'}
       </span>
-      <audio src={previewUrl} />
+      {/* <audio src={previewUrl} /> */}
     </button>
   );
 }

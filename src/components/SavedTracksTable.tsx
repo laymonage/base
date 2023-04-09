@@ -1,4 +1,3 @@
-import savedTracksData from '@/data/spotify';
 import {
   formatDate,
   msToDuration,
@@ -6,33 +5,44 @@ import {
   relativeFormat,
 } from '@/lib/datetime';
 import {
+  Row,
+  SortingState,
   createColumnHelper,
   flexRender,
   getCoreRowModel,
+  getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
+import { useVirtualizer } from '@tanstack/react-virtual';
 import clsx from 'clsx';
-import { ReactNode, useState } from 'react';
+import { ReactNode, useEffect, useRef, useState } from 'react';
 import TrackPreview from './TrackPreview';
 import { AudioProvider } from '@/lib/providers/audio';
 
-interface SavedTrackRow {
+interface SavedTrackSimplified {
   id: string;
-  image_url: string;
-  title: string;
-  artist: {
+  name: string;
+  added_at: string;
+  popularity: number;
+  duration_ms: number;
+  explicit: boolean;
+  url: string;
+  preview_url: string | null;
+  album: {
+    id: string;
+    name: string;
+    release_date: string;
+    image_url: string;
+    url: string;
+  };
+  artists: Array<{
     id: string;
     name: string;
     url: string;
-  }[];
-  album: string;
-  added_at: string;
-  duration_ms: number;
-  explicit: boolean;
-  preview_url: string;
+  }>;
 }
 
-const columnHelper = createColumnHelper<SavedTrackRow>();
+const columnHelper = createColumnHelper<SavedTrackSimplified>();
 
 function getColumnMeta(columnDef: ReturnType<typeof columnHelper.display>) {
   return columnDef.meta as Record<string, string>;
@@ -41,36 +51,40 @@ function getColumnMeta(columnDef: ReturnType<typeof columnHelper.display>) {
 const columns = [
   columnHelper.display({
     id: 'number',
-    cell: ({ row }) => (
+    cell: ({ row: { index, original: row } }) => (
       <TrackPreview
-        number={row.index + 1}
-        title={row.original.title}
-        artists={row.original.artist.map((artist) => artist.name)}
-        previewUrl={row.original.preview_url}
+        number={index + 1}
+        title={row.name}
+        artists={row.artists.map(({ name }) => name)}
+        previewUrl={row.preview_url}
       />
     ),
     header: '#',
     meta: { class: 'w-[6%] text-center tabular-nums' },
   }),
-  columnHelper.accessor((row) => `${row.title} ${row.album}`, {
-    cell: (info) => (
+  columnHelper.accessor((row) => `${row.name} ${row.album.name}`, {
+    cell: ({ row: { original: row } }) => (
       <div className="flex items-center gap-4">
         <img
-          alt={info.row.original.album}
-          src={info.row.original.image_url}
+          src={row.album.image_url}
+          alt={row.album.name}
           className="h-8 w-8"
         />
         <div className="min-w-0">
-          <div
-            title={info.row.original.title}
-            className="overflow-hidden text-ellipsis"
-          >
-            {info.row.original.title}
+          <div title={row.name} className="overflow-hidden text-ellipsis">
+            <a
+              className="text-primary"
+              href={row.url}
+              target="_blank"
+              rel="noreferrer noopener nofollow"
+            >
+              {row.name}
+            </a>
           </div>
           <div className="text-sm">
-            {info.row.original.artist
+            {row.artists
               .map<ReactNode>((artist) => (
-                <a href={artist.url} key={artist.id}>
+                <a className="text-secondary" href={artist.url} key={artist.id}>
                   {artist.name}
                 </a>
               ))
@@ -83,11 +97,15 @@ const columns = [
     header: 'Title',
     meta: { class: 'text-left text-ellipsis overflow-hidden' },
   }),
-  columnHelper.accessor('album', {
-    cell: (info) => (
-      <span className="text-sm" title={info.getValue()}>
-        {info.getValue()}
-      </span>
+  columnHelper.accessor((row) => row.album.name, {
+    cell: ({ row: { original: row } }) => (
+      <a
+        href={row.album.url}
+        className="text-secondary text-sm"
+        title={row.album.name}
+      >
+        {row.album.name}
+      </a>
     ),
     header: 'Album',
     meta: { class: 'w-[25%] text-left text-ellipsis overflow-hidden' },
@@ -95,7 +113,7 @@ const columns = [
   columnHelper.accessor('added_at', {
     cell: (info) => (
       <time
-        className="text-sm"
+        className="text-secondary text-sm"
         dateTime={info.getValue()}
         title={formatDate(info.getValue())}
       >
@@ -107,47 +125,80 @@ const columns = [
   }),
   columnHelper.accessor('duration_ms', {
     cell: (info) => (
-      <time className="text-sm" dateTime={msToDuration(info.getValue())}>
+      <time
+        className="text-secondary text-sm"
+        dateTime={msToDuration(info.getValue())}
+      >
         {msToMinutes(info.getValue())}
       </time>
     ),
     header: '⌛️',
     meta: { class: 'w-[5%] text-right tabular-nums' },
+    enableSorting: false,
   }),
 ];
+
+let fetched = false;
 
 export default function SavedTracksTable({
   className,
 }: {
   className?: string;
 }) {
-  const [data] = useState<SavedTrackRow[]>(() =>
-    savedTracksData.tracks.map((track) => ({
-      id: track.id,
-      image_url: track.album.images[0].url,
-      title: track.name,
-      artist: track.artists.map((artist) => ({
-        id: artist.id,
-        name: artist.name,
-        url: artist.external_urls.spotify,
-      })),
-      album: track.album.name,
-      added_at: track.added_at,
-      duration_ms: track.duration_ms,
-      explicit: track.explicit,
-      preview_url: track.preview_url,
-    })),
-  );
+  const tableContainerRef = useRef<HTMLDivElement>(null);
+  const [sorting, setSorting] = useState<SortingState>([
+    { id: 'added_at', desc: true },
+  ]);
+  const [data, setData] = useState<SavedTrackSimplified[]>([]);
+
+  useEffect(() => {
+    if (fetched) return;
+    fetch(
+      'https://raw.githubusercontent.com/laymonage/spotify-saved-tracks/data/data/saved_tracks_simplified.json',
+    )
+      .then((response) => response.json())
+      .then(({ tracks }) => {
+        fetched = true;
+        setData(tracks);
+      });
+  }, []);
 
   const table = useReactTable({
     data,
     columns,
+    state: {
+      sorting,
+    },
+    onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
   });
+
+  const { rows } = table.getRowModel();
+
+  const rowVirtualizer = useVirtualizer({
+    getScrollElement: () => tableContainerRef.current,
+    count: rows.length,
+    estimateSize: () => 64,
+    overscan: 32,
+  });
+  const virtualRows = rowVirtualizer.getVirtualItems();
+  const totalSize = rowVirtualizer.getTotalSize();
+  const paddingTop = virtualRows.length > 0 ? virtualRows?.[0]?.start || 0 : 0;
+  const paddingBottom =
+    virtualRows.length > 0
+      ? totalSize - (virtualRows[virtualRows.length - 1]?.end || 0)
+      : 0;
 
   return (
     <AudioProvider>
-      <div className={clsx('overflow-auto', className)}>
+      <div
+        ref={tableContainerRef}
+        className={clsx(
+          'h-[max(calc(100vh-10rem),16rem)] overflow-auto',
+          className,
+        )}
+      >
         <table className="w-full min-w-max table-fixed border-collapse whitespace-nowrap">
           <thead>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -160,33 +211,61 @@ export default function SavedTracksTable({
                     )}
                     key={header.id}
                   >
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
+                    {header.isPlaceholder ? null : (
+                      <div
+                        className={clsx({
+                          'cursor-pointer select-none':
+                            header.column.getCanSort(),
+                        })}
+                        onClick={header.column.getToggleSortingHandler()}
+                      >
+                        {flexRender(
                           header.column.columnDef.header,
                           header.getContext(),
                         )}
+                        {{
+                          asc: ' 🔼',
+                          desc: ' 🔽',
+                        }[header.column.getIsSorted() as string] ?? null}
+                      </div>
+                    )}
                   </th>
                 ))}
               </tr>
             ))}
           </thead>
           <tbody>
-            {table.getRowModel().rows.map((row) => (
-              <tr key={row.id} className="group/row">
-                {row.getVisibleCells().map((cell) => (
-                  <td
-                    className={clsx(
-                      getColumnMeta(cell.column.columnDef)?.class,
-                      'p-2',
-                    )}
-                    key={cell.id}
-                  >
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                ))}
+            {paddingTop > 0 ? (
+              <tr>
+                <td style={{ height: `${paddingTop}px` }} />
               </tr>
-            ))}
+            ) : null}
+            {virtualRows.map((virtualRow) => {
+              const row = rows[virtualRow.index] as Row<SavedTrackSimplified>;
+              return (
+                <tr key={row.index} className="group/row">
+                  {row.getVisibleCells().map((cell) => (
+                    <td
+                      className={clsx(
+                        getColumnMeta(cell.column.columnDef)?.class,
+                        'p-2',
+                      )}
+                      key={cell.id}
+                    >
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext(),
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              );
+            })}
+            {paddingBottom > 0 ? (
+              <tr>
+                <td style={{ height: `${paddingBottom}px` }} />
+              </tr>
+            ) : null}
           </tbody>
           <tfoot>
             {table.getFooterGroups().map((footerGroup) => (
