@@ -58,7 +58,7 @@ export default function Posts({
           </Link>
           . This is the documentation of my journey.
         </p>
-        <Search onSearch={handleSearch} />
+        <Search onChange={handleSearch} />
       </Card>
       {posts.length ? (
         <Catalog

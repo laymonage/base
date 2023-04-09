@@ -1,12 +1,11 @@
-import { useRef, useEffect, ChangeEventHandler } from 'react';
+import { useRef, useEffect, ComponentProps } from 'react';
 import DebouncedInput from './DebouncedInput';
 
-interface SearchProps {
-  onSearch: ChangeEventHandler<HTMLInputElement>;
-  debounce?: number;
-}
-
-export default function Search({ onSearch, debounce }: SearchProps) {
+export default function Search({
+  className,
+  inputClassName = '',
+  ...props
+}: ComponentProps<typeof DebouncedInput> & { inputClassName?: string }) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleKeydown = (event: KeyboardEvent) => {
@@ -22,13 +21,12 @@ export default function Search({ onSearch, debounce }: SearchProps) {
   }, []);
 
   return (
-    <div className="flex">
+    <div className={`flex ${className}`}>
       <DebouncedInput
-        className="w-full flex-grow rounded border-2 border-gray-400 border-opacity-20 bg-gray-300 bg-opacity-10 px-4 py-2 hover:bg-opacity-30 focus:bg-opacity-30 focus:outline-none sm:rounded-r-none sm:border-r-0"
+        className={`w-full flex-grow rounded border-2 border-gray-400 border-opacity-20 bg-gray-300 bg-opacity-10 px-4 py-2 hover:bg-opacity-30 focus:bg-opacity-30 focus:outline-none sm:rounded-r-none sm:border-r-0 ${inputClassName}`}
         placeholder="Type what you're looking for..."
         type="text"
-        onChange={onSearch}
-        debounce={debounce}
+        {...props}
         ref={inputRef}
       />
       <kbd

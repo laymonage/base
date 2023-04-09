@@ -47,7 +47,7 @@ export default function Posts({
           </h1>
         }
       >
-        <Search onSearch={handleSearch} />
+        <Search onChange={handleSearch} />
       </Card>
       {posts.length ? (
         <Catalog
