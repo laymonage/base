@@ -1,4 +1,5 @@
 import { useAudio } from '@/lib/providers/audio';
+import { useEffect, useRef } from 'react';
 
 interface TrackPreviewProps {
   number: number;
@@ -14,6 +15,18 @@ export default function TrackPreview({
   previewUrl,
 }: TrackPreviewProps) {
   const [state, dispatch] = useAudio();
+  const audio = useRef<HTMLAudioElement>(null);
+
+  useEffect(() => {
+    const element = audio.current;
+    if (!element || !previewUrl) return;
+    // Clean up the audio element when the component unmounts
+    return () => {
+      element.remove();
+      element.srcObject = null;
+    };
+  }, [previewUrl]);
+
   if (!previewUrl) return <>{number}</>;
 
   const isCurrent = state.audio?.src === previewUrl;
@@ -49,7 +62,7 @@ export default function TrackPreview({
       <span className="hidden group-hover/row:inline group-focus-within:group-focus-visible:inline">
         {isPlaying ? '⏸️' : '▶️'}
       </span>
-      {/* <audio src={previewUrl} /> */}
+      {previewUrl ? <audio ref={audio} src={previewUrl} /> : null}
     </button>
   );
 }
