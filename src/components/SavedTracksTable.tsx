@@ -10,6 +10,7 @@ import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
@@ -18,6 +19,7 @@ import clsx from 'clsx';
 import { ReactNode, useEffect, useRef, useState } from 'react';
 import TrackPreview from './TrackPreview';
 import { AudioProvider } from '@/lib/providers/audio';
+import Search from './Search';
 
 interface SavedTrackSimplified {
   id: string;
@@ -60,49 +62,52 @@ const columns = [
       />
     ),
     header: '#',
-    meta: { class: 'w-[6%] text-center tabular-nums' },
+    meta: { class: 'w-[6.5%] text-center tabular-nums' },
   }),
-  columnHelper.accessor((row) => `${row.name} ${row.album.name}`, {
-    cell: ({ row: { original: row } }) => (
-      <div className="flex items-center gap-4">
-        <img
-          src={row.album.image_url}
-          alt={row.album.name}
-          className="h-8 w-8"
-        />
-        <div className="min-w-0">
-          <div title={row.name} className="overflow-hidden text-ellipsis">
-            <a
-              className="text-primary"
-              href={row.url}
-              target="_blank"
-              rel="noreferrer noopener nofollow"
-            >
-              {row.name}
-            </a>
-          </div>
-          <div className="text-sm">
-            {row.artists
-              .map<ReactNode>((artist) => (
-                <a
-                  key={artist.id}
-                  className="text-secondary"
-                  href={artist.url}
-                  target="_blank"
-                  rel="noreferrer noopener nofollow"
-                >
-                  {artist.name}
-                </a>
-              ))
-              .reduce((prev, curr) => [prev, ', ', curr])}
+  columnHelper.accessor(
+    (row) => `${row.name} ${row.artists.map(({ name }) => name).join(' ')}`,
+    {
+      cell: ({ row: { original: row } }) => (
+        <div className="flex items-center gap-4">
+          <img
+            src={row.album.image_url}
+            alt={row.album.name}
+            className="h-8 w-8"
+          />
+          <div className="min-w-0">
+            <div title={row.name} className="overflow-hidden text-ellipsis">
+              <a
+                className="text-primary"
+                href={row.url}
+                target="_blank"
+                rel="noreferrer noopener nofollow"
+              >
+                {row.name}
+              </a>
+            </div>
+            <div className="text-sm">
+              {row.artists
+                .map<ReactNode>((artist) => (
+                  <a
+                    key={artist.id}
+                    className="text-secondary"
+                    href={artist.url}
+                    target="_blank"
+                    rel="noreferrer noopener nofollow"
+                  >
+                    {artist.name}
+                  </a>
+                ))
+                .reduce((prev, curr) => [prev, ', ', curr])}
+            </div>
           </div>
         </div>
-      </div>
-    ),
-    id: 'title',
-    header: 'Title',
-    meta: { class: 'text-left text-ellipsis overflow-hidden' },
-  }),
+      ),
+      id: 'title',
+      header: 'Title',
+      meta: { class: 'text-left text-ellipsis overflow-hidden' },
+    },
+  ),
   columnHelper.accessor((row) => row.album.name, {
     cell: ({ row: { original: row } }) => (
       <a
@@ -142,8 +147,8 @@ const columns = [
       </time>
     ),
     header: '⌛️',
-    meta: { class: 'w-[6%] text-right tabular-nums pr-4' },
-    enableSorting: false,
+    meta: { class: 'w-[7.5%] text-right tabular-nums pr-4' },
+    enableGlobalFilter: false,
   }),
 ];
 
@@ -157,6 +162,7 @@ export default function SavedTracksTable({
 }) {
   const tableContainerRef = useRef<HTMLDivElement>(null);
   const [sorting, setSorting] = useState<SortingState>(defaultSorting);
+  const [globalFilter, setGlobalFilter] = useState('');
   const [data, setData] = useState<SavedTrackSimplified[]>([]);
 
   useEffect(() => {
@@ -176,8 +182,12 @@ export default function SavedTracksTable({
     columns,
     state: {
       sorting: sorting.length ? sorting : defaultSorting,
+      globalFilter,
     },
     onSortingChange: setSorting,
+    onGlobalFilterChange: setGlobalFilter,
+    globalFilterFn: 'includesString',
+    getFilteredRowModel: getFilteredRowModel(),
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
   });
@@ -200,6 +210,12 @@ export default function SavedTracksTable({
 
   return (
     <AudioProvider>
+      <Search
+        onChange={({ target: { value } }) => setGlobalFilter(String(value))}
+        value={globalFilter}
+        className="bleed mb-8 w-full max-w-3xl place-self-center"
+        placeholder="Search…"
+      />
       <div
         ref={tableContainerRef}
         className={clsx(
