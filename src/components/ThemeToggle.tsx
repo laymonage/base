@@ -1,8 +1,7 @@
 import { useMounted } from '@/lib/hooks/mounted';
 import { useTheme } from 'next-themes';
 import { useCallback } from 'react';
-import Moon from './icons/Moon.svg';
-import Sun from './icons/Sun.svg';
+import { Moon, Sun } from 'react-feather';
 
 export default function ThemeToggle() {
   const mounted = useMounted();
@@ -20,7 +19,11 @@ export default function ThemeToggle() {
       aria-label="Change theme"
       onClick={handleThemeChange}
     >
-      {theme === 'dark' ? <Moon /> : <Sun />}
+      {theme === 'dark' ? (
+        <Moon width={24} height={24} fill="currentColor" />
+      ) : (
+        <Sun width={22} height={22} strokeWidth={2.5} />
+      )}
     </button>
   ) : null;
 }

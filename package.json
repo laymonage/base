@@ -28,6 +28,7 @@
     "preact-render-to-string": "^5.2.6",
     "react": "npm:@preact/compat@^17.1.2",
     "react-dom": "npm:@preact/compat@^17.1.2",
+    "react-feather": "^2.0.10",
     "react-ssr-prepass": "npm:preact-ssr-prepass@^1.2.0",
     "reading-time": "^1.5.0",
     "rehype-autolink-headings": "^6.1.1",

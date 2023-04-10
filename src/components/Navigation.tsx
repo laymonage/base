@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import clsx from 'clsx';
+import { Menu, X } from 'react-feather';
 import Link from '@/components/Link';
 import { useScrollY } from '@/lib/hooks/scroll';
 import Logo from './icons/Logo.svg';
-import Bars from './icons/Bars.svg';
-import Times from './icons/Times.svg';
 import ThemeToggle from './ThemeToggle';
 
 export default function Navigation() {
@@ -41,10 +40,10 @@ export default function Navigation() {
             <button
               aria-label="Toggle navigation menu"
               type="button"
-              className="alike ml-4 h-8 w-8 fill-current focus:outline-none sm:hidden"
+              className="alike ml-4 h-6 w-6 fill-current focus:outline-none sm:hidden"
               onClick={() => setOpen(!open)}
             >
-              {open ? <Times /> : <Bars />}
+              {open ? <X strokeWidth={2.5} /> : <Menu strokeWidth={2.5} />}
             </button>
           </div>
         </div>

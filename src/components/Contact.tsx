@@ -1,9 +1,7 @@
 import { ElementType } from 'react';
 import Card from './Card';
 import Link from './Link';
-import GitHub from './icons/GitHub.svg';
-import LinkedIn from './icons/LinkedIn.svg';
-import Twitter from './icons/Twitter.svg';
+import { GitHub, Linkedin, Twitter } from 'react-feather';
 
 export interface ContactInfo {
   name: string;
@@ -32,7 +30,7 @@ export const data: ContactInfo = {
     {
       url: 'https://linkedin.com/in/laymonage',
       name: 'LinkedIn',
-      icon: LinkedIn,
+      icon: Linkedin,
     },
     {
       url: 'https://twitter.com/laymonage',
