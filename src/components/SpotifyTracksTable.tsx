@@ -16,13 +16,13 @@ import {
 } from '@tanstack/react-table';
 import { useVirtualizer } from '@tanstack/react-virtual';
 import clsx from 'clsx';
-import { ReactNode, useEffect, useRef, useState } from 'react';
+import { ReactNode, useRef, useState } from 'react';
 import TrackPreview from './TrackPreview';
 import { AudioProvider } from '@/lib/providers/audio';
 import Search from './Search';
 import { ArrowDown, ArrowUp, Clock } from 'react-feather';
 
-interface SavedTrackSimplified {
+interface SpotifyTrackSimplified {
   id: string;
   name: string;
   added_at: string;
@@ -45,7 +45,7 @@ interface SavedTrackSimplified {
   }>;
 }
 
-const columnHelper = createColumnHelper<SavedTrackSimplified>();
+const columnHelper = createColumnHelper<SpotifyTrackSimplified>();
 
 function getColumnMeta(columnDef: ReturnType<typeof columnHelper.display>) {
   return columnDef.meta as Record<string, string>;
@@ -164,30 +164,20 @@ const columns = [
   }),
 ];
 
-let fetched = false;
 const defaultSorting = [{ id: 'added_at', desc: true }];
 
-export default function SavedTracksTable({
-  className,
-}: {
+interface SpotifyTracksTableProps {
   className?: string;
-}) {
-  const tableContainerRef = useRef<HTMLDivElement>(null);
-  const [sorting, setSorting] = useState<SortingState>(defaultSorting);
-  const [globalFilter, setGlobalFilter] = useState('');
-  const [data, setData] = useState<SavedTrackSimplified[]>([]);
+  data: SpotifyTrackSimplified[];
+}
 
-  useEffect(() => {
-    if (fetched) return;
-    fetch(
-      'https://raw.githubusercontent.com/laymonage/spotify-saved-tracks/data/data/saved_tracks_simplified.json',
-    )
-      .then((response) => response.json())
-      .then(({ tracks }) => {
-        fetched = true;
-        setData(tracks);
-      });
-  }, []);
+export default function SpotifyTracksTable({
+  className,
+  data,
+}: SpotifyTracksTableProps) {
+  const tableContainerRef = useRef<HTMLDivElement>(null);
+  const [sorting, setSorting] = useState<SortingState>([]);
+  const [globalFilter, setGlobalFilter] = useState('');
 
   const table = useReactTable({
     data,
@@ -235,125 +225,131 @@ export default function SavedTracksTable({
           className,
         )}
       >
-        {!fetched ? (
-          <div className="flex h-full flex-col items-center justify-center text-center">
-            <img
-              aria-hidden="true"
-              className="mx-auto my-2"
-              alt="Loading…"
-              src="/img/equaliser-animated-green.gif"
-            />
-            Loading…
-          </div>
-        ) : (
-          <table className="w-full min-w-max table-fixed border-collapse whitespace-nowrap">
-            <thead className="bg-primary sticky top-0">
-              {table.getHeaderGroups().map((headerGroup) => (
-                <tr key={headerGroup.id}>
-                  {headerGroup.headers.map((header) => {
-                    const meta = getColumnMeta(header.column.columnDef);
-                    const label = meta.label || header.column.columnDef.header;
-                    const sortable = header.column.getCanSort();
-                    const sortDirection = header.column.getIsSorted();
-                    const sortInfo = {
-                      asc: { component: ArrowUp, otherLabel: 'descending' },
-                      desc: { component: ArrowDown, otherLabel: 'ascending' },
-                    }[sortDirection as string];
+        {
+          // Assume that the table is never empty if the data is loaded
+          !data.length ? (
+            <div className="flex h-full flex-col items-center justify-center text-center">
+              <img
+                aria-hidden="true"
+                className="mx-auto my-2"
+                alt="Loading…"
+                src="/img/equaliser-animated-green.gif"
+              />
+              Loading…
+            </div>
+          ) : (
+            <table className="w-full min-w-max table-fixed border-collapse whitespace-nowrap">
+              <thead className="bg-primary sticky top-0">
+                {table.getHeaderGroups().map((headerGroup) => (
+                  <tr key={headerGroup.id}>
+                    {headerGroup.headers.map((header) => {
+                      const meta = getColumnMeta(header.column.columnDef);
+                      const label =
+                        meta.label || header.column.columnDef.header;
+                      const sortable = header.column.getCanSort();
+                      const sortDirection = header.column.getIsSorted();
+                      const sortInfo = {
+                        asc: { component: ArrowUp, otherLabel: 'descending' },
+                        desc: { component: ArrowDown, otherLabel: 'ascending' },
+                      }[sortDirection as string];
 
-                    const buttonDirectionLabel =
-                      sortInfo?.otherLabel || 'descending';
-                    const buttonLabel = sortable
-                      ? `Sort ${buttonDirectionLabel} by ${label}`
-                      : undefined;
+                      const buttonDirectionLabel =
+                        sortInfo?.otherLabel || 'descending';
+                      const buttonLabel = sortable
+                        ? `Sort ${buttonDirectionLabel} by ${label}`
+                        : undefined;
 
-                    return (
-                      <th className={clsx(meta.class, 'p-2')} key={header.id}>
-                        {header.isPlaceholder ? null : (
-                          <button
-                            className={clsx(
-                              'flex w-full items-center gap-1',
-                              meta.headerClass,
-                              { 'cursor-pointer select-none': sortable },
-                            )}
-                            disabled={!sortable}
-                            aria-label={buttonLabel}
-                            type="button"
-                            onClick={header.column.getToggleSortingHandler()}
-                          >
-                            {flexRender(
-                              header.column.columnDef.header,
+                      return (
+                        <th className={clsx(meta.class, 'p-2')} key={header.id}>
+                          {header.isPlaceholder ? null : (
+                            <button
+                              className={clsx(
+                                'flex w-full items-center gap-1',
+                                meta.headerClass,
+                                { 'cursor-pointer select-none': sortable },
+                              )}
+                              disabled={!sortable}
+                              aria-label={buttonLabel}
+                              type="button"
+                              onClick={header.column.getToggleSortingHandler()}
+                            >
+                              {flexRender(
+                                header.column.columnDef.header,
+                                header.getContext(),
+                              )}
+                              {sortInfo?.component ? (
+                                <sortInfo.component
+                                  aria-hidden
+                                  strokeWidth={2.5}
+                                  width={16}
+                                  height={16}
+                                />
+                              ) : null}
+                            </button>
+                          )}
+                        </th>
+                      );
+                    })}
+                  </tr>
+                ))}
+              </thead>
+              <tbody>
+                {paddingTop > 0 ? (
+                  <tr>
+                    <td style={{ height: `${paddingTop}px` }} />
+                  </tr>
+                ) : null}
+                {virtualRows.map((virtualRow) => {
+                  const row = rows[
+                    virtualRow.index
+                  ] as Row<SpotifyTrackSimplified>;
+                  return (
+                    <tr
+                      key={row.original.id}
+                      className="group/row focus-within:bg-blue-300 focus-within:bg-opacity-10 hover:bg-blue-300 hover:bg-opacity-10"
+                    >
+                      {row.getVisibleCells().map((cell) => (
+                        <td
+                          className={clsx(
+                            getColumnMeta(cell.column.columnDef)?.class,
+                            'p-2 first-of-type:rounded-l last-of-type:rounded-r',
+                          )}
+                          key={cell.id}
+                        >
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext(),
+                          )}
+                        </td>
+                      ))}
+                    </tr>
+                  );
+                })}
+                {paddingBottom > 0 ? (
+                  <tr>
+                    <td style={{ height: `${paddingBottom}px` }} />
+                  </tr>
+                ) : null}
+              </tbody>
+              <tfoot>
+                {table.getFooterGroups().map((footerGroup) => (
+                  <tr key={footerGroup.id}>
+                    {footerGroup.headers.map((header) => (
+                      <th key={header.id}>
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.footer,
                               header.getContext(),
                             )}
-                            {sortInfo?.component ? (
-                              <sortInfo.component
-                                aria-hidden
-                                strokeWidth={2.5}
-                                width={16}
-                                height={16}
-                              />
-                            ) : null}
-                          </button>
-                        )}
                       </th>
-                    );
-                  })}
-                </tr>
-              ))}
-            </thead>
-            <tbody>
-              {paddingTop > 0 ? (
-                <tr>
-                  <td style={{ height: `${paddingTop}px` }} />
-                </tr>
-              ) : null}
-              {virtualRows.map((virtualRow) => {
-                const row = rows[virtualRow.index] as Row<SavedTrackSimplified>;
-                return (
-                  <tr
-                    key={row.original.id}
-                    className="group/row focus-within:bg-blue-300 focus-within:bg-opacity-10 hover:bg-blue-300 hover:bg-opacity-10"
-                  >
-                    {row.getVisibleCells().map((cell) => (
-                      <td
-                        className={clsx(
-                          getColumnMeta(cell.column.columnDef)?.class,
-                          'p-2 first-of-type:rounded-l last-of-type:rounded-r',
-                        )}
-                        key={cell.id}
-                      >
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext(),
-                        )}
-                      </td>
                     ))}
                   </tr>
-                );
-              })}
-              {paddingBottom > 0 ? (
-                <tr>
-                  <td style={{ height: `${paddingBottom}px` }} />
-                </tr>
-              ) : null}
-            </tbody>
-            <tfoot>
-              {table.getFooterGroups().map((footerGroup) => (
-                <tr key={footerGroup.id}>
-                  {footerGroup.headers.map((header) => (
-                    <th key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.footer,
-                            header.getContext(),
-                          )}
-                    </th>
-                  ))}
-                </tr>
-              ))}
-            </tfoot>
-          </table>
-        )}
+                ))}
+              </tfoot>
+            </table>
+          )
+        }
       </div>
     </AudioProvider>
   );
