@@ -20,6 +20,7 @@ import { ReactNode, useEffect, useRef, useState } from 'react';
 import TrackPreview from './TrackPreview';
 import { AudioProvider } from '@/lib/providers/audio';
 import Search from './Search';
+import { ArrowDown, ArrowUp, Clock } from 'react-feather';
 
 interface SavedTrackSimplified {
   id: string;
@@ -61,8 +62,12 @@ const columns = [
         previewUrl={row.preview_url}
       />
     ),
-    header: '#',
-    meta: { class: 'w-[6.5%] text-center tabular-nums' },
+    header: () => <span aria-label="Track number">#</span>,
+    meta: {
+      label: 'Track number',
+      class: 'w-[6.5%] text-center tabular-nums',
+      headerClass: 'justify-center',
+    },
   }),
   columnHelper.accessor(
     (row) => `${row.name} ${row.artists.map(({ name }) => name).join(' ')}`,
@@ -75,16 +80,15 @@ const columns = [
             className="h-8 w-8"
           />
           <div className="min-w-0">
-            <div title={row.name} className="overflow-hidden text-ellipsis">
-              <a
-                className="text-primary"
-                href={row.url}
-                target="_blank"
-                rel="noreferrer noopener nofollow"
-              >
-                {row.name}
-              </a>
-            </div>
+            <a
+              title={row.name}
+              className="text-primary block overflow-hidden text-ellipsis"
+              href={row.url}
+              target="_blank"
+              rel="noreferrer noopener nofollow"
+            >
+              {row.name}
+            </a>
             <div className="text-sm">
               {row.artists
                 .map<ReactNode>((artist) => (
@@ -146,8 +150,16 @@ const columns = [
         {msToMinutes(info.getValue())}
       </time>
     ),
-    header: '⌛️',
-    meta: { class: 'w-[7.5%] text-right tabular-nums pr-4' },
+    header: () => (
+      <span aria-label="Duration">
+        <Clock aria-hidden strokeWidth={3} width={16} height={16} />
+      </span>
+    ),
+    meta: {
+      label: 'Duration',
+      class: 'w-[7.5%] text-right tabular-nums pr-4',
+      headerClass: 'justify-end',
+    },
     enableGlobalFilter: false,
   }),
 ];
@@ -238,34 +250,53 @@ export default function SavedTracksTable({
             <thead className="bg-primary sticky top-0">
               {table.getHeaderGroups().map((headerGroup) => (
                 <tr key={headerGroup.id}>
-                  {headerGroup.headers.map((header) => (
-                    <th
-                      className={clsx(
-                        getColumnMeta(header.column.columnDef)?.class,
-                        'p-2',
-                      )}
-                      key={header.id}
-                    >
-                      {header.isPlaceholder ? null : (
-                        <div
-                          className={clsx({
-                            'cursor-pointer select-none':
-                              header.column.getCanSort(),
-                          })}
-                          onClick={header.column.getToggleSortingHandler()}
-                        >
-                          {flexRender(
-                            header.column.columnDef.header,
-                            header.getContext(),
-                          )}
-                          {{
-                            asc: ' 🔼',
-                            desc: ' 🔽',
-                          }[header.column.getIsSorted() as string] ?? null}
-                        </div>
-                      )}
-                    </th>
-                  ))}
+                  {headerGroup.headers.map((header) => {
+                    const meta = getColumnMeta(header.column.columnDef);
+                    const label = meta.label || header.column.columnDef.header;
+                    const sortable = header.column.getCanSort();
+                    const sortDirection = header.column.getIsSorted();
+                    const sortInfo = {
+                      asc: { component: ArrowUp, otherLabel: 'descending' },
+                      desc: { component: ArrowDown, otherLabel: 'ascending' },
+                    }[sortDirection as string];
+
+                    const buttonDirectionLabel =
+                      sortInfo?.otherLabel || 'descending';
+                    const buttonLabel = sortable
+                      ? `Sort ${buttonDirectionLabel} by ${label}`
+                      : undefined;
+
+                    return (
+                      <th className={clsx(meta.class, 'p-2')} key={header.id}>
+                        {header.isPlaceholder ? null : (
+                          <button
+                            className={clsx(
+                              'flex w-full items-center gap-1',
+                              meta.headerClass,
+                              { 'cursor-pointer select-none': sortable },
+                            )}
+                            disabled={!sortable}
+                            aria-label={buttonLabel}
+                            type="button"
+                            onClick={header.column.getToggleSortingHandler()}
+                          >
+                            {flexRender(
+                              header.column.columnDef.header,
+                              header.getContext(),
+                            )}
+                            {sortInfo?.component ? (
+                              <sortInfo.component
+                                aria-hidden
+                                strokeWidth={2.5}
+                                width={16}
+                                height={16}
+                              />
+                            ) : null}
+                          </button>
+                        )}
+                      </th>
+                    );
+                  })}
                 </tr>
               ))}
             </thead>

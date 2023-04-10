@@ -1,5 +1,6 @@
 import { useAudio } from '@/lib/providers/audio';
 import { useEffect, useRef } from 'react';
+import { Pause, Play } from 'react-feather';
 
 interface TrackPreviewProps {
   number: number;
@@ -46,7 +47,7 @@ export default function TrackPreview({
       className="group"
       type="button"
       onClick={togglePlay}
-      aria-label={`Play ${title} by ${artists.join(', ')}`}
+      aria-label={`Preview ${title} by ${artists.join(', ')}`}
     >
       <span className="group-hover/row:hidden group-focus-within:group-focus-visible:hidden">
         {isPlaying ? (
@@ -60,7 +61,11 @@ export default function TrackPreview({
         )}
       </span>
       <span className="hidden group-hover/row:inline group-focus-within:group-focus-visible:inline">
-        {isPlaying ? '⏸️' : '▶️'}
+        {isPlaying ? (
+          <Pause fill="currentColor" width={16} height={16} />
+        ) : (
+          <Play fill="currentColor" width={16} height={16} />
+        )}
       </span>
       {previewUrl ? <audio ref={audio} src={previewUrl} /> : null}
     </button>
