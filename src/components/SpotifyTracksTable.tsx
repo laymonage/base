@@ -20,7 +20,7 @@ import { ReactNode, useRef, useState } from 'react';
 import TrackPreview from './TrackPreview';
 import { AudioProvider } from '@/lib/providers/audio';
 import Search from './Search';
-import { ArrowDown, ArrowUp, Clock } from 'react-feather';
+import { ArrowDown, ArrowUp, Clock, Music } from 'react-feather';
 
 interface SpotifyTrackSimplified {
   id: string;
@@ -226,17 +226,25 @@ export default function SpotifyTracksTable({
         )}
       >
         {
-          // Assume that the table is never empty if the data is loaded
-          !data.length ? (
-            <div className="flex h-full flex-col items-center justify-center text-center">
-              <img
-                aria-hidden="true"
-                className="mx-auto my-2"
-                alt="Loading…"
-                src="/img/equaliser-animated-green.gif"
-              />
-              Loading…
-            </div>
+          // Assume that the table is never empty if the data is loaded, unless
+          // a search query is specified.
+          !virtualRows.length ? (
+            globalFilter ? (
+              <div className="flex h-full flex-col items-center justify-center gap-4">
+                <Music aria-hidden width={128} height={128} strokeWidth={1.5} />
+                <p>No tracks found for the given search query.</p>
+              </div>
+            ) : (
+              <div className="flex h-full flex-col items-center justify-center text-center">
+                <img
+                  aria-hidden="true"
+                  className="mx-auto my-2"
+                  alt="Loading…"
+                  src="/img/equaliser-animated-green.gif"
+                />
+                Loading…
+              </div>
+            )
           ) : (
             <table className="w-full min-w-max table-fixed border-collapse whitespace-nowrap">
               <thead className="bg-primary sticky top-0">
