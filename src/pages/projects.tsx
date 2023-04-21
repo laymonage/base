@@ -57,7 +57,7 @@ export default function Projects({
           key={group.id}
           header={
             <h2 id={group.anchor}>
-              <Link href={`#${group.anchor}`}>{group.type} Projects</Link>
+              <Link href={`#${group.anchor}`}>{group.type} projects</Link>
             </h2>
           }
         >

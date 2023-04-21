@@ -45,7 +45,7 @@ export default function Posts({
       <Card
         header={
           <h1 id="posts">
-            <Link href="#gsoc-2019">GSoC 2019 Blog</Link>
+            <Link href="#gsoc-2019">GSoC 2019 blog</Link>
           </h1>
         }
       >
