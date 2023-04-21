@@ -82,7 +82,7 @@ const columns = [
           <div className="min-w-0">
             <a
               title={row.name}
-              className="text-primary block overflow-hidden text-ellipsis"
+              className="text-primary block overflow-hidden text-ellipsis hover:underline"
               href={row.url}
               target="_blank"
               rel="noreferrer noopener nofollow"
@@ -94,7 +94,7 @@ const columns = [
                 .map<ReactNode>((artist) => (
                   <a
                     key={artist.id}
-                    className="text-secondary"
+                    className="text-secondary hover:underline"
                     href={artist.url}
                     target="_blank"
                     rel="noreferrer noopener nofollow"
@@ -115,7 +115,7 @@ const columns = [
   columnHelper.accessor((row) => row.album.name, {
     cell: ({ row: { original: row } }) => (
       <a
-        className="text-secondary text-sm"
+        className="text-secondary text-sm hover:underline"
         href={row.album.url}
         target="_blank"
         rel="noreferrer noopener nofollow"
