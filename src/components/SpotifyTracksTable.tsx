@@ -20,7 +20,7 @@ import { ReactNode, useRef, useState } from 'react';
 import TrackPreview from './TrackPreview';
 import { AudioProvider } from '@/lib/providers/audio';
 import Search from './Search';
-import { ArrowDown, ArrowUp, Clock, Music } from 'react-feather';
+import { ArrowDown, ArrowUp, BarChart, Clock, Music } from 'react-feather';
 
 interface SpotifyTrackSimplified {
   id: string;
@@ -151,11 +151,29 @@ const columns = [
       </time>
     ),
     header: () => (
-      <Clock aria-label="Duration" strokeWidth={3} width={16} height={16} />
+      <span title="Duration">
+        <Clock aria-label="Duration" strokeWidth={3} width={16} height={16} />
+      </span>
     ),
     meta: {
       label: 'Duration',
-      class: 'w-[7.5%] text-right tabular-nums pr-4',
+      class: 'w-[6%] text-right tabular-nums',
+      headerClass: 'justify-end',
+    },
+    enableGlobalFilter: false,
+  }),
+  columnHelper.accessor('popularity', {
+    cell: (info) => (
+      <span className="text-secondary text-sm">{info.getValue()}</span>
+    ),
+    header: () => (
+      <span title="Popularity">
+        <BarChart aria-label="Popularity" width={16} height={16} />
+      </span>
+    ),
+    meta: {
+      label: 'Popularity',
+      class: 'w-[6%] text-right tabular-nums',
       headerClass: 'justify-end',
     },
     enableGlobalFilter: false,
