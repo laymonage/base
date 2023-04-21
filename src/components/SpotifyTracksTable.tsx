@@ -151,9 +151,7 @@ const columns = [
       </time>
     ),
     header: () => (
-      <span aria-label="Duration">
-        <Clock aria-hidden strokeWidth={3} width={16} height={16} />
-      </span>
+      <Clock aria-label="Duration" strokeWidth={3} width={16} height={16} />
     ),
     meta: {
       label: 'Duration',
