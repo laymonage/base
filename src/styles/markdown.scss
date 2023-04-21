@@ -117,7 +117,7 @@
   }
 
   .anchor {
-    @apply invisible absolute -ml-6 w-full max-w-2xl cursor-pointer hover:visible;
+    @apply absolute -ml-6 w-6 cursor-pointer opacity-0 hover:opacity-100;
     &:after {
       @apply text-gray-400;
       content: '#';
@@ -126,7 +126,7 @@
 
   [id] {
     &:hover > .anchor {
-      @apply visible;
+      @apply opacity-100;
     }
   }
 
