@@ -96,7 +96,7 @@ export default function Layout({
           ) : null}
         </div>
       </main>
-      <div className="bg fixed top-0 left-0 h-screen w-screen bg-cover bg-center opacity-40 xl:opacity-100" />
+      <div className="bg fixed top-0 left-0 h-screen w-screen bg-cover bg-center opacity-40 2xl:opacity-100" />
       <Footer />
       <ScrollTop />
     </>

@@ -20,10 +20,10 @@ export default function Navigation() {
 
   const menu = ['posts', 'thoughts', 'projects', 'about'];
   return (
-    <nav role="navigation" className="mx-auto max-w-3xl">
+    <nav role="navigation" className="mx-auto max-w-4xl">
       <div
         className={clsx(
-          'ease fixed bottom-0 z-20 flex w-full max-w-3xl transform flex-col-reverse bg-white bg-opacity-50 py-3 backdrop-blur backdrop-filter transition-transform duration-300 dark:bg-gray-800 dark:bg-opacity-50 sm:top-0 sm:bottom-auto sm:flex-row sm:items-center sm:justify-between',
+          'ease fixed bottom-0 z-20 flex w-full max-w-4xl transform flex-col-reverse bg-white bg-opacity-50 py-3 backdrop-blur backdrop-filter transition-transform duration-300 dark:bg-gray-800 dark:bg-opacity-50 sm:top-0 sm:bottom-auto sm:flex-row sm:items-center sm:justify-between',
           hidden ? 'translate-y-full sm:-translate-y-full' : 'shadow',
         )}
       >

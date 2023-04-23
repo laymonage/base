@@ -3,7 +3,7 @@ import Link from '@/components/Link';
 export default function Footer() {
   return (
     <footer className="px-8">
-      <div className="mx-auto max-w-2xl">
+      <div className="mx-auto max-w-4xl">
         <hr className="border-1 mb-8 w-full border-gray-400 border-opacity-20" />
         <div className="grid w-full grid-cols-1 justify-between gap-4 pb-8 sm:grid-cols-[repeat(3,min-content)]">
           <div className="flex flex-col space-y-4">
