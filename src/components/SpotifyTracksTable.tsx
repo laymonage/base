@@ -263,7 +263,7 @@ export default function SpotifyTracksTable({
             )
           ) : (
             <table className="w-full min-w-max table-fixed border-collapse whitespace-nowrap">
-              <thead className="bg-primary sticky top-0">
+              <thead className="bg-primary sticky top-0 shadow-sm shadow-gray-200 dark:shadow-gray-600">
                 {table.getHeaderGroups().map((headerGroup) => (
                   <tr key={headerGroup.id}>
                     {headerGroup.headers.map((header) => {
