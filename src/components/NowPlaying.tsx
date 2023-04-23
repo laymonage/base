@@ -33,7 +33,7 @@ export default function NowPlaying() {
           'h-6 w-6': !isPlaying,
         })}
       >
-        <Spotify />
+        <Spotify className="fill-black dark:fill-white" />
       </div>
     </a>
   );
