@@ -3,11 +3,13 @@
 import { useMemo } from 'react';
 import { getMDXComponent } from 'mdx-bundler/client';
 import Image from 'next/image';
+import CTA from './CTA';
 import Link from './Link';
 import Pre from './Pre';
 import Script, { ScriptProps } from 'next/script';
 
 export const MDXComponents = {
+  CTA,
   Image,
   Link,
   a: Link,
