@@ -231,7 +231,7 @@ export default function SpotifyTracksTable({
       <Search
         onChange={({ target: { value } }) => setGlobalFilter(String(value))}
         value={globalFilter}
-        className="bleed mb-8 w-full max-w-3xl place-self-center"
+        className="mb-8 w-full"
         placeholder="Search…"
       />
       <div
