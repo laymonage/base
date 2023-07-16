@@ -1,6 +1,9 @@
+import Card from '@/components/Card';
 import Layout from '@/components/Layout';
+import Link from '@/components/Link';
 import SpotifyTracksTable from '@/components/SpotifyTracksTable';
 import { ComponentProps, useEffect, useState } from 'react';
+import { Heart } from 'react-feather';
 
 const SPOTIFY_SAVED_TRACKS_RAW_URL =
   'https://raw.githubusercontent.com/laymonage/spotify-saved-tracks';
@@ -22,10 +25,25 @@ export default function Selections() {
     <Layout
       customMeta={{ title: 'Selections', description: `Selections of things.` }}
     >
-      <SpotifyTracksTable
-        data={data}
-        className="bleed w-full max-w-4xl place-self-center"
-      />
+      <div className="bleed w-full max-w-4xl place-self-center">
+        <div className="my-4 mb-14 flex flex-wrap items-end gap-8 sm:flex-nowrap">
+          <div className="flex h-48 w-48 flex-shrink-0 items-center justify-center bg-blue-200 bg-opacity-50">
+            <Heart fill="currentColor" className="h-20 w-20" />
+          </div>
+          <Card header="Saved tracks">
+            <p>
+              For science, I've made an{' '}
+              <Link href="https://github.com/laymonage/spotify-saved-tracks">
+                automated scraper
+              </Link>{' '}
+              that exports my Spotify saved tracks every day. It allows me to
+              share the playlist here, without having to make a Spotify API call
+              every time someone visits this page.
+            </p>
+          </Card>
+        </div>
+        <SpotifyTracksTable data={data} />
+      </div>
     </Layout>
   );
 }
