@@ -6,9 +6,9 @@ import { ComponentProps, useEffect, useState } from 'react';
 import { Heart } from 'react-feather';
 
 const SPOTIFY_SAVED_TRACKS_RAW_URL =
-  'https://raw.githubusercontent.com/laymonage/spotify-saved-tracks';
+  'https://raw.githubusercontent.com/laymonage/spotify-to-github';
 const SPOTIFY_SAVED_TRACKS_DATA_URL = `${SPOTIFY_SAVED_TRACKS_RAW_URL}/data/data`;
-const SPOTIFY_SAVED_TRACKS_DATA_FILE = 'saved_tracks_simplified.json';
+const SPOTIFY_SAVED_TRACKS_DATA_FILE = 'tracks_simplified.json';
 
 type SpotifySavedTracksData = ComponentProps<typeof SpotifyTracksTable>['data'];
 
@@ -33,7 +33,7 @@ export default function Selections() {
           <Card header="Saved tracks">
             <p>
               For science, I've made an{' '}
-              <Link href="https://github.com/laymonage/spotify-saved-tracks">
+              <Link href="https://github.com/laymonage/spotify-to-github">
                 automated scraper
               </Link>{' '}
               that exports my Spotify saved tracks every day. It allows me to
