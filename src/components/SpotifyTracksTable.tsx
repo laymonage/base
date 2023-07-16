@@ -262,8 +262,8 @@ export default function SpotifyTracksTable({
               </div>
             )
           ) : (
-            <table className="w-full min-w-max table-fixed border-collapse whitespace-nowrap">
-              <thead className="bg-primary sticky top-0 shadow-sm shadow-gray-200 dark:shadow-gray-600">
+            <table className="w-[55rem] table-fixed border-separate border-spacing-0 whitespace-nowrap">
+              <thead className="bg-primary sticky top-0">
                 {table.getHeaderGroups().map((headerGroup) => (
                   <tr key={headerGroup.id}>
                     {headerGroup.headers.map((header) => {
@@ -284,7 +284,13 @@ export default function SpotifyTracksTable({
                         : undefined;
 
                       return (
-                        <th className={clsx(meta.class, 'p-2')} key={header.id}>
+                        <th
+                          className={clsx(
+                            meta.class,
+                            'border-b border-slate-400 border-opacity-50 p-2',
+                          )}
+                          key={header.id}
+                        >
                           {header.isPlaceholder ? null : (
                             <button
                               className={clsx(
