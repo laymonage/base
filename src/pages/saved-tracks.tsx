@@ -2,7 +2,8 @@ import Card from '@/components/Card';
 import Layout from '@/components/Layout';
 import Link from '@/components/Link';
 import SpotifyTracksTable from '@/components/SpotifyTracksTable';
-import { ComponentProps, useEffect, useState } from 'react';
+import { useData } from '@/lib/hooks/data';
+import { ComponentProps } from 'react';
 import { Heart } from 'react-feather';
 
 const SPOTIFY_SAVED_TRACKS_RAW_URL =
@@ -13,13 +14,9 @@ const SPOTIFY_SAVED_TRACKS_DATA_FILE = 'tracks_simplified.json';
 type SpotifySavedTracksData = ComponentProps<typeof SpotifyTracksTable>['data'];
 
 export default function Selections() {
-  const [data, setData] = useState<SpotifySavedTracksData>([]);
-
-  useEffect(() => {
-    fetch(`${SPOTIFY_SAVED_TRACKS_DATA_URL}/${SPOTIFY_SAVED_TRACKS_DATA_FILE}`)
-      .then((response) => response.json())
-      .then(({ tracks }) => setData(tracks));
-  }, []);
+  const [data, error] = useData<{ tracks: SpotifySavedTracksData }>(
+    `${SPOTIFY_SAVED_TRACKS_DATA_URL}/${SPOTIFY_SAVED_TRACKS_DATA_FILE}`,
+  );
 
   return (
     <Layout
@@ -42,7 +39,11 @@ export default function Selections() {
             </p>
           </Card>
         </div>
-        <SpotifyTracksTable data={data} />
+        {!error ? (
+          <SpotifyTracksTable data={data?.tracks} />
+        ) : (
+          <p>Unable to load saved tracks.</p>
+        )}
       </div>
     </Layout>
   );

@@ -184,7 +184,7 @@ const defaultSorting = [{ id: 'added_at', desc: true }];
 
 interface SpotifyTracksTableProps {
   className?: string;
-  data: SpotifyTrackSimplified[];
+  data?: SpotifyTrackSimplified[];
 }
 
 export default function SpotifyTracksTable({
@@ -196,7 +196,7 @@ export default function SpotifyTracksTable({
   const [globalFilter, setGlobalFilter] = useState('');
 
   const table = useReactTable({
-    data,
+    data: data || [],
     columns,
     state: {
       sorting: sorting.length ? sorting : defaultSorting,
@@ -245,12 +245,7 @@ export default function SpotifyTracksTable({
           // Assume that the table is never empty if the data is loaded, unless
           // a search query is specified.
           !virtualRows.length ? (
-            globalFilter ? (
-              <div className="flex h-full flex-col items-center justify-center gap-4">
-                <Music aria-hidden width={128} height={128} strokeWidth={1.5} />
-                <p>No tracks found for the given search query.</p>
-              </div>
-            ) : (
+            !data ? (
               <div className="flex h-full flex-col items-center justify-center text-center">
                 <img
                   aria-hidden="true"
@@ -259,6 +254,14 @@ export default function SpotifyTracksTable({
                   src="/img/equaliser-animated-green.gif"
                 />
                 Loading…
+              </div>
+            ) : (
+              <div className="flex h-full flex-col items-center justify-center gap-4">
+                <Music aria-hidden width={128} height={128} strokeWidth={1.5} />
+                <p>
+                  No tracks available
+                  {globalFilter ? ' for the given search query' : ''}.
+                </p>
               </div>
             )
           ) : (
