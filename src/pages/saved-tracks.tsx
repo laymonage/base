@@ -3,18 +3,14 @@ import Layout from '@/components/Layout';
 import Link from '@/components/Link';
 import SpotifyTracksTable from '@/components/SpotifyTracksTable';
 import { useData } from '@/lib/hooks/data';
+import { getSpotifyDataURL } from '@/lib/spotify/data';
 import { ComponentProps } from 'react';
-
-const SPOTIFY_SAVED_TRACKS_RAW_URL =
-  'https://raw.githubusercontent.com/laymonage/spotify-to-github';
-const SPOTIFY_SAVED_TRACKS_DATA_URL = `${SPOTIFY_SAVED_TRACKS_RAW_URL}/data/data`;
-const SPOTIFY_SAVED_TRACKS_DATA_FILE = 'tracks_simplified.json';
 
 type SpotifySavedTracksData = ComponentProps<typeof SpotifyTracksTable>['data'];
 
 export default function Selections() {
   const [data, error] = useData<{ tracks: SpotifySavedTracksData }>(
-    `${SPOTIFY_SAVED_TRACKS_DATA_URL}/${SPOTIFY_SAVED_TRACKS_DATA_FILE}`,
+    getSpotifyDataURL('tracks_simplified'),
   );
 
   return (
