@@ -2,7 +2,7 @@ import {
   CurrentlyPlaying,
   NowPlaying,
   RefreshTokenResponse,
-} from './models/spotify';
+} from '../models/spotify';
 
 const SPOTIFY_API_BASE_URL = 'https://api.spotify.com/v1';
 const SPOTIFY_ACCOUNTS_BASE_URL = 'https://accounts.spotify.com';
