@@ -1,8 +1,4 @@
-import {
-  CurrentlyPlaying,
-  NowPlaying,
-  RefreshTokenResponse,
-} from '../models/spotify';
+import { NowPlaying, RefreshTokenResponse } from '../models/spotify';
 
 const SPOTIFY_API_BASE_URL = 'https://api.spotify.com/v1';
 const SPOTIFY_ACCOUNTS_BASE_URL = 'https://accounts.spotify.com';
@@ -63,11 +59,38 @@ export const getTopTracks = async () =>
 
 // Adapter functions
 
-export const adaptNowPlaying = (track: CurrentlyPlaying): NowPlaying => ({
-  isPlaying: track.is_playing,
-  title: track.item?.name || '',
-  artist: track.item?.artists.map((artist) => artist.name).join(', ') || '',
-  album: track.item?.album.name || '',
-  albumImageUrl: track.item?.album.images[0]?.url || '',
-  trackUrl: track.item?.external_urls.spotify || '',
-});
+export const adaptNowPlaying = (
+  track: SpotifyApi.CurrentlyPlayingObject,
+): NowPlaying => {
+  const isPlaying = track.is_playing && !!track.item;
+  let title = '';
+  let artist = '';
+  let album = '';
+  let albumImageUrl = '';
+  let trackUrl = '';
+
+  if (track.item) {
+    title = track.item.name;
+    trackUrl = track.item.external_urls.spotify;
+    if ('artists' in track.item) {
+      // Currently playing track
+      artist = track.item.artists.map((artist) => artist.name).join(', ');
+      album = track.item.album.name;
+      albumImageUrl = track.item.album.images[0]?.url || '';
+    } else {
+      // Currently playing episode
+      artist = track.item.show.publisher;
+      album = track.item.show.name;
+      albumImageUrl = track.item.show.images[0]?.url || '';
+    }
+  }
+
+  return {
+    isPlaying,
+    title,
+    artist,
+    album,
+    albumImageUrl,
+    trackUrl,
+  };
+};

@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { adaptNowPlaying, getNowPlaying } from '@/lib/spotify/now-playing';
-import { CurrentlyPlaying } from '@/lib/models/spotify';
 
 export default async function NowPlayingApi(
   _: NextApiRequest,
@@ -12,7 +11,7 @@ export default async function NowPlayingApi(
     return res.status(200).json({ isPlaying: false });
   }
 
-  const track: CurrentlyPlaying = await response.json();
+  const track: SpotifyApi.CurrentlyPlayingResponse = await response.json();
   const nowPlaying = adaptNowPlaying(track);
 
   res.setHeader(
