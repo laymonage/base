@@ -38,3 +38,7 @@ export interface TrackSimplified {
     url: string;
   }>;
 }
+
+export type PlaylistFull = Omit<SpotifyApi.PlaylistObjectFull, 'tracks'> & {
+  tracks: SpotifyApi.PlaylistTrackObject[];
+};
