@@ -119,3 +119,8 @@ export function msToMinutes(ms: number) {
   const { minutes, seconds } = msToComponents(ms);
   return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 }
+
+export function humanizeMs(ms: number) {
+  const { hours, minutes, seconds } = msToComponents(ms);
+  return hours ? `${hours} hr ${minutes} min` : `${minutes} min ${seconds} sec`;
+}
