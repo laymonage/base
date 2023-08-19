@@ -1,9 +1,4 @@
-import {
-  formatDate,
-  msToDuration,
-  msToMinutes,
-  relativeFormat,
-} from '@/lib/datetime';
+import { formatDate, relativeFormat } from '@/lib/datetime';
 import {
   Row,
   SortingState,
@@ -21,6 +16,7 @@ import TrackPreview from './TrackPreview';
 import { AudioProvider } from '@/lib/providers/audio';
 import Search from './Search';
 import { ArrowDown, ArrowUp, BarChart, Clock, Music } from 'react-feather';
+import Duration from './Duration';
 
 interface SpotifyTrackSimplified {
   id: string;
@@ -143,12 +139,7 @@ const columns = [
   }),
   columnHelper.accessor('duration_ms', {
     cell: (info) => (
-      <time
-        className="text-secondary text-sm"
-        dateTime={msToDuration(info.getValue())}
-      >
-        {msToMinutes(info.getValue())}
-      </time>
+      <Duration className="text-secondary text-sm" value={info.getValue()} />
     ),
     header: () => (
       <span title="Duration">

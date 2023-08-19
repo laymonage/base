@@ -101,19 +101,21 @@ export function relativeFormat(date: string | Date) {
   });
 }
 
-export function msToMinutesSeconds(ms: number) {
+export function msToComponents(ms: number) {
   const seconds = Math.floor(ms / 1000);
   const minutes = Math.floor(seconds / 60);
   const remainingSeconds = Math.floor(seconds % 60);
-  return [minutes, remainingSeconds];
+  const hours = Math.floor(minutes / 60);
+  const remainingMinutes = Math.floor(minutes % 60);
+  return { hours, minutes: remainingMinutes, seconds: remainingSeconds };
 }
 
 export function msToDuration(ms: number) {
-  const [minutes, seconds] = msToMinutesSeconds(ms);
+  const { minutes, seconds } = msToComponents(ms);
   return `PT${minutes}M${seconds}S`;
 }
 
 export function msToMinutes(ms: number) {
-  const [minutes, remainingSeconds] = msToMinutesSeconds(ms);
-  return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+  const { minutes, seconds } = msToComponents(ms);
+  return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 }
