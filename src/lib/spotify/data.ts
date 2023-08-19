@@ -13,15 +13,17 @@ export function simplifyPlaylistTrack({
   track,
 }: SpotifyApi.PlaylistTrackObject): TrackSimplified {
   const t = track as SpotifyApi.TrackObjectFull;
-  const url = t.external_urls.spotify;
+  const url = t.external_urls.spotify || '';
   const album = {
     ...t.album,
-    image_url: t.album.images[0]?.url,
-    url: t.album.external_urls.spotify,
+    image_url:
+      t.album.images[0]?.url ||
+      'https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png',
+    url: t.album.external_urls.spotify || '',
   };
   const artists = t.artists.map((artist) => ({
     ...artist,
-    url: artist.external_urls.spotify,
+    url: artist.external_urls.spotify || '',
   }));
   return { added_at, url, ...t, album, artists };
 }

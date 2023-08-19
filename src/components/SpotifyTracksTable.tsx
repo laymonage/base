@@ -14,6 +14,7 @@ import clsx from 'clsx';
 import { ReactNode, useRef, useState } from 'react';
 import TrackPreview from './TrackPreview';
 import { AudioProvider } from '@/lib/providers/audio';
+import Link from './Link';
 import Search from './Search';
 import { ArrowDown, ArrowUp, BarChart, Clock, Music } from 'react-feather';
 import Duration from './Duration';
@@ -61,27 +62,23 @@ const getColumns = (useTitle = true) => [
             className="h-8 w-8"
           />
           <div className="min-w-0">
-            <a
+            <Link
               title={row.name}
               className="text-primary block overflow-hidden text-ellipsis hover:underline"
               href={row.url}
-              target="_blank"
-              rel="noreferrer noopener nofollow"
             >
               {row.name}
-            </a>
+            </Link>
             <div className="text-sm">
               {row.artists
                 .map<ReactNode>((artist) => (
-                  <a
+                  <Link
                     key={artist.id}
                     className="text-secondary hover:underline"
                     href={artist.url}
-                    target="_blank"
-                    rel="noreferrer noopener nofollow"
                   >
                     {artist.name}
-                  </a>
+                  </Link>
                 ))
                 .reduce((prev, curr) => [prev, ', ', curr])}
             </div>
@@ -95,15 +92,13 @@ const getColumns = (useTitle = true) => [
   ),
   columnHelper.accessor((row) => row.album.name, {
     cell: ({ row: { original: row } }) => (
-      <a
+      <Link
         className="text-secondary text-sm hover:underline"
         href={row.album.url}
-        target="_blank"
-        rel="noreferrer noopener nofollow"
         title={row.album.name}
       >
         {row.album.name}
-      </a>
+      </Link>
     ),
     header: 'Album',
     meta: { class: 'w-[25%] text-left text-ellipsis overflow-hidden' },

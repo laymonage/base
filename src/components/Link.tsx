@@ -11,6 +11,10 @@ export default function Link({
   const isInternalLink = href && href.startsWith('/');
   const isAnchorLink = href && href.startsWith('#');
 
+  if (!href) {
+    return <span {...rest} />;
+  }
+
   if (isInternalLink) {
     return (
       <NextLink href={href as string}>
