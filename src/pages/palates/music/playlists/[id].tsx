@@ -88,15 +88,12 @@ export default function PlaylistTracks({
               (description ? <p>{decodeHTML(description || '')}</p> : null)}
             <div className="mt-1 flex flex-wrap items-center gap-x-1.5">
               <span>
-                <Link
-                  className="inline-flex items-center gap-2"
-                  href={spotifyUrl}
-                >
-                  <Spotify className="h-4 w-4 fill-black dark:fill-white" />
+                <Link className="flex items-center gap-2" href={spotifyUrl}>
+                  <Spotify className="h-5 w-5 fill-black dark:fill-white" />
                   Open on Spotify
                 </Link>
               </span>
-              <span className="before:ml-1.5 before:mr-3 before:content-['•']">
+              <span className="before:ml-2 before:mr-4 before:content-['•']">
                 {tracks ? tracks.length : 'Loading'} songs,{' '}
                 <Duration value={duration}>{humanizeMs(duration)}</Duration>
               </span>
