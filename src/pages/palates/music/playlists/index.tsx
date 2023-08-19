@@ -60,7 +60,7 @@ export default function Playlists({
                 const isLiked = isLikedSongs(playlist);
                 const url = isLiked
                   ? '/palates/music/saved-tracks'
-                  : `/palates/music/playlists/tracks?id=${playlist.id}`;
+                  : `/palates/music/playlists/${playlist.id}`;
                 const img = isLiked
                   ? 'https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png'
                   : playlist.images[0]?.url;

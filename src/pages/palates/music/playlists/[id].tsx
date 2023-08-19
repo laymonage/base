@@ -4,91 +4,97 @@ import Layout from '@/components/Layout';
 import Link from '@/components/Link';
 import SpotifyTracksTable from '@/components/SpotifyTracksTable';
 import { humanizeMs } from '@/lib/datetime';
-import { useData } from '@/lib/hooks/data';
 import { PlaylistFull } from '@/lib/models/spotify';
 import { getSpotifyDataURL, simplifyPlaylistTrack } from '@/lib/spotify/data';
 import { decodeHTML } from '@/lib/string';
-import { useRouter } from 'next/router';
+import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import { ExternalLink } from 'react-feather';
 
-export default function PlaylistTracks() {
-  const router = useRouter();
-  const id = router.query.id as string;
-  const [data, error] = useData<PlaylistFull>(
-    id ? getSpotifyDataURL(`playlists/${id}`) : '',
+export async function getStaticPaths() {
+  const data = await fetch(getSpotifyDataURL('playlists')).then((res) =>
+    res.json(),
+  );
+  const allPlaylists = data.playlists as SpotifyApi.PlaylistObjectFull[];
+  const paths = allPlaylists.map(({ id }) => ({ params: { id } }));
+  return {
+    paths,
+    fallback: false,
+  };
+}
+
+export async function getStaticProps({ params }: GetStaticPropsContext) {
+  const id = params?.id as string;
+
+  const {
+    name: title,
+    description: originalDescription,
+    images,
+    external_urls,
+    tracks: tracksFull,
+  }: PlaylistFull = await fetch(getSpotifyDataURL(`playlists/${id}`)).then(
+    (res) => res.json(),
   );
 
-  const duration =
-    data?.tracks
-      .map((v) => v.track?.duration_ms || 0)
-      .reduce((a, b) => a + b) || 0;
+  const description =
+    originalDescription || `The ${name} playlist on my Spotify account.`;
+  const imageUrl = images[0]?.url;
+  const spotifyUrl = external_urls.spotify;
 
+  const tracks = tracksFull
+    .filter(({ track }) => !!track)
+    .map(simplifyPlaylistTrack);
+
+  const duration =
+    tracks.map((track) => track.duration_ms || 0).reduce((a, b) => a + b) || 0;
+  return {
+    props: { title, description, imageUrl, spotifyUrl, duration, tracks },
+  };
+}
+
+export default function PlaylistTracks({
+  title,
+  description,
+  imageUrl,
+  spotifyUrl,
+  duration,
+  tracks,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <Layout
-      customMeta={
-        !data
-          ? {
-              title: 'Playlist',
-              description: `A playlist on my Spotify account.`,
-            }
-          : {
-              title: data.name,
-              description:
-                data.description ||
-                `The ${data.name} playlist on my Spotify account.`,
-            }
-      }
+      customMeta={{
+        title,
+        description,
+      }}
     >
       <div className="bleed min-h-screen w-full max-w-4xl place-self-center">
-        {error ? (
-          <p>Unable to load the playlist</p>
-        ) : !data ? (
-          <div className="flex h-full min-h-screen flex-col items-center justify-center text-center">
+        <div className="my-4 mb-14 flex flex-wrap items-end gap-8 sm:flex-nowrap">
+          <div className="flex h-48 w-48 flex-shrink-0 items-center justify-center">
             <img
-              aria-hidden="true"
-              className="mx-auto my-2"
-              alt="Loading…"
-              src="/img/equaliser-animated-green.gif"
+              className="aspect-square h-full w-full object-cover"
+              alt=""
+              src={imageUrl}
             />
-            Loading…
           </div>
-        ) : (
-          <>
-            <div className="my-4 mb-14 flex flex-wrap items-end gap-8 sm:flex-nowrap">
-              <div className="flex h-48 w-48 flex-shrink-0 items-center justify-center">
-                <img
-                  className="aspect-square h-full w-full object-cover"
-                  alt=""
-                  src={data.images[0]?.url}
-                />
-              </div>
-              <Card header={data.name}>
-                <p>{decodeHTML(data.description || '')}</p>
-                <div className="flex items-center">
-                  <span>
-                    {data.tracks.length} songs,{' '}
-                    <Duration value={duration}>{humanizeMs(duration)}</Duration>
-                  </span>
-                  <span className="before:mx-2 before:content-['•']">
-                    <Link
-                      className="inline-flex items-center gap-2"
-                      href={data.external_urls.spotify}
-                    >
-                      Open on Spotify
-                      <ExternalLink className="h-4 w-4" />
-                    </Link>
-                  </span>
-                </div>
-              </Card>
+          <Card header={title}>
+            <p>{decodeHTML(description || '')}</p>
+            <div className="flex items-center">
+              <span>
+                {tracks.length} songs,{' '}
+                <Duration value={duration}>{humanizeMs(duration)}</Duration>
+              </span>
+              <span className="before:mx-2 before:content-['•']">
+                <Link
+                  className="inline-flex items-center gap-2"
+                  href={spotifyUrl}
+                >
+                  Open on Spotify
+                  <ExternalLink className="h-4 w-4" />
+                </Link>
+              </span>
             </div>
-            <SpotifyTracksTable
-              data={data.tracks
-                .filter(({ track }) => !!track)
-                .map(simplifyPlaylistTrack)}
-              defaultSorting={[]}
-            />
-          </>
-        )}
+          </Card>
+        </div>
+        <SpotifyTracksTable data={tracks} defaultSorting={[]} />
       </div>
     </Layout>
   );
