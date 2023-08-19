@@ -28,7 +28,7 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
 
   const {
     name: title,
-    description: originalDescription,
+    description,
     images,
     external_urls,
     tracks: tracksFull,
@@ -36,8 +36,6 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
     (res) => res.json(),
   );
 
-  const description =
-    originalDescription || `The ${title} playlist on my Spotify account.`;
   const imageUrl = images[0]?.url;
   const spotifyUrl = external_urls.spotify;
 
@@ -72,7 +70,8 @@ export default function PlaylistTracks({
     <Layout
       customMeta={{
         title,
-        description,
+        description:
+          description || `The ${title} playlist on my Spotify account.`,
       }}
     >
       <div className="bleed min-h-screen w-full max-w-4xl place-self-center">
@@ -85,7 +84,8 @@ export default function PlaylistTracks({
             />
           </div>
           <Card header={title}>
-            {richDescription || <p>{decodeHTML(description || '')}</p>}
+            {richDescription ||
+              (description ? <p>{decodeHTML(description || '')}</p> : null)}
             <div className="mt-1 flex flex-wrap items-center gap-x-1.5">
               <span>
                 <Link
