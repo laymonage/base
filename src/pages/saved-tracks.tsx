@@ -11,7 +11,7 @@ import { ExternalLink } from 'react-feather';
 
 type SpotifySavedTracksData = ComponentProps<typeof SpotifyTracksTable>['data'];
 
-export default function Selections() {
+export default function SavedTracks() {
   const [data, error] = useData<{ tracks: SpotifySavedTracksData }>(
     getSpotifyDataURL('tracks_simplified'),
   );
@@ -21,7 +21,10 @@ export default function Selections() {
 
   return (
     <Layout
-      customMeta={{ title: 'Selections', description: `Selections of things.` }}
+      customMeta={{
+        title: 'Saved tracks',
+        description: `My saved tracks on Spotify.`,
+      }}
     >
       <div className="bleed w-full max-w-4xl place-self-center">
         <div className="my-4 mb-14 flex flex-wrap items-end gap-8 sm:flex-nowrap">
