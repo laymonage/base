@@ -18,9 +18,9 @@ export interface ContactInfo {
 export const data: ContactInfo = {
   alias: 'laymonage',
   name: 'Sage Abdullah',
-  description: 'I build up and break down stuff in the open.',
+  description: 'I build things up and break them down in the open.',
   metaDescription:
-    'laymonage is Sage M. Abdullah. I build up and break down stuff in the open.',
+    'laymonage is Sage M. Abdullah. I build things up and break them down in the open.',
   links: [
     {
       url: 'https://github.com/laymonage',

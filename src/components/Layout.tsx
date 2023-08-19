@@ -41,7 +41,7 @@ export default function Layout({
   const title =
     (customMeta?.title ? `${capitalize(customMeta.title)} | ` : '') + siteTitle;
   const meta = {
-    description: 'I build up and break down stuff in the open.',
+    description: 'I build things up and break them down in the open.',
     image: `https://og-image.laymonage.com/**${encodeURI(
       customMeta?.title || siteTitle,
     )}**.png?&md=1`,
