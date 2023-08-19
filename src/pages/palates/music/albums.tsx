@@ -14,11 +14,20 @@ import Link from '@/components/Link';
 import Search from '@/components/Search';
 import { AlbumSimplified } from '@/lib/models/spotify';
 import { getSpotifyDataURL } from '@/lib/spotify/data';
+import { InferGetStaticPropsType } from 'next';
 import { formatDate, relativeFormat } from '@/lib/datetime';
 import { ReactNode, useRef, useState } from 'react';
 import { ArrowDown, ArrowUp, BarChart, Music } from 'react-feather';
 import clsx from 'clsx';
-import { useData } from '@/lib/hooks/data';
+
+export async function getStaticProps() {
+  const { albums: data }: { albums: AlbumSimplified[] } = await fetch(
+    getSpotifyDataURL('albums_simplified'),
+  ).then((res) => res.json());
+  return {
+    props: { data },
+  };
+}
 
 function getColumnMeta(columnDef: ReturnType<typeof columnHelper.display>) {
   return columnDef.meta as Record<string, string>;
@@ -116,18 +125,16 @@ const columnsWithArtist = getColumns(false);
 
 const defaultSortingState: SortingState = [{ id: 'added_at', desc: true }];
 
-export default function Albums() {
+export default function Albums({
+  data,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   const tableContainerRef = useRef<HTMLDivElement>(null);
   const [sorting, setSorting] = useState<SortingState>([]);
   const [useTitle, setUseTitle] = useState(true);
   const [globalFilter, setGlobalFilter] = useState('');
 
-  const [data, error] = useData<{ albums: AlbumSimplified[] }>(
-    getSpotifyDataURL('albums_simplified'),
-  );
-
   const table = useReactTable({
-    data: data?.albums || [],
+    data,
     columns: useTitle ? columnsWithTitle : columnsWithArtist,
     state: {
       sorting: sorting.length ? sorting : defaultSortingState,
@@ -182,179 +189,148 @@ export default function Albums() {
           <h1 className="text-4xl font-bold">Albums</h1>
           <p>Here are all the albums I've saved my Spotify account.</p>
         </div>
-        {error ? (
-          <p>Unable to load albums data.</p>
-        ) : data ? (
-          <>
-            {' '}
-            <Search
-              onChange={({ target: { value } }) =>
-                setGlobalFilter(String(value))
-              }
-              value={globalFilter}
-              className="mb-8 w-full"
-              placeholder="Search…"
-            />
-            <div
-              ref={tableContainerRef}
-              className={clsx('h-[max(calc(100vh-14rem),16rem)] overflow-auto')}
-            >
-              {
-                // Assume that the table is never empty if the data is loaded, unless
-                // a search query is specified.
-                !virtualRows.length ? (
-                  <div className="flex h-full flex-col items-center justify-center gap-4">
-                    <Music
-                      aria-hidden
-                      width={128}
-                      height={128}
-                      strokeWidth={1.5}
-                    />
-                    <p>
-                      No tracks available
-                      {globalFilter ? ' for the given search query' : ''}.
-                    </p>
-                  </div>
-                ) : (
-                  <table className="w-[55rem] table-fixed border-separate border-spacing-0 whitespace-nowrap">
-                    <thead className="bg-primary sticky top-0">
-                      {table.getHeaderGroups().map((headerGroup) => (
-                        <tr key={headerGroup.id}>
-                          {headerGroup.headers.map((header) => {
-                            const meta = getColumnMeta(header.column.columnDef);
-                            const label =
-                              meta.label || header.column.columnDef.header;
-                            const sortable = header.column.getCanSort();
-                            const sortDirection = header.column.getIsSorted();
-                            const sortInfo = {
-                              asc: {
-                                component: ArrowUp,
-                                otherLabel: 'descending',
-                              },
-                              desc: {
-                                component: ArrowDown,
-                                otherLabel: 'ascending',
-                              },
-                            }[sortDirection as string];
+        <Search
+          onChange={({ target: { value } }) => setGlobalFilter(String(value))}
+          value={globalFilter}
+          className="mb-8 w-full"
+          placeholder="Search…"
+        />
+        <div
+          ref={tableContainerRef}
+          className={clsx('h-[max(calc(100vh-14rem),16rem)] overflow-auto')}
+        >
+          {
+            // Assume that the table is never empty if the data is loaded, unless
+            // a search query is specified.
+            !virtualRows.length ? (
+              <div className="flex h-full flex-col items-center justify-center gap-4">
+                <Music aria-hidden width={128} height={128} strokeWidth={1.5} />
+                <p>
+                  No tracks available
+                  {globalFilter ? ' for the given search query' : ''}.
+                </p>
+              </div>
+            ) : (
+              <table className="w-[55rem] table-fixed border-separate border-spacing-0 whitespace-nowrap">
+                <thead className="bg-primary sticky top-0">
+                  {table.getHeaderGroups().map((headerGroup) => (
+                    <tr key={headerGroup.id}>
+                      {headerGroup.headers.map((header) => {
+                        const meta = getColumnMeta(header.column.columnDef);
+                        const label =
+                          meta.label || header.column.columnDef.header;
+                        const sortable = header.column.getCanSort();
+                        const sortDirection = header.column.getIsSorted();
+                        const sortInfo = {
+                          asc: { component: ArrowUp, otherLabel: 'descending' },
+                          desc: {
+                            component: ArrowDown,
+                            otherLabel: 'ascending',
+                          },
+                        }[sortDirection as string];
 
-                            const buttonDirectionLabel =
-                              sortInfo?.otherLabel || 'descending';
-                            const buttonLabel = sortable
-                              ? `Sort ${buttonDirectionLabel} by ${label}`
-                              : undefined;
+                        const buttonDirectionLabel =
+                          sortInfo?.otherLabel || 'descending';
+                        const buttonLabel = sortable
+                          ? `Sort ${buttonDirectionLabel} by ${label}`
+                          : undefined;
 
-                            return (
-                              <th
-                                className={clsx(
-                                  meta.class,
-                                  'border-b border-slate-400 border-opacity-50 p-2',
-                                )}
-                                key={header.id}
-                              >
-                                {header.isPlaceholder ? null : (
-                                  <button
-                                    className={clsx(
-                                      'flex w-full items-center gap-1',
-                                      meta.headerClass,
-                                      {
-                                        'cursor-pointer select-none': sortable,
-                                      },
-                                    )}
-                                    disabled={!sortable}
-                                    aria-label={buttonLabel}
-                                    type="button"
-                                    onClick={header.column.getToggleSortingHandler()}
-                                  >
-                                    {flexRender(
-                                      header.column.columnDef.header,
-                                      header.getContext(),
-                                    )}
-                                    {sortInfo?.component ? (
-                                      <sortInfo.component
-                                        aria-hidden
-                                        strokeWidth={2.5}
-                                        width={16}
-                                        height={16}
-                                      />
-                                    ) : null}
-                                  </button>
-                                )}
-                              </th>
-                            );
-                          })}
-                        </tr>
-                      ))}
-                    </thead>
-                    <tbody>
-                      {paddingTop > 0 ? (
-                        <tr>
-                          <td style={{ height: `${paddingTop}px` }} />
-                        </tr>
-                      ) : null}
-                      {virtualRows.map((virtualRow) => {
-                        const row = rows[
-                          virtualRow.index
-                        ] as Row<AlbumSimplified>;
                         return (
-                          <tr
-                            key={row.original.id}
-                            className="group/row focus-within:bg-blue-300 focus-within:bg-opacity-10 hover:bg-blue-300 hover:bg-opacity-10"
+                          <th
+                            className={clsx(
+                              meta.class,
+                              'border-b border-slate-400 border-opacity-50 p-2',
+                            )}
+                            key={header.id}
                           >
-                            {row.getVisibleCells().map((cell) => (
-                              <td
+                            {header.isPlaceholder ? null : (
+                              <button
                                 className={clsx(
-                                  getColumnMeta(cell.column.columnDef)?.class,
-                                  'p-2 first-of-type:rounded-l last-of-type:rounded-r',
+                                  'flex w-full items-center gap-1',
+                                  meta.headerClass,
+                                  { 'cursor-pointer select-none': sortable },
                                 )}
-                                key={cell.id}
+                                disabled={!sortable}
+                                aria-label={buttonLabel}
+                                type="button"
+                                onClick={header.column.getToggleSortingHandler()}
                               >
                                 {flexRender(
-                                  cell.column.columnDef.cell,
-                                  cell.getContext(),
+                                  header.column.columnDef.header,
+                                  header.getContext(),
                                 )}
-                              </td>
-                            ))}
-                          </tr>
+                                {sortInfo?.component ? (
+                                  <sortInfo.component
+                                    aria-hidden
+                                    strokeWidth={2.5}
+                                    width={16}
+                                    height={16}
+                                  />
+                                ) : null}
+                              </button>
+                            )}
+                          </th>
                         );
                       })}
-                      {paddingBottom > 0 ? (
-                        <tr>
-                          <td style={{ height: `${paddingBottom}px` }} />
-                        </tr>
-                      ) : null}
-                    </tbody>
-                    <tfoot>
-                      {table.getFooterGroups().map((footerGroup) => (
-                        <tr key={footerGroup.id}>
-                          {footerGroup.headers.map((header) => (
-                            <th key={header.id}>
-                              {header.isPlaceholder
-                                ? null
-                                : flexRender(
-                                    header.column.columnDef.footer,
-                                    header.getContext(),
-                                  )}
-                            </th>
-                          ))}
-                        </tr>
+                    </tr>
+                  ))}
+                </thead>
+                <tbody>
+                  {paddingTop > 0 ? (
+                    <tr>
+                      <td style={{ height: `${paddingTop}px` }} />
+                    </tr>
+                  ) : null}
+                  {virtualRows.map((virtualRow) => {
+                    const row = rows[virtualRow.index] as Row<AlbumSimplified>;
+                    return (
+                      <tr
+                        key={row.original.id}
+                        className="group/row focus-within:bg-blue-300 focus-within:bg-opacity-10 hover:bg-blue-300 hover:bg-opacity-10"
+                      >
+                        {row.getVisibleCells().map((cell) => (
+                          <td
+                            className={clsx(
+                              getColumnMeta(cell.column.columnDef)?.class,
+                              'p-2 first-of-type:rounded-l last-of-type:rounded-r',
+                            )}
+                            key={cell.id}
+                          >
+                            {flexRender(
+                              cell.column.columnDef.cell,
+                              cell.getContext(),
+                            )}
+                          </td>
+                        ))}
+                      </tr>
+                    );
+                  })}
+                  {paddingBottom > 0 ? (
+                    <tr>
+                      <td style={{ height: `${paddingBottom}px` }} />
+                    </tr>
+                  ) : null}
+                </tbody>
+                <tfoot>
+                  {table.getFooterGroups().map((footerGroup) => (
+                    <tr key={footerGroup.id}>
+                      {footerGroup.headers.map((header) => (
+                        <th key={header.id}>
+                          {header.isPlaceholder
+                            ? null
+                            : flexRender(
+                                header.column.columnDef.footer,
+                                header.getContext(),
+                              )}
+                        </th>
                       ))}
-                    </tfoot>
-                  </table>
-                )
-              }
-            </div>
-          </>
-        ) : (
-          <div className="flex min-h-screen flex-col items-center justify-center text-center">
-            <img
-              aria-hidden="true"
-              className="mx-auto my-2"
-              alt="Loading…"
-              src="/img/equaliser-animated-green.gif"
-            />
-            Loading…
-          </div>
-        )}
+                    </tr>
+                  ))}
+                </tfoot>
+              </table>
+            )
+          }
+        </div>
       </div>
     </Layout>
   );
