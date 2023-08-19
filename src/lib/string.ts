@@ -10,3 +10,9 @@ export const humanizeLogSlug = (slug: string) => {
   const { year, week } = parseLogSlug(slug);
   return `${year} Week ${week}`;
 };
+
+export const decodeHTML = (html: string) => {
+  const text = document.createElement('textarea');
+  text.innerHTML = html;
+  return text.value;
+};
