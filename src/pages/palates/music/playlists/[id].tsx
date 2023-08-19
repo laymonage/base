@@ -3,12 +3,13 @@ import Duration from '@/components/Duration';
 import Layout from '@/components/Layout';
 import Link from '@/components/Link';
 import SpotifyTracksTable from '@/components/SpotifyTracksTable';
+import Spotify from '@/components/icons/Spotify.svg';
 import { humanizeMs } from '@/lib/datetime';
 import { PlaylistFull } from '@/lib/models/spotify';
 import { getSpotifyDataURL, simplifyPlaylistTrack } from '@/lib/spotify/data';
 import { decodeHTML } from '@/lib/string';
-import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
-import { ExternalLink } from 'react-feather';
+import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
+import type { ReactNode } from 'react';
 
 export async function getStaticPaths() {
   const data = await fetch(getSpotifyDataURL('playlists')).then((res) =>
@@ -36,7 +37,7 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
   );
 
   const description =
-    originalDescription || `The ${name} playlist on my Spotify account.`;
+    originalDescription || `The ${title} playlist on my Spotify account.`;
   const imageUrl = images[0]?.url;
   const spotifyUrl = external_urls.spotify;
 
@@ -51,14 +52,22 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
   };
 }
 
+interface PlaylistTracksProps
+  extends InferGetStaticPropsType<typeof getStaticProps> {
+  richDescription?: ReactNode;
+  children?: ReactNode;
+}
+
 export default function PlaylistTracks({
   title,
   description,
+  richDescription,
   imageUrl,
   spotifyUrl,
   duration,
   tracks,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
+  children,
+}: PlaylistTracksProps) {
   return (
     <Layout
       customMeta={{
@@ -76,25 +85,25 @@ export default function PlaylistTracks({
             />
           </div>
           <Card header={title}>
-            <p>{decodeHTML(description || '')}</p>
-            <div className="flex items-center">
+            {richDescription || <p>{decodeHTML(description || '')}</p>}
+            <div className="mt-1 flex flex-wrap items-center gap-x-1.5">
               <span>
-                {tracks.length} songs,{' '}
-                <Duration value={duration}>{humanizeMs(duration)}</Duration>
-              </span>
-              <span className="before:mx-2 before:content-['•']">
                 <Link
                   className="inline-flex items-center gap-2"
                   href={spotifyUrl}
                 >
+                  <Spotify className="h-4 w-4 fill-black dark:fill-white" />
                   Open on Spotify
-                  <ExternalLink className="h-4 w-4" />
                 </Link>
+              </span>
+              <span className="before:ml-1.5 before:mr-3 before:content-['•']">
+                {tracks ? tracks.length : 'Loading'} songs,{' '}
+                <Duration value={duration}>{humanizeMs(duration)}</Duration>
               </span>
             </div>
           </Card>
         </div>
-        <SpotifyTracksTable data={tracks} defaultSorting={[]} />
+        {children || <SpotifyTracksTable data={tracks} defaultSorting={[]} />}
       </div>
     </Layout>
   );

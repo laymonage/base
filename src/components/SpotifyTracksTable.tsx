@@ -163,7 +163,7 @@ const defaultSortingState: SortingState = [{ id: 'added_at', desc: true }];
 
 interface SpotifyTracksTableProps {
   className?: string;
-  data?: TrackSimplified[];
+  data: TrackSimplified[];
   defaultSorting?: SortingState;
 }
 
@@ -178,7 +178,7 @@ export default function SpotifyTracksTable({
   const [globalFilter, setGlobalFilter] = useState('');
 
   const table = useReactTable({
-    data: data || [],
+    data,
     columns: useTitle ? columnsWithTitle : columnsWithArtist,
     state: {
       sorting: sorting.length ? sorting : defaultSorting,
@@ -240,25 +240,13 @@ export default function SpotifyTracksTable({
           // Assume that the table is never empty if the data is loaded, unless
           // a search query is specified.
           !virtualRows.length ? (
-            !data ? (
-              <div className="flex h-full flex-col items-center justify-center text-center">
-                <img
-                  aria-hidden="true"
-                  className="mx-auto my-2"
-                  alt="Loading…"
-                  src="/img/equaliser-animated-green.gif"
-                />
-                Loading…
-              </div>
-            ) : (
-              <div className="flex h-full flex-col items-center justify-center gap-4">
-                <Music aria-hidden width={128} height={128} strokeWidth={1.5} />
-                <p>
-                  No tracks available
-                  {globalFilter ? ' for the given search query' : ''}.
-                </p>
-              </div>
-            )
+            <div className="flex h-full flex-col items-center justify-center gap-4">
+              <Music aria-hidden width={128} height={128} strokeWidth={1.5} />
+              <p>
+                No tracks available
+                {globalFilter ? ' for the given search query' : ''}.
+              </p>
+            </div>
           ) : (
             <table className="w-[55rem] table-fixed border-separate border-spacing-0 whitespace-nowrap">
               <thead className="bg-primary sticky top-0">
