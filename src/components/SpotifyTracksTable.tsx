@@ -149,16 +149,18 @@ const columns = [
   }),
 ];
 
-const defaultSorting = [{ id: 'added_at', desc: true }];
+const defaultSortingState: SortingState = [{ id: 'added_at', desc: true }];
 
 interface SpotifyTracksTableProps {
   className?: string;
   data?: TrackSimplified[];
+  defaultSorting?: SortingState;
 }
 
 export default function SpotifyTracksTable({
   className,
   data,
+  defaultSorting = defaultSortingState,
 }: SpotifyTracksTableProps) {
   const tableContainerRef = useRef<HTMLDivElement>(null);
   const [sorting, setSorting] = useState<SortingState>([]);
