@@ -17,31 +17,9 @@ import { AudioProvider } from '@/lib/providers/audio';
 import Search from './Search';
 import { ArrowDown, ArrowUp, BarChart, Clock, Music } from 'react-feather';
 import Duration from './Duration';
+import { TrackSimplified } from '@/lib/models/spotify';
 
-interface SpotifyTrackSimplified {
-  id: string;
-  name: string;
-  added_at: string;
-  popularity: number;
-  duration_ms: number;
-  explicit: boolean;
-  url: string;
-  preview_url: string | null;
-  album: {
-    id: string;
-    name: string;
-    release_date: string;
-    image_url: string;
-    url: string;
-  };
-  artists: Array<{
-    id: string;
-    name: string;
-    url: string;
-  }>;
-}
-
-const columnHelper = createColumnHelper<SpotifyTrackSimplified>();
+const columnHelper = createColumnHelper<TrackSimplified>();
 
 function getColumnMeta(columnDef: ReturnType<typeof columnHelper.display>) {
   return columnDef.meta as Record<string, string>;
@@ -175,7 +153,7 @@ const defaultSorting = [{ id: 'added_at', desc: true }];
 
 interface SpotifyTracksTableProps {
   className?: string;
-  data?: SpotifyTrackSimplified[];
+  data?: TrackSimplified[];
 }
 
 export default function SpotifyTracksTable({
@@ -324,9 +302,7 @@ export default function SpotifyTracksTable({
                   </tr>
                 ) : null}
                 {virtualRows.map((virtualRow) => {
-                  const row = rows[
-                    virtualRow.index
-                  ] as Row<SpotifyTrackSimplified>;
+                  const row = rows[virtualRow.index] as Row<TrackSimplified>;
                   return (
                     <tr
                       key={row.original.id}
