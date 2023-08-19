@@ -1,10 +1,13 @@
 import Card from '@/components/Card';
+import Duration from '@/components/Duration';
 import Layout from '@/components/Layout';
 import Link from '@/components/Link';
 import SpotifyTracksTable from '@/components/SpotifyTracksTable';
+import { humanizeMs } from '@/lib/datetime';
 import { useData } from '@/lib/hooks/data';
 import { getSpotifyDataURL } from '@/lib/spotify/data';
 import { ComponentProps } from 'react';
+import { ExternalLink } from 'react-feather';
 
 type SpotifySavedTracksData = ComponentProps<typeof SpotifyTracksTable>['data'];
 
@@ -12,6 +15,9 @@ export default function Selections() {
   const [data, error] = useData<{ tracks: SpotifySavedTracksData }>(
     getSpotifyDataURL('tracks_simplified'),
   );
+
+  const duration =
+    data?.tracks?.map((v) => v.duration_ms || 0).reduce((a, b) => a + b) || 0;
 
   return (
     <Layout
@@ -27,18 +33,27 @@ export default function Selections() {
           </div>
           <Card header="Saved tracks">
             <p>
-              For science, I've made an{' '}
+              Shareable "Liked Songs" playlist synchronised by my{' '}
               <Link href="https://github.com/laymonage/spotify-to-github">
-                automated scraper
+                spotify-to-github
               </Link>{' '}
-              that exports my Spotify saved tracks every day. It allows me to
-              share the playlist here, without having to make a Spotify API call
-              every time someone visits this page. You can also{' '}
-              <Link href="https://open.spotify.com/playlist/6T5QnaTXvu6ckKwcxANEwp">
-                follow the playlist on Spotify
-              </Link>
-              .
+              project.
             </p>
+            <div className="flex items-center">
+              <span>
+                {data?.tracks?.length} songs,{' '}
+                <Duration value={duration}>{humanizeMs(duration)}</Duration>
+              </span>
+              <span className="before:mx-2 before:content-['•']">
+                <Link
+                  className="inline-flex items-center gap-2"
+                  href="https://open.spotify.com/playlist/6T5QnaTXvu6ckKwcxANEwp"
+                >
+                  Open on Spotify
+                  <ExternalLink className="h-4 w-4" />
+                </Link>
+              </span>
+            </div>
           </Card>
         </div>
         {!error ? (
