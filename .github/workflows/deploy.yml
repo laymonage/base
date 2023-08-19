@@ -1,0 +1,15 @@
+name: Daily deployment
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron:  '0 5 * * *'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger deployment
+        env:
+          DEPLOYMENT_HOOK_URL: ${{ secrets.DEPLOYMENT_HOOK_URL }}
+        run: curl "$DEPLOYMENT_HOOK_URL"
