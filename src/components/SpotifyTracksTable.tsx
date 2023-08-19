@@ -25,7 +25,9 @@ function getColumnMeta(columnDef: ReturnType<typeof columnHelper.display>) {
   return columnDef.meta as Record<string, string>;
 }
 
-const columns = [
+const separator = '|SEP|';
+
+const getColumns = (useTitle = true) => [
   columnHelper.display({
     id: 'number',
     cell: ({ row: { index, original: row } }) => (
@@ -44,7 +46,12 @@ const columns = [
     },
   }),
   columnHelper.accessor(
-    (row) => `${row.name} ${row.artists.map(({ name }) => name).join(' ')}`,
+    (row) => {
+      const artists = row.artists.map(({ name }) => name).join(' ');
+      return useTitle
+        ? `${row.name} ${separator} ${artists}`
+        : `${artists} ${separator} ${row.name}`;
+    },
     {
       cell: ({ row: { original: row } }) => (
         <div className="flex items-center gap-4">
@@ -81,8 +88,8 @@ const columns = [
           </div>
         </div>
       ),
-      id: 'title',
-      header: 'Title',
+      id: useTitle ? 'title' : 'artist',
+      header: useTitle ? 'Title' : 'Artist',
       meta: { class: 'text-left text-ellipsis overflow-hidden' },
     },
   ),
@@ -149,6 +156,9 @@ const columns = [
   }),
 ];
 
+const columnsWithTitle = getColumns(true);
+const columnsWithArtist = getColumns(false);
+
 const defaultSortingState: SortingState = [{ id: 'added_at', desc: true }];
 
 interface SpotifyTracksTableProps {
@@ -164,16 +174,30 @@ export default function SpotifyTracksTable({
 }: SpotifyTracksTableProps) {
   const tableContainerRef = useRef<HTMLDivElement>(null);
   const [sorting, setSorting] = useState<SortingState>([]);
+  const [useTitle, setUseTitle] = useState(true);
   const [globalFilter, setGlobalFilter] = useState('');
 
   const table = useReactTable({
     data: data || [],
-    columns,
+    columns: useTitle ? columnsWithTitle : columnsWithArtist,
     state: {
       sorting: sorting.length ? sorting : defaultSorting,
       globalFilter,
     },
-    onSortingChange: setSorting,
+    onSortingChange: (v) => {
+      if (
+        sorting.length &&
+        (sorting[0].id === 'title' || sorting[0].id === 'artist') &&
+        sorting[0].desc
+      ) {
+        setUseTitle(!useTitle);
+        if (sorting[0].id === 'title') {
+          setSorting([{ id: 'artist', desc: false }]);
+          return;
+        }
+      }
+      setSorting(v);
+    },
     onGlobalFilterChange: setGlobalFilter,
     globalFilterFn: 'includesString',
     getFilteredRowModel: getFilteredRowModel(),
