@@ -5,12 +5,11 @@ import { InferGetStaticPropsType } from 'next';
 
 const isLikedSongs = (playlist: SpotifyApi.PlaylistObjectFull) =>
   playlist.name === 'Liked Songs (Mirror)';
-const isDiscoverWeekly = (playlist: SpotifyApi.PlaylistObjectFull) =>
-  playlist.name === 'Discover Weekly';
 const generated = (playlist: SpotifyApi.PlaylistObjectFull) =>
   playlist.name.includes('Top Songs') ||
   playlist.name.includes('Daily Mix') ||
-  isDiscoverWeekly(playlist) ||
+  playlist.name === 'Discover Weekly' ||
+  playlist.name === 'Release Radar' ||
   isLikedSongs(playlist);
 const created = (playlist: SpotifyApi.PlaylistObjectFull) =>
   playlist.owner.id === 'laymonage' && !generated(playlist);
@@ -27,12 +26,17 @@ export async function getStaticProps() {
         .filter(generated)
         .sort((a, b) => {
           if (isLikedSongs(a)) return -1;
-          if (isDiscoverWeekly(a)) return isLikedSongs(b) ? 0 : -1;
+          if (isLikedSongs(b)) return 1;
+
           const aSplit = a.name.split(' ');
           const aNumber = +aSplit[aSplit.length - 1];
-          if (!aNumber) return 0;
           const bSplit = b.name.split(' ');
           const bNumber = +bSplit[bSplit.length - 1];
+
+          if (!aNumber && !bNumber)
+            return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
+          if (!aNumber && bNumber) return -1;
+          if (aNumber && !bNumber) return 1;
 
           return aNumber - bNumber;
         })
