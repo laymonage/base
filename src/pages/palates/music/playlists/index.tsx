@@ -26,8 +26,6 @@ export async function getStaticProps() {
         .map((playlist) => {
           if (isLikedSongs(playlist)) {
             playlist.id = 'saved-tracks';
-            playlist.images[0].url =
-              'https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png';
           }
           return playlist;
         }),
