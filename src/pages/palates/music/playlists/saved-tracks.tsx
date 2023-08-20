@@ -5,8 +5,8 @@ import { TrackSimplified } from '@/lib/models/spotify';
 import Link from '@/components/Link';
 import SpotifyTracksTable from '@/components/SpotifyTracksTable';
 
-const title = 'Saved tracks';
-const description = `My saved tracks on Spotify.`;
+const title = 'Liked Songs (Mirror)';
+const description = `Shareable "Liked Songs" playlist synchronised by my spotify-to-github project.`;
 const imageUrl =
   'https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png';
 const spotifyUrl = 'https://open.spotify.com/playlist/6T5QnaTXvu6ckKwcxANEwp';
