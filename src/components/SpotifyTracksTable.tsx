@@ -178,6 +178,9 @@ export default function SpotifyTracksTable({
     state: {
       sorting: sorting.length ? sorting : defaultSorting,
       globalFilter,
+      columnVisibility: {
+        added_at: !!new Date(data[0]?.added_at).getTime(),
+      },
     },
     onSortingChange: (v) => {
       if (
