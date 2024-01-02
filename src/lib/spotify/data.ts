@@ -1,4 +1,4 @@
-import { TrackSimplified } from '../models/spotify';
+import { AddedTrack, TrackSimplified } from '../models/spotify';
 
 const SPOTIFY_DATA_RAW_URL =
   'https://raw.githubusercontent.com/laymonage/spotify-to-github';
@@ -11,8 +11,14 @@ export function getSpotifyDataURL(filename: string, format = 'json') {
 export function simplifyPlaylistTrack({
   added_at,
   track,
-}: SpotifyApi.PlaylistTrackObject): TrackSimplified {
-  const t = track as SpotifyApi.TrackObjectFull;
+}: AddedTrack): TrackSimplified {
+  return simplifyTrack(track as SpotifyApi.TrackObjectFull, added_at);
+}
+
+export function simplifyTrack(
+  t: SpotifyApi.TrackObjectFull,
+  added_at = '1970-01-01',
+): TrackSimplified {
   const url = t.external_urls.spotify || '';
   const album = {
     ...t.album,

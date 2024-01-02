@@ -16,6 +16,11 @@ export interface NowPlaying {
   trackUrl: string;
 }
 
+export interface AddedTrack {
+  added_at?: string;
+  track: SpotifyApi.TrackObjectFull | null;
+}
+
 export interface TrackSimplified {
   id: string;
   name: string;
