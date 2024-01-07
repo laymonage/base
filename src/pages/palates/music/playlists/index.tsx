@@ -10,6 +10,7 @@ const generated = (playlist: SpotifyApi.PlaylistObjectFull) =>
   playlist.name.includes('Daily Mix') ||
   playlist.name === 'Discover Weekly' ||
   playlist.name === 'Release Radar' ||
+  playlist.name === 'Tastebreakers' ||
   isLikedSongs(playlist);
 const created = (playlist: SpotifyApi.PlaylistObjectFull) =>
   playlist.owner.id === 'laymonage' && !generated(playlist);
