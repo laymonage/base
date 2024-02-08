@@ -1,26 +1,18 @@
-import NextLink from 'next/link';
-import { AnchorHTMLAttributes, DetailedHTMLProps } from 'react';
+import NextLink, { LinkProps } from 'next/link';
 
 export default function Link({
   href,
   ...rest
-}: DetailedHTMLProps<
-  AnchorHTMLAttributes<HTMLAnchorElement>,
-  HTMLAnchorElement
->) {
-  const isInternalLink = href && href.startsWith('/');
-  const isAnchorLink = href && href.startsWith('#');
+}: Omit<LinkProps, 'href'> & { href: string }) {
+  const isInternalLink = (href as string).startsWith('/');
+  const isAnchorLink = (href as string).startsWith('#');
 
   if (!href) {
     return <span {...rest} />;
   }
 
   if (isInternalLink) {
-    return (
-      <NextLink href={href as string}>
-        <a {...rest} />
-      </NextLink>
-    );
+    return <NextLink href={href as string} {...rest} />;
   }
 
   if (isAnchorLink) {

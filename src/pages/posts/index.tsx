@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import Card from '@/components/Card';
 import Date from '@/components/Date';
 import Layout from '@/components/Layout';

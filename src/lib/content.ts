@@ -79,9 +79,8 @@ export async function getSingleContentData<
   const fullPath = path.join(baseContentDirectory, type || '', `${slug}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
 
-  const { frontMatter: data, mdxSource: content } = await processMDX<A>(
-    fileContents,
-  );
+  const { frontMatter: data, mdxSource: content } =
+    await processMDX<A>(fileContents);
 
   return {
     slug,
