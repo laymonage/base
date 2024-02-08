@@ -1,9 +1,10 @@
-import NextLink, { LinkProps } from 'next/link';
+import NextLink from 'next/link';
+import { ComponentProps } from 'react';
 
 export default function Link({
   href,
   ...rest
-}: Omit<LinkProps, 'href'> & { href: string }) {
+}: Omit<ComponentProps<typeof NextLink>, 'href'> & { href: string }) {
   const isInternalLink = (href as string).startsWith('/');
   const isAnchorLink = (href as string).startsWith('#');
 
