@@ -9,8 +9,8 @@
     "lint": "eslint --cache",
     "lint:fix": "eslint --cache --fix",
     "format": "prettier",
-    "format:check": "prettier --check src",
-    "format:fix": "prettier --write src",
+    "format:check": "prettier --check",
+    "format:fix": "prettier --write",
     "tscheck": "tsc --noEmit"
   },
   "dependencies": {
