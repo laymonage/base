@@ -1,4 +1,3 @@
-const withPreact = require('next-plugin-preact');
 const path = require('path');
 
 const ContentSecurityPolicy = `
@@ -48,7 +47,7 @@ const cacheHeaders = [
   },
 ];
 
-module.exports = withPreact({
+module.exports = {
   reactStrictMode: true,
   experimental: {
     esmExternals: false,
@@ -78,4 +77,4 @@ module.exports = withPreact({
 
     return config;
   },
-});
+};
