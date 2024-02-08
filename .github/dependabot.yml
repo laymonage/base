@@ -7,3 +7,25 @@ updates:
       interval: "daily"
     labels:
       - content
+
+  - package-ecosystem: github-actions
+    directory: '/'
+    schedule:
+      interval: weekly
+      day: saturday
+    open-pull-requests-limit: 99
+    groups:
+      actions:
+        patterns:
+          - '*'
+
+  - package-ecosystem: npm
+    directory: '/'
+    schedule:
+      interval: weekly
+      day: saturday
+    open-pull-requests-limit: 99
+    groups:
+      dependencies:
+        patterns:
+          - '*'
