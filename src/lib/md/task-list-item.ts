@@ -18,7 +18,7 @@ export default function processTaskListItem() {
   return (tree: Parent) => {
     visit(
       tree,
-      (node: Node): node is ListItem =>
+      (node: Node<object>): node is ListItem =>
         ((node as ListItem)?.tagName === 'li' &&
           (node as ListItem)?.properties?.className?.includes(
             'task-list-item',

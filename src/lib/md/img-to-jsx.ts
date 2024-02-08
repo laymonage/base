@@ -17,7 +17,7 @@ export default function imgToJsx() {
   return (tree: Node) => {
     visit(
       tree,
-      (node: Node): node is Parent =>
+      (node: Node<object>): node is Parent =>
         (node.type === 'paragraph' || node.type === 'linkReference') &&
         (node as ImageNode).children?.some((n) => n.type === 'image'),
       (node: Parent, _, parent) => {
