@@ -7,6 +7,8 @@ import { InferGetStaticPropsType } from 'next';
 export async function getStaticProps() {
   const palates = await getSingleContentData('index', 'palates');
   delete palates.content;
+  // @ts-expect-error test
+  delete palates.data;
   return {
     props: {
       test: 'Test hmm',
@@ -35,6 +37,7 @@ export default function Palates({
         </div>
         <p>New</p>
         <p>Also new</p>
+        <p>Another one</p>
       </Card>
     </Layout>
   );
