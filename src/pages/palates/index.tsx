@@ -5,10 +5,11 @@ import { getSingleContentData } from '@/lib/content';
 import { InferGetStaticPropsType } from 'next';
 
 export async function getStaticProps() {
-  await getSingleContentData('index', 'palates');
+  const palates = await getSingleContentData('index', 'palates');
   return {
     props: {
       test: 'Test hmm',
+      palates,
     },
   };
 }
@@ -31,6 +32,7 @@ export default function Palates({
           <p>Test</p>
         </div>
         <p>New</p>
+        <p>Also new</p>
       </Card>
     </Layout>
   );
