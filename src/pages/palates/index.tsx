@@ -1,7 +1,6 @@
 import Card from '@/components/Card';
 import Layout from '@/components/Layout';
 import Link from '@/components/Link';
-import MDXLayoutRenderer from '@/components/MDX';
 import { getSingleContentData } from '@/lib/content';
 import { InferGetStaticPropsType } from 'next';
 
@@ -29,7 +28,7 @@ export default function Palates({
         }
       >
         <div className="markdown">
-          <MDXLayoutRenderer mdxSource={palates.content as string} />
+          <p>Test</p>
         </div>
       </Card>
     </Layout>
