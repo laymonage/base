@@ -15,7 +15,6 @@ export async function getStaticProps() {
   return {
     props: {
       test: 'Test hmm',
-      palates: palates,
     },
   };
 }
@@ -43,6 +42,7 @@ export default function Palates({
         <p>Another one</p>
         <p>Again?</p>
         <p>Giving up</p>
+        <p>I don't understand</p>
       </Card>
     </Layout>
   );
