@@ -30,6 +30,7 @@ export default function Palates({
         <div className="markdown">
           <p>Test</p>
         </div>
+        <p>New</p>
       </Card>
     </Layout>
   );
