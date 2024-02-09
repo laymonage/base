@@ -54,7 +54,7 @@
   }
 
   a:not(.anchor) {
-    @apply hover:underline focus:underline;
+    @apply underline;
   }
 
   div.pre {
