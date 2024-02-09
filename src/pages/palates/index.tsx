@@ -1,9 +1,11 @@
 import Card from '@/components/Card';
 import Layout from '@/components/Layout';
 import Link from '@/components/Link';
+import { getSingleContentData } from '@/lib/content';
 import { InferGetStaticPropsType } from 'next';
 
 export async function getStaticProps() {
+  await getSingleContentData('index', 'palates');
   return {
     props: {
       test: 'Test hmm',
