@@ -4,6 +4,8 @@ import Link from './Link';
 import {
   IconBrandGithub,
   IconBrandLinkedin,
+  IconBrandMastodon,
+  IconBrandSteam,
   IconBrandTwitter,
 } from '@tabler/icons-react';
 
@@ -42,6 +44,17 @@ export const data: ContactInfo = {
       name: 'Twitter',
       icon: IconBrandTwitter,
     },
+    {
+      url: 'https://fosstodon.org/@laymonage',
+      name: 'Fosstodon',
+      rel: 'me',
+      icon: IconBrandMastodon,
+    },
+    {
+      url: 'https://steamcommunity.com/id/laymonage',
+      name: 'Steam',
+      icon: IconBrandSteam,
+    },
   ],
 };
 
@@ -70,6 +83,7 @@ export default function Contact({
           <Link
             key={link.url}
             href={link.url}
+            rel={link.rel}
             aria-label={link.name}
             className="ml-3 h-8 w-8 rounded fill-current p-1 first:ml-0 hover:bg-blue-100 hover:text-blue-700 focus:bg-blue-100 focus:text-blue-700 focus:outline-none dark:text-blue-200 dark:hover:bg-gray-700 dark:hover:text-blue-100 dark:focus:bg-gray-700 dark:focus:text-blue-100"
           >
