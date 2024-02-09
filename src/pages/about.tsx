@@ -46,8 +46,8 @@ const dataToTimeline = (data: YearData) => (
 export default function About({
   about,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const [one, two, three, four, ...rest] = timelineData;
-  const latestItems = [one, two, three, four].map(dataToTimeline);
+  const latestItems = timelineData.slice(0, 6).map(dataToTimeline);
+  const rest = timelineData.slice(6).map(dataToTimeline);
 
   return (
     <Layout customMeta={{ title: 'About', description: `About laymonage.` }}>
@@ -78,7 +78,7 @@ export default function About({
           <summary className="alike my-4">
             <span className="ml-2">More...</span>
           </summary>
-          <Catalog border items={rest.map(dataToTimeline)} />
+          <Catalog border items={rest} />
         </details>
       </Card>
     </Layout>

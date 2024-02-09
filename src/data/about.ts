@@ -2,8 +2,64 @@ import { YearData } from '@/lib/models/about';
 
 export const timelineData: YearData[] = [
   {
+    year: 2024,
+    items: [
+      {
+        emoji: '🇧🇪',
+        title: 'Spoke at FOSDEM',
+        description: `I spoke about Wagtail in a room full of other open source CMS developers. It was the first time I've been to FOSDEM.`,
+      },
+    ],
+  },
+  {
+    year: 2023,
+    items: [
+      {
+        emoji: '🇨🇦',
+        title: 'Went on a road trip in Canada',
+        description: `We went on a road trip from Calgary to Edmonton, through Banff and Jasper. We saw a baby bear!`,
+      },
+      {
+        emoji: '🇺🇸',
+        title: 'Spoke at DjangoCon US',
+        description: `I spoke about Wagtail's modern editing experience for existing Django models. It's the first time I've been to DjangoCon US.`,
+      },
+      {
+        emoji: '☀️',
+        title: 'Represented Wagtail at the Google Summer of Code Mentor Summit',
+        description: `Thibaud and I went to the Google Summer of Code Mentor Summit in California. It was my first time in the US and we went on a road trip from Los Angeles to San Francisco!`,
+      },
+      {
+        emoji: '🏴󠁧󠁢󠁷󠁬󠁳󠁿',
+        title: 'Completed the Black Dragon Challenge',
+        description: `Went on a ~32km hike in the Brecon Beacons, Wales. It was my first real hike and it was tough, but the views were worth it!`,
+      },
+      {
+        emoji: '🏴󠁧󠁢󠁳󠁣󠁴󠁿',
+        title: 'Held a workshop at DjangoCon Europe',
+        description: `With my colleague Thibaud, we did a workshop on using Wagtail with Next.js. There were more than 50 participants, which we did not expect at all!`,
+      },
+      {
+        emoji: '🇫🇷',
+        title: 'Went on my first ski trip',
+        description: `Tried skiing for the first time in Chamonix, France. I don't think I quite enjoyed it, but hey – at least I tried.`,
+      },
+    ],
+  },
+  {
     year: 2022,
     items: [
+      {
+        emoji: '🇸🇪',
+        title: `Visited the Swedish Lapland`,
+        description: `I went on a trip to Luleå in the Swedish Lapland with my friend. We didn't get to see the northern lights, though. The dog sledding was quite fun!`,
+      },
+      {
+        emoji: '♿️',
+        title: `Mentored Wagtail's Outreachy program`,
+        description:
+          'I co-mentored an Outreachy intern who worked on adding an accessibility checker to Wagtail. It was a great success!',
+      },
       {
         emoji: '🐦',
         title: 'Joined the Wagtail Core Team',
