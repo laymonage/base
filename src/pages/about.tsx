@@ -8,6 +8,7 @@ import { YearData } from '@/lib/models/about';
 import NowPlaying from '@/components/NowPlaying';
 import MDXLayoutRenderer from '@/components/MDX';
 import { InferGetStaticPropsType } from 'next';
+import { useState } from 'react';
 
 export async function getStaticProps() {
   const about = await getSingleContentData('about');
@@ -48,6 +49,7 @@ export default function About({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const latestItems = timelineData.slice(0, 6).map(dataToTimeline);
   const rest = timelineData.slice(6).map(dataToTimeline);
+  const [summary, setSummary] = useState('More...');
 
   return (
     <Layout customMeta={{ title: 'About', description: `About laymonage.` }}>
@@ -74,9 +76,15 @@ export default function About({
         }
       >
         <Catalog border items={latestItems} />
-        <details>
+        <details
+          onToggle={(event) => {
+            (event.target as HTMLDetailsElement).hasAttribute('open')
+              ? setSummary('Less…')
+              : setSummary('More…');
+          }}
+        >
           <summary className="alike my-4">
-            <span className="ml-2">More...</span>
+            <span className="ml-4">{summary}</span>
           </summary>
           <Catalog border items={rest} />
         </details>
