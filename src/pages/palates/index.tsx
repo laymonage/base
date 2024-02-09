@@ -11,10 +11,11 @@ export async function getStaticProps() {
   delete palates.data;
   // @ts-expect-error test 2
   delete palates.slug;
+  console.log({ palates });
   return {
     props: {
       test: 'Test hmm',
-      palates,
+      palates: palates,
     },
   };
 }
@@ -41,6 +42,7 @@ export default function Palates({
         <p>Also new</p>
         <p>Another one</p>
         <p>Again?</p>
+        <p>Giving up</p>
       </Card>
     </Layout>
   );
