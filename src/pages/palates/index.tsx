@@ -6,6 +6,7 @@ import { InferGetStaticPropsType } from 'next';
 
 export async function getStaticProps() {
   const palates = await getSingleContentData('index', 'palates');
+  delete palates.content;
   return {
     props: {
       test: 'Test hmm',
@@ -28,6 +29,7 @@ export default function Palates({
           </h2>
         }
       >
+        <p>Please</p>
         <div className="markdown">
           <p>Test</p>
         </div>
