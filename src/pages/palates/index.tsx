@@ -6,6 +6,7 @@ import { InferGetStaticPropsType } from 'next';
 
 export async function getStaticProps() {
   const palates = await getSingleContentData('index', 'palates');
+  palates.content = 'Test';
   return {
     props: {
       palates,
