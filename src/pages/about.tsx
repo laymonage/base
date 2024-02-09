@@ -104,9 +104,9 @@ export default function About({
           country. There isn't even a marker on Bali.
         </p>
         <p className="mb-4">
-          If you were to ask me about the best places to visit in Indonesia, I'd
-          probably be the last person to ask. Let's hope this paragraph won't be
-          here for long!
+          If you were to ask someone about places to visit in Indonesia, I'd
+          probably be the last person you should ask. Let's hope this paragraph
+          won't be here for long!
         </p>
       </Card>
       <Card
