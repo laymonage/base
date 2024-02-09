@@ -54,6 +54,7 @@ export default function About({
   return (
     <Layout customMeta={{ title: 'About', description: `About laymonage.` }}>
       <Card
+        className="mb-8"
         header={
           <h2 id="me">
             <Link href="#me">{about.data.title}</Link>
@@ -63,9 +64,50 @@ export default function About({
         <div className="markdown">
           <MDXLayoutRenderer mdxSource={about.content as string} />
         </div>
-        <div className="my-6 flex justify-end">
+        <div className="mt-6 flex justify-end">
           <NowPlaying />
         </div>
+      </Card>
+      <Card
+        className="mb-8"
+        header={
+          <h2 id="places">
+            <Link href="#places">Places</Link>
+          </h2>
+        }
+      >
+        <p className="mb-4">
+          We have a world full of wonders, and it has always been my dream to
+          see as much of it as possible. Up until 2019, I've spent most of my
+          life in Jakarta, Indonesia, with very few short trips to visit some
+          friends and family, or to attend events. Circumstances didn't allow me
+          to leave Java (the island).
+        </p>
+        <p className="mb-4">
+          In 2019, I visited Malaysia to attend an event for three days. That
+          was the very first time I left my home country. Not long after, the
+          world went into a pandemic, so I didn't get to travel again.
+        </p>
+        <p className="mb-4">
+          Then I moved to the UK in late 2022 as part of my job. Since then,
+          I've had the opportunity to visit many other places the world has to
+          offer. I thought it'd be interesting to see them on a map, so here it
+          is!
+        </p>
+        <iframe
+          className="w-full min-h-96 max-h-screen my-8"
+          src="https://www.google.com/maps/d/embed?mid=1rWcLp6UVtUwmgJoHFWoMhll0lwFBV54&ehbc=2E312F&noprof=1"
+        />
+        <p className="mb-4">
+          Despite living the better part of my life in Indonesia, the map shows
+          you the sorry truth: I haven't had the chance to see much of my home
+          country. There isn't even a marker on Bali.
+        </p>
+        <p className="mb-4">
+          If you were to ask me about the best places to visit in Indonesia, I'd
+          probably be the last person to ask. Let's hope this paragraph won't be
+          here for long!
+        </p>
       </Card>
       <Card
         className="mb-8"
