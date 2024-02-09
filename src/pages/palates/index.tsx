@@ -1,21 +1,18 @@
 import Card from '@/components/Card';
 import Layout from '@/components/Layout';
 import Link from '@/components/Link';
-import { getSingleContentData } from '@/lib/content';
 import { InferGetStaticPropsType } from 'next';
 
 export async function getStaticProps() {
-  const palates = await getSingleContentData('index', 'palates');
-  palates.content = 'Test';
   return {
     props: {
-      palates,
+      test: 'Test hmm',
     },
   };
 }
 
 export default function Palates({
-  palates,
+  test,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <Layout
@@ -24,7 +21,7 @@ export default function Palates({
       <Card
         header={
           <h2 id="palates">
-            <Link href="#palates">{palates.data.title}</Link>
+            <Link href="#palates">{test}</Link>
           </h2>
         }
       >
