@@ -1,17 +1,16 @@
 import Card from '@/components/Card';
 import Layout from '@/components/Layout';
 import Link from '@/components/Link';
-import { getSingleContentData } from '@/lib/content';
 import { InferGetStaticPropsType } from 'next';
 
 export async function getStaticProps() {
-  const palates = await getSingleContentData('index', 'palates');
-  delete palates.content;
-  // @ts-expect-error test
-  delete palates.data;
-  // @ts-expect-error test 2
-  delete palates.slug;
-  console.log({ palates });
+  // const palates = await getSingleContentData('index', 'palates');
+  // delete palates.content;
+  // // @ts-expect-error test
+  // delete palates.data;
+  // // @ts-expect-error test 2
+  // delete palates.slug;
+  console.log({ palates: 'naon' });
   return {
     props: {
       test: 'Test hmm',
