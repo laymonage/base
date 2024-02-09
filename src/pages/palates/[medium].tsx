@@ -6,7 +6,10 @@ import Card from '@/components/Card';
 import Link from '@/components/Link';
 
 export async function getStaticPaths() {
-  const paths = getAllContentSlugs('palates', 'medium');
+  const paths = getAllContentSlugs('palates', 'medium').filter(
+    // boom
+    (v) => v.params.medium !== 'index',
+  );
   return {
     paths,
     fallback: false,
