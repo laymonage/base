@@ -3,6 +3,7 @@ import { ComponentProps } from 'react';
 
 export default function Link({
   href,
+  rel,
   ...rest
 }: Omit<ComponentProps<typeof NextLink>, 'href'> & { href: string }) {
   const isInternalLink = (href as string).startsWith('/');
@@ -23,7 +24,7 @@ export default function Link({
   return (
     <a
       target="_blank"
-      rel="noopener noreferrer nofollow"
+      rel={`noopener noreferrer nofollow ${rel || ''}`}
       href={href}
       {...rest}
     />
