@@ -1,7 +1,11 @@
 import { ElementType } from 'react';
 import Card from './Card';
 import Link from './Link';
-import { GitHub, Linkedin, Twitter } from 'react-feather';
+import {
+  IconBrandGithub,
+  IconBrandLinkedin,
+  IconBrandTwitter,
+} from '@tabler/icons-react';
 
 export interface ContactInfo {
   name: string;
@@ -11,6 +15,7 @@ export interface ContactInfo {
   links: Array<{
     url: string;
     name: string;
+    rel?: string;
     icon: ElementType;
   }>;
 }
@@ -25,17 +30,17 @@ export const data: ContactInfo = {
     {
       url: 'https://github.com/laymonage',
       name: 'GitHub',
-      icon: GitHub,
+      icon: IconBrandGithub,
     },
     {
       url: 'https://linkedin.com/in/laymonage',
       name: 'LinkedIn',
-      icon: Linkedin,
+      icon: IconBrandLinkedin,
     },
     {
       url: 'https://twitter.com/laymonage',
       name: 'Twitter',
-      icon: Twitter,
+      icon: IconBrandTwitter,
     },
   ],
 };

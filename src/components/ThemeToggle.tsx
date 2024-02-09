@@ -1,7 +1,7 @@
 import { useMounted } from '@/lib/hooks/mounted';
 import { useTheme } from 'next-themes';
 import { useCallback } from 'react';
-import { Moon, Sun } from 'react-feather';
+import { IconMoonFilled, IconSun } from '@tabler/icons-react';
 
 export default function ThemeToggle() {
   const mounted = useMounted();
@@ -20,9 +20,9 @@ export default function ThemeToggle() {
       onClick={handleThemeChange}
     >
       {theme === 'dark' ? (
-        <Moon width={24} height={24} fill="currentColor" />
+        <IconMoonFilled width={24} height={24} fill="currentColor" />
       ) : (
-        <Sun width={22} height={22} strokeWidth={2.5} />
+        <IconSun width={22} height={22} strokeWidth={2.5} />
       )}
     </button>
   ) : null;

@@ -1,7 +1,7 @@
 import { ComponentProps } from 'react';
 import Link from './Link';
 import clsx from 'clsx';
-import { ArrowRight } from 'react-feather';
+import { IconArrowRight } from '@tabler/icons-react';
 
 export default function CTA({
   className,
@@ -14,7 +14,7 @@ export default function CTA({
       {...props}
     >
       {children}
-      <ArrowRight width={20} height={20} />
+      <IconArrowRight width={20} height={20} />
     </Link>
   );
 }

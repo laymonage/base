@@ -16,7 +16,13 @@ import TrackPreview from './TrackPreview';
 import { AudioProvider } from '@/lib/providers/audio';
 import Link from './Link';
 import Search from './Search';
-import { ArrowDown, ArrowUp, BarChart, Clock, Music } from 'react-feather';
+import {
+  IconArrowDown,
+  IconArrowUp,
+  IconChartBar,
+  IconClock,
+  IconMusic,
+} from '@tabler/icons-react';
 import Duration from './Duration';
 import { TrackSimplified } from '@/lib/models/spotify';
 
@@ -123,7 +129,12 @@ const getColumns = (useTitle = true) => [
     ),
     header: () => (
       <span title="Duration">
-        <Clock aria-label="Duration" strokeWidth={3} width={16} height={16} />
+        <IconClock
+          aria-label="Duration"
+          strokeWidth={3}
+          width={16}
+          height={16}
+        />
       </span>
     ),
     meta: {
@@ -139,7 +150,7 @@ const getColumns = (useTitle = true) => [
     ),
     header: () => (
       <span title="Popularity">
-        <BarChart aria-label="Popularity" width={16} height={16} />
+        <IconChartBar aria-label="Popularity" width={16} height={16} />
       </span>
     ),
     meta: {
@@ -239,7 +250,12 @@ export default function SpotifyTracksTable({
           // a search query is specified.
           !virtualRows.length ? (
             <div className="flex h-full flex-col items-center justify-center gap-4">
-              <Music aria-hidden width={128} height={128} strokeWidth={1.5} />
+              <IconMusic
+                aria-hidden
+                width={128}
+                height={128}
+                strokeWidth={1.5}
+              />
               <p>
                 No tracks available
                 {globalFilter ? ' for the given search query' : ''}.
@@ -257,8 +273,14 @@ export default function SpotifyTracksTable({
                       const sortable = header.column.getCanSort();
                       const sortDirection = header.column.getIsSorted();
                       const sortInfo = {
-                        asc: { component: ArrowUp, otherLabel: 'descending' },
-                        desc: { component: ArrowDown, otherLabel: 'ascending' },
+                        asc: {
+                          component: IconArrowUp,
+                          otherLabel: 'descending',
+                        },
+                        desc: {
+                          component: IconArrowDown,
+                          otherLabel: 'ascending',
+                        },
                       }[sortDirection as string];
 
                       const buttonDirectionLabel =

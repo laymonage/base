@@ -17,7 +17,12 @@ import { getSpotifyDataURL } from '@/lib/spotify/data';
 import { InferGetStaticPropsType } from 'next';
 import { formatDate, relativeFormat } from '@/lib/datetime';
 import { ReactNode, useRef, useState } from 'react';
-import { ArrowDown, ArrowUp, BarChart, Music } from 'react-feather';
+import {
+  IconArrowDown,
+  IconArrowUp,
+  IconChartBar,
+  IconMusic,
+} from '@tabler/icons-react';
 import clsx from 'clsx';
 
 export async function getStaticProps() {
@@ -108,7 +113,7 @@ const getColumns = (useTitle = true) => [
     ),
     header: () => (
       <span title="Popularity">
-        <BarChart aria-label="Popularity" width={16} height={16} />
+        <IconChartBar aria-label="Popularity" width={16} height={16} />
       </span>
     ),
     meta: {
@@ -204,7 +209,12 @@ export default function Albums({
             // a search query is specified.
             !virtualRows.length ? (
               <div className="flex h-full flex-col items-center justify-center gap-4">
-                <Music aria-hidden width={128} height={128} strokeWidth={1.5} />
+                <IconMusic
+                  aria-hidden
+                  width={128}
+                  height={128}
+                  strokeWidth={1.5}
+                />
                 <p>
                   No tracks available
                   {globalFilter ? ' for the given search query' : ''}.
@@ -222,9 +232,12 @@ export default function Albums({
                         const sortable = header.column.getCanSort();
                         const sortDirection = header.column.getIsSorted();
                         const sortInfo = {
-                          asc: { component: ArrowUp, otherLabel: 'descending' },
+                          asc: {
+                            component: IconArrowUp,
+                            otherLabel: 'descending',
+                          },
                           desc: {
-                            component: ArrowDown,
+                            component: IconArrowDown,
                             otherLabel: 'ascending',
                           },
                         }[sortDirection as string];

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import clsx from 'clsx';
-import { Menu, X } from 'react-feather';
+import { IconMenu2, IconX } from '@tabler/icons-react';
 import Link from '@/components/Link';
 import { useScrollY } from '@/lib/hooks/scroll';
 import Logo from './icons/Logo.svg';
@@ -43,7 +43,11 @@ export default function Navigation() {
               className="alike ml-4 h-6 w-6 fill-current focus:outline-none sm:hidden"
               onClick={() => setOpen(!open)}
             >
-              {open ? <X strokeWidth={2.5} /> : <Menu strokeWidth={2.5} />}
+              {open ? (
+                <IconX strokeWidth={2.5} />
+              ) : (
+                <IconMenu2 strokeWidth={2.5} />
+              )}
             </button>
           </div>
         </div>

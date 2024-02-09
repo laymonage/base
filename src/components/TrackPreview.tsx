@@ -1,6 +1,9 @@
 import { useAudio } from '@/lib/providers/audio';
 import { useEffect, useRef } from 'react';
-import { Pause, Play } from 'react-feather';
+import {
+  IconPlayerPauseFilled,
+  IconPlayerPlayFilled,
+} from '@tabler/icons-react';
 
 interface TrackPreviewProps {
   number: number;
@@ -62,9 +65,9 @@ export default function TrackPreview({
       </span>
       <span className="hidden group-hover/row:inline group-focus-within:group-focus-visible:inline">
         {isPlaying ? (
-          <Pause fill="currentColor" width={16} height={16} />
+          <IconPlayerPauseFilled fill="currentColor" width={16} height={16} />
         ) : (
-          <Play fill="currentColor" width={16} height={16} />
+          <IconPlayerPlayFilled fill="currentColor" width={16} height={16} />
         )}
       </span>
       {previewUrl ? <audio ref={audio} src={previewUrl} /> : null}
