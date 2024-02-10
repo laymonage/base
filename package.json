@@ -39,7 +39,7 @@
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
     "@types/js-yaml": "^4.0.9",
-    "@types/node": "^20.11.16",
+    "@types/node": "^20.11.17",
     "@types/react": "^18.2.55",
     "@types/spotify-api": "^0.0.25",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
