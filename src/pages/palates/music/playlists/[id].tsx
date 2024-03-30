@@ -36,7 +36,7 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
     (res) => res.json(),
   );
 
-  const imageUrl = images[0]?.url;
+  const imageUrl = images?.[0]?.url || null;
   const spotifyUrl = external_urls.spotify;
 
   const tracks = tracksFull
@@ -44,7 +44,8 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
     .map(simplifyPlaylistTrack);
 
   const duration =
-    tracks.map((track) => track.duration_ms || 0).reduce((a, b) => a + b) || 0;
+    tracks.map((track) => track.duration_ms || 0).reduce((a, b) => a + b, 0) ||
+    0;
   return {
     props: { title, description, imageUrl, spotifyUrl, duration, tracks },
   };
@@ -77,11 +78,13 @@ export default function PlaylistTracks({
       <div className="bleed min-h-screen w-full max-w-4xl place-self-center">
         <div className="my-4 mb-14 flex flex-wrap items-end gap-8 sm:flex-nowrap">
           <div className="flex h-48 w-48 flex-shrink-0 items-center justify-center">
-            <img
-              className="aspect-square h-full w-full object-cover"
-              alt=""
-              src={imageUrl}
-            />
+            {imageUrl ? (
+              <img
+                className="aspect-square h-full w-full object-cover"
+                alt=""
+                src={imageUrl}
+              />
+            ) : null}
           </div>
           <Card header={title}>
             {richDescription ||
