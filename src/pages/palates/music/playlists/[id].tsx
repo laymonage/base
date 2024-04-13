@@ -40,7 +40,7 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
   const spotifyUrl = external_urls.spotify;
 
   const tracks = tracksFull
-    .filter(({ track }) => !!track)
+    .filter((playlistItem) => !!(playlistItem && playlistItem.track))
     .map(simplifyPlaylistTrack);
 
   const duration =
