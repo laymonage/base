@@ -1,4 +1,5 @@
 import {
+  ColumnDef,
   Row,
   SortingState,
   createColumnHelper,
@@ -23,7 +24,9 @@ import {
 
 const columnHelper = createColumnHelper<SpotifyApi.ArtistObjectFull>();
 
-function getColumnMeta(columnDef: ReturnType<typeof columnHelper.display>) {
+function getColumnMeta(
+  columnDef: ColumnDef<SpotifyApi.ArtistObjectFull, unknown>,
+) {
   return columnDef.meta as Record<string, string>;
 }
 

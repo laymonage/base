@@ -1,4 +1,5 @@
 import {
+  ColumnDef,
   Row,
   SortingState,
   createColumnHelper,
@@ -34,7 +35,7 @@ export async function getStaticProps() {
   };
 }
 
-function getColumnMeta(columnDef: ReturnType<typeof columnHelper.display>) {
+function getColumnMeta(columnDef: ColumnDef<AlbumSimplified, unknown>) {
   return columnDef.meta as Record<string, string>;
 }
 

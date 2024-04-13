@@ -1,5 +1,6 @@
 import { formatDate, relativeFormat } from '@/lib/datetime';
 import {
+  ColumnDef,
   Row,
   SortingState,
   createColumnHelper,
@@ -28,7 +29,7 @@ import { TrackSimplified } from '@/lib/models/spotify';
 
 const columnHelper = createColumnHelper<TrackSimplified>();
 
-function getColumnMeta(columnDef: ReturnType<typeof columnHelper.display>) {
+function getColumnMeta(columnDef: ColumnDef<TrackSimplified, unknown>) {
   return columnDef.meta as Record<string, string>;
 }
 
