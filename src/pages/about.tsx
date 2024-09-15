@@ -120,9 +120,11 @@ export default function About({
         <Catalog border items={latestItems} />
         <details
           onToggle={(event) => {
-            (event.target as HTMLDetailsElement).hasAttribute('open')
-              ? setSummary('Less…')
-              : setSummary('More…');
+            setSummary(
+              (event.target as HTMLDetailsElement).hasAttribute('open')
+                ? 'Less…'
+                : 'More…',
+            );
           }}
         >
           <summary className="alike my-4">

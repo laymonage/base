@@ -47,7 +47,11 @@ function audioReducer(state: AudioState, action: AudioAction) {
       state.audio?.pause();
       return { ...state, playing: false };
     case 'TOGGLE':
-      state.playing ? state.audio?.pause() : state.audio?.play();
+      if (state.playing) {
+        state.audio?.pause();
+      } else {
+        state.audio?.play();
+      }
       return { ...state, playing: !state.playing };
     case 'SET_SRC':
       if (state.audio) {
