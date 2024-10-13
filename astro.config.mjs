@@ -14,4 +14,13 @@ import tailwind from '@astrojs/tailwind';
 export default defineConfig({
   site: 'https://example.com',
   integrations: [mdx(), sitemap(), react(), icon(), tailwind()],
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: 'modern-compiler',
+        },
+      },
+    },
+  },
 });
