@@ -8,8 +8,10 @@ import react from '@astrojs/react';
 
 import icon from 'astro-icon';
 
+import tailwind from '@astrojs/tailwind';
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://example.com',
-  integrations: [mdx(), sitemap(), react(), icon()],
+  integrations: [mdx(), sitemap(), react(), icon(), tailwind()],
 });
