@@ -1,8 +1,8 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
 import Contact from '../components/Contact.astro';
-import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Navigation from '../components/Navigation.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 ---
 
@@ -12,7 +12,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
   </head>
   <body>
-    <Header />
+    <Navigation />
     <main class="flex w-full flex-col items-center p-8 sm:mt-20">
       <Contact />
     </main>

@@ -1,0 +1,73 @@
+---
+import { Icon } from 'astro-icon/components';
+import Link from './Link.astro';
+
+const menu = ['posts', 'thoughts', 'projects', 'palates', 'about'];
+---
+
+<nav role="navigation" class="mx-auto max-w-4xl">
+  <div
+    class="ease fixed bottom-0 z-20 flex w-full max-w-4xl transform flex-col-reverse bg-white bg-opacity-50 py-3 backdrop-blur backdrop-filter transition-transform duration-300 dark:bg-gray-800 dark:bg-opacity-50 sm:top-0 sm:bottom-auto sm:flex-row sm:items-center sm:justify-between shadow"
+  >
+    <div class="mx-4 flex flex-grow items-center justify-between">
+      <Link
+        href="/"
+        aria-label="Home"
+        class="mr-2 h-10 w-10 fill-current text-blue-700 focus:outline-none dark:text-blue-100"
+      >
+        <Icon width="40" height="40" name="logo" />
+      </Link>
+      <div class="flex items-center justify-between">
+        <!-- TODO: ThemeToggle /-->
+        <button
+          data-l-nav-toggle
+          aria-label="Toggle navigation menu"
+          aria-expanded="false"
+          type="button"
+          class="alike ml-4 group fill-current focus:outline-none sm:hidden"
+        >
+          <Icon
+            stroke-width={2.5}
+            name="tabler:x"
+            class="w-6 h-6 hidden group-aria-expanded:block"
+          />
+          <Icon
+            stroke-width={2.5}
+            name="tabler:menu-2"
+            class="w-6 h-6 block group-aria-expanded:hidden"
+          />
+        </button>
+      </div>
+    </div>
+    <div
+      data-l-nav-items
+      class="mr-0 px-3 pb-2 hidden sm:mr-4 sm:flex sm:items-center sm:p-0"
+    >
+      {
+        menu.map((m) => (
+          <Link
+            href={`/${m}`}
+            class="mb-2 block rounded p-2 font-semibold capitalize hover:bg-blue-100 hover:bg-opacity-50 focus:bg-blue-100 focus:bg-opacity-50 focus:outline-none dark:hover:bg-gray-700 dark:hover:bg-opacity-50 dark:focus:bg-gray-700 dark:focus:bg-opacity-50 sm:mb-0 sm:ml-4 sm:first:ml-0"
+          >
+            {m}
+          </Link>
+        ))
+      }
+    </div>
+  </div>
+</nav>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>(
+    '[data-l-nav-toggle]',
+  );
+  const navItems = document.querySelector<HTMLDivElement>('[data-l-nav-items]');
+
+  let open = false;
+
+  toggle!.addEventListener('click', () => {
+    open = !open;
+    toggle!.setAttribute('aria-expanded', `${open}`);
+    navItems!.classList.toggle('hidden', !open);
+  });
+</script>
