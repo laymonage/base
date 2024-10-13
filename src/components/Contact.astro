@@ -1,0 +1,69 @@
+---
+import { Icon } from 'astro-icon/components';
+import Card from './Card.astro';
+import Link from './Link.astro';
+
+const { alias, name, description, links } = {
+  alias: 'laymonage',
+  name: 'Sage Abdullah',
+  description: 'I build things up and break them down in the open.',
+  links: [
+    {
+      url: 'https://github.com/laymonage',
+      name: 'GitHub',
+      icon: 'tabler:brand-github',
+    },
+    {
+      url: 'https://linkedin.com/in/laymonage',
+      name: 'LinkedIn',
+      icon: 'tabler:brand-linkedin',
+    },
+    {
+      url: 'https://twitter.com/laymonage',
+      name: 'Twitter',
+      icon: 'tabler:brand-twitter',
+    },
+    {
+      url: 'https://fosstodon.org/@laymonage',
+      name: 'Fosstodon',
+      rel: 'me',
+      icon: 'tabler:brand-mastodon',
+    },
+    {
+      url: 'https://steamcommunity.com/id/laymonage',
+      name: 'Steam',
+      icon: 'tabler:brand-steam',
+    },
+  ],
+} as const;
+---
+
+<Card
+  class="mx-auto flex min-h-[calc(100vh-6rem)] max-w-lg flex-col justify-center sm:-mt-20 sm:min-h-[calc(100vh-4rem)]"
+>
+  <strong slot="header">{alias}</strong>
+  {
+    name && (
+      <Fragment slot="subtitle">
+        <span class="mr-1 text-gray-500 sm:ml-4"> is </span>
+        <span>{name}</span>
+      </Fragment>
+    )
+  }
+
+  <div class="mb-8 text-left text-xl sm:text-2xl">{description}</div>
+  <div class="flex items-center">
+    {
+      links.map((link) => (
+        <Link
+          href={link.url}
+          rel={'rel' in link ? link.rel : undefined}
+          aria-label={link.name}
+          class="ml-3 h-8 w-8 rounded fill-current p-1 first:ml-0 hover:bg-blue-100 hover:text-blue-700 focus:bg-blue-100 focus:text-blue-700 focus:outline-none dark:text-blue-200 dark:hover:bg-gray-700 dark:hover:text-blue-100 dark:focus:bg-gray-700 dark:focus:text-blue-100"
+        >
+          <Icon width="24" height="24" name={link.icon} />
+        </Link>
+      ))
+    }
+  </div>
+</Card>

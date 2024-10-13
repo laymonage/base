@@ -1,0 +1,26 @@
+---
+const { href, rel, ...rest } = Astro.props;
+const isInternalLink = (href as string).startsWith('/');
+const isAnchorLink = (href as string).startsWith('#');
+---
+
+{
+  !href ? (
+    <span {...rest}>
+      <slot />
+    </span>
+  ) : isInternalLink || isAnchorLink ? (
+    <a href={href} {...rest}>
+      <slot />
+    </a>
+  ) : (
+    <a
+      target="_blank"
+      rel={`noopener noreferrer nofollow ${rel || ''}`}
+      href={href}
+      {...rest}
+    >
+      <slot />
+    </a>
+  )
+}

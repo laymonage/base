@@ -1,0 +1,24 @@
+<div class:list={['w-full', Astro.props.class]}>
+  {
+    Astro.slots.has('header') ? (
+      <div
+        class:list={[
+          'mb-8 text-4xl text-blue-800 dark:text-blue-200 sm:flex-row sm:text-5xl',
+          {
+            'flex flex-col items-baseline': !!(
+              Astro.slots.has('header') && Astro.slots.has('subtitle')
+            ),
+          },
+        ]}
+      >
+        <slot name="header" />
+        {Astro.slots.has('subtitle') ? (
+          <div class="text-2xl sm:text-3xl">
+            <slot name="subtitle" />
+          </div>
+        ) : null}
+      </div>
+    ) : null
+  }
+  <slot />
+</div>

@@ -1,0 +1,131 @@
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/source-sans-pro-latin-reg-400-v14.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/fonts/source-sans-pro-latin-reg-600-v14.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/source-sans-pro-latin-itl-400-v14.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/fonts/source-sans-pro-latin-itl-600-v14.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
+html {
+  min-width: 320px;
+  scrollbar-color: rgb(156, 163, 175) transparent;
+  scrollbar-width: thin;
+  overflow-y: scroll;
+
+  &.dark {
+    scrollbar-color: rgb(55, 65, 81) transparent;
+  }
+}
+
+::selection {
+  @apply bg-blue-500 text-gray-100;
+}
+
+::-webkit-scrollbar {
+  @apply h-2 w-2 bg-transparent;
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner {
+  @apply rounded-full bg-white dark:bg-gray-900;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-gray-400 hover:bg-gray-500 dark:bg-gray-700 dark:hover:bg-gray-600;
+}
+
+* {
+  @apply outline-offset-4;
+}
+
+body {
+  &,
+  .bg-primary {
+    @apply bg-white text-lg dark:bg-gray-900;
+  }
+
+  &,
+  & .text-primary {
+    @apply font-sans text-gray-700 dark:text-gray-300;
+  }
+}
+
+.text-secondary {
+  @apply text-gray-500 dark:text-gray-400;
+}
+
+a,
+.alike {
+  @apply text-blue-800 hover:text-blue-700 focus:text-blue-700 dark:text-blue-300 dark:hover:text-blue-200 dark:focus:text-blue-200;
+}
+
+[id] {
+  scroll-margin-top: 6rem;
+}
+
+.bg {
+  background-image: url('/bg.svg');
+  z-index: -1;
+  content: '';
+  will-change: transform;
+}
+
+.reading-wrapper,
+.reading-wrapper > .markdown {
+  @apply grid w-full;
+  grid-template-columns: 1fr min(69ch, 100%) 1fr;
+}
+
+.reading-wrapper > *,
+.reading-wrapper > .markdown > * {
+  grid-column: 2;
+}
+
+.reading-wrapper .bleed,
+.reading-wrapper > .markdown {
+  grid-column: 1 / -1;
+}
+
+details summary {
+  @apply cursor-pointer;
+}
+
+details summary > * {
+  @apply inline;
+}
