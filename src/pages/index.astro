@@ -1,25 +1,8 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
 import Contact from '../components/Contact.astro';
-import Footer from '../components/Footer.astro';
-import Navigation from '../components/Navigation.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-  </head>
-  <body>
-    <Navigation />
-    <main class="flex w-full flex-col items-center p-8 sm:mt-20">
-      <Contact />
-    </main>
-    <Footer />
-    <div
-      class="bg fixed top-0 left-0 h-screen w-screen bg-cover bg-center opacity-40 2xl:opacity-100"
-    >
-    </div>
-  </body>
-</html>
+<BaseLayout>
+  <Contact />
+</BaseLayout>
