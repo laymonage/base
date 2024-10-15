@@ -13,7 +13,9 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
   <body>
     <Navigation />
     <main class="flex w-full flex-col items-center p-8 sm:mt-20">
-      <slot />
+      <div class="reading-wrapper">
+        <slot />
+      </div>
     </main>
     <Footer />
     <div
