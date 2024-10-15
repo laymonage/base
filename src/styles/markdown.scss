@@ -1,0 +1,160 @@
+.markdown {
+  @apply break-words text-gray-700 text-opacity-90 dark:text-gray-300;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply mt-8 font-semibold text-black dark:text-white;
+  }
+
+  h2 {
+    @apply text-2xl;
+  }
+
+  h3 {
+    @apply text-xl;
+  }
+
+  hr {
+    @apply my-4 mt-8;
+  }
+
+  p,
+  li,
+  .cta {
+    @apply mt-6;
+  }
+
+  ul,
+  ol {
+    @apply ml-8;
+  }
+
+  ul:not(.contains-task-list) {
+    @apply list-disc;
+  }
+
+  ol {
+    @apply list-decimal;
+  }
+
+  li {
+    @apply my-2;
+  }
+
+  blockquote {
+    @apply -mx-5 my-4 border-l-4 border-gray-400 border-opacity-20 pl-4 text-base italic;
+
+    > :first-child {
+      @apply mt-0;
+    }
+  }
+
+  a:not(.anchor) {
+    @apply underline;
+  }
+
+  div.pre {
+    @apply my-4;
+  }
+
+  code,
+  kbd {
+    @apply rounded bg-gray-500 bg-opacity-5 p-1;
+  }
+
+  p code,
+  li code {
+    @apply -mx-[1px] text-sm;
+  }
+
+  p code:not(a code),
+  li code:not(a code) {
+    @apply text-pink-600 dark:text-red-300;
+  }
+
+  p kbd,
+  li kbd {
+    @apply mx-1 inline-block rounded-lg py-[3px] px-[5px] align-middle text-xs text-pink-600 dark:text-pink-300;
+  }
+
+  pre code {
+    @apply block overflow-auto py-8 text-sm;
+  }
+
+  img,
+  video {
+    @apply mx-auto block rounded;
+  }
+
+  iframe,
+  img,
+  .mdx-image,
+  video {
+    @apply mt-8;
+  }
+
+  figure .mdx-image:not(:only-child) {
+    @apply mb-2;
+  }
+
+  .mdx-image {
+    @apply mx-auto flex justify-center;
+  }
+
+  figcaption {
+    @apply text-center text-sm;
+  }
+
+  /* MDX stuff */
+
+  .task-list-item {
+    input {
+      @apply -ml-2 mr-2;
+    }
+  }
+
+  .anchor {
+    @apply absolute -ml-6 w-6 cursor-pointer opacity-0 hover:opacity-100;
+    &:after {
+      @apply text-gray-400;
+      content: '#';
+    }
+  }
+
+  [id] {
+    &:hover > .anchor {
+      @apply opacity-100;
+    }
+  }
+
+  .remark-code-title {
+    @apply mt-4 rounded-t bg-gray-200 px-5 py-3 font-mono text-sm font-bold dark:bg-gray-700;
+  }
+
+  .remark-code-title + div > pre {
+    @apply mt-0 rounded-t-none;
+  }
+
+  .code-line {
+    @apply w-max border-l-4 border-transparent px-6;
+  }
+
+  .highlight-line {
+    @apply border-l-4 border-gray-500 bg-blue-200 bg-opacity-50 dark:bg-gray-700;
+  }
+
+  .line-number {
+    &:before {
+      @apply pr-4 text-gray-400;
+      content: attr(line);
+    }
+  }
+
+  .twitter-tweet {
+    @apply mx-auto;
+  }
+}

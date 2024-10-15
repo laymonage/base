@@ -4,6 +4,7 @@ import Card from '../components/Card.astro';
 import Link from '../components/Link.astro';
 import { timelineData } from '../content.old/about';
 import TimelineYear from '../components/TimelineYear.astro';
+import * as about from '../content/about.md';
 
 const latestItems = timelineData.slice(0, 6);
 const rest = timelineData.slice(6);
@@ -12,10 +13,10 @@ const rest = timelineData.slice(6);
 <BaseLayout>
   <Card class="mb-8">
     <h2 id="me" slot="header">
-      <Link href="#me">About me</Link>
+      <Link href="#me">{about.frontmatter.title}</Link>
     </h2>
     <div class="markdown">
-      <!-- <MDXLayoutRenderer mdxSource={about.content as string} /> -->
+      {(<about.Content />)}
     </div>
     <div class="mt-6 flex justify-end">
       <!-- <NowPlaying /> -->
