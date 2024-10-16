@@ -1,10 +1,12 @@
 ---
 import { getCollection } from 'astro:content';
+import { Icon } from 'astro-icon/components';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Card from '../components/Card.astro';
 import Link from '../components/Link.astro';
 import ListItem from '../components/ListItem.astro';
 import TimelineYear from '../components/TimelineYear.astro';
+import NowPlaying from '../components/NowPlaying';
 import * as about from '../../content/about.md';
 
 const timelineData = await getCollection('about');
@@ -21,7 +23,13 @@ const rest = timelineData.slice(6);
       {(<about.Content />)}
     </div>
     <div class="mt-6 flex justify-end">
-      <!-- <NowPlaying /> -->
+      <NowPlaying client:idle>
+        <Icon
+          name="spotify"
+          slot="icon"
+          class="text-black dark:text-white w-full h-full"
+        />
+      </NowPlaying>
     </div>
   </Card>
   <Card class="mb-8">
