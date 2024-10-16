@@ -1,11 +1,13 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Card from '../components/Card.astro';
 import Link from '../components/Link.astro';
+import ListItem from '../components/ListItem.astro';
 import TimelineYear from '../components/TimelineYear.astro';
-import { timelineData } from '../content/about';
-import * as about from '../content/about.md';
+import * as about from '../../content/about.md';
 
+const timelineData = await getCollection('about');
 const latestItems = timelineData.slice(0, 6);
 const rest = timelineData.slice(6);
 ---
@@ -62,12 +64,12 @@ const rest = timelineData.slice(6);
     <h2 id="timeline" slot="header">
       <Link href="#timeline">Timeline</Link>
     </h2>
-    <ol class="flex flex-col gap-6">
+    <ol>
       {
         latestItems.map((item) => (
-          <li class="after:w-full after:flex after:mt-6 after:border after:border-gray-400 after:border-opacity-20 last:after:hidden">
-            <TimelineYear {...item} />
-          </li>
+          <ListItem border>
+            <TimelineYear {...item.data} />
+          </ListItem>
         ))
       }
     </ol>
@@ -75,12 +77,12 @@ const rest = timelineData.slice(6);
       <summary class="alike my-4">
         <span class="ml-4">More...</span>
       </summary>
-      <ol class="flex flex-col gap-6">
+      <ol>
         {
           rest.map((item) => (
-            <li class="after:w-full after:flex after:mt-6 after:border after:border-gray-400 after:border-opacity-20 last:after:hidden">
-              <TimelineYear {...item} />
-            </li>
+            <ListItem border>
+              <TimelineYear {...item.data} />
+            </ListItem>
           ))
         }
       </ol>

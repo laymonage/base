@@ -1,0 +1,19 @@
+---
+interface Props {
+  border?: boolean;
+  class?: string;
+}
+const { border = false, class: className } = Astro.props;
+---
+
+<li
+  class:list={[
+    {
+      'after:w-full after:flex after:my-6 after:border after:border-gray-400 after:border-opacity-20 last:after:hidden':
+        border,
+    },
+    className,
+  ]}
+>
+  <slot />
+</li>
