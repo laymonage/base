@@ -50,7 +50,7 @@ const timelineYearSchema = z.object({
 export type TimelineYear = z.infer<typeof timelineYearSchema>;
 
 const about = defineCollection({
-  loader: file('./content/about.json'),
+  loader: file('./src/content/data/about.json'),
   schema: timelineYearSchema,
 });
 
