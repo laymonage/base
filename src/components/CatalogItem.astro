@@ -1,0 +1,52 @@
+---
+interface Item {
+  id: number;
+  shown: boolean;
+  url: string;
+  image: {
+    src: string;
+    lowContrast?: boolean;
+  };
+  title: string;
+  description: string;
+  details: string[];
+}
+
+interface Props {
+  item: Item;
+}
+
+const { item } = Astro.props;
+---
+
+<div class="flex flex-col items-center sm:flex-row">
+  {
+    item.image ? (
+      <div class="mb-6 mr-0 w-9/12 rounded p-2 sm:mb-0 sm:mr-8 sm:w-5/12">
+        <div class="relative h-48 sm:h-36">
+          <img
+            class:list={[
+              'rounded h-full object-contain',
+              { 'dark:bg-white': item.image.lowContrast },
+            ]}
+            src={item.image.src}
+            alt={item.title}
+            title={item.title}
+          />
+        </div>
+      </div>
+    ) : null
+  }
+  <div class="flex w-full flex-col justify-between">
+    <h3 class="text-2xl">
+      <a
+        href={item.url}
+        class="dark:text-blue-200 not-prose"
+        rel="noreferrer noopener nofollow"
+      >
+        <strong>{item.title}</strong>
+      </a>
+    </h3>
+    <Fragment set:html={item.description} />
+  </div>
+</div>

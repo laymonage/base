@@ -1,3 +1,4 @@
+import { createMarkdownProcessor } from '@astrojs/markdown-remark';
 import { defineCollection, z } from 'astro:content';
 import { file, glob } from 'astro/loaders';
 
@@ -53,4 +54,35 @@ const about = defineCollection({
   schema: timelineYearSchema,
 });
 
-export const collections = { gsoc, logs, posts, thoughts, about };
+const projectSchema = z.object({
+  id: z.number(),
+  shown: z.boolean(),
+  image: z.object({
+    src: z.string(),
+    lowContrast: z.boolean().optional(),
+  }),
+  title: z.string(),
+  url: z.string(),
+  description: z.string(),
+  details: z.array(z.string()),
+});
+
+const projectGroupSchema = z.object({
+  id: z.number(),
+  shown: z.boolean(),
+  type: z.string(),
+  anchor: z.string(),
+  data: z.array(projectSchema),
+});
+
+const projects = defineCollection({
+  loader: file('./src/content/data/projects.json'),
+  schema: projectGroupSchema,
+});
+
+const markdownProcessor = createMarkdownProcessor();
+
+export const md = async (content: string) =>
+  (await (await markdownProcessor).render(content)).code;
+
+export const collections = { gsoc, logs, posts, thoughts, about, projects };

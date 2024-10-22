@@ -1,0 +1,44 @@
+---
+import { getCollection } from 'astro:content';
+import { md } from '../content/config';
+import Card from '../components/Card.astro';
+import Link from '../components/Link.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ListItem from '../components/ListItem.astro';
+import CatalogItem from '../components/CatalogItem.astro';
+
+const projects = await Promise.all(
+  (await getCollection('projects'))
+    .filter(({ data: { shown } }) => shown)
+    .map(async ({ data: group }) => ({
+      ...group,
+      data: await Promise.all(
+        group.data
+          .filter(({ shown }) => shown)
+          .map(async (item) => ({
+            ...item,
+            description: await md(item.description),
+          })),
+      ),
+    })),
+);
+---
+
+<BaseLayout>
+  {
+    projects.map((group) => (
+      <Card class="mx-auto my-16 w-full first:mt-0">
+        <h2 id={group.anchor} slot="header">
+          <Link href={`#${group.anchor}`}>{group.type} projects</Link>
+        </h2>
+        <ol>
+          {group.data.map((item) => (
+            <ListItem border>
+              <CatalogItem item={item} />
+            </ListItem>
+          ))}
+        </ol>
+      </Card>
+    ))
+  }
+</BaseLayout>
