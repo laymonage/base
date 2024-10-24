@@ -1,0 +1,73 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Card from '../../components/Card.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import Link from '../../components/Link.astro';
+import ListItem from '../../components/ListItem.astro';
+
+const posts = (await getCollection('posts')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+const showTags = false; // FIXME
+---
+
+<BaseLayout title="Posts" description="All posts by laymonage.">
+  <Card>
+    <h1 id="posts" slot="header">
+      <Link href="#posts">Posts</Link>
+    </h1>
+    <!-- <Search onChange={handleSearch} /> -->
+  </Card>
+  {
+    posts.length ? (
+      <ol class="my-8">
+        {posts.map((post) => (
+          <ListItem border>
+            <Link
+              href={`/posts/${post.id}`}
+              class="text-gray-700 dark:text-gray-300"
+            >
+              <Card>
+                <div class="flex flex-col sm:flex-row gap-6 sm:gap-8">
+                  {post.data.image ? (
+                    <div class="rounded p-4 dark:bg-gray-700 sm:w-48">
+                      <div class="relative my-auto h-48 sm:h-full">
+                        <img
+                          src={post.data.image}
+                          alt={post.data.title}
+                          title={post.data.title}
+                          class="rounded w-0 h-0 min-w-full min-h-full max-w-full max-h-full object-contain mx-auto"
+                        />
+                      </div>
+                    </div>
+                  ) : null}
+                  <div class="flex w-full flex-col justify-between sm:w-9/12">
+                    <div>
+                      <div class="mb-4 flex flex-col justify-between">
+                        <h2 class="text-xl font-semibold">{post.data.title}</h2>
+                        <FormattedDate date={post.data.date} />
+                      </div>
+                      <p>{post.data.description}</p>
+                    </div>
+                    {showTags && post.data.tags?.length ? (
+                      <div class="flex">
+                        {post.data.tags.map((tag) => (
+                          <span class="ml-2 rounded border-2 border-gray-500 bg-gray-400 bg-opacity-20 p-1 first:ml-0">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    ) : null}
+                  </div>
+                </div>
+              </Card>
+            </Link>
+          </ListItem>
+        ))}
+      </ol>
+    ) : (
+      <Card class="my-8 text-center">No posts found matching your query.</Card>
+    )
+  }
+</BaseLayout>

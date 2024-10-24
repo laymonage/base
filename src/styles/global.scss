@@ -107,18 +107,18 @@ a,
 }
 
 .reading-wrapper,
-.reading-wrapper > .markdown {
+.reading-wrapper .markdown {
   @apply grid w-full;
   grid-template-columns: 1fr min(69ch, 100%) 1fr;
 }
 
-.reading-wrapper > *,
-.reading-wrapper > .markdown > * {
+.reading-wrapper *,
+.reading-wrapper .markdown * {
   grid-column: 2;
 }
 
 .reading-wrapper .bleed,
-.reading-wrapper > .markdown {
+.reading-wrapper .markdown {
   grid-column: 1 / -1;
 }
 

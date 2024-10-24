@@ -3,19 +3,24 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Navigation from '../components/Navigation.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+const { description = SITE_DESCRIPTION, title = '' } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <BaseHead
+      title={title ? `${title} | ${SITE_TITLE}` : SITE_TITLE}
+      description={description}
+    />
   </head>
   <body>
     <Navigation />
-    <main class="flex w-full flex-col items-center p-8 sm:mt-20">
-      <div class="reading-wrapper">
-        <slot />
-      </div>
+    <main
+      class="flex w-full flex-col items-center p-8 sm:mt-20 reading-wrapper"
+    >
+      <slot />
     </main>
     <Footer />
     <div
