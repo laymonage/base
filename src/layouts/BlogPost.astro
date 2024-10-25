@@ -3,9 +3,10 @@ import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 
-type PostData = CollectionEntry<'posts'>['data'];
+type PostData = Omit<CollectionEntry<'posts'>['data'], 'date'>;
 
 interface Props extends PostData {
+  date: Date | string;
   readingTime?: string;
 }
 
@@ -20,10 +21,19 @@ const { title, description, date, readingTime, tags = [] } = Astro.props;
       >
         {title}
       </h1>
-      <div class="mb-4 flex justify-between">
-        <FormattedDate date={date} />
-        {readingTime && <span>{readingTime}</span>}
-      </div>
+      {
+        (date || readingTime) && (
+          <div class="mb-4 flex justify-between">
+            {date &&
+              (typeof date === 'string' ? (
+                <span>{date}</span>
+              ) : (
+                <FormattedDate date={date} />
+              ))}
+            {readingTime && <span>{readingTime}</span>}
+          </div>
+        )
+      }
       {
         tags.length ? (
           <div class="mb-16">
