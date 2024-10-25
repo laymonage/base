@@ -1,5 +1,5 @@
 import { createMarkdownProcessor } from '@astrojs/markdown-remark';
-import { defineCollection, z } from 'astro:content';
+import { defineCollection, getCollection, z } from 'astro:content';
 import { file, glob } from 'astro/loaders';
 
 const postsSchema = z.object({
@@ -18,14 +18,6 @@ const gsoc = defineCollection({
   schema: postsSchema,
 });
 
-const logs = defineCollection({
-  loader: glob({ pattern: '**/[^_]*.md', base: './content/logs' }),
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-  }),
-});
-
 const posts = defineCollection({
   loader: glob({ pattern: '**/[^_]*.md', base: './content/posts' }),
   schema: postsSchema,
@@ -35,6 +27,39 @@ const thoughts = defineCollection({
   loader: glob({ pattern: '**/[^_]*.md', base: './content/thoughts' }),
   schema: postsSchema,
 });
+
+// Logs
+
+export const parseLogSlug = (slug: string) => {
+  const [year, week] = slug.split('w');
+  return { year: +`20${year}`, week: +week };
+};
+
+export const humanizeLogSlug = (slug: string) => {
+  const { year, week } = parseLogSlug(slug);
+  return `${year} Week ${week}`;
+};
+
+const logs = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.md', base: './content/logs' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+  }),
+});
+
+export const getGroupedLogs = async () =>
+  Object.entries(
+    Object.groupBy(
+      (await getCollection('logs'))
+        .map((log) => ({
+          ...log,
+          data: { ...log.data, ...parseLogSlug(log.id) },
+        }))
+        .sort((a, b) => b.data.year - a.data.year || b.data.week - a.data.week),
+      ({ data: { year } }) => year,
+    ),
+  ).sort(([a], [b]) => +b - +a);
 
 const timelineYearSchema = z.object({
   id: z.number(),
