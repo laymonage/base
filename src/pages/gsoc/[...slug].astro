@@ -1,0 +1,20 @@
+---
+import { type CollectionEntry, getCollection } from 'astro:content';
+import readingTime from 'reading-time';
+import BlogPost from '../../layouts/BlogPost.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('gsoc');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: post,
+  }));
+}
+type Props = CollectionEntry<'posts'>;
+
+const post = Astro.props;
+---
+
+<BlogPost {...post.data} readingTime={readingTime(post.rendered!.html).text}>
+  {post?.rendered?.html && <Fragment set:html={post.rendered.html} />}
+</BlogPost>

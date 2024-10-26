@@ -1,0 +1,63 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Card from '../../components/Card.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import Link from '../../components/Link.astro';
+import ListItem from '../../components/ListItem.astro';
+
+const posts = (await getCollection('gsoc')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+
+<BaseLayout
+  title="Google Summer of Code"
+  description="The documentation of my Google Summer of Code 2019 journey with Django Software Foundation."
+>
+  <Card>
+    <h1 id="gsoc-2019" slot="header">
+      <Link href="#gsoc-2019">GSoC 2019 blog</Link>
+    </h1>
+    <!-- <Search onChange={handleSearch} /> -->
+    <p class="mb-8">
+      In 2019, I participated in the
+      <Link href="https://g.co/gsoc">Google Summer of Code (GSoC)</Link>
+      program and implemented the cross-DB
+      <Link href="https://github.com/django/django/pull/12392">JSONField</Link>.
+      This is the documentation of my journey. These posts were originally
+      hosted on <Link href="https://gsoc.laymonage.com">a separate blog</Link>.
+    </p>
+  </Card>
+  {
+    posts.length ? (
+      <ol class="my-8 flex flex-col gap-6">
+        {posts.map((post) => (
+          <ListItem>
+            <Link
+              href={`/gsoc/${post.id}`}
+              class="text-gray-700 dark:text-gray-300"
+            >
+              <Card>
+                <div class="flex flex-col">
+                  <div class="mb-2 flex justify-between flex-col flex-wrap gap-2 sm:flex-row">
+                    <h2 class="text-xl font-semibold">{post.data.title}</h2>
+                    <FormattedDate
+                      date={post.data.date}
+                      format={{ month: 'long', day: 'numeric' }}
+                    />
+                  </div>
+                  <p class="text-gray-700 dark:text-gray-300">
+                    {post.data.description}
+                  </p>
+                </div>
+              </Card>
+            </Link>
+          </ListItem>
+        ))}
+      </ol>
+    ) : (
+      <Card class="my-8 text-center">No posts found matching your query.</Card>
+    )
+  }
+</BaseLayout>
