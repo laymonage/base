@@ -3,6 +3,7 @@ interface Props {
   date: Date;
   locale?: string;
   format?: Intl.DateTimeFormatOptions;
+  class?: string;
 }
 
 const {
@@ -13,9 +14,10 @@ const {
     month: 'long',
     day: 'numeric',
   },
+  class: className,
 } = Astro.props;
 ---
 
-<time datetime={date.toISOString()}>
+<time class={className} datetime={date.toISOString()}>
   {date.toLocaleDateString(locale, format)}
 </time>
