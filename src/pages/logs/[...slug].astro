@@ -1,15 +1,12 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
+import { type CollectionEntry } from 'astro:content';
+import { getContentStaticPaths } from '../../content/config';
 import readingTime from 'reading-time';
 import BlogPost from '../../layouts/BlogPost.astro';
 import { humanizeLogSlug } from '../../content/config';
 
 export async function getStaticPaths() {
-  const logs = await getCollection('logs');
-  return logs.map((log) => ({
-    params: { slug: log.id },
-    props: log,
-  }));
+  return await getContentStaticPaths('logs');
 }
 type Props = CollectionEntry<'logs'>;
 
@@ -21,5 +18,5 @@ const log = Astro.props;
   date={humanizeLogSlug(log.id)}
   readingTime={readingTime(log.rendered!.html).text}
 >
-  {log?.rendered?.html && <Fragment set:html={log.rendered.html} />}
+  <Fragment set:html={log.rendered!.html} />
 </BlogPost>

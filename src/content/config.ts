@@ -1,5 +1,10 @@
 import { createMarkdownProcessor } from '@astrojs/markdown-remark';
-import { defineCollection, getCollection, z } from 'astro:content';
+import {
+  defineCollection,
+  getCollection,
+  z,
+  type AnyEntryMap,
+} from 'astro:content';
 import { file, glob } from 'astro/loaders';
 
 const postsSchema = z.object({
@@ -27,6 +32,13 @@ const thoughts = defineCollection({
   loader: glob({ pattern: '**/[^_]*.md', base: './content/thoughts' }),
   schema: postsSchema,
 });
+
+export const getSortedCollection = async <C extends keyof AnyEntryMap>(
+  collection: C,
+) =>
+  (await getCollection(collection)).sort(
+    (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+  );
 
 // Logs
 
@@ -60,6 +72,14 @@ export const getGroupedLogs = async () =>
       ({ data: { year } }) => year,
     ),
   ).sort(([a], [b]) => +b - +a);
+
+export const getContentStaticPaths = async <C extends keyof AnyEntryMap>(
+  collection: C,
+) =>
+  (await getCollection(collection)).map((entry) => ({
+    params: { slug: entry.id },
+    props: entry,
+  }));
 
 const timelineYearSchema = z.object({
   id: z.number(),
