@@ -9,41 +9,41 @@ const logs = await getGroupedLogs();
 ---
 
 <BaseLayout title="Logs" description="All logs by laymonage.">
-  <Card>
+  <Card class="prose prose-lg sm:prose-xl">
     <h1 id="logs" slot="header">
       <Link href="#logs">Logs</Link>
     </h1>
-  </Card>
-  <p>
-    These were logs that contain my life updates between 2021 and 2022. If
-    things were not moving too fast, a new log would be up every Monday. Some of
-    these might be shorter than a paragraph, and some might be a few articles
-    worth of words. Some might make sense, some might not. Some might be useful,
-    some might make you wonder why you're reading these. Make of them what you
-    will.
-  </p>
+    <p>
+      These were logs that contain my life updates between 2021 and 2022. If
+      things were not moving too fast, a new log would be up every Monday. Some
+      of these might be shorter than a paragraph, and some might be a few
+      articles worth of words. Some might make sense, some might not. Some might
+      be useful, some might make you wonder why you're reading these. Make of
+      them what you will.
+    </p>
 
-  <p class="mt-4">
-    Since then, I've moved on from writing these weekly logs to writing an
-    irregular series of <Link href="/thoughts">thoughts</Link>.
-  </p>
+    <p>
+      Since then, I've moved on from writing these weekly logs to writing an
+      irregular series of <Link href="/thoughts">thoughts</Link>.
+    </p>
+  </Card>
 
   {
     logs.length > 0 ? (
       logs.map(([year, logs], index) => (
         <details open={index === 0}>
-          <summary class="mt-6 text-2xl font-semibold text-gray-800 marker:text-xl dark:text-gray-100">
+          <summary class="mt-6 text-3xl font-semibold text-gray-800 dark:text-gray-100">
             <h2 class="ml-2 align-text-top">{year}</h2>
           </summary>
-          <ol class="ml-5 list-disc">
+          <ol class="ml-6 list-disc">
             {logs!.map((log) => (
               <ListItem>
                 <Link
                   href={`/logs/${log.id}`}
-                  class="mt-4 block text-gray-700 dark:text-gray-300"
+                  class="mt-6 block text-gray-700 dark:text-gray-300"
                 >
-                  <h3>Week {log.data.week}</h3>
-                  <h2 class="text-xl font-semibold">{log.data.title}</h2>
+                  <h2 class="text-lg">Week {log.data.week}</h2>
+                  <h3 class="text-2xl font-semibold">{log.data.title}</h3>
                 </Link>
               </ListItem>
             ))}

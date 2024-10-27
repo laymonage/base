@@ -3,7 +3,7 @@
     Astro.slots.has('header') ? (
       <div
         class:list={[
-          'mb-8 text-4xl text-blue-800 dark:text-blue-200 sm:flex-row sm:text-5xl',
+          'mb-8 text-4xl text-blue-800 dark:text-blue-200 sm:flex-row sm:text-5xl not-prose',
           {
             'flex flex-col items-baseline': !!(
               Astro.slots.has('header') && Astro.slots.has('subtitle')

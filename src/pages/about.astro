@@ -19,7 +19,7 @@ const rest = timelineData.slice(6);
     <h2 id="me" slot="header">
       <Link href="#me">{about.frontmatter.title}</Link>
     </h2>
-    <div class="markdown">
+    <div class="prose prose-lg sm:prose-xl">
       {(<about.Content />)}
     </div>
     <div class="mt-6 flex justify-end">
@@ -32,23 +32,23 @@ const rest = timelineData.slice(6);
       </NowPlaying>
     </div>
   </Card>
-  <Card class="mb-8">
+  <Card class="mb-8 prose prose-lg sm:prose-xl">
     <h2 id="places" slot="header">
       <Link href="#places">Places</Link>
     </h2>
-    <p class="mb-4">
+    <p>
       We have a world full of wonders, and it has always been my dream to see as
       much of it as possible. Up until 2019, I've spent most of my life in
       Jakarta, Indonesia, with very few short trips to visit some friends and
       family, or to attend events. Circumstances didn't allow me to leave Java
       (the island).
     </p>
-    <p class="mb-4">
+    <p>
       In 2019, I visited Malaysia to attend an event for three days. That was
       the very first time I left my home country. Not long after, the world went
       into a pandemic, so I didn't get to travel again.
     </p>
-    <p class="mb-4">
+    <p>
       Then I moved to the UK in late 2022 as part of my job. Since then, I've
       had the opportunity to visit many other places the world has to offer. I
       thought it'd be interesting to see them on a map, so here it is!
@@ -57,18 +57,20 @@ const rest = timelineData.slice(6);
       class="w-full min-h-96 max-h-screen my-8 rounded"
       src="https://www.google.com/maps/d/embed?mid=1rWcLp6UVtUwmgJoHFWoMhll0lwFBV54&ehbc=2E312F&noprof=1"
     ></iframe>
-    <p class="mb-4">
+    <p>
       Despite living the better part of my life in Indonesia, the map shows you
       the sorry truth: I haven't had the chance to see much of my home country.
       There isn't even a marker on Bali.
     </p>
-    <p class="mb-4">
+    <p>
       If you were to ask someone about places to visit in Indonesia, I'd
       probably be the last person you should ask. Let's hope this paragraph
       won't be here for long!
     </p>
   </Card>
-  <Card class="mb-8">
+  <Card
+    class="mb-8 prose prose-ol:list-none prose-ol:pl-0 prose-li:pl-0 prose-lg sm:prose-xl"
+  >
     <h2 id="timeline" slot="header">
       <Link href="#timeline">Timeline</Link>
     </h2>

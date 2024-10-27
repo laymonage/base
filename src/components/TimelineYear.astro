@@ -5,17 +5,17 @@ type Props = TimelineYear;
 const { id, items } = Astro.props;
 ---
 
-<h3 class="text-2xl font-semibold text-gray-800 dark:text-gray-100">
+<h3 class="text-gray-800 dark:text-gray-100">
   {id}
 </h3>
 <ol>
   {
     items.map((item) => (
-      <li class="mt-4">
-        <p class="flex font-semibold text-gray-800 dark:text-gray-100">
+      <li>
+        <h4 class="flex text-gray-800 dark:text-gray-100">
           <span class="w-8">{item.emoji}</span>
           <span>{item.title}</span>
-        </p>
+        </h4>
         <p class="ml-8">{item.description}</p>
       </li>
     ))
