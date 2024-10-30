@@ -7,13 +7,16 @@ import {
 } from 'astro:content';
 import { file, glob } from 'astro/loaders';
 
-const postsSchema = z.object({
+const baseSchema = z.object({
   title: z.string(),
+  description: z.string(),
+});
+
+const postsSchema = baseSchema.extend({
   date: z.coerce.date(),
   draft: z.boolean().optional(),
   toc: z.boolean().optional(),
   comments: z.boolean().or(z.string()).optional(),
-  description: z.string(),
   tags: z.array(z.string()).optional(),
   image: z.string().optional(),
 });
@@ -54,10 +57,7 @@ export const humanizeLogSlug = (slug: string) => {
 
 const logs = defineCollection({
   loader: glob({ pattern: '**/[^_]*.md', base: './content/logs' }),
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-  }),
+  schema: baseSchema,
 });
 
 export const getGroupedLogs = async () =>
