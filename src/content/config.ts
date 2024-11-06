@@ -77,7 +77,7 @@ export const getContentStaticPaths = async <C extends keyof AnyEntryMap>(
   collection: C,
 ) =>
   (await getCollection(collection)).map((entry) => ({
-    params: { slug: entry.id },
+    params: { slug: entry.id === 'index' ? undefined : entry.id },
     props: entry,
   }));
 
