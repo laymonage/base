@@ -113,7 +113,7 @@ a,
   grid-template-columns: 1fr min(69ch, 100%) 1fr;
 }
 
-.reading-wrapper *,
+.reading-wrapper :not(.bleed *),
 .reading-wrapper .markdown * {
   grid-column: 2;
 }
