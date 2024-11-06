@@ -1,0 +1,97 @@
+---
+import Link from '../../../../../components/Link.astro';
+import Palate from '../../../../../layouts/Palate.astro';
+import {
+  getSpotifyDataURL,
+  simplifyTrack,
+  trackSchema,
+} from '../../../../../lib/spotify';
+import SpotifyTable from '../../../../../components/palates/SpotifyTable';
+
+export async function getStaticPaths() {
+  const terms = ['short', 'medium', 'long'] as const;
+  const types = ['artists', 'tracks'] as const;
+  return types.flatMap((type) =>
+    terms.map((term) => ({ params: { type, term } })),
+  );
+}
+
+const { type, term } = Astro.params;
+
+const data = await fetch(getSpotifyDataURL(`top/${type}/${term}_term`)).then(
+  (res) => res.json(),
+);
+
+const terms = ['short', 'medium', 'long'] as const;
+const tIdx = terms.indexOf(term);
+---
+
+<Palate
+  title={`Top ${type}`}
+  description={`The top ${type} on my Spotify within a given time frame.`}
+>
+  <p>
+    <Link
+      href="https://developer.spotify.com/documentation/web-api/reference/get-users-top-artists-and-tracks"
+    >
+      According to Spotify</Link
+    >, "short term" means the last 4 weeks, "medium term" means the last 6
+    months, and "long term" means ~1 year.
+  </p>
+  <span class="sr-only">Choose a time frame:</span>
+  <ol
+    class="mb-4 flex w-fit items-center gap-x-1.5 rounded bg-blue-200 bg-opacity-25"
+  >
+    {
+      terms.map((t, i) => {
+        return (
+          <li
+            class:list={[
+              'relative rounded border-2 outline-offset-0',
+              {
+                'before:pointer-events-none before:absolute before:inset-0 before:-left-px before:my-1 before:border-l before:border-gray-500':
+                  t !== term && i !== 0 && i !== tIdx + 1,
+                'border-gray-500 border-opacity-25 bg-blue-800 bg-opacity-100 font-semibold dark:bg-gray-800':
+                  t === term,
+                'border-transparent': t !== term,
+              },
+            ]}
+          >
+            <Link
+              class:list={[
+                'px-3 py-0.5 capitalize',
+                {
+                  'text-white hover:text-white focus:text-white': t === term,
+                },
+              ]}
+              href={`/palates/music/top/${type}/${t}`}
+              aria-current={t === term ? 'page' : undefined}
+              button={true}
+            >
+              {t}
+            </Link>
+          </li>
+        );
+      })
+    }
+  </ol>
+  {
+    type === 'artists' ? (
+      <SpotifyTable
+        type="artist"
+        data={data.artists}
+        defaultSorting={[]}
+        client:idle
+      />
+    ) : (
+      <SpotifyTable
+        type="track"
+        data={data.tracks.map((track: SpotifyApi.TrackObjectFull) =>
+          trackSchema.parse(simplifyTrack(track)),
+        )}
+        defaultSorting={[]}
+        client:idle
+      />
+    )
+  }
+</Palate>

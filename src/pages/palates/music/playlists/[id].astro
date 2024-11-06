@@ -1,0 +1,98 @@
+---
+import { Icon } from 'astro-icon/components';
+import Card from '../../../../components/Card.astro';
+import Duration from '../../../../components/Duration.astro';
+import Link from '../../../../components/Link.astro';
+import SpotifyTable from '../../../../components/palates/SpotifyTable';
+import Palate from '../../../../layouts/Palate.astro';
+import { humanizeMs } from '../../../../lib/datetime';
+import {
+  getSpotifyDataURL,
+  simplifyPlaylistTrack,
+  trackSchema,
+  type PlaylistFull,
+} from '../../../../lib/spotify';
+import { decodeHTML } from '../../../../lib/string';
+
+export async function getStaticPaths() {
+  const SAVED_TRACKS_ID = '6T5QnaTXvu6ckKwcxANEwp';
+  const data = await fetch(getSpotifyDataURL('playlists')).then((res) =>
+    res.json(),
+  );
+  const allPlaylists = data.playlists as SpotifyApi.PlaylistObjectFull[];
+  return allPlaylists.map(({ id }) => ({
+    params: { id: id === SAVED_TRACKS_ID ? 'saved-tracks' : id },
+  }));
+}
+
+const { id } = Astro.params;
+const { richDescription } = Astro.props;
+const isSavedTracks = id === 'saved-tracks';
+
+const {
+  name: title = 'Liked Songs (Mirror)',
+  description = `Shareable "Liked Songs" playlist synchronised by my spotify-to-github project.`,
+  images,
+  external_urls,
+  tracks: tracksFull,
+}: PlaylistFull = await fetch(
+  getSpotifyDataURL(isSavedTracks ? 'tracks_simplified' : `playlists/${id}`),
+).then((res) => res.json());
+
+const imageUrl =
+  images?.[0]?.url ||
+  'https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png';
+const spotifyUrl =
+  external_urls?.spotify ||
+  'https://open.spotify.com/playlist/6T5QnaTXvu6ckKwcxANEwp';
+
+const tracks = isSavedTracks
+  ? tracksFull.map((track) => trackSchema.parse(track))
+  : tracksFull
+      .filter((playlistItem) => !!(playlistItem && playlistItem.track))
+      .map((track) => trackSchema.parse(simplifyPlaylistTrack(track)));
+
+const duration =
+  tracks.map((track) => track.duration_ms || 0).reduce((a, b) => a + b, 0) || 0;
+---
+
+<Palate
+  title={title}
+  description={description || `The ${title} playlist on my Spotify account.`}
+>
+  <div slot="header" class="my-4 flex flex-wrap items-end gap-8 sm:flex-nowrap">
+    <div class="flex h-48 w-48 flex-shrink-0 items-center justify-center">
+      {
+        imageUrl ? (
+          <img
+            class="aspect-square h-full w-full object-cover"
+            alt=""
+            src={imageUrl}
+          />
+        ) : null
+      }
+    </div>
+    <Card>
+      <Fragment slot="header">{title}</Fragment>
+      {
+        richDescription ||
+          (description ? <p>{decodeHTML(description || '')}</p> : null)
+      }
+      <div class="mt-1 flex flex-wrap items-center gap-x-1.5">
+        <span>
+          <Link class="flex items-center gap-2" href={spotifyUrl}>
+            <Icon name="spotify" class="h-5 w-5 fill-black dark:fill-white" />
+            Open on Spotify
+          </Link>
+        </span>
+        <span class="before:mx-2 before:content-['•']">
+          {tracks ? tracks.length : 'Loading'} songs,{' '}
+          <Duration value={duration}>{humanizeMs(duration)}</Duration>
+        </span>
+      </div>
+    </Card>
+  </div>
+  <slot>
+    <SpotifyTable type="track" data={tracks} client:idle />
+  </slot>
+</Palate>

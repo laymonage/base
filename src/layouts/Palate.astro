@@ -1,0 +1,29 @@
+---
+import { Icon } from 'astro-icon/components';
+import BaseLayout from './BaseLayout.astro';
+
+const { description, title } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <div
+    class="bleed flex min-h-screen w-full max-w-4xl flex-col gap-8 place-self-center"
+  >
+    <slot name="header">
+      <div class="flex flex-col gap-2">
+        <h1 class="text-4xl font-bold">{title}</h1>
+        <p>{description}</p>
+      </div>
+    </slot>
+    <div class="hidden [&_symbol>*]:stroke-unset">
+      <Icon name="tabler:music" />
+      <Icon name="tabler:player-pause-filled" />
+      <Icon name="tabler:player-play-filled" />
+      <Icon name="tabler:arrow-up" />
+      <Icon name="tabler:arrow-down" />
+      <Icon name="tabler:chart-bar" />
+      <Icon name="tabler:clock" />
+    </div>
+    <slot />
+  </div>
+</BaseLayout>

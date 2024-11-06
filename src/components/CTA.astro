@@ -1,0 +1,17 @@
+---
+import { Icon } from 'astro-icon/components';
+import Link from './Link.astro';
+
+const { class: className, ...props } = Astro.props;
+---
+
+<Link
+  class:list={[
+    'cta flex w-fit items-center gap-4 py-4 px-6 no-underline',
+    className,
+  ]}
+  {...props}
+>
+  <slot />
+  <Icon name="tabler:arrow-right" width={20} height={20} />
+</Link>

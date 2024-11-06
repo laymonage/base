@@ -1,0 +1,18 @@
+---
+import { msToDuration, msToMinutes } from '../lib/datetime';
+
+interface DurationProps {
+  // The duration in milliseconds
+  value: number;
+  class?: string;
+}
+
+const { value, class: className = 'text-secondary' } =
+  Astro.props as DurationProps;
+---
+
+<time class={className} datetime={msToDuration(value)}>
+  <slot>
+    {msToMinutes(value)}
+  </slot>
+</time>

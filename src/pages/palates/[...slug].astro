@@ -1,0 +1,25 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+import Card from '../../components/Card.astro';
+import CTA from '../../components/CTA.astro';
+import Link from '../../components/Link.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getContentStaticPaths } from '../../content/config';
+
+export async function getStaticPaths() {
+  return await getContentStaticPaths('palates');
+}
+type Props = CollectionEntry<'palates'>;
+
+const palate = Astro.props;
+const { Content } = await render(palate);
+---
+
+<BaseLayout title={palate.data.title} description={palate.data.description}>
+  <Card class="prose prose-lg md:prose-xl">
+    <h2 id="palate" slot="header">
+      <Link href="#palate">{palate.data.title}</Link>
+    </h2>
+    <Content components={{ CTA }} />
+  </Card>
+</BaseLayout>

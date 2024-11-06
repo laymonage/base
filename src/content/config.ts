@@ -73,6 +73,11 @@ export const getGroupedLogs = async () =>
     ),
   ).sort(([a], [b]) => +b - +a);
 
+const palates = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.mdx', base: './content/palates' }),
+  schema: baseSchema,
+});
+
 export const getContentStaticPaths = async <C extends keyof AnyEntryMap>(
   collection: C,
 ) =>
@@ -130,4 +135,12 @@ const markdownProcessor = createMarkdownProcessor();
 export const md = async (content: string) =>
   (await (await markdownProcessor).render(content)).code;
 
-export const collections = { gsoc, logs, posts, thoughts, about, projects };
+export const collections = {
+  gsoc,
+  logs,
+  posts,
+  thoughts,
+  about,
+  projects,
+  palates,
+};

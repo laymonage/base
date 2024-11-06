@@ -1,0 +1,26 @@
+---
+import Palate from '../../../layouts/Palate.astro';
+import SpotifyTable from '../../../components/palates/SpotifyTable';
+import {
+  albumSchema,
+  type AlbumSimplified,
+  getSpotifyDataURL,
+} from '../../../lib/spotify';
+
+const { albums }: { albums: AlbumSimplified[] } = await fetch(
+  getSpotifyDataURL('albums_simplified'),
+)
+  .then((res) => res.json())
+  .then((data) => ({
+    albums: data.albums.map((album: AlbumSimplified) =>
+      albumSchema.parse(album),
+    ),
+  }));
+---
+
+<Palate
+  title="Albums"
+  description="Here are all the albums I've saved to my Spotify account."
+>
+  <SpotifyTable type="album" data={albums} client:idle />
+</Palate>
