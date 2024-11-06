@@ -37,6 +37,9 @@ export default {
       fontFamily: {
         sans: ['"Source Sans Pro"', ...fontFamily.sans],
       },
+      strokeWidth: {
+        unset: 'unset',
+      },
       typography: (theme) => ({
         sm: modifyStyles('sm'),
         DEFAULT: {
