@@ -1,5 +1,5 @@
 ---
-const { href, rel, ...rest } = Astro.props;
+const { href, rel, button = false, ...rest } = Astro.props;
 const isInternalLink = (href as string).startsWith('/');
 const isAnchorLink = (href as string).startsWith('#');
 ---
@@ -9,6 +9,12 @@ const isAnchorLink = (href as string).startsWith('#');
     <span {...rest}>
       <slot />
     </span>
+  ) : button ? (
+    // Not the best thing to do, but this allows you to load a new page
+    // without pushing a new entry to the history stack.
+    <button onclick={`window.location.replace('${href}')`} {...rest}>
+      <slot />
+    </button>
   ) : isInternalLink || isAnchorLink ? (
     <a href={href} {...rest}>
       <slot />
