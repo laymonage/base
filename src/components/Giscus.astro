@@ -1,0 +1,62 @@
+---
+const themeMapping = {
+  light: 'light',
+  dark: 'transparent_dark',
+};
+
+interface Props {
+  eager?: boolean;
+}
+
+const { eager = false } = Astro.props;
+
+const theme = 'light';
+---
+
+<template data-giscus-widget>
+  <giscus-widget
+    repo="laymonage/base"
+    repoid="MDEwOlJlcG9zaXRvcnkzNDExNDE2OTY"
+    category="Comments"
+    categoryid="MDE4OkRpc2N1c3Npb25DYXRlZ29yeTMyNzIzMDI4"
+    theme={theme}
+    mapping="pathname"
+    reactionsenabled="1"
+    emitmetadata="0"
+    inputposition="bottom"
+    lang="en"></giscus-widget>
+</template>
+
+{
+  !eager && (
+    <button
+      data-show-comments
+      type="button"
+      class="hover rounded bg-gray-100 py-2 px-4 text-center text-base text-gray-600 hover:bg-gray-200  hover:text-gray-800 focus:bg-gray-200 focus:text-gray-800 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:text-white"
+    >
+      Load comments
+    </button>
+  )
+}
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>(
+    '[data-show-comments]',
+  );
+  const widget = document.querySelector<HTMLTemplateElement>(
+    '[data-giscus-widget]',
+  );
+
+  const loadComments = () =>
+    widget &&
+    import('giscus').then(() => {
+      widget?.replaceWith(widget.content);
+      button?.remove();
+    });
+
+  if (button) {
+    button.addEventListener('click', loadComments);
+  } else {
+    loadComments();
+  }
+</script>

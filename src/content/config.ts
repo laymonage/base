@@ -10,13 +10,13 @@ import { file, glob } from 'astro/loaders';
 const baseSchema = z.object({
   title: z.string(),
   description: z.string(),
+  comments: z.boolean().or(z.literal('eager')).optional(),
 });
 
 const postsSchema = baseSchema.extend({
   date: z.coerce.date(),
   draft: z.boolean().optional(),
   toc: z.boolean().optional(),
-  comments: z.boolean().or(z.string()).optional(),
   tags: z.array(z.string()).optional(),
   image: z.string().optional(),
 });

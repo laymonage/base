@@ -1,10 +1,23 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
+import Giscus from '../components/Giscus.astro';
 import Navigation from '../components/Navigation.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
-const { description = SITE_DESCRIPTION, title = '' } = Astro.props;
+interface Props {
+  title?: string;
+  description?: string;
+  comments?: boolean | 'eager';
+}
+
+const {
+  description = SITE_DESCRIPTION,
+  title = '',
+  comments = false,
+} = Astro.props;
+
+const giscusThemes = ['light', 'transparent_dark'];
 ---
 
 <!doctype html>
@@ -14,6 +27,19 @@ const { description = SITE_DESCRIPTION, title = '' } = Astro.props;
       title={title ? `${title} | ${SITE_TITLE}` : SITE_TITLE}
       description={description}
     />
+
+    {
+      comments &&
+        giscusThemes.map((theme) => (
+          <link
+            rel="prefetch"
+            href={`https://giscus.app/themes/${theme}.css`}
+            as="style"
+            type="text/css"
+            crossorigin="anonymous"
+          />
+        ))
+    }
   </head>
   <body>
     <Navigation />
@@ -21,6 +47,13 @@ const { description = SITE_DESCRIPTION, title = '' } = Astro.props;
       class="flex w-full flex-col items-center p-8 sm:mt-20 reading-wrapper"
     >
       <slot />
+      {
+        comments && (
+          <div class="my-8 text-center">
+            <Giscus eager={comments === 'eager'} />
+          </div>
+        )
+      }
     </main>
     <Footer />
     <div

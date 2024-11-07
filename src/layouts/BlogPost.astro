@@ -8,12 +8,20 @@ type PostData = Omit<CollectionEntry<'posts'>['data'], 'date'>;
 interface Props extends PostData {
   date: Date | string;
   readingTime?: string;
+  comments?: boolean | 'eager';
 }
 
-const { title, description, date, readingTime, tags = [] } = Astro.props;
+const {
+  title,
+  description,
+  date,
+  readingTime,
+  tags = [],
+  comments,
+} = Astro.props;
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} comments={comments}>
   <article>
     <div class="mt-4 flex-row">
       <h1
