@@ -47,13 +47,7 @@ const giscusThemes = ['light', 'transparent_dark'];
       class="flex w-full flex-col items-center p-8 sm:mt-20 reading-wrapper"
     >
       <slot />
-      {
-        comments && (
-          <div class="my-8 text-center">
-            <Giscus eager={comments === 'eager'} />
-          </div>
-        )
-      }
+      {comments && <Giscus class="my-8" eager={comments === 'eager'} />}
     </main>
     <Footer />
     <div

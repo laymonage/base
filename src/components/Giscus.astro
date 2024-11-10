@@ -1,62 +1,99 @@
 ---
-const themeMapping = {
-  light: 'light',
-  dark: 'transparent_dark',
-};
-
 interface Props {
   eager?: boolean;
+  class?: string;
 }
 
-const { eager = false } = Astro.props;
-
-const theme = 'light';
+const { eager = false, class: className } = Astro.props;
 ---
 
-<template data-giscus-widget>
-  <giscus-widget
-    repo="laymonage/base"
-    repoid="MDEwOlJlcG9zaXRvcnkzNDExNDE2OTY"
-    category="Comments"
-    categoryid="MDE4OkRpc2N1c3Npb25DYXRlZ29yeTMyNzIzMDI4"
-    theme={theme}
-    mapping="pathname"
-    reactionsenabled="1"
-    emitmetadata="0"
-    inputposition="bottom"
-    lang="en"></giscus-widget>
-</template>
+<l-giscus class={className}>
+  <template data-giscus-widget>
+    <giscus-widget
+      repo="laymonage/base"
+      repoid="MDEwOlJlcG9zaXRvcnkzNDExNDE2OTY"
+      category="Comments"
+      categoryid="MDE4OkRpc2N1c3Npb25DYXRlZ29yeTMyNzIzMDI4"
+      theme="preferred_color_scheme"
+      mapping="pathname"
+      reactionsenabled="1"
+      emitmetadata="0"
+      inputposition="bottom"
+      lang="en"></giscus-widget>
+  </template>
 
-{
-  !eager && (
-    <button
-      data-show-comments
-      type="button"
-      class="hover rounded bg-gray-100 py-2 px-4 text-center text-base text-gray-600 hover:bg-gray-200  hover:text-gray-800 focus:bg-gray-200 focus:text-gray-800 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:text-white"
-    >
-      Load comments
-    </button>
-  )
-}
+  {
+    !eager && (
+      <button
+        data-show-comments
+        type="button"
+        class="hover rounded bg-gray-100 py-2 px-4 mx-auto block text-base text-gray-600 hover:bg-gray-200  hover:text-gray-800 focus:bg-gray-200 focus:text-gray-800 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:text-white"
+      >
+        Load comments
+      </button>
+    )
+  }
+</l-giscus>
 
 <script>
-  const button = document.querySelector<HTMLButtonElement>(
-    '[data-show-comments]',
-  );
-  const widget = document.querySelector<HTMLTemplateElement>(
-    '[data-giscus-widget]',
-  );
+  class Giscus extends HTMLElement {
+    static identifier = 'l-giscus';
+    static themes = {
+      light: 'light',
+      dark: 'transparent_dark',
+    };
 
-  const loadComments = () =>
-    widget &&
-    import('giscus').then(() => {
-      widget?.replaceWith(widget.content);
-      button?.remove();
-    });
+    button = document.querySelector<HTMLButtonElement>('[data-show-comments]');
+    widget = document.querySelector<HTMLTemplateElement>(
+      '[data-giscus-widget]',
+    )!;
 
-  if (button) {
-    button.addEventListener('click', loadComments);
-  } else {
-    loadComments();
+    connectedCallback() {
+      this.updateTheme = this.updateTheme.bind(this);
+      this.loadComments = this.loadComments.bind(this);
+      document.addEventListener('l-theme-switcher:changed', this.updateTheme);
+
+      if (this.button) {
+        this.button.addEventListener('click', this.loadComments);
+      } else {
+        this.loadComments();
+      }
+    }
+
+    disconnectedCallback() {
+      document.removeEventListener(
+        'l-theme-switcher:changed',
+        this.updateTheme,
+      );
+      this.button?.removeEventListener('click', this.loadComments);
+    }
+
+    loadComments() {
+      if (!this.widget) return;
+
+      const resolvedTheme = document.documentElement.dataset
+        .resolvedTheme as keyof typeof Giscus.themes;
+      if (resolvedTheme) {
+        this.widget.content.firstElementChild!.setAttribute(
+          'theme',
+          Giscus.themes[resolvedTheme],
+        );
+      }
+
+      import('giscus').then(() => {
+        this.widget?.replaceWith(this.widget.content);
+        this.button?.remove();
+      });
+    }
+
+    updateTheme(event: Event) {
+      const { resolvedTheme } = (event as CustomEvent).detail;
+      this.querySelector('giscus-widget')?.setAttribute(
+        'theme',
+        Giscus.themes[resolvedTheme as keyof typeof Giscus.themes],
+      );
+    }
   }
+
+  customElements.define(Giscus.identifier, Giscus);
 </script>
