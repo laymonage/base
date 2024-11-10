@@ -3,6 +3,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Giscus from '../components/Giscus.astro';
 import Navigation from '../components/Navigation.astro';
+import SkipLink from '../components/SkipLink.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
 interface Props {
@@ -42,8 +43,10 @@ const giscusThemes = ['light', 'transparent_dark'];
     }
   </head>
   <body>
+    <SkipLink />
     <Navigation />
     <main
+      id="main"
       class="flex w-full flex-col items-center p-8 sm:mt-20 reading-wrapper"
     >
       <slot />
