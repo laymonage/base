@@ -1,0 +1,56 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<l-scroll-top>
+  <button
+    type="button"
+    aria-label="Scroll to top"
+    class="p-1 hidden fixed bottom-3 right-3 z-10 translate-y-0 transform rounded-full bg-blue-900 text-white transition-transform duration-300 dark:bg-slate-800"
+  >
+    <Icon
+      aria-hidden="true"
+      name="tabler:chevron-up"
+      class="w-8 h-8 sm:w-14 sm:h-14"
+    />
+  </button>
+</l-scroll-top>
+
+<script>
+  class ScrollTop extends HTMLElement {
+    static identifier = 'l-scroll-top';
+    static offset = 256;
+
+    button = this.querySelector('button')!;
+
+    connectedCallback() {
+      this.scroll = this.scroll.bind(this);
+      this.toggleShow = this.toggleShow.bind(this);
+      this.toggleShow();
+      this.button.classList.remove('hidden');
+      this.button.addEventListener('click', this.scroll);
+      window.addEventListener('scroll', this.toggleShow);
+    }
+
+    disconnectedCallback() {
+      window.removeEventListener('scroll', this.toggleShow);
+      this.button.removeEventListener('click', this.scroll);
+    }
+
+    scroll() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    get hidden() {
+      return window.scrollY <= ScrollTop.offset;
+    }
+
+    toggleShow() {
+      const hidden = this.hidden;
+      this.button.classList.toggle('translate-y-20', hidden);
+      this.button.classList.toggle('shadow-lg', !hidden);
+    }
+  }
+
+  customElements.define(ScrollTop.identifier, ScrollTop);
+</script>

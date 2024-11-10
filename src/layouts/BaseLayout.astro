@@ -3,6 +3,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Giscus from '../components/Giscus.astro';
 import Navigation from '../components/Navigation.astro';
+import ScrollTop from '../components/ScrollTop.astro';
 import SkipLink from '../components/SkipLink.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
@@ -53,6 +54,7 @@ const giscusThemes = ['light', 'transparent_dark'];
       {comments && <Giscus class="my-8" eager={comments === 'eager'} />}
     </main>
     <Footer />
+    <ScrollTop />
     <div
       class="bg fixed top-0 left-0 h-screen w-screen bg-cover bg-center opacity-40 2xl:opacity-100"
     >
