@@ -5,17 +5,18 @@ import Link from './Link.astro';
 const menu = ['posts', 'thoughts', 'projects', 'palates', 'about'];
 ---
 
-<nav role="navigation" class="mx-auto max-w-4xl">
-  <div
-    class="ease fixed bottom-0 z-20 flex w-full max-w-4xl transform flex-col-reverse bg-white bg-opacity-50 py-3 backdrop-blur backdrop-filter transition-transform duration-300 dark:bg-gray-800 dark:bg-opacity-50 sm:top-0 sm:bottom-auto sm:flex-row sm:items-center sm:justify-between shadow"
+<div class="mx-auto max-w-4xl">
+  <l-nav
+    role="navigation"
+    class="ease fixed open:pt-3 sm:p-0 bottom-0 sm:top-0 sm:bottom-auto z-20 flex w-full max-w-4xl mx-auto transform flex-col-reverse bg-white transition-transform duration-300 dark:bg-gray-800 sm:flex-row sm:items-center sm:justify-between drop-shadow"
   >
-    <div class="mx-4 flex flex-grow items-center justify-between">
+    <div class="py-3 mx-4 flex flex-grow items-center justify-between">
       <Link
         href="/"
         aria-label="Home"
-        class="mr-2 h-10 w-10 fill-current text-blue-700 focus:outline-none dark:text-blue-100"
+        class="mr-2 h-10 w-10 fill-current text-blue-700 dark:text-blue-100"
       >
-        <Icon width="40" height="40" name="logo" />
+        <Icon aria-hidden="true" width="40" height="40" name="logo" />
       </Link>
       <div class="flex items-center justify-between">
         <!-- TODO: ThemeToggle /-->
@@ -24,14 +25,16 @@ const menu = ['posts', 'thoughts', 'projects', 'palates', 'about'];
           aria-label="Toggle navigation menu"
           aria-expanded="false"
           type="button"
-          class="alike ml-4 group fill-current focus:outline-none sm:hidden"
+          class="alike ml-4 group fill-current sm:hidden"
         >
           <Icon
+            aria-hidden="true"
             stroke-width={2.5}
             name="tabler:x"
             class="w-6 h-6 hidden group-aria-expanded:block"
           />
           <Icon
+            aria-hidden="true"
             stroke-width={2.5}
             name="tabler:menu-2"
             class="w-6 h-6 block group-aria-expanded:hidden"
@@ -41,7 +44,7 @@ const menu = ['posts', 'thoughts', 'projects', 'palates', 'about'];
     </div>
     <div
       data-l-nav-items
-      class="mr-0 px-3 pb-2 hidden sm:mr-4 sm:flex sm:items-center sm:p-0"
+      class="mr-0 px-3 hidden max-h-[50vh] sm:mr-4 sm:flex sm:items-center sm:p-0 overflow-auto"
     >
       {
         menu.map((m) => (
@@ -54,20 +57,99 @@ const menu = ['posts', 'thoughts', 'projects', 'palates', 'about'];
         ))
       }
     </div>
-  </div>
-</nav>
+  </l-nav>
+</div>
 
 <script>
-  const toggle = document.querySelector<HTMLButtonElement>(
-    '[data-l-nav-toggle]',
-  );
-  const navItems = document.querySelector<HTMLDivElement>('[data-l-nav-items]');
+  class Navigation extends HTMLElement {
+    static identifier = 'l-nav';
+    static observedAttributes = ['open'] as const;
+    static hideOffset = 64;
 
-  let open = false;
+    toggle = this.querySelector('[data-l-nav-toggle]')!;
+    navItems = this.querySelector('[data-l-nav-items]')!;
+    focusableElements = this.querySelectorAll<HTMLElement>('a, button');
+    firstFocusable = this.focusableElements[0];
+    lastFocusable = this.focusableElements[this.focusableElements.length - 1];
 
-  toggle!.addEventListener('click', () => {
-    open = !open;
-    toggle!.setAttribute('aria-expanded', `${open}`);
-    navItems!.classList.toggle('hidden', !open);
-  });
+    lastScroll = 0;
+
+    connectedCallback() {
+      this.toggleShow = this.toggleShow.bind(this);
+      this.toggleMenu = this.toggleMenu.bind(this);
+      this.trapFocus = this.trapFocus.bind(this);
+      this.hide = this.hide.bind(this);
+      this.toggle.addEventListener('click', this.toggleMenu);
+      this.addEventListener('focusin', this.toggleShow);
+      this.addEventListener('focusout', this.trapFocus);
+      window.addEventListener('scroll', this.hide);
+    }
+
+    disconnectedCallback() {
+      window.removeEventListener('scroll', this.hide);
+      this.removeEventListener('focusout', this.trapFocus);
+      this.removeEventListener('focusin', this.toggleShow);
+      this.toggle.removeEventListener('click', this.toggleMenu);
+    }
+
+    get open() {
+      return this.hasAttribute('open');
+    }
+
+    set open(value) {
+      if (this.open === value) return;
+      if (value) {
+        this.setAttribute('open', '');
+      } else {
+        this.removeAttribute('open');
+      }
+    }
+
+    get hidden() {
+      return (
+        window.scrollY >= this.lastScroll &&
+        !this.contains(document.activeElement)
+      );
+    }
+
+    attributeChangedCallback(
+      name: (typeof Navigation.observedAttributes)[number],
+      oldValue: boolean,
+      newValue: boolean,
+    ) {
+      this.open = newValue !== null;
+    }
+
+    hide(event: Event) {
+      if (!(Math.abs(window.scrollY - this.lastScroll) > Navigation.hideOffset))
+        return;
+      this.toggleShow();
+      this.lastScroll = window.scrollY;
+    }
+
+    toggleShow() {
+      const hidden = this.hidden;
+      this.classList.toggle('translate-y-full', hidden);
+      this.classList.toggle('sm:-translate-y-full', hidden);
+    }
+
+    toggleMenu() {
+      this.open = !this.open;
+      this.toggle.setAttribute('aria-expanded', `${this.open}`);
+      this.navItems.classList.toggle('hidden', !this.open);
+    }
+
+    trapFocus(event: FocusEvent) {
+      if (!this.open || this.contains(event.relatedTarget as HTMLElement))
+        return;
+
+      if (event.target === this.firstFocusable) {
+        this.lastFocusable.focus();
+      } else if (event.target === this.lastFocusable) {
+        this.firstFocusable.focus();
+      }
+    }
+  }
+
+  customElements.define(Navigation.identifier, Navigation);
 </script>
