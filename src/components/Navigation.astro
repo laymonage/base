@@ -1,6 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
 import Link from './Link.astro';
+import ThemeSwitcher from './ThemeSwitcher.astro';
 
 const menu = ['posts', 'thoughts', 'projects', 'palates', 'about'];
 ---
@@ -8,7 +9,7 @@ const menu = ['posts', 'thoughts', 'projects', 'palates', 'about'];
 <div class="mx-auto max-w-4xl">
   <l-nav
     role="navigation"
-    class="ease fixed open:pt-3 sm:p-0 bottom-0 sm:top-0 sm:bottom-auto z-20 flex w-full max-w-4xl mx-auto transform flex-col-reverse bg-white transition-transform duration-300 dark:bg-gray-800 sm:flex-row sm:items-center sm:justify-between drop-shadow"
+    class="ease fixed open:pt-3 sm:p-0 bottom-0 sm:top-0 sm:bottom-auto z-20 flex w-full max-w-4xl mx-auto transform flex-col-reverse bg-white transition-transform duration-300 dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between drop-shadow"
   >
     <div class="py-3 mx-4 flex flex-grow items-center justify-between">
       <Link
@@ -19,7 +20,7 @@ const menu = ['posts', 'thoughts', 'projects', 'palates', 'about'];
         <Icon aria-hidden="true" width="40" height="40" name="logo" />
       </Link>
       <div class="flex items-center justify-between">
-        <!-- TODO: ThemeToggle /-->
+        <ThemeSwitcher />
         <button
           data-l-nav-toggle
           aria-label="Toggle navigation menu"

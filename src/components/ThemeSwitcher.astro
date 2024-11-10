@@ -1,0 +1,120 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<l-theme-switcher class="alike">
+  <label class="relative">
+    <span class="sr-only">Select theme</span>
+    <select class="opacity-0 absolute w-6 h-6 cursor-pointer" value="system">
+      <option value="system">System default</option>
+      <option value="light">Light</option>
+      <option value="dark">Dark</option>
+    </select>
+    <Icon data-theme="system" name="tabler:sun-moon" class="hidden w-6 h-6" />
+    <Icon data-theme="dark" name="tabler:moon-filled" class="hidden w-6 h-6" />
+    <Icon data-theme="light" name="tabler:sun" class="hidden w-6 h-6" />
+  </label>
+</l-theme-switcher>
+
+<script is:inline>
+  (() => {
+    const theme = localStorage.getItem('l:theme') || 'system';
+    document.documentElement.classList.toggle(
+      'dark',
+      theme === 'system'
+        ? window.matchMedia('(prefers-color-scheme: dark)').matches
+        : theme === 'dark',
+    );
+    document
+      .querySelector(`l-theme-switcher svg[data-theme="${theme}"]`)
+      .classList.remove('hidden');
+  })();
+</script>
+
+<script>
+  type ResolvedTheme = 'light' | 'dark';
+  type Theme = 'system' | ResolvedTheme;
+
+  class ThemeSwitcher extends HTMLElement {
+    static identifier = 'l-theme-switcher';
+    static observedAttributes = ['theme'] as const;
+    static mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+    get theme() {
+      return (localStorage.getItem('l:theme') || 'system') as Theme;
+    }
+
+    get resolvedTheme() {
+      const theme = this.theme;
+      return theme === 'system'
+        ? ThemeSwitcher.mediaQuery.matches
+          ? 'dark'
+          : 'light'
+        : theme;
+    }
+
+    set theme(value) {
+      if (value === this.theme) return;
+      localStorage.setItem('l:theme', value);
+      this.apply();
+      this.dispatchEvent(
+        new CustomEvent(`${ThemeSwitcher.identifier}:changed`, {
+          bubbles: true,
+          cancelable: false,
+          detail: { theme: this.theme, resolvedTheme: this.resolvedTheme },
+        }),
+      );
+    }
+
+    attributeChangedCallback(
+      name: (typeof ThemeSwitcher.observedAttributes)[number],
+      oldValue: Theme,
+      newValue: Theme,
+    ) {
+      this.theme = newValue;
+    }
+
+    apply() {
+      const theme = this.theme;
+      const resolvedTheme = this.resolvedTheme;
+
+      document.documentElement.classList.toggle(
+        'dark',
+        resolvedTheme === 'dark',
+      );
+      document.documentElement.setAttribute('data-theme', theme);
+      document.documentElement.setAttribute(
+        'data-resolved-theme',
+        resolvedTheme,
+      );
+
+      this.setAttribute('theme', theme);
+      this.querySelectorAll('svg').forEach((icon) => {
+        icon.classList.toggle('hidden', icon.dataset.theme !== theme);
+      });
+      this.querySelector('select')!.value = theme;
+    }
+
+    changeTheme(event: Event) {
+      if (event instanceof MediaQueryListEvent) {
+        this.apply();
+      } else if (event.type === 'input') {
+        this.theme = (event.target as HTMLSelectElement).value as Theme;
+      }
+    }
+
+    connectedCallback() {
+      this.changeTheme = this.changeTheme.bind(this);
+      this.addEventListener('input', this.changeTheme);
+      ThemeSwitcher.mediaQuery.addEventListener('change', this.changeTheme);
+      this.apply();
+    }
+
+    disconnectedCallback() {
+      this.removeEventListener('input', this.changeTheme);
+      ThemeSwitcher.mediaQuery.removeEventListener('change', this.changeTheme);
+    }
+  }
+
+  customElements.define(ThemeSwitcher.identifier, ThemeSwitcher);
+</script>
