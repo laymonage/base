@@ -5,6 +5,7 @@ import CTA from '../../components/CTA.astro';
 import Link from '../../components/Link.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getContentStaticPaths } from '../../content/config';
+import { prose } from '../../lib/classes';
 
 export async function getStaticPaths() {
   return await getContentStaticPaths('palates');
@@ -16,7 +17,7 @@ const { Content } = await render(palate);
 ---
 
 <BaseLayout title={palate.data.title} description={palate.data.description}>
-  <Card class="prose prose-lg md:prose-xl">
+  <Card class={prose}>
     <h2 id="palate" slot="header">
       <Link href="#palate">{palate.data.title}</Link>
     </h2>

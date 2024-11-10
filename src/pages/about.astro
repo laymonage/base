@@ -8,6 +8,7 @@ import ListItem from '../components/ListItem.astro';
 import TimelineYear from '../components/TimelineYear.astro';
 import NowPlaying from '../components/NowPlaying';
 import * as about from '../../content/about.md';
+import { prose, proseList } from '../lib/classes';
 
 const timelineData = await getCollection('about');
 const latestItems = timelineData.slice(0, 6);
@@ -19,7 +20,7 @@ const rest = timelineData.slice(6);
     <h2 id="me" slot="header">
       <Link href="#me">{about.frontmatter.title}</Link>
     </h2>
-    <div class="prose prose-lg sm:prose-xl">
+    <div class={prose}>
       {(<about.Content />)}
     </div>
     <div class="mt-6 flex justify-end">
@@ -32,7 +33,7 @@ const rest = timelineData.slice(6);
       </NowPlaying>
     </div>
   </Card>
-  <Card class="mb-8 prose prose-lg sm:prose-xl">
+  <Card class:list={['mb-8', prose]}>
     <h2 id="places" slot="header">
       <Link href="#places">Places</Link>
     </h2>
@@ -68,9 +69,7 @@ const rest = timelineData.slice(6);
       won't be here for long!
     </p>
   </Card>
-  <Card
-    class="mb-8 prose prose-ol:list-none prose-ol:pl-0 prose-li:pl-0 prose-lg sm:prose-xl"
-  >
+  <Card class:list={['mb-8', prose, proseList]}>
     <h2 id="timeline" slot="header">
       <Link href="#timeline">Timeline</Link>
     </h2>

@@ -6,6 +6,7 @@ import Link from '../components/Link.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ListItem from '../components/ListItem.astro';
 import CatalogItem from '../components/CatalogItem.astro';
+import { prose, proseList } from '../lib/classes';
 
 const projects = await Promise.all(
   (await getCollection('projects', ({ data: { shown } }) => shown)).map(
@@ -27,7 +28,7 @@ const projects = await Promise.all(
 <BaseLayout>
   {
     projects.map((group) => (
-      <Card class="mx-auto my-16 w-full first:mt-0 prose prose-ol:list-none prose-ol:pl-0 prose-li:pl-0 prose-lg sm:prose-xl">
+      <Card class:list={[prose, proseList, 'mx-auto my-16 w-full first:mt-0']}>
         <h2 id={group.anchor} slot="header">
           <Link href={`#${group.anchor}`}>{group.type} projects</Link>
         </h2>

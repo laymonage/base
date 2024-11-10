@@ -4,12 +4,13 @@ import Card from '../../components/Card.astro';
 import Link from '../../components/Link.astro';
 import ListItem from '../../components/ListItem.astro';
 import { getGroupedLogs } from '../../content/config';
+import { prose } from '../../lib/classes';
 
 const logs = await getGroupedLogs();
 ---
 
 <BaseLayout title="Logs" description="All logs by laymonage.">
-  <Card class="prose prose-lg sm:prose-xl">
+  <Card class={prose}>
     <h1 id="logs" slot="header">
       <Link href="#logs">Logs</Link>
     </h1>

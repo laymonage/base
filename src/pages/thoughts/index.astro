@@ -5,12 +5,13 @@ import Card from '../../components/Card.astro';
 import Link from '../../components/Link.astro';
 import ListItem from '../../components/ListItem.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
+import { prose } from '../../lib/classes';
 
 const thoughts = await getSortedCollection('thoughts');
 ---
 
 <BaseLayout title="Thoughts" description="All thoughts by laymonage.">
-  <Card class="prose prose-lg sm:prose-xl">
+  <Card class={prose}>
     <h1 id="thoughts" slot="header">
       <Link href="#thoughts">Thoughts</Link>
     </h1>

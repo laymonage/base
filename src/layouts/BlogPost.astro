@@ -2,6 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import FormattedDate from '../components/FormattedDate.astro';
+import { prose } from '../lib/classes';
 
 type PostData = Omit<CollectionEntry<'posts'>['data'], 'date'>;
 
@@ -54,7 +55,7 @@ const {
         ) : null
       }
     </div>
-    <div class="prose prose-lg sm:prose-xl mt-12 mb-8">
+    <div class:list={[prose, 'mt-12 mb-8']}>
       <slot />
     </div>
   </article>
