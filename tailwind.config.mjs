@@ -1,6 +1,27 @@
 import { fontFamily } from 'tailwindcss/defaultTheme';
+import plugin from 'tailwindcss/plugin';
 import typography from '@tailwindcss/typography';
 import styles from '@tailwindcss/typography/src/styles';
+
+const reading = plugin(function ({ addComponents }) {
+  addComponents({
+    // Relative to font size of this element,
+    // defaults to 18px on the body
+    '.reading': {
+      display: 'grid',
+      gridTemplateColumns: '1fr min(65ch, 100%) 1fr',
+      '> *': {
+        gridColumn: '2',
+      },
+    },
+    '.reading-lg': {
+      gridTemplateColumns: '1fr min(69ch, 100%) 1fr',
+    },
+    '.reading-xl': {
+      gridTemplateColumns: '1fr min(78ch, 100%) 1fr',
+    },
+  });
+});
 
 /** Sourced from https://github.com/tailwindlabs/tailwindcss-typography/blob/main/src/styles.js */
 const round = (num) =>
@@ -48,7 +69,7 @@ export default {
         DEFAULT: {
           css: {
             '@apply break-words': '',
-            maxWidth: '69ch',
+            maxWidth: 'initial',
             'blockquote p:first-of-type::before': {
               content: '',
             },
@@ -73,6 +94,20 @@ export default {
             iframe: {
               '@apply aspect-video w-full': '',
             },
+            // Bleed layout
+            // We don't want to use the grid-column 1 / -1 approach here
+            // because using grid will disable margin collapsing,
+            // which is relied upon by the typography plugin
+            '.bleed': {
+              width: '100vw',
+              marginInlineStart: 'calc(50% - 50vw)',
+              ':where(img, video, iframe)': {
+                '@apply rounded-none sm:rounded': '',
+              },
+            },
+            '.bleed-full > *': {
+              '@apply w-screen rounded-none': '',
+            },
           },
         },
         base: modifyStyles('base'),
@@ -82,5 +117,5 @@ export default {
       }),
     },
   },
-  plugins: [typography],
+  plugins: [reading, typography],
 };

@@ -48,7 +48,7 @@ const giscusThemes = ['light', 'transparent_dark'];
     <Navigation />
     <main
       id="main"
-      class="flex w-full flex-col items-center p-8 sm:mt-20 reading-wrapper"
+      class="p-8 sm:mt-20 w-full reading reading-lg sm:reading-xl"
     >
       <slot />
       {comments && <Giscus class="my-8" eager={comments === 'eager'} />}
