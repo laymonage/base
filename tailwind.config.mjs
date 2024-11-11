@@ -64,6 +64,12 @@ export default {
             'code::after': {
               content: '',
             },
+            'img, video, iframe': {
+              '@apply mx-auto flex justify-center rounded': '',
+            },
+            iframe: {
+              '@apply aspect-video w-full': '',
+            },
           },
         },
         base: modifyStyles('base'),
