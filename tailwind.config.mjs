@@ -6,19 +6,13 @@ import styles from '@tailwindcss/typography/src/styles';
 const reading = plugin(function ({ addComponents }) {
   addComponents({
     // Relative to font size of this element,
-    // defaults to 18px on the body
+    // defaults to 20px on the body
     '.reading': {
       display: 'grid',
-      gridTemplateColumns: '1fr min(65ch, 100%) 1fr',
+      gridTemplateColumns: '1fr min(66ch, 100%) 1fr',
       '> *': {
         gridColumn: '2',
       },
-    },
-    '.reading-lg': {
-      gridTemplateColumns: '1fr min(69ch, 100%) 1fr',
-    },
-    '.reading-xl': {
-      gridTemplateColumns: '1fr min(78ch, 100%) 1fr',
     },
   });
 });

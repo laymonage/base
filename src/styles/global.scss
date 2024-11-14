@@ -83,7 +83,7 @@
 body {
   &,
   .bg-primary {
-    @apply bg-white text-lg dark:bg-gray-900;
+    @apply bg-white text-lg leading-relaxed sm:text-xl sm:leading-relaxed dark:bg-gray-900;
   }
 
   &,
