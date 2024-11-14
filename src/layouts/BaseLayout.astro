@@ -46,14 +46,16 @@ const giscusThemes = ['light', 'transparent_dark'];
   <body>
     <SkipLink />
     <Navigation />
-    <main
-      id="main"
-      class="p-8 sm:mt-20 w-full reading reading-lg sm:reading-xl"
-    >
-      <slot />
-      {comments && <Giscus class="my-8" eager={comments === 'eager'} />}
-    </main>
-    <Footer />
+    <div class="p-4 sm:p-8">
+      <main
+        id="main"
+        class="mb-10 sm:mt-20 w-full reading reading-lg sm:reading-xl"
+      >
+        <slot />
+        {comments && <Giscus class="my-8" eager={comments === 'eager'} />}
+      </main>
+      <Footer />
+    </div>
     <ScrollTop />
     <div
       class="bg fixed top-0 left-0 h-screen w-screen bg-cover bg-center opacity-40 2xl:opacity-100"
