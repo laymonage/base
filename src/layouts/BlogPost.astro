@@ -22,7 +22,12 @@ const {
 } = Astro.props;
 ---
 
-<BaseLayout title={title} description={description} comments={comments}>
+<BaseLayout
+  title={title}
+  description={description}
+  comments={comments}
+  indexed={true}
+>
   <article>
     <div class="mt-4 flex-row">
       <h1

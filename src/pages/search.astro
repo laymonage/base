@@ -1,0 +1,69 @@
+---
+import '@pagefind/default-ui/css/ui.css';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const bundlePath = `${import.meta.env.BASE_URL}pagefind/`;
+---
+
+<BaseLayout
+  title="Search"
+  description="Search the website for content. Powered by Pagefind."
+>
+  <l-pagefind
+    class="min-h-[calc(100vh-8rem)] sm:min-h-[calc(100vh-10rem)]"
+    bundlepath={bundlePath}
+  >
+  </l-pagefind>
+</BaseLayout>
+
+<script>
+  // @ts-expect-error
+  import { PagefindUI } from '@pagefind/default-ui';
+
+  class Pagefind extends HTMLElement {
+    static identifier = 'l-pagefind';
+
+    pagefind: PagefindUI;
+    input!: HTMLInputElement;
+    clear!: HTMLButtonElement;
+    query = '';
+
+    connectedCallback() {
+      this.pagefind = new PagefindUI({
+        showImages: false,
+        translations: { placeholder: 'Search…' },
+        element: this,
+        bundlePath: this.getAttribute('bundlepath'),
+      });
+
+      this.clear = this.querySelector('button.pagefind-ui__search-clear')!;
+      this.input = this.querySelector(`input[type="text"]`)!;
+      this.query = new URL(window.location.href).searchParams.get('q') || '';
+
+      // Best practice fixes
+      this.clear.setAttribute('type', 'button');
+      this.input.removeAttribute('autocapitalize');
+
+      this.reflectQuery = this.reflectQuery.bind(this);
+      this.input.addEventListener('input', this.reflectQuery);
+
+      // Set query from URL params if available
+      this.input.value = this.query;
+      this.input.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+
+    disconnectedCallback() {
+      this.input.removeEventListener('input', this.reflectQuery);
+    }
+
+    reflectQuery(event: Event) {
+      const url = new URL(window.location.href);
+      const value = (event.target as HTMLInputElement).value;
+      url.searchParams.set('q', value);
+      window.history.replaceState({}, '', url.toString());
+      this.clear.hidden = !value;
+    }
+  }
+
+  customElements.define(Pagefind.identifier, Pagefind);
+</script>

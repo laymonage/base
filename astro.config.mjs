@@ -10,10 +10,12 @@ import icon from 'astro-icon';
 
 import tailwind from '@astrojs/tailwind';
 
+import pagefind from 'astro-pagefind';
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://example.com',
-  integrations: [mdx(), sitemap(), react(), icon(), tailwind()],
+  integrations: [mdx(), sitemap(), react(), icon(), tailwind(), pagefind()],
   vite: {
     css: {
       preprocessorOptions: {

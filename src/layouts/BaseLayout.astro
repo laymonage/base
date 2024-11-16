@@ -11,12 +11,14 @@ interface Props {
   title?: string;
   description?: string;
   comments?: boolean | 'eager';
+  indexed?: boolean;
 }
 
 const {
   description = SITE_DESCRIPTION,
   title = '',
   comments = false,
+  indexed = false,
 } = Astro.props;
 
 const giscusThemes = ['light', 'transparent_dark'];
@@ -47,7 +49,11 @@ const giscusThemes = ['light', 'transparent_dark'];
     <SkipLink />
     <Navigation />
     <div class="p-4 sm:p-8 has-[.bleed]:overflow-x-hidden">
-      <main id="main" class="mb-10 sm:mt-20 w-full reading">
+      <main
+        id="main"
+        class="mb-10 sm:mt-20 w-full reading"
+        data-pagefind-body={indexed}
+      >
         <slot />
         {comments && <Giscus class="my-8" eager={comments === 'eager'} />}
       </main>

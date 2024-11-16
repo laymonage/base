@@ -19,14 +19,17 @@ const menu = ['posts', 'thoughts', 'projects', 'palates', 'about'];
       >
         <Icon aria-hidden="true" class="w-8 h-8 sm:h-10 sm:w-10" name="logo" />
       </Link>
-      <div class="flex items-center justify-between">
+      <div class="flex items-center justify-between gap-4">
         <ThemeSwitcher />
+        <Link href="/search" aria-label="Search">
+          <Icon aria-hidden="true" class="w-6 h-6" name="tabler:search" />
+        </Link>
         <button
           data-l-nav-toggle
           aria-label="Toggle navigation menu"
           aria-expanded="false"
           type="button"
-          class="alike ml-4 group fill-current sm:hidden"
+          class="alike group fill-current sm:hidden"
         >
           <Icon
             aria-hidden="true"
