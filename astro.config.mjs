@@ -14,7 +14,7 @@ import pagefind from 'astro-pagefind';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://example.com',
+  site: 'https://laymonage.com',
   integrations: [mdx(), sitemap(), react(), icon(), tailwind(), pagefind()],
   vite: {
     css: {

@@ -6,6 +6,7 @@ import {
   type AnyEntryMap,
 } from 'astro:content';
 import { file, glob } from 'astro/loaders';
+import { rssSchema } from '@astrojs/rss';
 
 const baseSchema = z.object({
   title: z.string(),
@@ -85,6 +86,21 @@ export const getContentStaticPaths = async <C extends keyof AnyEntryMap>(
     params: { slug: entry.id === 'index' ? undefined : entry.id },
     props: entry,
   }));
+
+export const sortFeedItems = (items: z.infer<typeof rssSchema>[]) =>
+  items.sort((a, b) => b.pubDate!.valueOf() - a.pubDate!.valueOf());
+
+export const getRssItems = async <C extends keyof AnyEntryMap>(collection: C) =>
+  sortFeedItems(
+    (await getCollection(collection)).map((entry) =>
+      rssSchema.parse({
+        title: entry.data.title,
+        description: entry.data.description,
+        pubDate: entry.data.date,
+        link: `${String(collection)}/${entry.id}`,
+      }),
+    ),
+  );
 
 const timelineYearSchema = z.object({
   id: z.number(),
