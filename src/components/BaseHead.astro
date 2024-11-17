@@ -14,12 +14,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
 
-const fonts = [
-  'source-sans-pro-latin-reg-400-v14',
-  'source-sans-pro-latin-reg-600-v14',
-  'source-sans-pro-latin-itl-400-v14',
-  'source-sans-pro-latin-itl-600-v14',
-];
+const fonts = ['sourcesans3-latin-normal-v15', 'sourcesans3-latin-italic-v15'];
 ---
 
 <!-- Global Metadata -->
@@ -40,6 +35,8 @@ const fonts = [
     />
   ))
 }
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />

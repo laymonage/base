@@ -53,7 +53,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['"Source Sans Pro"', ...fontFamily.sans],
+        sans: ['"Source Sans 3"', ...fontFamily.sans],
       },
       strokeWidth: {
         unset: 'unset',
@@ -63,6 +63,18 @@ export default {
         DEFAULT: {
           css: {
             '@apply break-words': '',
+            h1: {
+              fontWeight: '600',
+            },
+            'h1 strong': {
+              fontWeight: '700',
+            },
+            h2: {
+              fontWeight: '600',
+            },
+            'h2 strong': {
+              fontWeight: '700',
+            },
             maxWidth: 'initial',
             'blockquote p:first-of-type::before': {
               content: '',
