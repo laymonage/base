@@ -44,13 +44,13 @@ import { Icon } from 'astro-icon/components';
       return (localStorage.getItem('l:theme') || 'system') as Theme;
     }
 
+    get mediaQueryTheme() {
+      return ThemeSwitcher.mediaQuery.matches ? 'dark' : 'light';
+    }
+
     get resolvedTheme() {
       const theme = this.theme;
-      return theme === 'system'
-        ? ThemeSwitcher.mediaQuery.matches
-          ? 'dark'
-          : 'light'
-        : theme;
+      return theme === 'system' ? this.mediaQueryTheme : theme;
     }
 
     set theme(value) {
@@ -95,9 +95,27 @@ import { Icon } from 'astro-icon/components';
       this.querySelector('select')!.value = theme;
     }
 
+    updateFavicon() {
+      // Force reload favicon by changing the query string,
+      // even though the icon itself doesn't change (it's adaptive).
+      // We use this.mediaQueryTheme instead of this.resolvedTheme because we're
+      // interested in the browser theme, not the active website theme, as the
+      // favicon is shown on the browser tab and not the website itself. For
+      // example, the user may use a light theme for their browser and set the
+      // website's theme to dark. In this case, the value of this.resolvedTheme
+      // is dark, but the media query would resolve to a light theme, which is
+      // the theme we want to use for the favicon.
+      const favicon =
+        document.querySelector<HTMLLinkElement>('link[rel="icon"]')!;
+      const url = new URL(favicon.href);
+      url.searchParams.set('theme', this.mediaQueryTheme);
+      favicon.href = url.href;
+    }
+
     changeTheme(event: Event) {
       if (event instanceof MediaQueryListEvent) {
         this.apply();
+        this.updateFavicon();
       } else if (event.type === 'input') {
         this.theme = (event.target as HTMLSelectElement).value as Theme;
       }
