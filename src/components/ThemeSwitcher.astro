@@ -67,8 +67,8 @@ import { Icon } from 'astro-icon/components';
     }
 
     attributeChangedCallback(
-      name: (typeof ThemeSwitcher.observedAttributes)[number],
-      oldValue: Theme,
+      _name: (typeof ThemeSwitcher.observedAttributes)[number],
+      _oldValue: Theme,
       newValue: Theme,
     ) {
       this.theme = newValue;

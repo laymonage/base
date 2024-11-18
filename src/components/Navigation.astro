@@ -125,14 +125,14 @@ const subpath = pathname.match(/[^\/]+/g);
     }
 
     attributeChangedCallback(
-      name: (typeof Navigation.observedAttributes)[number],
-      oldValue: boolean,
+      _name: (typeof Navigation.observedAttributes)[number],
+      _oldValue: boolean,
       newValue: boolean,
     ) {
       this.open = newValue !== null;
     }
 
-    hide(event: Event) {
+    hide() {
       if (!(Math.abs(window.scrollY - this.lastScroll) > Navigation.hideOffset))
         return;
       this.toggleShow();

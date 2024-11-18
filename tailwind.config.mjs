@@ -18,13 +18,13 @@ const reading = plugin(function ({ addComponents }) {
 });
 
 /** Sourced from https://github.com/tailwindlabs/tailwindcss-typography/blob/main/src/styles.js */
-const round = (num) =>
+export const round = (num) =>
   num
     .toFixed(7)
     .replace(/(\.[0-9]+?)0+$/, '$1')
     .replace(/\.0$/, '');
-const rem = (px) => `${round(px / 16)}rem`;
-const em = (px, base) => `${round(px / base)}em`;
+export const rem = (px) => `${round(px / 16)}rem`;
+export const em = (px, base) => `${round(px / base)}em`;
 
 /** Add negative margins to blockquote and pre elements so the text is not indented */
 const modifyStyles = (breakpoint) => {
@@ -58,7 +58,7 @@ export default {
       strokeWidth: {
         unset: 'unset',
       },
-      typography: (theme) => ({
+      typography: () => ({
         sm: modifyStyles('sm'),
         DEFAULT: {
           css: {
