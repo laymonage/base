@@ -15,7 +15,34 @@ import pagefind from 'astro-pagefind';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://laymonage.com',
-  integrations: [mdx(), sitemap(), react(), icon(), tailwind(), pagefind()],
+  integrations: [
+    mdx(),
+    sitemap({
+      priority: 0.5,
+      serialize(item) {
+        const priorityMap = {
+          0.1: [
+            /\/palates\/music\/playlists\/[\w-]+\//,
+            /\/palates\/music\/top\//,
+          ],
+          0.2: [/\/logs\/$/, /\/logs\/2[1,2]w[0-9]{2}\/$/],
+          0.3: [/\/guestbook\/$/],
+        };
+        for (const [priority, urls] of Object.entries(priorityMap)) {
+          for (const url of urls) {
+            if (url.test(item.url)) {
+              item.priority = +priority;
+            }
+          }
+        }
+        return item;
+      },
+    }),
+    react(),
+    icon(),
+    tailwind(),
+    pagefind(),
+  ],
   vite: {
     css: {
       preprocessorOptions: {

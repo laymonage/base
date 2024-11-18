@@ -1,0 +1,4 @@
+Contact: https://fosstodon.org/@laymonage
+Expires: 2025-06-01T08:00:00.000Z
+Preferred-Languages: en, id
+Canonical: https://laymonage.com/.well-known/security.txt
