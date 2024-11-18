@@ -19,8 +19,8 @@ const { albums }: { albums: AlbumSimplified[] } = await fetch(
 ---
 
 <Palate
-  title="Albums"
   description="Here are all the albums I've saved to my Spotify account."
+  title="Albums"
 >
-  <SpotifyTable type="album" data={albums} client:idle />
+  <SpotifyTable client:idle data={albums} type="album" />
 </Palate>

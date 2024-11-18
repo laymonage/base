@@ -27,8 +27,8 @@ const tIdx = terms.indexOf(term);
 ---
 
 <Palate
-  title={`Top ${type}`}
   description={`The top ${type} on my Spotify within a given time frame.`}
+  title={`Top ${type}`}
 >
   <p>
     <Link
@@ -58,6 +58,8 @@ const tIdx = terms.indexOf(term);
             ]}
           >
             <Link
+              aria-current={t === term ? 'page' : undefined}
+              button={true}
               class:list={[
                 'px-3 py-0.5 capitalize',
                 {
@@ -65,8 +67,6 @@ const tIdx = terms.indexOf(term);
                 },
               ]}
               href={`/palates/music/top/${type}/${t}`}
-              aria-current={t === term ? 'page' : undefined}
-              button={true}
             >
               {t}
             </Link>
@@ -78,19 +78,19 @@ const tIdx = terms.indexOf(term);
   {
     type === 'artists' ? (
       <SpotifyTable
-        type="artist"
+        client:idle
         data={data.artists}
         defaultSorting={[]}
-        client:idle
+        type="artist"
       />
     ) : (
       <SpotifyTable
-        type="track"
+        client:idle
         data={data.tracks.map((track: SpotifyApi.TrackObjectFull) =>
           trackSchema.parse(simplifyTrack(track)),
         )}
         defaultSorting={[]}
-        client:idle
+        type="track"
       />
     )
   }

@@ -19,55 +19,55 @@ const fonts = ['sourcesans3-latin-normal-v15', 'sourcesans3-latin-italic-v15'];
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<meta name="generator" content={Astro.generator} />
+<meta content="width=device-width,initial-scale=1" name="viewport" />
+<link href="/favicon.svg" rel="icon" type="image/svg+xml" />
+<meta content={Astro.generator} name="generator" />
 
 <!-- Font preloads -->
 {
   fonts.map((font) => (
     <link
-      rel="preload"
-      href={`/fonts/${font}.woff2`}
       as="font"
-      type="font/woff2"
       crossorigin="anonymous"
+      href={`/fonts/${font}.woff2`}
+      rel="preload"
+      type="font/woff2"
     />
   ))
 }
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com" rel="preconnect" />
+<link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
 
 <!-- Canonical URL -->
-<link rel="canonical" href={canonicalURL} />
+<link href={canonicalURL} rel="canonical" />
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>
-<meta name="title" content={title} />
-<meta name="description" content={description} />
-<meta name="color-scheme" content="light dark" />
+<meta content={title} name="title" />
+<meta content={description} name="description" />
+<meta content="light dark" name="color-scheme" />
 
 <!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta property="og:url" content={Astro.url} />
-<meta property="og:title" content={title} />
-<meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(image, Astro.url)} />
+<meta content="website" property="og:type" />
+<meta content={Astro.url} property="og:url" />
+<meta content={title} property="og:title" />
+<meta content={description} property="og:description" />
+<meta content={new URL(image, Astro.url)} property="og:image" />
 
 <!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={Astro.url} />
-<meta property="twitter:title" content={title} />
-<meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(image, Astro.url)} />
+<meta content="summary_large_image" property="twitter:card" />
+<meta content={Astro.url} property="twitter:url" />
+<meta content={title} property="twitter:title" />
+<meta content={description} property="twitter:description" />
+<meta content={new URL(image, Astro.url)} property="twitter:image" />
 
 <!-- RSS Feed -->
 <link
-  rel="alternate"
-  type="application/rss+xml"
-  title="laymonage's Web Feed"
   href={new URL('rss.xml', Astro.site)}
+  rel="alternate"
+  title="laymonage's Web Feed"
+  type="application/rss+xml"
 />
 
 <!-- Sitemap -->
-<link rel="sitemap" href="/sitemap-index.xml" />
+<link href="/sitemap-index.xml" rel="sitemap" />

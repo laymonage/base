@@ -10,8 +10,8 @@ import { prose } from '../../lib/classes';
 const thoughts = await getSortedCollection('thoughts');
 ---
 
-<BaseLayout title="Thoughts" description="All thoughts by laymonage.">
-  <Card class={prose}>
+<BaseLayout description="All thoughts by laymonage." title="Thoughts">
+  <Card class:list={prose}>
     <h1 id="thoughts" slot="header">
       <Link href="#thoughts">Thoughts</Link>
     </h1>
@@ -24,15 +24,15 @@ const thoughts = await getSortedCollection('thoughts');
         {thoughts!.map((thought) => (
           <ListItem>
             <Link
-              href={`/thoughts/${thought.id}`}
               class="mt-4 block text-gray-700 dark:text-gray-300"
+              href={`/thoughts/${thought.id}`}
             >
               <h2 class="flex flex-col sm:flex-row items-baseline gap-x-4 gap-y-2 text-xl">
                 <FormattedDate
                   class="font-semibold tabular-nums whitespace-nowrap"
                   date={thought.data.date}
-                  locale="sv"
                   format={{}}
+                  locale="sv"
                 />
                 <span class="sr-only">-</span>
                 {thought.data.title}

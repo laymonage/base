@@ -11,7 +11,7 @@ const { value, class: className = 'text-secondary' } =
   Astro.props as DurationProps;
 ---
 
-<time class={className} datetime={msToDuration(value)}>
+<time class:list={className} datetime={msToDuration(value)}>
   <slot>
     {msToMinutes(value)}
   </slot>

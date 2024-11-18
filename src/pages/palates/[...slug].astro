@@ -16,8 +16,8 @@ const palate = Astro.props;
 const { Content } = await render(palate);
 ---
 
-<BaseLayout title={palate.data.title} description={palate.data.description}>
-  <Card class={prose}>
+<BaseLayout description={palate.data.description} title={palate.data.title}>
+  <Card class:list={prose}>
     <h2 id="palate" slot="header">
       <Link href="#palate">{palate.data.title}</Link>
     </h2>

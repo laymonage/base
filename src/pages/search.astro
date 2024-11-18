@@ -6,13 +6,13 @@ const bundlePath = `${import.meta.env.BASE_URL}pagefind/`;
 ---
 
 <BaseLayout
-  title="Search"
   description="Search the website for content. Powered by Pagefind."
+  title="Search"
 >
   <l-pagefind
-    id="pagefind"
-    class="min-h-[calc(100vh-8rem)] sm:min-h-[calc(100vh-10rem)]"
     bundlepath={bundlePath}
+    class="min-h-[calc(100vh-8rem)] sm:min-h-[calc(100vh-10rem)]"
+    id="pagefind"
   >
   </l-pagefind>
 </BaseLayout>

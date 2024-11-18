@@ -58,8 +58,8 @@ const groups = [
 ---
 
 <Palate
-  title="Playlists"
   description="Here are all the playlists on my Spotify account."
+  title="Playlists"
 >
   {
     groups.map(({ group, playlists }) => (
@@ -74,8 +74,8 @@ const groups = [
               >
                 <img
                   alt=""
-                  src={images?.[0].url}
                   class="aspect-square h-full w-full rounded object-cover"
+                  src={images?.[0].url}
                 />
                 <div class="overflow-clip text-ellipsis whitespace-nowrap font-semibold">
                   {name}

@@ -21,9 +21,9 @@ const isAnchorLink = (href as string).startsWith('#');
     </a>
   ) : (
     <a
-      target="_blank"
-      rel={`noopener noreferrer nofollow ${rel || ''}`}
       href={href}
+      rel={`noopener noreferrer nofollow ${rel || ''}`}
+      target="_blank"
       {...rest}
     >
       <slot />

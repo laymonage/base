@@ -18,6 +18,6 @@ const {
 } = Astro.props;
 ---
 
-<time class={className} datetime={date.toISOString()}>
+<time class:list={className} datetime={date.toISOString()}>
   {date.toLocaleDateString(locale, format)}
 </time>

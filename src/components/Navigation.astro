@@ -9,68 +9,67 @@ const { pathname } = Astro.url;
 const subpath = pathname.match(/[^\/]+/g);
 ---
 
-<div class="mx-auto max-w-4xl">
-  <l-nav
-    role="navigation"
-    class="ease fixed text-lg open:pt-3 sm:p-0 bottom-0 sm:top-0 sm:bottom-auto z-20 flex w-full max-w-4xl mx-auto transform flex-col-reverse bg-white transition-transform duration-300 dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between drop-shadow"
+<l-nav class="block mx-auto max-w-4xl group">
+  <nav
+    class="ease fixed text-lg group-open:pt-3 sm:p-0 bottom-0 sm:top-0 sm:bottom-auto z-20 flex w-full max-w-4xl mx-auto transform flex-col-reverse bg-white transition-transform duration-300 dark:bg-slate-800 sm:flex-row sm:items-center sm:justify-between drop-shadow"
   >
     <div class="py-3 mx-4 flex flex-grow items-center justify-between">
       <Link
-        href="/"
         aria-label="Home"
         class="mr-2 text-blue-800 dark:text-blue-200"
+        href="/"
       >
         <Icon aria-hidden="true" class="w-8 h-8 sm:h-10 sm:w-10" name="logo" />
       </Link>
       <div class="flex items-center justify-between gap-4">
         <ThemeSwitcher />
-        <Link href="/search" aria-label="Search">
+        <Link aria-label="Search" href="/search">
           <Icon aria-hidden="true" class="w-6 h-6" name="tabler:search" />
         </Link>
         <button
-          data-l-nav-toggle
-          aria-label="Toggle navigation menu"
           aria-expanded="false"
-          type="button"
+          aria-label="Toggle navigation menu"
           class="alike group fill-current sm:hidden"
+          data-l-nav-toggle
+          type="button"
         >
           <Icon
             aria-hidden="true"
-            stroke-width={2.5}
-            name="tabler:x"
             class="w-6 h-6 hidden group-aria-expanded:block"
+            name="tabler:x"
+            stroke-width={2.5}
           />
           <Icon
             aria-hidden="true"
-            stroke-width={2.5}
-            name="tabler:menu-2"
             class="w-6 h-6 block group-aria-expanded:hidden"
+            name="tabler:menu-2"
+            stroke-width={2.5}
           />
         </button>
       </div>
     </div>
     <div
-      data-l-nav-items
       class="mr-0 px-3 hidden max-h-[50vh] sm:mr-4 sm:flex sm:items-center sm:p-0 overflow-auto"
+      data-l-nav-items
     >
       {
         menu.map((m) => (
           <Link
-            href={`/${m}`}
             class:list={[
               'mb-2 block rounded p-2 font-semibold capitalize hover:bg-blue-100 hover:bg-opacity-50 dark:hover:bg-gray-700 dark:hover:bg-opacity-50 sm:mb-0 sm:ml-4 sm:first:ml-0 -outline-offset-2',
               {
                 'text-blue-700 dark:text-blue-200': m === subpath?.[0],
               },
             ]}
+            href={`/${m}`}
           >
             {m}
           </Link>
         ))
       }
     </div>
-  </l-nav>
-</div>
+  </nav>
+</l-nav>
 
 <script>
   class Navigation extends HTMLElement {
@@ -78,6 +77,7 @@ const subpath = pathname.match(/[^\/]+/g);
     static observedAttributes = ['open'] as const;
     static hideOffset = 64;
 
+    nav = this.querySelector('nav')!;
     toggle = this.querySelector('[data-l-nav-toggle]')!;
     navItems = this.querySelector('[data-l-nav-items]')!;
     focusableElements = this.querySelectorAll<HTMLElement>('a, button');
@@ -141,8 +141,8 @@ const subpath = pathname.match(/[^\/]+/g);
 
     toggleShow() {
       const hidden = this.hidden;
-      this.classList.toggle('translate-y-full', hidden);
-      this.classList.toggle('sm:-translate-y-full', hidden);
+      this.nav.classList.toggle('translate-y-full', hidden);
+      this.nav.classList.toggle('sm:-translate-y-full', hidden);
     }
 
     toggleMenu() {

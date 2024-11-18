@@ -20,15 +20,15 @@ const rest = timelineData.slice(6);
     <h2 id="me" slot="header">
       <Link href="#me">{about.frontmatter.title}</Link>
     </h2>
-    <div class={prose}>
+    <div class:list={prose}>
       {(<about.Content />)}
     </div>
     <div class="mt-6 flex justify-end">
       <NowPlaying client:idle>
         <Icon
+          class="text-black dark:text-white w-full h-full"
           name="spotify"
           slot="icon"
-          class="text-black dark:text-white w-full h-full"
         />
       </NowPlaying>
     </div>
@@ -57,7 +57,7 @@ const rest = timelineData.slice(6);
     <iframe
       class="w-full min-h-96 max-h-screen my-8 rounded"
       src="https://www.google.com/maps/d/embed?mid=1rWcLp6UVtUwmgJoHFWoMhll0lwFBV54&ehbc=2E312F&noprof=1"
-    ></iframe>
+      title="Towns and cities I've been to"></iframe>
     <p>
       Despite living the better part of my life in Indonesia, the map shows you
       the sorry truth: I haven't had the chance to see much of my home country.

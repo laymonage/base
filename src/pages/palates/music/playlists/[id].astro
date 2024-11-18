@@ -57,16 +57,16 @@ const duration =
 ---
 
 <Palate
-  title={title}
   description={description || `The ${title} playlist on my Spotify account.`}
+  title={title}
 >
-  <div slot="header" class="my-4 flex flex-wrap items-end gap-8 sm:flex-nowrap">
+  <div class="my-4 flex flex-wrap items-end gap-8 sm:flex-nowrap" slot="header">
     <div class="flex h-48 w-48 flex-shrink-0 items-center justify-center">
       {
         imageUrl ? (
           <img
-            class="aspect-square h-full w-full object-cover"
             alt=""
+            class="aspect-square h-full w-full object-cover"
             src={imageUrl}
           />
         ) : null
@@ -81,7 +81,7 @@ const duration =
       <div class="mt-1 flex flex-wrap items-center gap-x-1.5">
         <span>
           <Link class="flex items-center gap-2" href={spotifyUrl}>
-            <Icon name="spotify" class="h-5 w-5 fill-black dark:fill-white" />
+            <Icon class="h-5 w-5 fill-black dark:fill-white" name="spotify" />
             Open on Spotify
           </Link>
         </span>
@@ -93,6 +93,6 @@ const duration =
     </Card>
   </div>
   <slot>
-    <SpotifyTable type="track" data={tracks} client:idle />
+    <SpotifyTable client:idle data={tracks} type="track" />
   </slot>
 </Palate>
