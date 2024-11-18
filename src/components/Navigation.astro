@@ -4,6 +4,9 @@ import Link from './Link.astro';
 import ThemeSwitcher from './ThemeSwitcher.astro';
 
 const menu = ['posts', 'thoughts', 'projects', 'palates', 'about'];
+
+const { pathname } = Astro.url;
+const subpath = pathname.match(/[^\/]+/g);
 ---
 
 <div class="mx-auto max-w-4xl">
@@ -54,7 +57,12 @@ const menu = ['posts', 'thoughts', 'projects', 'palates', 'about'];
         menu.map((m) => (
           <Link
             href={`/${m}`}
-            class="mb-2 block rounded p-2 font-semibold capitalize hover:bg-blue-100 hover:bg-opacity-50 dark:hover:bg-gray-700 dark:hover:bg-opacity-50 sm:mb-0 sm:ml-4 sm:first:ml-0 -outline-offset-2"
+            class:list={[
+              'mb-2 block rounded p-2 font-semibold capitalize hover:bg-blue-100 hover:bg-opacity-50 dark:hover:bg-gray-700 dark:hover:bg-opacity-50 sm:mb-0 sm:ml-4 sm:first:ml-0 -outline-offset-2',
+              {
+                'text-blue-700 dark:text-blue-200': m === subpath?.[0],
+              },
+            ]}
           >
             {m}
           </Link>
