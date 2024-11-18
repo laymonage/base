@@ -3,6 +3,16 @@
     "id": 2024,
     "items": [
       {
+        "emoji": "🚙",
+        "title": "East – west coast road trip",
+        "description": "Thibaud, Storm, and I went on a road trip from New York all the way to San Francisco. We visited a lot of landmarks along the way, and we biked the Golden Gate Bridge. I also gave another talk at DjangoCon US and a lightning talk at the Google Summer of Code Mentor Summit."
+      },
+      {
+        "emoji": "🇳🇱",
+        "title": "Spoke at Wagtail Space NL",
+        "description": "Gave a talk about the recent updates we made to the listing views in Wagtail. It was my first time in the Netherlands."
+      },
+      {
         "emoji": "🇧🇪",
         "title": "Spoke at FOSDEM",
         "description": "I spoke about Wagtail in a room full of other open source CMS developers. It was the first time I've been to FOSDEM."
@@ -21,6 +31,11 @@
         "emoji": "🇺🇸",
         "title": "Spoke at DjangoCon US",
         "description": "I spoke about Wagtail's modern editing experience for existing Django models. It's the first time I've been to DjangoCon US."
+      },
+      {
+        "emoji": "☀️",
+        "title": "Went to Google Summer of Code Mentor Summit",
+        "description": "Represented Wagtail at the mentor summit and met a lot of other open source project maintainers."
       },
       {
         "emoji": "☀️",
