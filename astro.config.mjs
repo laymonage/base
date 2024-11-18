@@ -37,6 +37,7 @@ export default defineConfig({
         }
         return item;
       },
+      xslURL: '/sitemap.xsl',
     }),
     react(),
     icon(),

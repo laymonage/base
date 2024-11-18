@@ -7,4 +7,4 @@
  /** Custom styles */
  ol {padding-left:0;list-style-type:none}
  small {display:block;margin-bottom:1rem}
- footer {border-top: 2px dashed var(--bd-muted);padding-top:1rem}
+ footer {border-top: 2px dashed var(--bd-muted);padding-top:1rem;margin-top:1rem}
