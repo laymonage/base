@@ -188,10 +188,6 @@
   }
 }
 
-::selection {
-  @apply bg-blue-500 text-gray-100;
-}
-
 ::-webkit-scrollbar {
   @apply h-2 w-2 bg-transparent;
 }
