@@ -1,0 +1,66 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<template id="l-copy-button">
+  <button
+    aria-label="Copy code"
+    class="block m-1 p-1 sm:m-2 sm:p-2 rounded-lg hover:bg-gray-400 hover:bg-opacity-20"
+  >
+    <Icon data-name="copy" name="tabler:copy" />
+    <Icon
+      class="hidden text-green-500"
+      data-name="copied"
+      name="tabler:clipboard-check"
+    />
+  </button>
+</template>
+
+<script>
+  import { throttle } from '../lib/throttle';
+
+  class CopyButton extends HTMLElement {
+    static identifier = 'l-copy-button';
+    static template = document.getElementById(
+      CopyButton.identifier,
+    ) as HTMLTemplateElement;
+
+    copiedDuration = 2000;
+    icons!: { copy: SVGElement; copied: SVGElement };
+    button!: HTMLButtonElement;
+    target!: HTMLElement;
+
+    connectedCallback() {
+      this.innerHTML = CopyButton.template.innerHTML;
+
+      this.icons = {
+        copy: this.querySelector<SVGElement>('[data-name="copy"]')!,
+        copied: this.querySelector<SVGElement>('[data-name="copied"]')!,
+      };
+      this.button = this.querySelector<HTMLButtonElement>('button')!;
+      this.target =
+        this.closest('pre')?.querySelector('code') ?? this.parentElement!;
+
+      this.copy = throttle(this.copy.bind(this), this.copiedDuration);
+      this.button.addEventListener('click', this.copy);
+    }
+
+    disconnectedCallback() {
+      this.button.removeEventListener('click', this.copy);
+    }
+
+    copy() {
+      navigator.clipboard.writeText(this.target.textContent ?? '');
+      this.icons.copy.classList.add('hidden');
+      this.icons.copied.classList.remove('hidden');
+      this.button.ariaLabel = 'Copied!';
+      setTimeout(() => {
+        this.icons.copy.classList.remove('hidden');
+        this.icons.copied.classList.add('hidden');
+        this.button.ariaLabel = 'Copy code';
+      }, this.copiedDuration);
+    }
+  }
+
+  customElements.define(CopyButton.identifier, CopyButton);
+</script>

@@ -172,6 +172,20 @@
   --pagefind-ui-image-box-ratio: 3 / 2;
   --pagefind-ui-font: theme(fontFamily.sans);
 
+  .astro-code {
+    @apply border border-opacity-20 border-gray-400 flex justify-between items-start;
+  }
+
+  .astro-code,
+  .astro-code span {
+    color: var(--shiki-light);
+    background-color: var(--shiki-light-bg);
+    /* Optional, if you also want font styles */
+    font-style: var(--shiki-light-font-style);
+    font-weight: var(--shiki-light-font-weight);
+    text-decoration: var(--shiki-light-text-decoration);
+  }
+
   &.dark {
     scrollbar-color: rgb(55, 65, 81) transparent;
     color-scheme: dark;
@@ -181,6 +195,16 @@
     --pagefind-ui-background: theme(colors.gray.800);
     --pagefind-ui-border: #152028;
     --pagefind-ui-tag: #152028;
+
+    .astro-code,
+    .astro-code span {
+      color: var(--shiki-dark);
+      background-color: var(--shiki-dark-bg);
+      /* Optional, if you also want font styles */
+      font-style: var(--shiki-dark-font-style);
+      font-weight: var(--shiki-dark-font-weight);
+      text-decoration: var(--shiki-dark-text-decoration);
+    }
   }
 
   @media screen and (min-width: theme('screens.sm')) {

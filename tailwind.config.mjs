@@ -30,14 +30,39 @@ export const em = (px, base) => `${round(px / base)}em`;
 const modifyStyles = (breakpoint) => {
   const defaults = styles.DEFAULT.css[0];
   const style = styles[breakpoint].css[0];
+  let pre = {
+    paddingInlineStart: style.pre.paddingInlineStart,
+    paddingInlineEnd: style.pre.paddingInlineEnd,
+    paddingTop: style.pre.paddingTop,
+    paddingBottom: style.pre.paddingBottom,
+  };
+  if (breakpoint === 'lg') {
+    pre = {
+      paddingInlineStart: em(10, 16),
+      paddingInlineEnd: em(10, 16),
+      paddingTop: em(10, 16),
+      paddingBottom: em(10, 16),
+    };
+  }
+
   return {
     css: {
       blockquote: {
         marginInlineStart: `calc(-${style.blockquote.paddingInlineStart} - ${defaults.blockquote.borderInlineStartWidth})`,
       },
       pre: {
-        marginInlineStart: `-${style.pre.paddingInlineStart}`,
-        marginInlineEnd: `-${style.pre.paddingInlineEnd}`,
+        marginInlineStart: `-${pre.paddingInlineStart}`,
+        marginInlineEnd: `-${pre.paddingInlineEnd}`,
+
+        // Move the padding to the code element
+        paddingInlineEnd: 0,
+        paddingInlineStart: 0,
+        paddingTop: 0,
+        paddingBottom: 0,
+        code: {
+          ...pre,
+          overflow: 'auto',
+        },
       },
     },
   };
@@ -59,7 +84,6 @@ export default {
         unset: 'unset',
       },
       typography: () => ({
-        sm: modifyStyles('sm'),
         DEFAULT: {
           css: {
             '@apply break-words': '',
@@ -116,6 +140,8 @@ export default {
             },
           },
         },
+        // We only ever use the lg and xl variants, see lib/classes.ts
+        sm: modifyStyles('sm'),
         base: modifyStyles('base'),
         lg: modifyStyles('lg'),
         xl: modifyStyles('xl'),

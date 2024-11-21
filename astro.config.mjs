@@ -12,6 +12,8 @@ import tailwind from '@astrojs/tailwind';
 
 import pagefind from 'astro-pagefind';
 
+import { copyButton } from './src/lib/shiki';
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://laymonage.com',
@@ -44,6 +46,16 @@ export default defineConfig({
     tailwind(),
     pagefind(),
   ],
+  markdown: {
+    shikiConfig: {
+      themes: {
+        light: 'github-light',
+        dark: 'github-dark',
+      },
+      defaultColor: false,
+      transformers: [copyButton()],
+    },
+  },
   vite: {
     css: {
       preprocessorOptions: {
