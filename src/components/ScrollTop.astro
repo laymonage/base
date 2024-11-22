@@ -6,6 +6,7 @@ import { Icon } from 'astro-icon/components';
   <button
     aria-label="Scroll to top"
     class="p-1 hidden fixed bottom-3 right-3 z-10 translate-y-0 transform rounded-full bg-blue-900 text-white transition-transform duration-300 dark:bg-slate-800"
+    tabindex="-1"
     type="button"
   >
     <Icon
@@ -59,6 +60,11 @@ import { Icon } from 'astro-icon/components';
       const hidden = this.hidden;
       this.button.classList.toggle('translate-y-20', hidden);
       this.button.classList.toggle('shadow-lg', !hidden);
+      if (hidden) {
+        this.button.tabIndex = -1;
+      } else {
+        this.button.removeAttribute('tabindex');
+      }
     }
   }
 
