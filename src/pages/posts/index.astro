@@ -43,7 +43,9 @@ const showTags = false; // FIXME
                   <div class="flex w-full flex-col justify-between sm:w-9/12">
                     <div>
                       <div class="mb-4 flex flex-col justify-between">
-                        <h2 class="text-xl font-semibold">{post.data.title}</h2>
+                        <h2 class="text-2xl font-semibold">
+                          {post.data.title}
+                        </h2>
                         <FormattedDate date={post.data.date} />
                       </div>
                       <p>{post.data.description}</p>
