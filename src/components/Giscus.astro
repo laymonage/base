@@ -43,10 +43,8 @@ const { eager = false, class: className } = Astro.props;
       dark: 'transparent_dark',
     };
 
-    button = document.querySelector<HTMLButtonElement>('[data-show-comments]');
-    widget = document.querySelector<HTMLTemplateElement>(
-      '[data-giscus-widget]',
-    )!;
+    button = this.querySelector<HTMLButtonElement>('[data-show-comments]');
+    widget = this.querySelector<HTMLTemplateElement>('[data-giscus-widget]')!;
 
     connectedCallback() {
       this.updateTheme = this.updateTheme.bind(this);
@@ -56,7 +54,7 @@ const { eager = false, class: className } = Astro.props;
       if (this.button) {
         this.button.addEventListener('click', this.loadComments);
       } else {
-        this.loadComments();
+        window.addEventListener('load', this.loadComments, { once: true });
       }
     }
 
