@@ -25,6 +25,7 @@ import { Icon } from 'astro-icon/components';
     );
 
     button = this.querySelector('button')!;
+    main = document.querySelector('main')!;
 
     connectedCallback() {
       this.scroll = this.scroll.bind(this);
@@ -41,6 +42,9 @@ import { Icon } from 'astro-icon/components';
     }
 
     scroll() {
+      this.main.tabIndex = -1;
+      this.main.focus();
+      this.main.removeAttribute('tabindex');
       const behavior = ScrollTop.prefersReducedMotion.matches
         ? 'instant'
         : 'smooth';
