@@ -5,35 +5,33 @@ const today = new Date();
 ---
 
 <footer>
-  <div class="mx-auto max-w-4xl">
-    <hr class="border-1 mb-8 w-full border-gray-400 border-opacity-20" />
-    <div
-      class="grid w-full grid-cols-1 justify-between gap-4 pb-8 sm:grid-cols-[repeat(3,min-content)]"
+  <hr class="border-1 mb-8 w-full border-gray-400 border-opacity-20" />
+  <div
+    class="grid w-full grid-cols-1 justify-between gap-4 pb-8 sm:grid-cols-[repeat(3,min-content)]"
+  >
+    <div class="flex flex-col space-y-4">
+      <Link href="/">Home</Link>
+      <Link href="/about">About</Link>
+      <Link href="/palates">Palates</Link>
+    </div>
+    <div class="flex flex-col space-y-4">
+      <Link href="/posts">Posts</Link>
+      <Link href="/thoughts">Thoughts</Link>
+      <Link href="/gsoc">GSoC</Link>
+    </div>
+    <div class="flex flex-col space-y-4">
+      <Link href="/projects">Projects</Link>
+      <Link href="/guestbook">Guestbook</Link>
+      <Link href="/rss.xml">RSS</Link>
+    </div>
+  </div>
+  <div class="w-full py-4 text-center text-sm">
+    &copy; {today.getFullYear()} – made with{' '}
+    <span
+      class="transition-color cursor-pointer brightness-50 saturate-0 duration-700 hover:text-red-500 hover:brightness-100 hover:saturate-100 dark:brightness-[320%] dark:hover:brightness-100"
     >
-      <div class="flex flex-col space-y-4">
-        <Link href="/">Home</Link>
-        <Link href="/about">About</Link>
-        <Link href="/palates">Palates</Link>
-      </div>
-      <div class="flex flex-col space-y-4">
-        <Link href="/posts">Posts</Link>
-        <Link href="/thoughts">Thoughts</Link>
-        <Link href="/gsoc">GSoC</Link>
-      </div>
-      <div class="flex flex-col space-y-4">
-        <Link href="/projects">Projects</Link>
-        <Link href="/guestbook">Guestbook</Link>
-        <Link href="/rss.xml">RSS</Link>
-      </div>
-    </div>
-    <div class="w-full py-4 text-center text-sm">
-      &copy; {today.getFullYear()} – made with{' '}
-      <span
-        class="transition-color cursor-pointer brightness-50 saturate-0 duration-700 hover:text-red-500 hover:brightness-100 hover:saturate-100 dark:brightness-[320%] dark:hover:brightness-100"
-      >
-        ♥&#xfe0e;
-      </span>{' '}
-      by laymonage
-    </div>
+      ♥&#xfe0e;
+    </span>{' '}
+    by laymonage
   </div>
 </footer>

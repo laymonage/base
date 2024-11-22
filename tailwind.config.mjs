@@ -3,20 +3,6 @@ import plugin from 'tailwindcss/plugin';
 import typography from '@tailwindcss/typography';
 import styles from '@tailwindcss/typography/src/styles';
 
-const reading = plugin(function ({ addComponents }) {
-  addComponents({
-    // Relative to font size of this element,
-    // defaults to 20px on the body
-    '.reading': {
-      display: 'grid',
-      gridTemplateColumns: '1fr min(66ch, 100%) 1fr',
-      '> *': {
-        gridColumn: '2',
-      },
-    },
-  });
-});
-
 /** Sourced from https://github.com/tailwindlabs/tailwindcss-typography/blob/main/src/styles.js */
 export const round = (num) =>
   num
@@ -149,5 +135,5 @@ export default {
       }),
     },
   },
-  plugins: [reading, typography],
+  plugins: [typography],
 };

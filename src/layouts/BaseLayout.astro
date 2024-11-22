@@ -12,6 +12,7 @@ interface Props {
   description?: string;
   comments?: boolean | 'eager';
   indexed?: boolean;
+  mainClass?: string;
 }
 
 const {
@@ -19,6 +20,7 @@ const {
   title = '',
   comments = false,
   indexed = false,
+  mainClass = 'max-w-[66ch]',
 } = Astro.props;
 
 const giscusThemes = ['light', 'transparent_dark'];
@@ -47,17 +49,21 @@ const giscusThemes = ['light', 'transparent_dark'];
   </head>
   <body>
     <SkipLink />
-    <Navigation />
-    <div class="p-4 sm:p-8 mb-14 sm:mb-0 has-[.bleed]:overflow-x-hidden">
-      <main
-        class="mb-10 sm:mt-20 w-full reading"
-        data-pagefind-body={indexed}
-        id="main"
-      >
-        <slot />
-        {comments && <Giscus class="my-8" eager={comments === 'eager'} />}
-      </main>
-      <Footer />
+    <div
+      class="mb-14 sm:mb-0 has-[.bleed]:overflow-x-hidden [&>*]:max-w-4xl [&>*]:mx-auto"
+    >
+      <Navigation />
+      <div class="p-4 sm:p-8 box-content">
+        <main
+          class:list={['mb-10 sm:mt-20 mx-auto flex flex-col', mainClass]}
+          data-pagefind-body={indexed}
+          id="main"
+        >
+          <slot />
+          {comments && <Giscus class="my-8" eager={comments === 'eager'} />}
+        </main>
+        <Footer />
+      </div>
     </div>
     <ScrollTop />
     <div
