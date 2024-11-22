@@ -62,10 +62,10 @@ const giscusThemes = ['light', 'transparent_dark'];
           <slot />
           {comments && <Giscus class="my-8" eager={comments === 'eager'} />}
         </main>
+        <ScrollTop />
         <Footer />
       </div>
     </div>
-    <ScrollTop />
     <div
       class="bg fixed top-0 left-0 h-screen w-screen bg-cover bg-center opacity-40 2xl:opacity-100"
     >
