@@ -1,11 +1,11 @@
 ---
 import Card from '../components/Card.astro';
+import Giscus from '../components/Giscus.astro';
 import Link from '../components/Link.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout
-  comments="eager"
   description="laymonage's guestbook. Feel free to sign it!"
   title="Guestbook"
 >
@@ -17,4 +17,5 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <Link href="https://giscus.app">giscus</Link>. Feel free to write anything –
     just please be considerate :)
   </Card>
+  <Giscus class="block my-8 min-h-screen" eager />
 </BaseLayout>
