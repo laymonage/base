@@ -20,6 +20,9 @@ import { Icon } from 'astro-icon/components';
   class ScrollTop extends HTMLElement {
     static identifier = 'l-scroll-top';
     static offset = 256;
+    static prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    );
 
     button = this.querySelector('button')!;
 
@@ -38,7 +41,10 @@ import { Icon } from 'astro-icon/components';
     }
 
     scroll() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      const behavior = ScrollTop.prefersReducedMotion.matches
+        ? 'instant'
+        : 'smooth';
+      window.scrollTo({ top: 0, behavior });
     }
 
     get hidden() {
