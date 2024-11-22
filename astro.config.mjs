@@ -14,9 +14,12 @@ import pagefind from 'astro-pagefind';
 
 import { copyButton } from './src/lib/shiki';
 
+import vercel from '@astrojs/vercel/serverless';
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://laymonage.com',
+  output: 'hybrid',
   integrations: [
     mdx(),
     sitemap({
@@ -68,4 +71,5 @@ export default defineConfig({
   experimental: {
     contentLayer: true,
   },
+  adapter: vercel(),
 });
