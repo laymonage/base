@@ -176,6 +176,10 @@
     @apply border border-opacity-20 border-gray-400 flex justify-between items-start;
   }
 
+  .astro-code code {
+    @apply max-h-[42rem] flex-1;
+  }
+
   .astro-code,
   .astro-code span {
     color: var(--shiki-light);
