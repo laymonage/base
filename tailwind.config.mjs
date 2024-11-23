@@ -1,5 +1,4 @@
 import { fontFamily } from 'tailwindcss/defaultTheme';
-import plugin from 'tailwindcss/plugin';
 import typography from '@tailwindcss/typography';
 import styles from '@tailwindcss/typography/src/styles';
 
