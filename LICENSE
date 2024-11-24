@@ -1,0 +1,24 @@
+Copyright (c) 2024 Sage Abdullah
+
+The source code of this project is made available under the following terms.
+
+You may:
+
+1. Use it as inspiration for your own projects.
+2. Use it for educational purposes.
+
+Unless you are forking the repository for the sole purpose of contributing fixes
+and/or improvements to this repository (https://github.com/laymonage/base), you
+may not:
+
+1. Copy a significant portion of the code to your own project.
+2. Copy any personal content (e.g. "About" section).
+3. Deploy the project as your own website.
+
+The above terms have been made to ensure that this project remains unique and
+that the author's personal content is not copied without permission, while still
+allowing for the code to be read in the spirit of free knowledge.
+
+Contents of the `content` submodule are subject to the submodule's own LICENSE:
+
+https://github.com/laymonage/content/blob/main/LICENSE.md
