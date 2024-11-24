@@ -10,12 +10,16 @@ interface Props {
   image?: string;
 }
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const pathname = Astro.url.pathname;
+
+const canonicalURL = new URL(pathname, Astro.site);
+
+const imagePathname = pathname === '/' ? '/index' : pathname;
 
 const {
   title: _title,
   description,
-  image = '/blog-placeholder-1.jpg',
+  image = `/og${imagePathname}.png`,
 } = Astro.props;
 const titleWithSite = _title ? `${_title} | ${SITE_TITLE}` : SITE_TITLE;
 const title = _title || SITE_TITLE;

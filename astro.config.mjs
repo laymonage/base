@@ -13,6 +13,7 @@ import tailwind from '@astrojs/tailwind';
 import pagefind from 'astro-pagefind';
 
 import { copyButton } from './src/lib/shiki';
+import { ogImagesGenerator } from './src/lib/astro';
 
 import vercel from '@astrojs/vercel/serverless';
 
@@ -48,6 +49,7 @@ export default defineConfig({
     icon(),
     tailwind(),
     pagefind(),
+    ogImagesGenerator(),
   ],
   markdown: {
     shikiConfig: {
@@ -66,6 +68,9 @@ export default defineConfig({
           api: 'modern-compiler',
         },
       },
+    },
+    resolve: {
+      extensions: ['.mjs', '.js', '.mts', '.ts', '.jsx', '.tsx', '.json'],
     },
   },
   experimental: {
