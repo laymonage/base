@@ -24,7 +24,7 @@ const projects = await Promise.all(
 );
 ---
 
-<BaseLayout>
+<BaseLayout description="A selection of projects by laymonage" title="Projects">
   {
     projects.map((group) => (
       <Card class:list={['mx-auto my-16 w-full first:mt-0']}>
