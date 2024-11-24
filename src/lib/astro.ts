@@ -56,13 +56,23 @@ export async function collectHtmlPages(outDir = defaultOutDir) {
   await Promise.all(
     files.map(async (filePath) => {
       const fileContent = await fs.promises.readFile(filePath, 'utf-8');
-      let { title, description } = extractMetadataFromHtml(fileContent);
+      const metadata = extractMetadataFromHtml(fileContent);
       const pagePath = path
         .relative(outDir, filePath)
         .replace(/\/index\.html$/, '')
         .replace(/\.html$/, ''); // For the main index.html
-      title = pagePath === 'index' ? `laymonage's personal website` : title;
-      pages[pagePath] = { title, description };
+
+      if (pagePath === 'index') {
+        pages[pagePath] = {
+          title: `laymonage's personal website`,
+          description: 'laymonage.com',
+        };
+      } else {
+        pages[pagePath] = {
+          title: metadata.title,
+          description: `laymonage.com/${pagePath}`,
+        };
+      }
     }),
   );
 
@@ -70,12 +80,12 @@ export async function collectHtmlPages(outDir = defaultOutDir) {
 }
 
 export function getImageOptions(
-  path: string,
+  _: string,
   page: { title: string; description: string },
 ) {
   return {
     title: page.title,
-    description: path === 'index' ? 'laymonage.com' : `laymonage.com/${path}`,
+    description: page.description,
     logo: {
       path: './public/logo.png',
       size: [200, 200],
@@ -93,13 +103,15 @@ export function getImageOptions(
     font: {
       title: {
         weight: 'SemiBold',
-        families: ['Source Sans 3 ExtraLight'],
+        families: ['Source Sans 3'],
       },
       description: {
-        families: ['Source Sans 3 ExtraLight'],
+        families: ['Source Sans 3'],
       },
     },
-    fonts: ['./public/fonts/sourcesans3-latin-normal-v15.woff2'],
+    fonts: [
+      'https://api.fontsource.org/v1/fonts/source-sans-3/latin-400-normal.ttf',
+    ],
   };
 }
 
@@ -114,24 +126,22 @@ async function generateOgImages(outDir = defaultOutDir) {
     )
   ).generateOpenGraphImage;
 
-  await Promise.all(
-    Object.entries(await collectHtmlPages(outDir)).map(
-      async ([ogPath, page]) => {
-        const options = getImageOptions(ogPath, page);
+  const pages = Object.entries(await collectHtmlPages(outDir));
 
-        const dest = path.join(process.cwd(), outDir, 'og', `${ogPath}.png`);
-        await fs.promises
-          .mkdir(path.dirname(dest), { recursive: true })
-          .catch(() => null);
-        await fs.promises.writeFile(
-          dest,
-          await generateOpenGraphImage(
-            options as Parameters<typeof generateOpenGraphImage>[0],
-          ),
-        );
-      },
-    ),
-  );
+  for (const [ogPath, page] of pages) {
+    const options = getImageOptions(ogPath, page);
+
+    const dest = path.join(process.cwd(), outDir, 'og', `${ogPath}.png`);
+    await fs.promises
+      .mkdir(path.dirname(dest), { recursive: true })
+      .catch(() => null);
+    await fs.promises.writeFile(
+      dest,
+      await generateOpenGraphImage(
+        options as Parameters<typeof generateOpenGraphImage>[0],
+      ),
+    );
+  }
 }
 
 export function ogImagesGenerator(): AstroIntegration {
