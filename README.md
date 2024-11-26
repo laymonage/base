@@ -11,9 +11,8 @@ posts from all the previous "personal websites" I built.
 
 1. `npm install`: install dependencies
 2. `npm run dev`: compile and hot-reload for development
-3. `npm run build`: compile and minify for production
-4. `npm run lint`: lint and fix files
-5. `npm start`: serve the compiled build without hot reload
+3. `npm run build`: compile for production
+4. `npm run lint:fix`: lint and fix files
 
 ## License
 
