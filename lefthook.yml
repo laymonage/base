@@ -1,0 +1,4 @@
+pre-commit:
+  commands:
+    check:
+      run: npx @biomejs/biome check --no-errors-on-unmatched --files-ignore-unknown=true {staged_files}
