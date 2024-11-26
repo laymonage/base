@@ -1,6 +1,6 @@
+import mdx from '@astrojs/mdx';
 // @ts-check
 import { defineConfig } from 'astro/config';
-import mdx from '@astrojs/mdx';
 
 import sitemap from '@astrojs/sitemap';
 
@@ -12,8 +12,8 @@ import tailwind from '@astrojs/tailwind';
 
 import pagefind from 'astro-pagefind';
 
-import { copyButton } from './src/lib/shiki';
 import { ogImagesGenerator } from './src/lib/astro';
+import { copyButton } from './src/lib/shiki';
 
 import vercel from '@astrojs/vercel/serverless';
 

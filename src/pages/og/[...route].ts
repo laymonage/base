@@ -1,5 +1,5 @@
-import { OGImageRoute, generateOpenGraphImage } from 'astro-og-canvas';
-import { getImageOptions, collectHtmlPages } from '../../lib/astro';
+import { OGImageRoute, type generateOpenGraphImage } from 'astro-og-canvas';
+import { collectHtmlPages, getImageOptions } from '../../lib/astro';
 
 // For local previews only
 

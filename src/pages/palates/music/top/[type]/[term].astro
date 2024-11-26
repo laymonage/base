@@ -1,12 +1,12 @@
 ---
 import Link from '../../../../../components/Link.astro';
+import SpotifyTable from '../../../../../components/palates/SpotifyTable';
 import Palate from '../../../../../layouts/Palate.astro';
 import {
   getSpotifyDataURL,
   simplifyTrack,
   trackSchema,
 } from '../../../../../lib/spotify';
-import SpotifyTable from '../../../../../components/palates/SpotifyTable';
 
 export async function getStaticPaths() {
   const terms = ['short', 'medium', 'long'] as const;

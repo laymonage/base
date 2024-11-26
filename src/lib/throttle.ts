@@ -1,4 +1,4 @@
-export function throttle<T extends any[], R>(
+export function throttle<T extends unknown[], R>(
   func: (...args: T) => R,
   duration: number,
 ) {

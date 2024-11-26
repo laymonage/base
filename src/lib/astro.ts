@@ -1,8 +1,8 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import type { AstroIntegration } from 'astro';
 import fastGlob from 'fast-glob';
 import { parse } from 'parse5';
-import path from 'node:path';
-import fs from 'node:fs';
-import type { AstroIntegration } from 'astro';
 
 export const defaultOutDir = '.vercel/output/static';
 
@@ -30,20 +30,20 @@ function extractMetadataFromHtml(fileContent: string) {
   );
 
   const metaTags: Record<string, string> = {};
-  metaTagsNode.forEach((node) => {
-    if (!('attrs' in node)) return;
+  for (const node of metaTagsNode) {
+    if (!('attrs' in node)) continue;
 
-    node.attrs.map((attr) => {
-      if (attr.name === 'property' || attr.name === 'name') {
-        const metaName = attr.value;
-        const metaValue = node.attrs.find(
-          (attr) => attr.name === 'content',
-        )?.value;
+    for (const attr of node.attrs) {
+      if (!(attr.name === 'property' || attr.name === 'name')) continue;
 
-        if (metaValue) metaTags[metaName] = metaValue;
-      }
-    });
-  });
+      const metaName = attr.value;
+      const metaValue = node.attrs.find(
+        (attr) => attr.name === 'content',
+      )?.value;
+
+      if (metaValue) metaTags[metaName] = metaValue;
+    }
+  }
 
   return metaTags;
 }
@@ -69,7 +69,7 @@ export async function collectHtmlPages(outDir = defaultOutDir) {
         };
       } else {
         pages[pagePath] = {
-          title: metadata.title,
+          title: metadata?.title,
           description: `laymonage.com/${pagePath}`,
         };
       }

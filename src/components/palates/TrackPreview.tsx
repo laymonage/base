@@ -65,6 +65,7 @@ export default function TrackPreview({
           <Icon name="tabler:player-play-filled" />
         )}
       </span>
+      {/* biome-ignore lint/a11y/useMediaCaption: it's music */}
       {previewUrl ? <audio ref={audio} src={previewUrl} /> : null}
     </button>
   );

@@ -5,7 +5,7 @@ export function copyButton() {
   return {
     name: 'l-copy-button',
     pre(node: Element) {
-      delete node.properties.tabindex;
+      node.properties.tabindex = undefined;
       node.children.push(h('l-copy-button'));
     },
   };

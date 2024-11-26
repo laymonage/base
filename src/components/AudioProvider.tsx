@@ -1,11 +1,11 @@
 import {
-  createContext,
-  useReducer,
   type Dispatch,
-  useContext,
-  useRef,
-  useEffect,
   type ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useRef,
 } from 'react';
 
 interface AudioState {
@@ -81,6 +81,7 @@ export function AudioProvider({ children }: { children: ReactNode }) {
     <AudioContext.Provider value={state}>
       <AudioDispatchContext.Provider value={dispatch}>
         {children}
+        {/* biome-ignore lint/a11y/useMediaCaption: it's music */}
         <audio ref={audio} onEnded={() => dispatch({ type: 'PAUSE' })} />
       </AudioDispatchContext.Provider>
     </AudioContext.Provider>

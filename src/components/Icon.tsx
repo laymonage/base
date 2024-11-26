@@ -11,6 +11,7 @@ export default function Icon({
       height="1em"
       viewBox="0 0 24 24"
       className={className}
+      aria-hidden="true"
       {...props}
     >
       <use href={`#ai:${name}`} />

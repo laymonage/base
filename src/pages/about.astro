@@ -1,13 +1,13 @@
 ---
 import { getCollection } from 'astro:content';
 import { Icon } from 'astro-icon/components';
-import BaseLayout from '../layouts/BaseLayout.astro';
+import * as about from '../../content/about.md';
 import Card from '../components/Card.astro';
 import Link from '../components/Link.astro';
 import ListItem from '../components/ListItem.astro';
-import TimelineYear from '../components/TimelineYear.astro';
 import NowPlaying from '../components/NowPlaying';
-import * as about from '../../content/about.md';
+import TimelineYear from '../components/TimelineYear.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import { prose, proseList } from '../lib/classes';
 
 const timelineData = await getCollection('about');
