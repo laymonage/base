@@ -1,12 +1,12 @@
-import { createMarkdownProcessor } from '@astrojs/markdown-remark';
 import {
+  type AnyEntryMap,
   defineCollection,
   getCollection,
   z,
-  type AnyEntryMap,
 } from 'astro:content';
-import { file, glob } from 'astro/loaders';
+import { createMarkdownProcessor } from '@astrojs/markdown-remark';
 import { rssSchema } from '@astrojs/rss';
+import { file, glob } from 'astro/loaders';
 
 const baseSchema = z.object({
   title: z.string(),
@@ -100,7 +100,9 @@ export const getContentStaticPaths = async <C extends keyof AnyEntryMap>(
   }));
 
 export const sortFeedItems = (items: z.infer<typeof rssSchema>[]) =>
-  items.sort((a, b) => b.pubDate!.valueOf() - a.pubDate!.valueOf());
+  items.sort(
+    (a, b) => (b.pubDate?.valueOf() || 0) - (a.pubDate?.valueOf() || 0),
+  );
 
 export const getRssItems = async <C extends keyof AnyEntryMap>(collection: C) =>
   sortFeedItems(

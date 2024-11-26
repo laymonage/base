@@ -1,4 +1,4 @@
-import { useRef, useEffect, type ComponentProps } from 'react';
+import { type ComponentProps, useEffect, useRef } from 'react';
 import DebouncedInput from './DebouncedInput';
 
 export default function Search({

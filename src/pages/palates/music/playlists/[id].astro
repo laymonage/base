@@ -1,5 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
+import { decodeHTML } from 'entities';
 import Card from '../../../../components/Card.astro';
 import Duration from '../../../../components/Duration.astro';
 import Link from '../../../../components/Link.astro';
@@ -7,12 +8,11 @@ import SpotifyTable from '../../../../components/palates/SpotifyTable';
 import Palate from '../../../../layouts/Palate.astro';
 import { humanizeMs } from '../../../../lib/datetime';
 import {
+  type PlaylistFull,
   getSpotifyDataURL,
   simplifyPlaylistTrack,
   trackSchema,
-  type PlaylistFull,
 } from '../../../../lib/spotify';
-import { decodeHTML } from 'entities';
 
 export async function getStaticPaths() {
   const SAVED_TRACKS_ID = '6T5QnaTXvu6ckKwcxANEwp';
@@ -49,7 +49,7 @@ const spotifyUrl =
 const tracks = isSavedTracks
   ? tracksFull.map((track) => trackSchema.parse(track))
   : tracksFull
-      .filter((playlistItem) => !!(playlistItem && playlistItem.track))
+      .filter((playlistItem) => !!playlistItem?.track)
       .map((track) => trackSchema.parse(simplifyPlaylistTrack(track)));
 
 const duration =

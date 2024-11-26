@@ -1,10 +1,14 @@
 import type { APIRoute } from 'astro';
 
-import { adaptNowPlaying, getNowPlaying } from '../../lib/spotify';
+import {
+  type NowPlaying,
+  adaptNowPlaying,
+  getNowPlaying,
+} from '../../lib/spotify';
 
 export const GET: APIRoute = async () => {
   const response = await getNowPlaying();
-  let result: Record<string, any>;
+  let result: Record<string, boolean> | NowPlaying;
 
   if (response.status !== 200) {
     result = { isPlaying: false };

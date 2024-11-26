@@ -1,6 +1,6 @@
-import { fontFamily } from 'tailwindcss/defaultTheme';
 import typography from '@tailwindcss/typography';
 import styles from '@tailwindcss/typography/src/styles';
+import { fontFamily } from 'tailwindcss/defaultTheme';
 
 /** Sourced from https://github.com/tailwindlabs/tailwindcss-typography/blob/main/src/styles.js */
 export const round = (num) =>

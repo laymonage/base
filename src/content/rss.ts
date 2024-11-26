@@ -1,5 +1,5 @@
-import type { APIContext } from 'astro';
 import AstroRSS from '@astrojs/rss';
+import type { APIContext } from 'astro';
 import { getRssItems, sortFeedItems } from './config';
 
 export const posts = {
@@ -26,6 +26,6 @@ const feeds = { posts, thoughts, '': all };
 export const rss = (feed: keyof typeof feeds, context: APIContext) =>
   AstroRSS({
     site: `${context.site}${feed}`,
-    stylesheet: `/rss.xsl`,
+    stylesheet: '/rss.xsl',
     ...feeds[feed],
   });

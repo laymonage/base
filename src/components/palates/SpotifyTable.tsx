@@ -12,19 +12,19 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import { useVirtualizer } from '@tanstack/react-virtual';
+import clsx from 'clsx';
 import {
   type AnchorHTMLAttributes,
   type ReactNode,
   useRef,
   useState,
 } from 'react';
-import clsx from 'clsx';
 import { formatDate, msToDuration, msToMinutes } from '../../lib/datetime';
-import { type AlbumSimplified, type TrackSimplified } from '../../lib/spotify';
 import { relativeFormat } from '../../lib/datetime';
-import Search from '../Search';
-import Icon from '../Icon';
+import type { AlbumSimplified, TrackSimplified } from '../../lib/spotify';
 import { AudioProvider } from '../AudioProvider';
+import Icon from '../Icon';
+import Search from '../Search';
 import TrackPreview from './TrackPreview';
 
 function ExternalLink({
@@ -155,7 +155,7 @@ const columns = {
                 .filter(
                   (image) =>
                     row.images.length === 1 ||
-                    (image && image.width && image.width > 100),
+                    (image?.width && image.width > 100),
                 )
                 .at(-1)?.url
             }

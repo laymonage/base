@@ -1,9 +1,9 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import BaseLayout from './BaseLayout.astro';
+import CopyButton from '../components/CopyButton.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import { prose } from '../lib/classes';
-import CopyButton from '../components/CopyButton.astro';
+import BaseLayout from './BaseLayout.astro';
 
 type PostData = Omit<CollectionEntry<'posts'>['data'], 'date'>;
 

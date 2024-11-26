@@ -1,12 +1,12 @@
 import clsx from 'clsx';
 import useSWR from 'swr';
 import { fetcher } from '../lib/fetcher';
-import type { NowPlaying } from '../lib/spotify';
+import type { NowPlaying as NowPlayingData } from '../lib/spotify';
 
 const SPOTIFY_PROFILE_URL = 'https://open.spotify.com/user/laymonage';
 
 export default function NowPlaying({ icon }: { icon?: JSX.Element }) {
-  const { data } = useSWR<NowPlaying>('/api/now-playing', fetcher);
+  const { data } = useSWR<NowPlayingData>('/api/now-playing', fetcher);
   const isPlaying = data?.isPlaying;
 
   return (
