@@ -39,14 +39,14 @@
         "image": {
           "src": "/img/projects/apex.svg"
         },
-        "title": "base",
-        "url": "https://github.com/laymonage/base",
-        "description": "This very website, built with React, Next.js, TypeScript, and Tailwind.",
+        "title": "isle",
+        "url": "https://github.com/laymonage/isle",
+        "description": "This very website, built with Astro, TypeScript, and Tailwind.",
         "details": [
           "Responsive design for devices with screen width of 320px and up.",
           "Clean architecture with reusable single-file components.",
           "Dark and light modes support.",
-          "Rewritten from two previous attempts with [Svelte](https://github.com/laymonage/nook) and [Vue](https://github.com/laymonage/apex) as my learning environment."
+          "Rewritten from three previous attempts with [Next.js](https://github.com/laymonage/isle/tree/legacy), [Svelte](https://github.com/laymonage/nook), and [Vue](https://github.com/laymonage/apex) as my learning environment."
         ]
       },
       {

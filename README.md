@@ -1,4 +1,4 @@
-# base
+# isle
 
 Yet another incarnation of [my personal website][laymonage], (re)built with
 [Astro][astro], [React][react], [TypeScript][typescript], and
@@ -23,7 +23,7 @@ posts from all the previous "personal websites" I built.
 [react]: https://reactjs.org
 [typescript]: https://typescriptlang.org
 [tailwind]: https://tailwindcss.com
-[legacy]: https://github.com/laymonage/base/tree/legacy
+[legacy]: https://github.com/laymonage/isle/tree/legacy
 [nook]: https://github.com/laymonage/nook
 [apex]: https://github.com/laymonage/apex
 [license]: LICENSE
