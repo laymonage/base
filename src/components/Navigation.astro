@@ -120,7 +120,7 @@ const subpath = pathname.match(/[^\/]+/g);
     get hidden() {
       return (
         window.scrollY >= this.lastScroll &&
-        !this.contains(document.activeElement)
+        !(this.contains(document.activeElement) || this.querySelector(':hover'))
       );
     }
 
