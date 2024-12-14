@@ -37,8 +37,10 @@ const thoughts = defineCollection({
   schema: postsSchema,
 });
 
-export const getSortedCollection = async <C extends keyof AnyEntryMap>(
-  collection: C,
+type ContentTypeWithDate = 'gsoc' | 'posts' | 'thoughts';
+
+export const getSortedCollection = async (
+  collection: ContentTypeWithDate,
 ) =>
   (await getCollection(collection)).sort(
     (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
@@ -104,7 +106,9 @@ export const sortFeedItems = (items: z.infer<typeof rssSchema>[]) =>
     (a, b) => (b.pubDate?.valueOf() || 0) - (a.pubDate?.valueOf() || 0),
   );
 
-export const getRssItems = async <C extends keyof AnyEntryMap>(collection: C) =>
+type FeedContentType = 'posts' | 'thoughts';
+
+export const getRssItems = async (collection: FeedContentType) =>
   sortFeedItems(
     (await getCollection(collection)).map((entry) =>
       rssSchema.parse({

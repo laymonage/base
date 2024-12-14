@@ -15,12 +15,11 @@ import pagefind from 'astro-pagefind';
 import { ogImagesGenerator } from './src/lib/astro';
 import { copyButton } from './src/lib/shiki';
 
-import vercel from '@astrojs/vercel/serverless';
+import vercel from '@astrojs/vercel';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://laymonage.com',
-  output: 'hybrid',
   integrations: [
     mdx(),
     sitemap({
@@ -62,19 +61,9 @@ export default defineConfig({
     },
   },
   vite: {
-    css: {
-      preprocessorOptions: {
-        scss: {
-          api: 'modern-compiler',
-        },
-      },
-    },
     resolve: {
       extensions: ['.mjs', '.js', '.mts', '.ts', '.jsx', '.tsx', '.json'],
     },
-  },
-  experimental: {
-    contentLayer: true,
   },
   adapter: vercel(),
 });
