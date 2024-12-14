@@ -5,7 +5,7 @@ import type { NowPlaying as NowPlayingData } from '../lib/spotify';
 
 const SPOTIFY_PROFILE_URL = 'https://open.spotify.com/user/laymonage';
 
-export default function NowPlaying({ icon }: { icon?: JSX.Element }) {
+export default function NowPlaying({ icon }: { icon?: astroHTML.JSX.Element }) {
   const { data } = useSWR<NowPlayingData>('/api/now-playing', fetcher);
   const isPlaying = data?.isPlaying;
 
